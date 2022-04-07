@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-duzhuo-32%C3%9732.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-duzhuo-32%C3%9732.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-duzhuo-16%C3%9716.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Linux 典型运维应用  💡 如果没有特殊说明，本文的案例都是针对 Centos 发行版本。  ¶网络操作 ¶无法访问外网域名 （1）在 hosts 中添加本机实际 IP 和本机实际域名的映射 1echo &quot;192.168.0.1 hostname&quot; &gt;&gt; &#x2F;etc&#x2F;hosts 如果不知道本机域名，使用 hostname 命令查一下；如果不知道本机实际 IP，使">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux 典型运维应用">
+<meta property="og:url" content="http://example.com/2022/02/20/network-ops/index.html">
+<meta property="og:site_name" content="duzhuo&#39;s-blog">
+<meta property="og:description" content="Linux 典型运维应用  💡 如果没有特殊说明，本文的案例都是针对 Centos 发行版本。  ¶网络操作 ¶无法访问外网域名 （1）在 hosts 中添加本机实际 IP 和本机实际域名的映射 1echo &quot;192.168.0.1 hostname&quot; &gt;&gt; &#x2F;etc&#x2F;hosts 如果不知道本机域名，使用 hostname 命令查一下；如果不知道本机实际 IP，使">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-02-20T07:09:06.000Z">
+<meta property="article:modified_time" content="2022-04-07T15:10:40.840Z">
+<meta property="article:author" content="duzhuo">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2022/02/20/network-ops/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Linux 典型运维应用 | duzhuo's-blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">duzhuo's-blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">学无止境</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/20/network-ops/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="duzhuo">
+      <meta itemprop="description" content="duzhuo-s-blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="duzhuo's-blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux 典型运维应用
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-02-20 15:09:06" itemprop="dateCreated datePublished" datetime="2022-02-20T15:09:06+08:00">2022-02-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-04-07 23:10:40" itemprop="dateModified" datetime="2022-04-07T23:10:40+08:00">2022-04-07</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1>Linux 典型运维应用</h1>
+<blockquote>
+<p>💡 如果没有特殊说明，本文的案例都是针对 Centos 发行版本。</p>
+</blockquote>
+<h2 id="网络操作"><a class="header-anchor" href="#网络操作">¶</a>网络操作</h2>
+<h3 id="无法访问外网域名"><a class="header-anchor" href="#无法访问外网域名">¶</a>无法访问外网域名</h3>
+<p>（1）在 hosts 中添加本机实际 IP 和本机实际域名的映射</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;192.168.0.1 hostname&quot; &gt;&gt; /etc/hosts</span><br></pre></td></tr></table></figure>
+<p>如果不知道本机域名，使用 <code>hostname</code> 命令查一下；如果不知道本机实际 IP，使用 <code>ifconfig</code> 查一下。</p>
+<p>（2）配置信赖的 DNS 服务器</p>
+<p>执行 <code>vi /etc/resolv.conf</code> ，添加以下内容：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nameserver 114.114.114.114</span><br><span class="line">nameserver 8.8.8.8</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>114.114.114.114 是国内老牌 DNS</p>
+<p>8.8.8.8 是 Google DNS</p>
+<p>:point_right: 参考：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/32229915">公共 DNS 哪家强</a></p>
+</blockquote>
+<p>（3）测试一下能否 ping 通 <a target="_blank" rel="noopener" href="http://www.baidu.com">www.baidu.com</a></p>
+<h3 id="配置网卡"><a class="header-anchor" href="#配置网卡">¶</a>配置网卡</h3>
+<p>使用 root 权限编辑 <code>/etc/sysconfig/network-scripts/ifcfg-eno16777736X</code> 文件</p>
+<p>参考以下进行配置：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">TYPE</span>=<span class="string">Ethernet                        # 网络类型：Ethernet以太网</span></span><br><span class="line"><span class="attr">BOOTPROTO</span>=<span class="string">none                       # 引导协议：自动获取、static静态、none不指定</span></span><br><span class="line"><span class="attr">DEFROUTE</span>=<span class="string">yes                         # 启动默认路由</span></span><br><span class="line"><span class="attr">IPV4_FAILURE_FATAL</span>=<span class="string">no                # 不启用IPV4错误检测功能</span></span><br><span class="line"><span class="attr">IPV6INIT</span>=<span class="string">yes                         # 启用IPV6协议</span></span><br><span class="line"><span class="attr">IPV6_AUTOCONF</span>=<span class="string">yes                    # 自动配置IPV6地址</span></span><br><span class="line"><span class="attr">IPV6_DEFROUTE</span>=<span class="string">yes                    # 启用IPV6默认路由</span></span><br><span class="line"><span class="attr">IPV6_FAILURE_FATAL</span>=<span class="string">no                # 不启用IPV6错误检测功能</span></span><br><span class="line"><span class="attr">IPV6_PEERDNS</span>=<span class="string">yes</span></span><br><span class="line"><span class="attr">IPV6_PEERROUTES</span>=<span class="string">yes</span></span><br><span class="line"><span class="attr">IPV6_PRIVACY</span>=<span class="string">&quot;no&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">NAME</span>=<span class="string">eno16777736                     # 网卡设备的别名（需要和文件名同名）</span></span><br><span class="line"><span class="attr">UUID</span>=<span class="string">90528772-9967-46da-b401-f82b64b4acbc  # 网卡设备的UUID唯一标识号</span></span><br><span class="line"><span class="attr">DEVICE</span>=<span class="string">eno16777736                   # 网卡的设备名称</span></span><br><span class="line"><span class="attr">ONBOOT</span>=<span class="string">yes                           # 开机自动激活网卡</span></span><br><span class="line"><span class="attr">IPADDR</span>=<span class="string">192.168.1.199                 # 网卡的固定IP地址</span></span><br><span class="line"><span class="attr">PREFIX</span>=<span class="string">24                            # 子网掩码</span></span><br><span class="line"><span class="attr">GATEWAY</span>=<span class="string">192.168.1.1                  # 默认网关IP地址</span></span><br><span class="line"><span class="attr">DNS1</span>=<span class="string">8.8.8.8                         # DNS域名解析服务器的IP地址</span></span><br></pre></td></tr></table></figure>
+<p>修改完后，执行 <code>systemctl restart network.service</code> 重启网卡服务。</p>
+<h2 id="系统维护"><a class="header-anchor" href="#系统维护">¶</a>系统维护</h2>
+<h2 id="自动化脚本"><a class="header-anchor" href="#自动化脚本">¶</a>自动化脚本</h2>
+<h3 id="Linux-开机自启动脚本"><a class="header-anchor" href="#Linux-开机自启动脚本">¶</a>Linux 开机自启动脚本</h3>
+<p>（1）在 <code>/etc/rc.local</code> 文件中添加命令</p>
+<p>如果不想将脚本粘来粘去，或创建链接，可以在 <code>/etc/rc.local</code> 文件中添加启动命令</p>
+<ol>
+<li>先修改好脚本，使其所有模块都能在任意目录启动时正常执行;</li>
+<li>再在 <code>/etc/rc.local</code> 的末尾添加一行以绝对路径启动脚本的行;</li>
+</ol>
+<p>例：</p>
+<p>执行 <code>vim /etc/rc.local</code> 命令，输入以下内容：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line"><span class="bash"><span class="comment"># This script will be executed *after* all the other init scripts.</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> You can put your own initialization stuff <span class="keyword">in</span> here <span class="keyword">if</span> you don<span class="string">&#x27;t</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="string"> want to do the full Sys V style init stuff.</span></span></span><br><span class="line"></span><br><span class="line">touch /var/lock/subsys/local</span><br><span class="line">/opt/pjt_test/test.pl</span><br></pre></td></tr></table></figure>
+<p>（2）在 <code>/etc/rc.d/init.d</code> 目录下添加自启动脚本</p>
+<p>Linux 在 <code>/etc/rc.d/init.d</code> 下有很多的文件，每个文件都是可以看到内容的，其实都是一些 shell 脚本或者可执行二进制文件。</p>
+<p>Linux 开机的时候，会加载运行 <code>/etc/rc.d/init.d</code> 目录下的程序，因此我们可以把想要自动运行的脚本放到这个目录下即可。系统服务的启动就是通过这种方式实现的。</p>
+<p>（3）运行级别设置</p>
+<p>简单的说，运行级就是操作系统当前正在运行的功能级别。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">不同的运行级定义如下:</span><br><span class="line"><span class="meta">#</span><span class="bash"> 0 - 停机（千万不能把initdefault 设置为0 ）</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 1 - 单用户模式       　　进入方法<span class="comment">#init s = init 1</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 2 - 多用户，没有 NFS</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 3 - 完全多用户模式(标准的运行级)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 4 - 没有用到</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 5 - X11 多用户图形模式（xwindow)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 6 - 重新启动 （千万不要把initdefault 设置为6 ）</span></span><br></pre></td></tr></table></figure>
+<p>这些级别在 <code>/etc/inittab</code> 文件里指定，这个文件是 init 程序寻找的主要文件，最先运行的服务是放在/etc/rc.d 目录下的文件。</p>
+<p>在 <code>/etc</code> 目录下面有这么几个目录值得注意：rcS.d rc0.d rc1.d … rc6.d (0，1… 6 代表启动级别 0 代表停止，1 代表单用户模式，2-5 代表多用户模式，6 代表重启) 它们的作用就相当于 redhat 下的 rc.d ，你可以把脚本放到 rcS.d，然后修改文件名，给它一个启动序号，如: S88mysql</p>
+<p>不过，最好的办法是放到相应的启动级别下面。具体作法:</p>
+<p>（1）先把脚本 mysql 放到 /etc/init.d 目录下</p>
+<p>（2）查看当前系统的启动级别</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> runlevel</span></span><br><span class="line">N 3</span><br></pre></td></tr></table></figure>
+<p>（3）设定启动级别</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">  98 为启动序号</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  2 是系统的运行级别，可自己调整，注意不要忘了结尾的句点</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> update-rc.d mysql start 98 2 .</span></span><br></pre></td></tr></table></figure>
+<p>现在我们到 /etc/rc2.d 下，就多了一个 S98mysql 这样的符号链接。</p>
+<p>（4）重启系统，验证设置是否有效。</p>
+<p>（5）移除符号链接</p>
+<p>当你需要移除这个符号连接时，方法有三种：</p>
+<ol>
+<li>
+<p>直接到 <code>/etc/rc2.d</code> 下删掉相应的链接，当然不是最好的方法；</p>
+</li>
+<li>
+<p>推荐做法：<code>update-rc.d -f s10 remove</code></p>
+</li>
+<li>
+<p>如果 update-rc.d 命令你不熟悉，还可以试试看 rcconf 这个命令，也很方便。</p>
+</li>
+</ol>
+<blockquote>
+<p>:point_right: 参考：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/linuxshine/article/details/50717272">linux 添加开机自启动脚本示例详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/ssooking/p/6094740.html">linux 设置开机自启动</a></li>
+</ul>
+</blockquote>
+<h3 id="定时执行脚本"><a class="header-anchor" href="#定时执行脚本">¶</a>定时执行脚本</h3>
+<h2 id="配置"><a class="header-anchor" href="#配置">¶</a>配置</h2>
+<h3 id="设置-Linux-启动模式"><a class="header-anchor" href="#设置-Linux-启动模式">¶</a>设置 Linux 启动模式</h3>
+<ol>
+<li>停机(记得不要把 initdefault 配置为 0，因为这样会使 Linux 不能启动)</li>
+<li>单用户模式，就像 Win9X 下的安全模式</li>
+<li>多用户，但是没有 NFS</li>
+<li>完全多用户模式，准则的运行级</li>
+<li>通常不用，在一些特殊情况下可以用它来做一些事情</li>
+<li>X11，即进到 X-Window 系统</li>
+<li>重新启动 (记得不要把 initdefault 配置为 6，因为这样会使 Linux 不断地重新启动)</li>
+</ol>
+<p>设置方法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i &#x27;s/id:5:initdefault:/id:3:initdefault:/&#x27; /etc/inittab</span><br></pre></td></tr></table></figure>
+<h2 id="参考资料-v2"><a class="header-anchor" href="#参考资料-v2">¶</a>参考资料</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/moxiaoan/p/5683743.html">CentOS7 使用 firewalld 打开关闭防火墙与端口</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/z_yong_cool/article/details/79288397">linux 定时执行脚本</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/linux/" rel="tag"># linux</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/02/20/samba/" rel="prev" title="Samba">
+      <i class="fa fa-chevron-left"></i> Samba
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/02/20/linux-cli-user/" rel="next" title="Linux 用户管理">
+      Linux 用户管理 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Linux 典型运维应用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E6%93%8D%E4%BD%9C"><span class="nav-number">1.1.</span> <span class="nav-text">网络操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E5%A4%96%E7%BD%91%E5%9F%9F%E5%90%8D"><span class="nav-number">1.1.1.</span> <span class="nav-text">无法访问外网域名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%BD%91%E5%8D%A1"><span class="nav-number">1.1.2.</span> <span class="nav-text">配置网卡</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E7%BB%B4%E6%8A%A4"><span class="nav-number">1.2.</span> <span class="nav-text">系统维护</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E5%8C%96%E8%84%9A%E6%9C%AC"><span class="nav-number">1.3.</span> <span class="nav-text">自动化脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux-%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC"><span class="nav-number">1.3.1.</span> <span class="nav-text">Linux 开机自启动脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E6%97%B6%E6%89%A7%E8%A1%8C%E8%84%9A%E6%9C%AC"><span class="nav-number">1.3.2.</span> <span class="nav-text">定时执行脚本</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE"><span class="nav-number">1.4.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE-Linux-%E5%90%AF%E5%8A%A8%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.4.1.</span> <span class="nav-text">设置 Linux 启动模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99-v2"><span class="nav-number">1.5.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">duzhuo</p>
+  <div class="site-description" itemprop="description">duzhuo-s-blog</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">duzhuo</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: '32px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+    </div>
+</body>
+</html>

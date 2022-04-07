@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-duzhuo-32%C3%9732.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-duzhuo-32%C3%9732.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-duzhuo-16%C3%9716.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Linux 用户管理  关键词：groupadd, groupdel, groupmod, useradd, userdel, usermod, passwd, su, sudo  ¶1. Linux 用户管理要点  创建用户组 - 使用 groupadd 删除用户组 - 使用 groupdel 修改用户组信息 - 使用 groupmod 创建用户 - 使用 useradd 删除用户 - 使用 u">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux 用户管理">
+<meta property="og:url" content="http://example.com/2022/02/20/linux-cli-user/index.html">
+<meta property="og:site_name" content="duzhuo&#39;s-blog">
+<meta property="og:description" content="Linux 用户管理  关键词：groupadd, groupdel, groupmod, useradd, userdel, usermod, passwd, su, sudo  ¶1. Linux 用户管理要点  创建用户组 - 使用 groupadd 删除用户组 - 使用 groupdel 修改用户组信息 - 使用 groupmod 创建用户 - 使用 useradd 删除用户 - 使用 u">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-02-20T07:09:06.000Z">
+<meta property="article:modified_time" content="2022-04-07T15:10:40.676Z">
+<meta property="article:author" content="duzhuo">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2022/02/20/linux-cli-user/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Linux 用户管理 | duzhuo's-blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">duzhuo's-blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">学无止境</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/20/linux-cli-user/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="duzhuo">
+      <meta itemprop="description" content="duzhuo-s-blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="duzhuo's-blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux 用户管理
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-02-20 15:09:06" itemprop="dateCreated datePublished" datetime="2022-02-20T15:09:06+08:00">2022-02-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-04-07 23:10:40" itemprop="dateModified" datetime="2022-04-07T23:10:40+08:00">2022-04-07</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1>Linux 用户管理</h1>
+<blockquote>
+<p>关键词：<code>groupadd</code>, <code>groupdel</code>, <code>groupmod</code>, <code>useradd</code>, <code>userdel</code>, <code>usermod</code>, <code>passwd</code>, <code>su</code>, <code>sudo</code></p>
+</blockquote>
+<h2 id="1-Linux-用户管理要点"><a class="header-anchor" href="#1-Linux-用户管理要点">¶</a>1. Linux 用户管理要点</h2>
+<ul>
+<li>创建用户组 - 使用 <a href="#groupadd">groupadd</a></li>
+<li>删除用户组 - 使用 <a href="#groupdel">groupdel</a></li>
+<li>修改用户组信息 - 使用 <a href="#groupmod">groupmod</a></li>
+<li>创建用户 - 使用 <a href="#useradd">useradd</a></li>
+<li>删除用户 - 使用 <a href="#userdel">userdel</a></li>
+<li>修改用户信息 - 使用 <a href="#usermod">usermod</a></li>
+<li>设置用户认证信息 - 使用 <a href="#passwd">passwd</a></li>
+<li>切换用户 - 使用 <a href="#su">su</a></li>
+<li>当前用户想执行没有权限执行的命令时，使用其他用户身份去执行 - 使用 <a href="#sudo">sudo</a></li>
+</ul>
+<h2 id="2-命令常见用法-v7"><a class="header-anchor" href="#2-命令常见用法-v7">¶</a>2. 命令常见用法</h2>
+<h3 id="2-1-groupadd"><a class="header-anchor" href="#2-1-groupadd">¶</a>2.1. groupadd</h3>
+<blockquote>
+<p>groupadd 命令用于创建一个新的用户组，新用户组的信息将被添加到系统文件中。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/groupadd">http://man.linuxde.net/groupadd</a></p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 建立一个新组，并设置组 ID 加入系统</span></span><br><span class="line">$ groupadd -g 344 jsdigname</span><br></pre></td></tr></table></figure>
+<h3 id="2-2-groupdel"><a class="header-anchor" href="#2-2-groupdel">¶</a>2.2. groupdel</h3>
+<blockquote>
+<p>groupdel 命令用于删除指定的用户组，本命令要修改的系统文件包括 <code>/ect/group</code> 和 <code>/ect/gshadow</code>。若该群组中仍包括某些用户，则必须先删除这些用户后，方能删除群组。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/groupdel">http://man.linuxde.net/groupdel</a></p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ groupadd damon  <span class="comment"># 创建damon用户组</span></span><br><span class="line">$ groupdel damon  <span class="comment"># 删除这个用户组</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-3-groupmod"><a class="header-anchor" href="#2-3-groupmod">¶</a>2.3. groupmod</h3>
+<blockquote>
+<p>groupmod 命令更改群组识别码或名称。需要更改群组的识别码或名称时，可用 groupmod 指令来完成这项工作。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/groupmod">http://man.linuxde.net/groupmod</a></p>
+</blockquote>
+<h3 id="2-4-useradd"><a class="header-anchor" href="#2-4-useradd">¶</a>2.4. useradd</h3>
+<blockquote>
+<p>useradd 命令用于 Linux 中创建的新的系统用户。useradd 可用来建立用户帐号。帐号建好之后，再用 passwd 设定帐号的密码．而可用 userdel 删除帐号。使用 useradd 指令所建立的帐号，实际上是保存在 <code>/etc/passwd</code> 文本文件中。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/useradd">http://man.linuxde.net/useradd</a></p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建用户加入组</span></span><br><span class="line">$ useradd –g sales jack –G company,employees    <span class="comment"># -g：加入主要组、-G：加入次要组</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 建立一个新用户账户，并设置 ID</span></span><br><span class="line">$ useradd caojh -u 544</span><br></pre></td></tr></table></figure>
+<h3 id="2-5-userdel"><a class="header-anchor" href="#2-5-userdel">¶</a>2.5. userdel</h3>
+<blockquote>
+<p>userdel 命令用于删除给定的用户，以及与用户相关的文件。若不加选项，则仅删除用户帐号，而不删除相关文件。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/userdel">http://man.linuxde.net/userdel</a></p>
+</blockquote>
+<p>示例：</p>
+<p>userdel 命令很简单，比如我们现在有个用户 linuxde，其 home 目录位于<code>/var</code>目录中，现在我们来删除这个用户：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ userdel linuxde       <span class="comment"># 删除用户linuxde，但不删除其家目录及文件；</span></span><br><span class="line">$ userdel -r linuxde    <span class="comment"># 删除用户linuxde，其 home 目录及文件一并删除；</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-6-usermod"><a class="header-anchor" href="#2-6-usermod">¶</a>2.6. usermod</h3>
+<blockquote>
+<p>usermod 命令用于修改用户的基本信息。usermod 命令不允许你改变正在线上的使用者帐号名称。当 usermod 命令用来改变 user id，必须确认这名 user 没在电脑上执行任何程序。你需手动更改使用者的 crontab 档。也需手动更改使用者的 at 工作档。采用 NIS server 须在 server 上更动相关的 NIS 设定。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/usermod">http://man.linuxde.net/usermod</a></p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将 newuser2 添加到组 staff 中</span></span><br><span class="line">$ usermod -G staff newuser2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改 newuser 的用户名为 newuser1</span></span><br><span class="line">$ usermod -l newuser1 newuser</span><br><span class="line"></span><br><span class="line"><span class="comment"># 锁定账号 newuser1</span></span><br><span class="line">$ usermod -L newuser1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解除对 newuser1 的锁定</span></span><br><span class="line">$ usermod -U newuser1</span><br></pre></td></tr></table></figure>
+<h3 id="2-7-passwd"><a class="header-anchor" href="#2-7-passwd">¶</a>2.7. passwd</h3>
+<blockquote>
+<p>passwd 命令用于设置用户的认证信息，包括用户密码、密码过期时间等。系统管理者则能用它管理系统用户的密码。只有管理者可以指定用户名称，一般用户只能变更自己的密码。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/passwd">http://man.linuxde.net/passwd</a></p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 如果是普通用户执行 passwd 只能修改自己的密码。</span></span><br><span class="line"><span class="comment"># 如果新建用户后，要为新用户创建密码，则用 passwd 用户名，注意要以 root 用户的权限来创建。</span></span><br><span class="line">$ passwd linuxde    <span class="comment"># 更改或创建linuxde用户的密码；</span></span><br><span class="line">Changing password <span class="keyword">for</span> user linuxde.</span><br><span class="line">New UNIX password:          <span class="comment"># 请输入新密码；</span></span><br><span class="line">Retype new UNIX password:   <span class="comment"># 再输入一次；</span></span><br><span class="line">passwd: all authentication tokens updated successfully. <span class="comment"># 成功；</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 普通用户如果想更改自己的密码，直接运行 passwd 即可，比如当前操作的用户是 linuxde。</span></span><br><span class="line">$ passwd</span><br><span class="line">Changing password <span class="keyword">for</span> user linuxde. <span class="comment"># 更改linuxde用户的密码；</span></span><br><span class="line">(current) UNIX password:   <span class="comment"># 请输入当前密码；</span></span><br><span class="line">New UNIX password:         <span class="comment"># 请输入新密码；</span></span><br><span class="line">Retype new UNIX password:  <span class="comment"># 确认新密码；</span></span><br><span class="line">passwd: all authentication tokens updated successfully. <span class="comment"># 更改成功；</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 比如我们让某个用户不能修改密码，可以用`-l`选项来锁定：</span></span><br><span class="line">$ passwd -l linuxde    <span class="comment"># 锁定用户linuxde不能更改密码；</span></span><br><span class="line">Locking password <span class="keyword">for</span> user linuxde.</span><br><span class="line">passwd: Success           <span class="comment"># 锁定成功；</span></span><br><span class="line"></span><br><span class="line">$ su linuxde   <span class="comment"># 通过su切换到linuxde用户；</span></span><br><span class="line">$ passwd      <span class="comment"># linuxde来更改密码；</span></span><br><span class="line">Changing password <span class="keyword">for</span> user linuxde.</span><br><span class="line">Changing password <span class="keyword">for</span> linuxde</span><br><span class="line">(current) UNIX password:          <span class="comment"># 输入linuxde的当前密码；</span></span><br><span class="line">passwd: Authentication token manipulation error     <span class="comment"># 失败，不能更改密码；</span></span><br><span class="line"></span><br><span class="line">$ passwd -d linuxde  <span class="comment"># 清除linuxde用户密码；</span></span><br><span class="line">Removing password <span class="keyword">for</span> user linuxde.</span><br><span class="line">passwd: Success                         <span class="comment"># 清除成功；</span></span><br><span class="line"></span><br><span class="line">$ passwd -S linuxde    <span class="comment"># 查询linuxde用户密码状态；</span></span><br><span class="line">Empty password.                         <span class="comment"># 空密码，也就是没有密码；</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-8-su"><a class="header-anchor" href="#2-8-su">¶</a>2.8. su</h3>
+<blockquote>
+<p>su 命令用于切换当前用户身份到其他用户身份，变更时须输入所要变更的用户帐号与密码。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/su">http://man.linuxde.net/su</a></p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 变更帐号为 root 并在执行 ls 指令后退出变回原使用者：</span></span><br><span class="line">$ su -c ls root</span><br><span class="line"></span><br><span class="line"><span class="comment"># 变更帐号为 root 并传入`-f`选项给新执行的 shell：</span></span><br><span class="line">$ su root -f</span><br><span class="line"></span><br><span class="line"><span class="comment"># 变更帐号为 test 并改变工作目录至 test 的家目录：</span></span><br><span class="line">$ su -<span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-9-sudo"><a class="header-anchor" href="#2-9-sudo">¶</a>2.9. sudo</h3>
+<blockquote>
+<p>sudo 命令用来以其他身份来执行命令，预设的身份为 root。在 <code>/etc/sudoers</code> 中设置了可执行 sudo 指令的用户。若其未经授权的用户企图使用 sudo，则会发出警告的邮件给管理员。用户使用 sudo 时，必须先输入密码，之后有 5 分钟的有效期限，超过期限则必须重新输入密码。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/sudo">http://man.linuxde.net/sudo</a></p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 指定用户执行命令</span></span><br><span class="line">$ sudo -u userb ls -l</span><br><span class="line"><span class="comment"># 列出目前的权限</span></span><br><span class="line">$ sudo -l</span><br><span class="line"><span class="comment"># 显示sudo设置</span></span><br><span class="line">$ sudo -L</span><br></pre></td></tr></table></figure>
+<h4 id="2-9-1-给普通用户授权-sudo"><a class="header-anchor" href="#2-9-1-给普通用户授权-sudo">¶</a>2.9.1. 给普通用户授权 sudo</h4>
+<p>假设要给普通用户 mary 配置 sudo 权限：</p>
+<ol>
+<li><code>/etc/sudoers</code> 文件存放了 sudo 的相关用户，但是默认是没有写权限的，所以需要设为可写：<code>chmod u+w /etc/sudoers</code></li>
+<li>在该文件中添加 <code>mary ALL=(ALL) ALL</code> ，保存并退出，让 mary 具有 sudo 的所有权限</li>
+<li>再将 <code>/etc/sudoers</code> 的权限恢复到默认状态：<code>chmod u-w /etc/sudoers</code></li>
+</ol>
+<h4 id="2-9-2-免密码授权-sudo"><a class="header-anchor" href="#2-9-2-免密码授权-sudo">¶</a>2.9.2. 免密码授权 sudo</h4>
+<p>与给普通用户授权 sudo 类似，区别仅在于第 2 步：<code>mary ALL=(ALL) NOPASSWD: ALL</code>。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/linux/" rel="tag"># linux</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/02/20/network-ops/" rel="prev" title="Linux 典型运维应用">
+      <i class="fa fa-chevron-left"></i> Linux 典型运维应用
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/02/20/linux-cli-system/" rel="next" title="Linux 系统管理">
+      Linux 系统管理 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Linux 用户管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Linux-%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86%E8%A6%81%E7%82%B9"><span class="nav-number">1.1.</span> <span class="nav-text">1. Linux 用户管理要点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%91%BD%E4%BB%A4%E5%B8%B8%E8%A7%81%E7%94%A8%E6%B3%95-v7"><span class="nav-number">1.2.</span> <span class="nav-text">2. 命令常见用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-groupadd"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1. groupadd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-groupdel"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2. groupdel</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-groupmod"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3. groupmod</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-useradd"><span class="nav-number">1.2.4.</span> <span class="nav-text">2.4. useradd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-userdel"><span class="nav-number">1.2.5.</span> <span class="nav-text">2.5. userdel</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-usermod"><span class="nav-number">1.2.6.</span> <span class="nav-text">2.6. usermod</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-7-passwd"><span class="nav-number">1.2.7.</span> <span class="nav-text">2.7. passwd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-8-su"><span class="nav-number">1.2.8.</span> <span class="nav-text">2.8. su</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-9-sudo"><span class="nav-number">1.2.9.</span> <span class="nav-text">2.9. sudo</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-9-1-%E7%BB%99%E6%99%AE%E9%80%9A%E7%94%A8%E6%88%B7%E6%8E%88%E6%9D%83-sudo"><span class="nav-number">1.2.9.1.</span> <span class="nav-text">2.9.1. 给普通用户授权 sudo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-9-2-%E5%85%8D%E5%AF%86%E7%A0%81%E6%8E%88%E6%9D%83-sudo"><span class="nav-number">1.2.9.2.</span> <span class="nav-text">2.9.2. 免密码授权 sudo</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">duzhuo</p>
+  <div class="site-description" itemprop="description">duzhuo-s-blog</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">duzhuo</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: '32px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+    </div>
+</body>
+</html>

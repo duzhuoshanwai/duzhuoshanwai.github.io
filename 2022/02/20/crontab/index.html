@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-duzhuo-32%C3%9732.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-duzhuo-32%C3%9732.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-duzhuo-16%C3%9716.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="定时任务 - crontab  环境：CentOS  通过 crontab 命令，我们可以在固定的间隔时间执行指定的系统指令或 shell script 脚本。时间间隔的单位可以是分钟、小时、日、月、周及以上的任意组合。这个命令非常适合周期性的日志分析或数据备份等工作。 ¶crond 服务 Linux 通过 crond 服务来支持 crontab。 ¶检查 crond 服务 使用 systemct">
+<meta property="og:type" content="article">
+<meta property="og:title" content="定时任务 - crontab">
+<meta property="og:url" content="http://example.com/2022/02/20/crontab/index.html">
+<meta property="og:site_name" content="duzhuo&#39;s-blog">
+<meta property="og:description" content="定时任务 - crontab  环境：CentOS  通过 crontab 命令，我们可以在固定的间隔时间执行指定的系统指令或 shell script 脚本。时间间隔的单位可以是分钟、小时、日、月、周及以上的任意组合。这个命令非常适合周期性的日志分析或数据备份等工作。 ¶crond 服务 Linux 通过 crond 服务来支持 crontab。 ¶检查 crond 服务 使用 systemct">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/dunwu/images/dev/snap/20200211113339.png">
+<meta property="article:published_time" content="2022-02-20T07:09:06.000Z">
+<meta property="article:modified_time" content="2022-04-07T15:10:38.620Z">
+<meta property="article:author" content="duzhuo">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="crontab">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/dunwu/images/dev/snap/20200211113339.png">
+
+<link rel="canonical" href="http://example.com/2022/02/20/crontab/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>定时任务 - crontab | duzhuo's-blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">duzhuo's-blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">学无止境</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/20/crontab/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="duzhuo">
+      <meta itemprop="description" content="duzhuo-s-blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="duzhuo's-blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          定时任务 - crontab
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-02-20 15:09:06" itemprop="dateCreated datePublished" datetime="2022-02-20T15:09:06+08:00">2022-02-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-04-07 23:10:38" itemprop="dateModified" datetime="2022-04-07T23:10:38+08:00">2022-04-07</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1>定时任务 - crontab</h1>
+<blockquote>
+<p>环境：CentOS</p>
+</blockquote>
+<p>通过 <code>crontab</code> 命令，我们可以在固定的间隔时间执行指定的系统指令或 shell script 脚本。时间间隔的单位可以是分钟、小时、日、月、周及以上的任意组合。这个命令非常适合周期性的日志分析或数据备份等工作。</p>
+<h2 id="crond-服务"><a class="header-anchor" href="#crond-服务">¶</a>crond 服务</h2>
+<p>Linux 通过 crond 服务来支持 crontab。</p>
+<h3 id="检查-crond-服务"><a class="header-anchor" href="#检查-crond-服务">¶</a>检查 <code>crond</code> 服务</h3>
+<p>使用 <code>systemctl list-unit-files</code> 命令确认 <code>crond</code> 服务是否已安装。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> systemctl list-unit-files | grep crond</span></span><br><span class="line">crond.service                               enabled</span><br></pre></td></tr></table></figure>
+<p>如果为 enabled，表示服务正运行。</p>
+<h3 id="crond-服务命令"><a class="header-anchor" href="#crond-服务命令">¶</a>crond 服务命令</h3>
+<p>开机自动启动 crond 服务：<code>chkconfig crond on</code></p>
+<p>或者，按以下命令手动启动：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable crond.service  # 开启服务（开机自动启动服务）</span><br><span class="line">systemctl disable crond.service # 关闭服务（开机不会自动启动服务）</span><br><span class="line">systemctl start crond.service   # 启动服务</span><br><span class="line">systemctl stop crond.service    # 停止服务</span><br><span class="line">systemctl restart crond.service # 重启服务</span><br><span class="line">systemctl reload crond.service  # 重新载入配置</span><br><span class="line">systemctl status crond.service  # 查看服务状态</span><br></pre></td></tr></table></figure>
+<h2 id="crontab"><a class="header-anchor" href="#crontab">¶</a>crontab</h2>
+<h3 id="crontab-命令"><a class="header-anchor" href="#crontab-命令">¶</a>crontab 命令</h3>
+<p>crontab 命令格式如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crontab [-u user] file crontab [-u user] [ -e | -l | -r ]</span><br></pre></td></tr></table></figure>
+<p>说明：</p>
+<ul>
+<li><code>-u user</code>：用来设定某个用户的 crontab 服务；</li>
+<li><code>file</code>：file 是命令文件的名字，表示将 file 做为 crontab 的任务列表文件并载入 crontab。如果在命令行中没有指定这个文件，crontab 命令将接受标准输入（键盘）上键入的命令，并将它们载入 crontab。</li>
+<li><code>-e</code>：编辑某个用户的 crontab 文件内容。如果不指定用户，则表示编辑当前用户的 crontab 文件。</li>
+<li><code>-l</code>：显示某个用户的 crontab 文件内容，如果不指定用户，则表示显示当前用户的 crontab 文件内容。</li>
+<li><code>-r</code>：从/var/spool/cron 目录中删除某个用户的 crontab 文件，如果不指定用户，则默认删除当前用户的 crontab 文件。</li>
+<li><code>-i</code>：在删除用户的 crontab 文件时给确认提示。</li>
+</ul>
+<p>有两种方法写入定时任务：</p>
+<ul>
+<li>在命令行输入：<code>crontab -e</code> 然后添加相应的任务，存盘退出。</li>
+<li>直接编辑 <code>/etc/crontab</code> 文件，即 <code>vi /etc/crontab</code>，添加相应的任务。</li>
+</ul>
+<h3 id="crontab-文件"><a class="header-anchor" href="#crontab-文件">¶</a>crontab 文件</h3>
+<p>crontab 要执行的定时任务都被保存在 <code>/etc/crontab</code> 文件中。</p>
+<p>crontab 的文件格式如下：</p>
+<p><img data-src="https://raw.githubusercontent.com/dunwu/images/dev/snap/20200211113339.png" alt="img"></p>
+<h4 id="标准字段"><a class="header-anchor" href="#标准字段">¶</a>标准字段</h4>
+<p><strong>逗号</strong>用于分隔列表。例如，在第 5 个字段(星期几)中使用 <code>MON,WED,FRI</code> 表示周一、周三和周五。</p>
+<p><strong>连字符</strong>定义范围。例如，<code>2000-2010</code> 表示 2000 年至 2010 年期间的每年，包括 2000 年和 2010 年。</p>
+<p>除非用反斜杠()转义，否则命令中的**百分号(%)**会被替换成换行符，第一个百分号后面的所有数据都会作为标准输入发送给命令。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">字段</th>
+<th style="text-align:left">是否必填</th>
+<th style="text-align:left">允许值</th>
+<th style="text-align:left">允许特殊字符</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Minutes</td>
+<td style="text-align:left">是</td>
+<td style="text-align:left">0–59</td>
+<td style="text-align:left"><code>*</code>,<code>-</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Hours</td>
+<td style="text-align:left">是</td>
+<td style="text-align:left">0–23</td>
+<td style="text-align:left"><code>*</code>,<code>-</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Day of month</td>
+<td style="text-align:left">是</td>
+<td style="text-align:left">1–31</td>
+<td style="text-align:left"><code>*</code>,<code>-</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Month</td>
+<td style="text-align:left">是</td>
+<td style="text-align:left">1–12 or JAN–DEC</td>
+<td style="text-align:left"><code>*</code>,<code>-</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Day of week</td>
+<td style="text-align:left">是</td>
+<td style="text-align:left">0–6 or SUN–SAT</td>
+<td style="text-align:left"><code>*</code>,<code>-</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>/etc/crontab</code> 文件示例：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">SHELL=/bin/bash</span><br><span class="line">PATH=/sbin:/bin:/usr/sbin:/usr/bin</span><br><span class="line">MAILTO=root</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> For details see man 4 crontabs</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Example of job definition:</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> .---------------- minute (0 - 59)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> |  .------------- hour (0 - 23)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> |  |  .---------- day of month (1 - 31)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> |  |  |  |  |</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> *  *  *  *  * user-name  <span class="built_in">command</span> to be executed</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 每两个小时以root身份执行 /home/hello.sh 脚本</span></span><br><span class="line">0 */2 * * * root /home/hello.sh</span><br></pre></td></tr></table></figure>
+<h3 id="crontab-实例"><a class="header-anchor" href="#crontab-实例">¶</a>crontab 实例</h3>
+<h4 id="实例-1：每-1-分钟执行一次-myCommand"><a class="header-anchor" href="#实例-1：每-1-分钟执行一次-myCommand">¶</a>实例 1：每 1 分钟执行一次 myCommand</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* * * * * myCommand</span><br></pre></td></tr></table></figure>
+<h4 id="实例-2：每小时的第-3-和第-15-分钟执行"><a class="header-anchor" href="#实例-2：每小时的第-3-和第-15-分钟执行">¶</a>实例 2：每小时的第 3 和第 15 分钟执行</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3,15 * * * * myCommand</span><br></pre></td></tr></table></figure>
+<h4 id="实例-3：在上午-8-点到-11-点的第-3-和第-15-分钟执行"><a class="header-anchor" href="#实例-3：在上午-8-点到-11-点的第-3-和第-15-分钟执行">¶</a>实例 3：在上午 8 点到 11 点的第 3 和第 15 分钟执行</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3,15 8-11 * * * myCommand</span><br></pre></td></tr></table></figure>
+<h4 id="实例-4：每隔两天的上午-8-点到-11-点的第-3-和第-15-分钟执行"><a class="header-anchor" href="#实例-4：每隔两天的上午-8-点到-11-点的第-3-和第-15-分钟执行">¶</a>实例 4：每隔两天的上午 8 点到 11 点的第 3 和第 15 分钟执行</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3,15 8-11 */2  *  * myCommand</span><br></pre></td></tr></table></figure>
+<h4 id="实例-5：每周一上午-8-点到-11-点的第-3-和第-15-分钟执行"><a class="header-anchor" href="#实例-5：每周一上午-8-点到-11-点的第-3-和第-15-分钟执行">¶</a>实例 5：每周一上午 8 点到 11 点的第 3 和第 15 分钟执行</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3,15 8-11 * * 1 myCommand</span><br></pre></td></tr></table></figure>
+<h4 id="实例-6：每晚的-21-30-重启-smb"><a class="header-anchor" href="#实例-6：每晚的-21-30-重启-smb">¶</a>实例 6：每晚的 21:30 重启 smb</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">30 21 * * * /etc/init.d/smb restart</span><br></pre></td></tr></table></figure>
+<h4 id="实例-7：每月-1、10、22-日的-4-45-重启-smb"><a class="header-anchor" href="#实例-7：每月-1、10、22-日的-4-45-重启-smb">¶</a>实例 7：每月 1、10、22 日的 4 : 45 重启 smb</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">45 4 1,10,22 * * /etc/init.d/smb restart</span><br></pre></td></tr></table></figure>
+<h4 id="实例-8：每周六、周日的-1-10-重启-smb"><a class="header-anchor" href="#实例-8：每周六、周日的-1-10-重启-smb">¶</a>实例 8：每周六、周日的 1 : 10 重启 smb</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10 1 * * 6,0 /etc/init.d/smb restart</span><br></pre></td></tr></table></figure>
+<h4 id="实例-9：每天-18-00-至-23-00-之间每隔-30-分钟重启-smb"><a class="header-anchor" href="#实例-9：每天-18-00-至-23-00-之间每隔-30-分钟重启-smb">¶</a>实例 9：每天 18 : 00 至 23 : 00 之间每隔 30 分钟重启 smb</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0,30 18-23 * * * /etc/init.d/smb restart</span><br></pre></td></tr></table></figure>
+<h4 id="实例-10：每星期六的晚上-11-00-pm-重启-smb"><a class="header-anchor" href="#实例-10：每星期六的晚上-11-00-pm-重启-smb">¶</a>实例 10：每星期六的晚上 11 : 00 pm 重启 smb</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 23 * * 6 /etc/init.d/smb restart</span><br></pre></td></tr></table></figure>
+<h4 id="实例-11：每一小时重启-smb"><a class="header-anchor" href="#实例-11：每一小时重启-smb">¶</a>实例 11：每一小时重启 smb</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* */1 * * * /etc/init.d/smb restart</span><br></pre></td></tr></table></figure>
+<h4 id="实例-12：晚上-11-点到早上-7-点之间，每隔一小时重启-smb"><a class="header-anchor" href="#实例-12：晚上-11-点到早上-7-点之间，每隔一小时重启-smb">¶</a>实例 12：晚上 11 点到早上 7 点之间，每隔一小时重启 smb</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 23-7 * * * /etc/init.d/smb restart</span><br></pre></td></tr></table></figure>
+<h2 id="参考资料"><a class="header-anchor" href="#参考资料">¶</a>参考资料</h2>
+<ul>
+<li><strong>文章</strong>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/crontab.html">crontab 定时任务</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/z_yong_cool/article/details/79288397">linux 定时执行脚本</a></li>
+</ul>
+</li>
+<li><strong>在线工具</strong>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://tool.lu/crontab/">https://tool.lu/crontab/</a></li>
+<li><a target="_blank" rel="noopener" href="https://cron.qqe2.com/">https://cron.qqe2.com/</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/linux/" rel="tag"># linux</a>
+              <a href="/tags/crontab/" rel="tag"># crontab</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/02/20/linux-cli-dir/" rel="prev" title="Linux 文件目录管理">
+      <i class="fa fa-chevron-left"></i> Linux 文件目录管理
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/02/20/iptables/" rel="next" title="Iptables 应用">
+      Iptables 应用 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">定时任务 - crontab</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#crond-%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.1.</span> <span class="nav-text">crond 服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5-crond-%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.1.1.</span> <span class="nav-text">检查 crond 服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#crond-%E6%9C%8D%E5%8A%A1%E5%91%BD%E4%BB%A4"><span class="nav-number">1.1.2.</span> <span class="nav-text">crond 服务命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#crontab"><span class="nav-number">1.2.</span> <span class="nav-text">crontab</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#crontab-%E5%91%BD%E4%BB%A4"><span class="nav-number">1.2.1.</span> <span class="nav-text">crontab 命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#crontab-%E6%96%87%E4%BB%B6"><span class="nav-number">1.2.2.</span> <span class="nav-text">crontab 文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%87%E5%87%86%E5%AD%97%E6%AE%B5"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">标准字段</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#crontab-%E5%AE%9E%E4%BE%8B"><span class="nav-number">1.2.3.</span> <span class="nav-text">crontab 实例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-1%EF%BC%9A%E6%AF%8F-1-%E5%88%86%E9%92%9F%E6%89%A7%E8%A1%8C%E4%B8%80%E6%AC%A1-myCommand"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">实例 1：每 1 分钟执行一次 myCommand</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-2%EF%BC%9A%E6%AF%8F%E5%B0%8F%E6%97%B6%E7%9A%84%E7%AC%AC-3-%E5%92%8C%E7%AC%AC-15-%E5%88%86%E9%92%9F%E6%89%A7%E8%A1%8C"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">实例 2：每小时的第 3 和第 15 分钟执行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-3%EF%BC%9A%E5%9C%A8%E4%B8%8A%E5%8D%88-8-%E7%82%B9%E5%88%B0-11-%E7%82%B9%E7%9A%84%E7%AC%AC-3-%E5%92%8C%E7%AC%AC-15-%E5%88%86%E9%92%9F%E6%89%A7%E8%A1%8C"><span class="nav-number">1.2.3.3.</span> <span class="nav-text">实例 3：在上午 8 点到 11 点的第 3 和第 15 分钟执行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-4%EF%BC%9A%E6%AF%8F%E9%9A%94%E4%B8%A4%E5%A4%A9%E7%9A%84%E4%B8%8A%E5%8D%88-8-%E7%82%B9%E5%88%B0-11-%E7%82%B9%E7%9A%84%E7%AC%AC-3-%E5%92%8C%E7%AC%AC-15-%E5%88%86%E9%92%9F%E6%89%A7%E8%A1%8C"><span class="nav-number">1.2.3.4.</span> <span class="nav-text">实例 4：每隔两天的上午 8 点到 11 点的第 3 和第 15 分钟执行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-5%EF%BC%9A%E6%AF%8F%E5%91%A8%E4%B8%80%E4%B8%8A%E5%8D%88-8-%E7%82%B9%E5%88%B0-11-%E7%82%B9%E7%9A%84%E7%AC%AC-3-%E5%92%8C%E7%AC%AC-15-%E5%88%86%E9%92%9F%E6%89%A7%E8%A1%8C"><span class="nav-number">1.2.3.5.</span> <span class="nav-text">实例 5：每周一上午 8 点到 11 点的第 3 和第 15 分钟执行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-6%EF%BC%9A%E6%AF%8F%E6%99%9A%E7%9A%84-21-30-%E9%87%8D%E5%90%AF-smb"><span class="nav-number">1.2.3.6.</span> <span class="nav-text">实例 6：每晚的 21:30 重启 smb</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-7%EF%BC%9A%E6%AF%8F%E6%9C%88-1%E3%80%8110%E3%80%8122-%E6%97%A5%E7%9A%84-4-45-%E9%87%8D%E5%90%AF-smb"><span class="nav-number">1.2.3.7.</span> <span class="nav-text">实例 7：每月 1、10、22 日的 4 : 45 重启 smb</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-8%EF%BC%9A%E6%AF%8F%E5%91%A8%E5%85%AD%E3%80%81%E5%91%A8%E6%97%A5%E7%9A%84-1-10-%E9%87%8D%E5%90%AF-smb"><span class="nav-number">1.2.3.8.</span> <span class="nav-text">实例 8：每周六、周日的 1 : 10 重启 smb</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-9%EF%BC%9A%E6%AF%8F%E5%A4%A9-18-00-%E8%87%B3-23-00-%E4%B9%8B%E9%97%B4%E6%AF%8F%E9%9A%94-30-%E5%88%86%E9%92%9F%E9%87%8D%E5%90%AF-smb"><span class="nav-number">1.2.3.9.</span> <span class="nav-text">实例 9：每天 18 : 00 至 23 : 00 之间每隔 30 分钟重启 smb</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-10%EF%BC%9A%E6%AF%8F%E6%98%9F%E6%9C%9F%E5%85%AD%E7%9A%84%E6%99%9A%E4%B8%8A-11-00-pm-%E9%87%8D%E5%90%AF-smb"><span class="nav-number">1.2.3.10.</span> <span class="nav-text">实例 10：每星期六的晚上 11 : 00 pm 重启 smb</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-11%EF%BC%9A%E6%AF%8F%E4%B8%80%E5%B0%8F%E6%97%B6%E9%87%8D%E5%90%AF-smb"><span class="nav-number">1.2.3.11.</span> <span class="nav-text">实例 11：每一小时重启 smb</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-12%EF%BC%9A%E6%99%9A%E4%B8%8A-11-%E7%82%B9%E5%88%B0%E6%97%A9%E4%B8%8A-7-%E7%82%B9%E4%B9%8B%E9%97%B4%EF%BC%8C%E6%AF%8F%E9%9A%94%E4%B8%80%E5%B0%8F%E6%97%B6%E9%87%8D%E5%90%AF-smb"><span class="nav-number">1.2.3.12.</span> <span class="nav-text">实例 12：晚上 11 点到早上 7 点之间，每隔一小时重启 smb</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">1.3.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">duzhuo</p>
+  <div class="site-description" itemprop="description">duzhuo-s-blog</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">duzhuo</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: '32px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+    </div>
+</body>
+</html>

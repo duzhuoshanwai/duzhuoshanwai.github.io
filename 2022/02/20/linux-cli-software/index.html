@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-duzhuo-32%C3%9732.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-duzhuo-32%C3%9732.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-duzhuo-16%C3%9716.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Linux 软件管理  关键词：rpm, yum, apt-get  ¶1. rpm  rpm 命令是 RPM 软件包的管理工具。rpm 原本是 Red Hat Linux 发行版专门用来管理 Linux 各项套件的程序，由于它遵循 GPL 规则且功能强大方便，因而广受欢迎。逐渐受到其他发行版的采用。RPM 套件管理方式的出现，让 Linux 易于安装，升级，间接提升了 Linux 的适用度。 参">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux 软件管理">
+<meta property="og:url" content="http://example.com/2022/02/20/linux-cli-software/index.html">
+<meta property="og:site_name" content="duzhuo&#39;s-blog">
+<meta property="og:description" content="Linux 软件管理  关键词：rpm, yum, apt-get  ¶1. rpm  rpm 命令是 RPM 软件包的管理工具。rpm 原本是 Red Hat Linux 发行版专门用来管理 Linux 各项套件的程序，由于它遵循 GPL 规则且功能强大方便，因而广受欢迎。逐渐受到其他发行版的采用。RPM 套件管理方式的出现，让 Linux 易于安装，升级，间接提升了 Linux 的适用度。 参">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-02-20T07:09:06.000Z">
+<meta property="article:modified_time" content="2022-04-07T15:10:40.340Z">
+<meta property="article:author" content="duzhuo">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2022/02/20/linux-cli-software/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Linux 软件管理 | duzhuo's-blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">duzhuo's-blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">学无止境</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/20/linux-cli-software/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="duzhuo">
+      <meta itemprop="description" content="duzhuo-s-blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="duzhuo's-blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux 软件管理
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-02-20 15:09:06" itemprop="dateCreated datePublished" datetime="2022-02-20T15:09:06+08:00">2022-02-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-04-07 23:10:40" itemprop="dateModified" datetime="2022-04-07T23:10:40+08:00">2022-04-07</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1>Linux 软件管理</h1>
+<blockquote>
+<p>关键词：<code>rpm</code>, <code>yum</code>, <code>apt-get</code></p>
+</blockquote>
+<h2 id="1-rpm"><a class="header-anchor" href="#1-rpm">¶</a>1. rpm</h2>
+<blockquote>
+<p>rpm 命令是 RPM 软件包的管理工具。rpm 原本是 Red Hat Linux 发行版专门用来管理 Linux 各项套件的程序，由于它遵循 GPL 规则且功能强大方便，因而广受欢迎。逐渐受到其他发行版的采用。RPM 套件管理方式的出现，让 Linux 易于安装，升级，间接提升了 Linux 的适用度。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/rpm">http://man.linuxde.net/rpm</a></p>
+</blockquote>
+<p>示例：</p>
+<p>（1）安装 rpm 包</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh xxx.rpm</span><br></pre></td></tr></table></figure>
+<p>（2）安装.src.rpm 软件包</p>
+<p>这类软件包是包含了源代码的 rpm 包，在安装时需要进行编译</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">rpm -i xxx.src.rpm</span><br><span class="line"><span class="built_in">cd</span> /usr/src/redhat/SPECS</span><br><span class="line">rpmbuild -bp xxx.specs             <span class="comment">#一个和你的软件包同名的specs文件</span></span><br><span class="line"><span class="built_in">cd</span> /usr/src/redhat/BUILD/xxx/      <span class="comment">#一个和你的软件包同名的目录</span></span><br><span class="line">./configure                        <span class="comment">#这一步和编译普通的源码软件一样，可以加上参数</span></span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+<p>（3）卸载 rpm 软件包</p>
+<p>使用命令 <code>rpm -e 包名</code>，包名可以包含版本号等信息，但是不可以有后缀.rpm，比如卸载软件包 proftpd-1.2.8-1，可以使用下列格式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rpm -e proftpd-1.2.8-1</span><br><span class="line">rpm -e proftpd-1.2.8</span><br><span class="line">rpm -e proftpd-</span><br><span class="line">rpm -e proftpd</span><br></pre></td></tr></table></figure>
+<p>不可以是下列格式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rpm -e proftpd-1.2.8-1.i386.rpm</span><br><span class="line">rpm -e proftpd-1.2.8-1.i386</span><br><span class="line">rpm -e proftpd-1.2</span><br><span class="line">rpm -e proftpd-1</span><br></pre></td></tr></table></figure>
+<p>有时会出现一些错误或者警告：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">... is needed by ...</span><br></pre></td></tr></table></figure>
+<p>这说明这个软件被其他软件需要，不能随便卸载，可以用 rpm -e --nodeps 强制卸载</p>
+<p>（4）查看与 rpm 包相关的文件和其他信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa <span class="comment"># 列出所有安装过的包</span></span><br></pre></td></tr></table></figure>
+<h2 id="2-yum"><a class="header-anchor" href="#2-yum">¶</a>2. yum</h2>
+<blockquote>
+<p>yum 命令是在 Fedora 和 RedHat 以及 SUSE 中基于 rpm 的软件包管理器，它可以使系统管理人员交互和自动化地更细与管理 RPM 软件包，能够从指定的服务器自动下载 RPM 包并且安装，可以自动处理依赖性关系，并且一次安装所有依赖的软体包，无须繁琐地一次次下载、安装。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/yum">http://man.linuxde.net/yum</a></p>
+</blockquote>
+<p>示例：</p>
+<p>部分常用的命令包括：</p>
+<ul>
+<li>自动搜索最快镜像插件：<code>yum install yum-fastestmirror</code></li>
+<li>安装 yum 图形窗口插件：<code>yum install yumex</code></li>
+<li>查看可能批量安装的列表：<code>yum grouplist</code></li>
+</ul>
+<p><strong>安装</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install              #全部安装</span><br><span class="line">yum install package1     #安装指定的安装包package1</span><br><span class="line">yum groupinsall group1   #安装程序组group1</span><br></pre></td></tr></table></figure>
+<p><strong>更新和升级</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yum update               #全部更新</span><br><span class="line">yum update package1      #更新指定程序包package1</span><br><span class="line">yum check-update         #检查可更新的程序</span><br><span class="line">yum upgrade package1     #升级指定程序包package1</span><br><span class="line">yum groupupdate group1   #升级程序组group1</span><br></pre></td></tr></table></figure>
+<p><strong>查找和显示</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yum info package1      #显示安装包信息package1</span><br><span class="line">yum list               #显示所有已经安装和可以安装的程序包</span><br><span class="line">yum list package1      #显示指定程序包安装情况package1</span><br><span class="line">yum groupinfo group1   #显示程序组group1信息yum search string 根据关键字string查找安装包</span><br><span class="line">yum search &lt;keyword&gt;   #查找软件包</span><br></pre></td></tr></table></figure>
+<p><strong>删除程序</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum remove &lt;package_name&gt;          #删除程序包package_name</span><br><span class="line">yum groupremove group1             #删除程序组group1</span><br><span class="line">yum deplist package1               #查看程序package1依赖情况</span><br></pre></td></tr></table></figure>
+<p><strong>清除缓存</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum clean packages       #清除缓存目录下的软件包</span><br><span class="line">yum clean headers        #清除缓存目录下的 headers</span><br><span class="line">yum clean oldheaders     #清除缓存目录下旧的 headers</span><br></pre></td></tr></table></figure>
+<h3 id="2-1-yum-源"><a class="header-anchor" href="#2-1-yum-源">¶</a>2.1. yum 源</h3>
+<p>yum 的默认源是国外的，下载速度比较慢，所以最好替换为一个国内的 yum 源。</p>
+<table>
+<thead>
+<tr>
+<th>推荐 yum 国内源</th>
+<th>源地址</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a target="_blank" rel="noopener" href="http://mirrors.163.com/">http://mirrors.163.com/</a></td>
+<td>Centos6：<a target="_blank" rel="noopener" href="http://mirrors.aliyun.com/repo/Centos-6.repo">http://mirrors.aliyun.com/repo/Centos-6.repo</a><br>Centos7：<a target="_blank" rel="noopener" href="http://mirrors.aliyun.com/repo/Centos-7.repo">http://mirrors.aliyun.com/repo/Centos-7.repo</a></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="http://mirrors.aliyun.com/">http://mirrors.aliyun.com/</a></td>
+<td>Centos6：<a target="_blank" rel="noopener" href="http://mirrors.163.com/.help/CentOS6-Base-163.repo">http://mirrors.163.com/.help/CentOS6-Base-163.repo</a><br>Centos7：<a target="_blank" rel="noopener" href="http://mirrors.163.com/.help/CentOS7-Base-163.repo">http://mirrors.163.com/.help/CentOS7-Base-163.repo</a></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>🔔 注意：Cento5 已废弃，只能使用 <a target="_blank" rel="noopener" href="http://vault.centos.org/">http://vault.centos.org/</a> 替换，但由于是国外镜像，速度较慢。</p>
+</blockquote>
+<p>替换方法，以 aliyun CentOS7 为例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cp /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.bak</span><br><span class="line">wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo</span><br><span class="line">yum clean all</span><br><span class="line">yum makecache</span><br></pre></td></tr></table></figure>
+<h2 id="3-apt-get"><a class="header-anchor" href="#3-apt-get">¶</a>3. apt-get</h2>
+<blockquote>
+<p>apt-get 命令是 Debian Linux 发行版中的 APT 软件包管理工具。所有基于 Debian 的发行都使用这个包管理系统。deb 包可以把一个应用的文件包在一起，大体就如同 Windows 上的安装文件。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/apt-get">http://man.linuxde.net/apt-get</a></p>
+</blockquote>
+<p>示例：</p>
+<p>使用 apt-get 命令的第一步就是引入必需的软件库，Debian 的软件库也就是所有 Debian 软件包的集合，它们存在互联网上的一些公共站点上。把它们的地址加入，apt-get 就能搜索到我们想要的软件。/etc/apt/sources.list 是存放这些地址列表的配置文件，其格式如下：</p>
+<p>deb [web 或 ftp 地址][发行版名字] [main/contrib/non-free]<br>
+我们常用的 Ubuntu 就是一个基于 Debian 的发行，我们使用 apt-get 命令获取这个列表，以下是我整理的常用命令：</p>
+<p>在修改 /etc/apt/sources.list 或者 /etc/apt/preferences 之后运行该命令。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 更新 apt-get</span></span><br><span class="line">apt-get update</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装一个软件包</span></span><br><span class="line">apt-get install packagename</span><br><span class="line"></span><br><span class="line"><span class="comment"># 卸载一个已安装的软件包（保留配置文件）</span></span><br><span class="line">apt-get remove packagename</span><br><span class="line"></span><br><span class="line"><span class="comment"># 卸载一个已安装的软件包（删除配置文件）</span></span><br><span class="line">apt-get –purge remove packagename</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果需要空间的话，可以让这个命令来删除你已经删掉的软件</span></span><br><span class="line">apt-get autoclean apt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 把安装的软件的备份也删除，不过这样不会影响软件的使用的</span></span><br><span class="line">apt-get clean</span><br><span class="line"></span><br><span class="line"><span class="comment"># 更新所有已安装的软件包</span></span><br><span class="line">apt-get upgrade</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将系统升级到新版本</span></span><br><span class="line">apt-get dist-upgrade</span><br></pre></td></tr></table></figure>
+<h2 id="4-参考资料"><a class="header-anchor" href="#4-参考资料">¶</a>4. 参考资料</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://man.linuxde.net/rpm">http://man.linuxde.net/rpm</a></li>
+<li><a target="_blank" rel="noopener" href="http://man.linuxde.net/yum">http://man.linuxde.net/yum</a></li>
+<li><a target="_blank" rel="noopener" href="http://man.linuxde.net/apt-get">http://man.linuxde.net/apt-get</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.runoob.com/linux/linux-yum.html">http://www.runoob.com/linux/linux-yum.html</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/linux/" rel="tag"># linux</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/02/20/linux-cli-hardware/" rel="prev" title="Linux 硬件管理">
+      <i class="fa fa-chevron-left"></i> Linux 硬件管理
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/02/20/linux-cli-net/" rel="next" title="Linux 网络管理">
+      Linux 网络管理 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Linux 软件管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-rpm"><span class="nav-number">1.1.</span> <span class="nav-text">1. rpm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-yum"><span class="nav-number">1.2.</span> <span class="nav-text">2. yum</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-yum-%E6%BA%90"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1. yum 源</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-apt-get"><span class="nav-number">1.3.</span> <span class="nav-text">3. apt-get</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">1.4.</span> <span class="nav-text">4. 参考资料</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">duzhuo</p>
+  <div class="site-description" itemprop="description">duzhuo-s-blog</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">duzhuo</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: '32px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+    </div>
+</body>
+</html>

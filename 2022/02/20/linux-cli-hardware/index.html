@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-duzhuo-32%C3%9732.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-duzhuo-32%C3%9732.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-duzhuo-16%C3%9716.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Linux 硬件管理  关键词：df, du, top, free, iotop  ¶1. Linux 硬件管理要点  查看磁盘空间 - 使用 df 查看文件或目录的磁盘空间 - 使用 du 实时查看系统整体运行状态（如：CPU、内存） - 使用 top 查看已使用和未使用的内存 - 使用 free 查看磁盘 I&#x2F;O 使用状况 - 使用 iotop  ¶2. 命令常见用法 ¶2.1. df  df">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux 硬件管理">
+<meta property="og:url" content="http://example.com/2022/02/20/linux-cli-hardware/index.html">
+<meta property="og:site_name" content="duzhuo&#39;s-blog">
+<meta property="og:description" content="Linux 硬件管理  关键词：df, du, top, free, iotop  ¶1. Linux 硬件管理要点  查看磁盘空间 - 使用 df 查看文件或目录的磁盘空间 - 使用 du 实时查看系统整体运行状态（如：CPU、内存） - 使用 top 查看已使用和未使用的内存 - 使用 free 查看磁盘 I&#x2F;O 使用状况 - 使用 iotop  ¶2. 命令常见用法 ¶2.1. df  df">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-02-20T07:09:06.000Z">
+<meta property="article:modified_time" content="2022-04-07T15:10:39.800Z">
+<meta property="article:author" content="duzhuo">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2022/02/20/linux-cli-hardware/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Linux 硬件管理 | duzhuo's-blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">duzhuo's-blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">学无止境</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/20/linux-cli-hardware/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="duzhuo">
+      <meta itemprop="description" content="duzhuo-s-blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="duzhuo's-blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux 硬件管理
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-02-20 15:09:06" itemprop="dateCreated datePublished" datetime="2022-02-20T15:09:06+08:00">2022-02-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-04-07 23:10:39" itemprop="dateModified" datetime="2022-04-07T23:10:39+08:00">2022-04-07</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1>Linux 硬件管理</h1>
+<blockquote>
+<p>关键词：<code>df</code>, <code>du</code>, <code>top</code>, <code>free</code>, <code>iotop</code></p>
+</blockquote>
+<h2 id="1-Linux-硬件管理要点"><a class="header-anchor" href="#1-Linux-硬件管理要点">¶</a>1. Linux 硬件管理要点</h2>
+<ul>
+<li>查看磁盘空间 - 使用 <a href="#df">df</a></li>
+<li>查看文件或目录的磁盘空间 - 使用 <a href="#du">du</a></li>
+<li>实时查看系统整体运行状态（如：CPU、内存） - 使用 <a href="#top">top</a></li>
+<li>查看已使用和未使用的内存 - 使用 <a href="#free">free</a></li>
+<li>查看磁盘 I/O 使用状况 - 使用 <a href="#iotop">iotop</a></li>
+</ul>
+<h2 id="2-命令常见用法-v5"><a class="header-anchor" href="#2-命令常见用法-v5">¶</a>2. 命令常见用法</h2>
+<h3 id="2-1-df"><a class="header-anchor" href="#2-1-df">¶</a>2.1. df</h3>
+<blockquote>
+<p>df 命令用于显示磁盘分区上的可使用的磁盘空间。默认显示单位为 KB。可以利用该命令来获取硬盘被占用了多少空间，目前还剩下多少空间等信息。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/df">http://man.linuxde.net/df</a></p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看系统磁盘设备，默认是 KB 为单位</span></span><br><span class="line">[root@LinServ-1 ~]<span class="comment"># df</span></span><br><span class="line">文件系统               1K-块        已用     可用 已用% 挂载点</span><br><span class="line">/dev/sda2            146294492  28244432 110498708  21% /</span><br><span class="line">/dev/sda1              1019208     62360    904240   7% /boot</span><br><span class="line">tmpfs                  1032204         0   1032204   0% /dev/shm</span><br><span class="line">/dev/sdb1            2884284108 218826068 2518944764   8% /data1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 -h 选项以 KB 以上的单位来显示，可读性高</span></span><br><span class="line">[root@LinServ-1 ~]<span class="comment"># df -h</span></span><br><span class="line">文件系统              容量  已用 可用 已用% 挂载点</span><br><span class="line">/dev/sda2             140G   27G  106G  21% /</span><br><span class="line">/dev/sda1             996M   61M  884M   7% /boot</span><br><span class="line">tmpfs                1009M     0 1009M   0% /dev/shm</span><br><span class="line">/dev/sdb1             2.7T  209G  2.4T   8% /data1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看全部文件系统</span></span><br><span class="line">[root@LinServ-1 ~]<span class="comment"># df -a</span></span><br><span class="line">文件系统               1K-块        已用     可用 已用% 挂载点</span><br><span class="line">/dev/sda2            146294492  28244432 110498708  21% /</span><br><span class="line">proc                         0         0         0   -  /proc</span><br><span class="line">sysfs                        0         0         0   -  /sys</span><br><span class="line">devpts                       0         0         0   -  /dev/pts</span><br><span class="line">/dev/sda1              1019208     62360    904240   7% /boot</span><br><span class="line">tmpfs                  1032204         0   1032204   0% /dev/shm</span><br><span class="line">/dev/sdb1            2884284108 218826068 2518944764   8% /data1</span><br><span class="line">none                         0         0         0   -  /proc/sys/fs/binfmt_misc</span><br></pre></td></tr></table></figure>
+<h3 id="2-2-du"><a class="header-anchor" href="#2-2-du">¶</a>2.2. du</h3>
+<blockquote>
+<p>du 命令也是查看使用空间的，但是与 df 命令不同的是：du 命令是对文件和目录磁盘使用的空间的查看，还是和 df 命令有一些区别的。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/du">http://man.linuxde.net/du</a></p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 显示目录或者文件所占空间</span></span><br><span class="line">root@localhost [<span class="built_in">test</span>]<span class="comment"># du</span></span><br><span class="line">608 ./test6</span><br><span class="line">308 ./test4</span><br><span class="line">4 ./scf/lib</span><br><span class="line">4 ./scf/service/deploy/product</span><br><span class="line">4 ./scf/service/deploy/info</span><br><span class="line">12 ./scf/service/deploy</span><br><span class="line">16 ./scf/service</span><br><span class="line">4 ./scf/doc</span><br><span class="line">4 ./scf/bin</span><br><span class="line">32 ./scf</span><br><span class="line">8 ./test3</span><br><span class="line">1288 .</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示指定文件所占空间</span></span><br><span class="line">[root@localhost <span class="built_in">test</span>]<span class="comment"># du log2012.log</span></span><br><span class="line">300 log2012.log</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看指定目录的所占空间</span></span><br><span class="line">[root@localhost <span class="built_in">test</span>]<span class="comment"># du scf</span></span><br><span class="line">4 scf/lib</span><br><span class="line">4 scf/service/deploy/product</span><br><span class="line">4 scf/service/deploy/info</span><br><span class="line">12 scf/service/deploy</span><br><span class="line">16 scf/service</span><br><span class="line">4 scf/doc</span><br><span class="line">4 scf/bin</span><br><span class="line">32 scf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示多个文件所占空间</span></span><br><span class="line">[root@localhost <span class="built_in">test</span>]<span class="comment"># du log30.tar.gz log31.tar.gz</span></span><br><span class="line">4 log30.tar.gz</span><br><span class="line">4 log31.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="comment"># 只显示总和的大小</span></span><br><span class="line">[root@localhost <span class="built_in">test</span>]<span class="comment"># du -s</span></span><br><span class="line">1288 .</span><br><span class="line"></span><br><span class="line">[root@localhost <span class="built_in">test</span>]<span class="comment"># du -s scf</span></span><br><span class="line">32 scf</span><br></pre></td></tr></table></figure>
+<h3 id="2-3-top"><a class="header-anchor" href="#2-3-top">¶</a>2.3. top</h3>
+<blockquote>
+<p>top 命令可以实时动态地查看系统的整体运行情况，是一个综合了多方信息监测系统性能和运行信息的实用工具。通过 top 命令所提供的互动式界面，用热键可以管理。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/top">http://man.linuxde.net/top</a></p>
+</blockquote>
+<h3 id="2-4-free"><a class="header-anchor" href="#2-4-free">¶</a>2.4. free</h3>
+<blockquote>
+<p>free 命令可以显示当前系统未使用的和已使用的内存数目，还可以显示被内核使用的内存缓冲区。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/free">http://man.linuxde.net/free</a></p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">free -t    <span class="comment"># 以总和的形式显示内存的使用信息</span></span><br><span class="line">free -s 10 <span class="comment"># 周期性的查询内存使用信息，每10s 执行一次命令</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示内存使用情况</span></span><br><span class="line"></span><br><span class="line">free -m</span><br><span class="line">             total       used       free     shared    buffers     cached</span><br><span class="line">Mem:          2016       1973         42          0        163       1497</span><br><span class="line">-/+ buffers/cache:        312       1703</span><br><span class="line">Swap:         4094          0       4094</span><br></pre></td></tr></table></figure>
+<h3 id="2-5-iotop"><a class="header-anchor" href="#2-5-iotop">¶</a>2.5. iotop</h3>
+<blockquote>
+<p>iotop 命令是一个用来监视磁盘 I/O 使用状况的 top 类工具。iotop 具有与 top 相似的 UI，其中包括 PID、用户、I/O、进程等相关信息。Linux 下的 IO 统计工具如 iostat，nmon 等大多数是只能统计到 per 设备的读写情况，如果你想知道每个进程是如何使用 IO 的就比较麻烦，使用 iotop 命令可以很方便的查看。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/iotop">http://man.linuxde.net/iotop</a></p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Total DISK <span class="built_in">read</span>:       0.00 B/s | Total DISK write:       0.00 B/s</span><br><span class="line">  TID  PRIO  USER     DISK READ  DISK WRITE  SWAPIN     IO&gt;    <span class="built_in">command</span></span><br><span class="line">    1 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % init [3]</span><br><span class="line">    2 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [kthreadd]</span><br><span class="line">    3 rt/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [migration/0]</span><br><span class="line">    4 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [ksoftirqd/0]</span><br><span class="line">    5 rt/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [watchdog/0]</span><br><span class="line">    6 rt/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [migration/1]</span><br><span class="line">    7 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [ksoftirqd/1]</span><br><span class="line">    8 rt/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [watchdog/1]</span><br><span class="line">    9 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [events/0]</span><br><span class="line">   10 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [events/1]</span><br><span class="line">   11 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [khelper]</span><br><span class="line">2572 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [bluetooth]</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/linux/" rel="tag"># linux</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/02/20/linux-cli-system/" rel="prev" title="Linux 系统管理">
+      <i class="fa fa-chevron-left"></i> Linux 系统管理
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/02/20/linux-cli-software/" rel="next" title="Linux 软件管理">
+      Linux 软件管理 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Linux 硬件管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Linux-%E7%A1%AC%E4%BB%B6%E7%AE%A1%E7%90%86%E8%A6%81%E7%82%B9"><span class="nav-number">1.1.</span> <span class="nav-text">1. Linux 硬件管理要点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%91%BD%E4%BB%A4%E5%B8%B8%E8%A7%81%E7%94%A8%E6%B3%95-v5"><span class="nav-number">1.2.</span> <span class="nav-text">2. 命令常见用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-df"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1. df</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-du"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2. du</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-top"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3. top</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-free"><span class="nav-number">1.2.4.</span> <span class="nav-text">2.4. free</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-iotop"><span class="nav-number">1.2.5.</span> <span class="nav-text">2.5. iotop</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">duzhuo</p>
+  <div class="site-description" itemprop="description">duzhuo-s-blog</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">duzhuo</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: '32px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+    </div>
+</body>
+</html>
