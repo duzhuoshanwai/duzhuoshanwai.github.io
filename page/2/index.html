@@ -163,6 +163,160 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/20/linux-cli-software/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="duzhuo">
+      <meta itemprop="description" content="duzhuo-s-blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="duzhuo's-blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/02/20/linux-cli-software/" class="post-title-link" itemprop="url">Linux 软件管理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-02-20 15:09:06" itemprop="dateCreated datePublished" datetime="2022-02-20T15:09:06+08:00">2022-02-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-04-07 23:10:40" itemprop="dateModified" datetime="2022-04-07T23:10:40+08:00">2022-04-07</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1>Linux 软件管理</h1>
+<blockquote>
+<p>关键词：<code>rpm</code>, <code>yum</code>, <code>apt-get</code></p>
+</blockquote>
+<h2 id="1-rpm"><a class="header-anchor" href="#1-rpm">¶</a>1. rpm</h2>
+<blockquote>
+<p>rpm 命令是 RPM 软件包的管理工具。rpm 原本是 Red Hat Linux 发行版专门用来管理 Linux 各项套件的程序，由于它遵循 GPL 规则且功能强大方便，因而广受欢迎。逐渐受到其他发行版的采用。RPM 套件管理方式的出现，让 Linux 易于安装，升级，间接提升了 Linux 的适用度。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/rpm">http://man.linuxde.net/rpm</a></p>
+</blockquote>
+<p>示例：</p>
+<p>（1）安装 rpm 包</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh xxx.rpm</span><br></pre></td></tr></table></figure>
+<p>（2）安装.src.rpm 软件包</p>
+<p>这类软件包是包含了源代码的 rpm 包，在安装时需要进行编译</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">rpm -i xxx.src.rpm</span><br><span class="line"><span class="built_in">cd</span> /usr/src/redhat/SPECS</span><br><span class="line">rpmbuild -bp xxx.specs             <span class="comment">#一个和你的软件包同名的specs文件</span></span><br><span class="line"><span class="built_in">cd</span> /usr/src/redhat/BUILD/xxx/      <span class="comment">#一个和你的软件包同名的目录</span></span><br><span class="line">./configure                        <span class="comment">#这一步和编译普通的源码软件一样，可以加上参数</span></span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+<p>（3）卸载 rpm 软件包</p>
+<p>使用命令 <code>rpm -e 包名</code>，包名可以包含版本号等信息，但是不可以有后缀.rpm，比如卸载软件包 proftpd-1.2.8-1，可以使用下列格式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rpm -e proftpd-1.2.8-1</span><br><span class="line">rpm -e proftpd-1.2.8</span><br><span class="line">rpm -e proftpd-</span><br><span class="line">rpm -e proftpd</span><br></pre></td></tr></table></figure>
+<p>不可以是下列格式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rpm -e proftpd-1.2.8-1.i386.rpm</span><br><span class="line">rpm -e proftpd-1.2.8-1.i386</span><br><span class="line">rpm -e proftpd-1.2</span><br><span class="line">rpm -e proftpd-1</span><br></pre></td></tr></table></figure>
+<p>有时会出现一些错误或者警告：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">... is needed by ...</span><br></pre></td></tr></table></figure>
+<p>这说明这个软件被其他软件需要，不能随便卸载，可以用 rpm -e --nodeps 强制卸载</p>
+<p>（4）查看与 rpm 包相关的文件和其他信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa <span class="comment"># 列出所有安装过的包</span></span><br></pre></td></tr></table></figure>
+<h2 id="2-yum"><a class="header-anchor" href="#2-yum">¶</a>2. yum</h2>
+<blockquote>
+<p>yum 命令是在 Fedora 和 RedHat 以及 SUSE 中基于 rpm 的软件包管理器，它可以使系统管理人员交互和自动化地更细与管理 RPM 软件包，能够从指定的服务器自动下载 RPM 包并且安装，可以自动处理依赖性关系，并且一次安装所有依赖的软体包，无须繁琐地一次次下载、安装。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/yum">http://man.linuxde.net/yum</a></p>
+</blockquote>
+<p>示例：</p>
+<p>部分常用的命令包括：</p>
+<ul>
+<li>自动搜索最快镜像插件：<code>yum install yum-fastestmirror</code></li>
+<li>安装 yum 图形窗口插件：<code>yum install yumex</code></li>
+<li>查看可能批量安装的列表：<code>yum grouplist</code></li>
+</ul>
+<p><strong>安装</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install              #全部安装</span><br><span class="line">yum install package1     #安装指定的安装包package1</span><br><span class="line">yum groupinsall group1   #安装程序组group1</span><br></pre></td></tr></table></figure>
+<p><strong>更新和升级</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yum update               #全部更新</span><br><span class="line">yum update package1      #更新指定程序包package1</span><br><span class="line">yum check-update         #检查可更新的程序</span><br><span class="line">yum upgrade package1     #升级指定程序包package1</span><br><span class="line">yum groupupdate group1   #升级程序组group1</span><br></pre></td></tr></table></figure>
+<p><strong>查找和显示</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yum info package1      #显示安装包信息package1</span><br><span class="line">yum list               #显示所有已经安装和可以安装的程序包</span><br><span class="line">yum list package1      #显示指定程序包安装情况package1</span><br><span class="line">yum groupinfo group1   #显示程序组group1信息yum search string 根据关键字string查找安装包</span><br><span class="line">yum search &lt;keyword&gt;   #查找软件包</span><br></pre></td></tr></table></figure>
+<p><strong>删除程序</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum remove &lt;package_name&gt;          #删除程序包package_name</span><br><span class="line">yum groupremove group1             #删除程序组group1</span><br><span class="line">yum deplist package1               #查看程序package1依赖情况</span><br></pre></td></tr></table></figure>
+<p><strong>清除缓存</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum clean packages       #清除缓存目录下的软件包</span><br><span class="line">yum clean headers        #清除缓存目录下的 headers</span><br><span class="line">yum clean oldheaders     #清除缓存目录下旧的 headers</span><br></pre></td></tr></table></figure>
+<h3 id="2-1-yum-源"><a class="header-anchor" href="#2-1-yum-源">¶</a>2.1. yum 源</h3>
+<p>yum 的默认源是国外的，下载速度比较慢，所以最好替换为一个国内的 yum 源。</p>
+<table>
+<thead>
+<tr>
+<th>推荐 yum 国内源</th>
+<th>源地址</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a target="_blank" rel="noopener" href="http://mirrors.163.com/">http://mirrors.163.com/</a></td>
+<td>Centos6：<a target="_blank" rel="noopener" href="http://mirrors.aliyun.com/repo/Centos-6.repo">http://mirrors.aliyun.com/repo/Centos-6.repo</a><br>Centos7：<a target="_blank" rel="noopener" href="http://mirrors.aliyun.com/repo/Centos-7.repo">http://mirrors.aliyun.com/repo/Centos-7.repo</a></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="http://mirrors.aliyun.com/">http://mirrors.aliyun.com/</a></td>
+<td>Centos6：<a target="_blank" rel="noopener" href="http://mirrors.163.com/.help/CentOS6-Base-163.repo">http://mirrors.163.com/.help/CentOS6-Base-163.repo</a><br>Centos7：<a target="_blank" rel="noopener" href="http://mirrors.163.com/.help/CentOS7-Base-163.repo">http://mirrors.163.com/.help/CentOS7-Base-163.repo</a></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>🔔 注意：Cento5 已废弃，只能使用 <a target="_blank" rel="noopener" href="http://vault.centos.org/">http://vault.centos.org/</a> 替换，但由于是国外镜像，速度较慢。</p>
+</blockquote>
+<p>替换方法，以 aliyun CentOS7 为例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cp /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.bak</span><br><span class="line">wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo</span><br><span class="line">yum clean all</span><br><span class="line">yum makecache</span><br></pre></td></tr></table></figure>
+<h2 id="3-apt-get"><a class="header-anchor" href="#3-apt-get">¶</a>3. apt-get</h2>
+<blockquote>
+<p>apt-get 命令是 Debian Linux 发行版中的 APT 软件包管理工具。所有基于 Debian 的发行都使用这个包管理系统。deb 包可以把一个应用的文件包在一起，大体就如同 Windows 上的安装文件。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/apt-get">http://man.linuxde.net/apt-get</a></p>
+</blockquote>
+<p>示例：</p>
+<p>使用 apt-get 命令的第一步就是引入必需的软件库，Debian 的软件库也就是所有 Debian 软件包的集合，它们存在互联网上的一些公共站点上。把它们的地址加入，apt-get 就能搜索到我们想要的软件。/etc/apt/sources.list 是存放这些地址列表的配置文件，其格式如下：</p>
+<p>deb [web 或 ftp 地址][发行版名字] [main/contrib/non-free]<br>
+我们常用的 Ubuntu 就是一个基于 Debian 的发行，我们使用 apt-get 命令获取这个列表，以下是我整理的常用命令：</p>
+<p>在修改 /etc/apt/sources.list 或者 /etc/apt/preferences 之后运行该命令。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 更新 apt-get</span></span><br><span class="line">apt-get update</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装一个软件包</span></span><br><span class="line">apt-get install packagename</span><br><span class="line"></span><br><span class="line"><span class="comment"># 卸载一个已安装的软件包（保留配置文件）</span></span><br><span class="line">apt-get remove packagename</span><br><span class="line"></span><br><span class="line"><span class="comment"># 卸载一个已安装的软件包（删除配置文件）</span></span><br><span class="line">apt-get –purge remove packagename</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果需要空间的话，可以让这个命令来删除你已经删掉的软件</span></span><br><span class="line">apt-get autoclean apt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 把安装的软件的备份也删除，不过这样不会影响软件的使用的</span></span><br><span class="line">apt-get clean</span><br><span class="line"></span><br><span class="line"><span class="comment"># 更新所有已安装的软件包</span></span><br><span class="line">apt-get upgrade</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将系统升级到新版本</span></span><br><span class="line">apt-get dist-upgrade</span><br></pre></td></tr></table></figure>
+<h2 id="4-参考资料"><a class="header-anchor" href="#4-参考资料">¶</a>4. 参考资料</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://man.linuxde.net/rpm">http://man.linuxde.net/rpm</a></li>
+<li><a target="_blank" rel="noopener" href="http://man.linuxde.net/yum">http://man.linuxde.net/yum</a></li>
+<li><a target="_blank" rel="noopener" href="http://man.linuxde.net/apt-get">http://man.linuxde.net/apt-get</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.runoob.com/linux/linux-yum.html">http://www.runoob.com/linux/linux-yum.html</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/20/linux-cli-system/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -643,6 +797,141 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/20/ntp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="duzhuo">
+      <meta itemprop="description" content="duzhuo-s-blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="duzhuo's-blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/02/20/ntp/" class="post-title-link" itemprop="url">时间服务器-NTP</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-02-20 15:09:06" itemprop="dateCreated datePublished" datetime="2022-02-20T15:09:06+08:00">2022-02-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-04-07 23:10:41" itemprop="dateModified" datetime="2022-04-07T23:10:41+08:00">2022-04-07</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1>时间服务器 - NTP</h1>
+<h2 id="一、NTP-简介"><a class="header-anchor" href="#一、NTP-简介">¶</a>一、NTP 简介</h2>
+<p>网络时间协议（英语：Network Time Protocol，缩写：NTP）是在数据网络潜伏时间可变的计算机系统之间通过分组交换进行时钟同步的一个网络协议，位于 OSI 模型的应用层。自 1985 年以来，NTP 是目前仍在使用的最古老的互联网协议之一。NTP 由特拉华大学的 David L. Mills（英语：David L. Mills）设计。</p>
+<p><strong>NTP 意图将所有参与计算机的协调世界时（UTC）时间同步到几毫秒的误差内</strong>。</p>
+<p>NTP 要点：</p>
+<ul>
+<li>地球共有 24 个时区，而以格林威治时间 (GMT) 为标准时间；</li>
+<li>中国本地时间为 GMT +8 小时；</li>
+<li>最准确的时间为使用原子钟 (Atomic clock) 所计算的，例如 UTC (Coordinated Universal Time) 就是一例；</li>
+<li>Linux 系统本来就有两种时间，一种是 Linux 以 <code>1970/01/01</code> 开始计数的系统时间，一种则是 BIOS 记载的硬件时间；</li>
+<li>Linux 可以透过网络校时，最常见的网络校时为使用 NTP 服务器，这个服务启动在 <code>udp port 123</code>；</li>
+<li>时区档案主要放置于 <code>/usr/share/zoneinfo/</code> 目录下，而本地时区则参考 <code>/etc/localtime</code>；</li>
+<li>NTP 服务器为一种阶层式的服务，所以 NTP 服务器本来就会与上层时间服务器作时间的同步化， 因此 <code>nptd</code> 与 <code>ntpdate</code> 两个指令不可同时使用；</li>
+<li>NTP 服务器的联机状态可以使用 <code>ntpstat</code> 及 <code>ntpq -p</code> 来查询；</li>
+<li>NTP 提供的客户端软件为 <code>ntpdate</code> 这个指令；</li>
+<li>在 Linux 下想要手动处理时间时，需以 <code>date</code> 设定时间后，以 <code>hwclock -w</code> 来写入 BIOS 所记录的时间。</li>
+<li>NTP 服务器之间的时间误差不可超过 1000 秒，否则 NTP 服务会自动关闭。</li>
+</ul>
+<blockquote>
+<p>更多 NTP 详情可以参考：<a target="_blank" rel="noopener" href="http://cn.linux.vbird.org/linux_server/0440ntp.php">鸟哥的 Linux 私房菜-- NTP 时间服务器</a></p>
+</blockquote>
+<h2 id="二、ntpd-服务"><a class="header-anchor" href="#二、ntpd-服务">¶</a>二、ntpd 服务</h2>
+<blockquote>
+<p>环境：CentOS</p>
+</blockquote>
+<h3 id="yum-安装"><a class="header-anchor" href="#yum-安装">¶</a>yum 安装</h3>
+<p>CentOS 安装 NTP 很简单，执行以下命令即可：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install ntp</span><br></pre></td></tr></table></figure>
+<h3 id="ntpd-配置"><a class="header-anchor" href="#ntpd-配置">¶</a>ntpd 配置</h3>
+<p>ntp 的配置文件路径为： <code>/etc/ntp.conf</code> ，参考配置：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 1. 先处理权限方面的问题，包括放行上层服务器以及开放区网用户来源：</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> restrict default kod nomodify notrap nopeer noquery     <span class="comment"># 拒绝 IPv4 的用户</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> restrict -6 default kod nomodify notrap nopeer noquery  <span class="comment"># 拒绝 IPv6 的用户</span></span></span><br><span class="line">restrict default nomodify notrap nopeer noquery</span><br><span class="line"><span class="meta">#</span><span class="bash">restrict 192.168.100.0 mask 255.255.255.0 nomodify <span class="comment"># 放行同局域网来源（根据网关和子网掩码决定）</span></span></span><br><span class="line">restrict 127.0.0.1   # 默认值，放行本机 IPv4 来源</span><br><span class="line">restrict ::1         # 默认值，放行本机 IPv6 来源</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 2. 设定 NTP 主机来源</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 注释掉默认 NTP 来源</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> server 0.centos.pool.ntp.org iburst</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> server 1.centos.pool.ntp.org iburst</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> server 2.centos.pool.ntp.org iburst</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> server 3.centos.pool.ntp.org iburst</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置国内 NTP 来源</span></span><br><span class="line">server cn.pool.ntp.org prefer # 以这个主机为优先</span><br><span class="line">server ntp1.aliyun.com</span><br><span class="line">server ntp.sjtu.edu.cn</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 3. 预设时间差异分析档案与暂不用到的 keys 等，不需要更改它：</span></span><br><span class="line">driftfile /var/lib/ntp/drift</span><br><span class="line">keys /etc/ntp/keys</span><br><span class="line">includefile /etc/ntp/crypto/pw</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：如果更改配置，必须重启 NTP 服务（<code>systemctl restart ntpd</code>）才能生效。</p>
+</blockquote>
+<h3 id="放开防火墙限制"><a class="header-anchor" href="#放开防火墙限制">¶</a>放开防火墙限制</h3>
+<p>NTP 服务的端口是 <code>123</code>，使用的是 udp 协议，所以 NTP 服务器的防火墙必须对外开放 udp 123 这个端口。</p>
+<p>如果防火墙使用 <strong><code>iptables</code></strong>，执行以下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -p UDP -i eth0 -s 192.168.0.0/24 --dport 123 -j ACCEPT</span><br></pre></td></tr></table></figure>
+<p>如果防火墙使用 <strong><code>firewalld</code></strong>，执行以下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --zone=public --add-port=123/udp --permanent</span><br></pre></td></tr></table></figure>
+<h3 id="ntpd-服务命令"><a class="header-anchor" href="#ntpd-服务命令">¶</a>ntpd 服务命令</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable ntpd.service  # 开启服务（开机自动启动服务）</span><br><span class="line">systemctl disable ntpd.service # 关闭服务（开机不会自动启动服务）</span><br><span class="line">systemctl start ntpd.service   # 启动服务</span><br><span class="line">systemctl stop ntpd.service    # 停止服务</span><br><span class="line">systemctl restart ntpd.service # 重启服务</span><br><span class="line">systemctl reload ntpd.service  # 重新载入配置</span><br><span class="line">systemctl status ntpd.service  # 查看服务状态</span><br></pre></td></tr></table></figure>
+<h3 id="查看-ntp-服务状态"><a class="header-anchor" href="#查看-ntp-服务状态">¶</a>查看 ntp 服务状态</h3>
+<h4 id="验证-NTP-服务正常工作"><a class="header-anchor" href="#验证-NTP-服务正常工作">¶</a>验证 NTP 服务正常工作</h4>
+<p>执行 <code>ntpstat</code> 可以查看 ntp 服务器有无和上层 ntp 连通，，如果成功，可以看到类似以下的内容：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ntpstat</span></span><br><span class="line">synchronised to NTP server (5.79.108.34) at stratum 3</span><br><span class="line">   time correct to within 1129 ms</span><br><span class="line">   polling server every 64 s</span><br></pre></td></tr></table></figure>
+<h4 id="查看-ntp-服务器与上层-ntp-的状态"><a class="header-anchor" href="#查看-ntp-服务器与上层-ntp-的状态">¶</a>查看 ntp 服务器与上层 ntp 的状态</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ntpq -p</span><br><span class="line">     remote           refid      st t when poll reach   delay   offset  jitter</span><br><span class="line">==============================================================================</span><br><span class="line">*ntp1.ams1.nl.le 130.133.1.10     2 u   36   64  367  230.801    5.271   2.791</span><br><span class="line"> 120.25.115.20   10.137.53.7      2 u   33   64  377   25.930   15.908   3.168</span><br><span class="line"> time.cloudflare 10.21.8.251      3 u   31   64  367  251.109   16.976   3.264</span><br></pre></td></tr></table></figure>
+<h2 id="三、ntpdate-命令"><a class="header-anchor" href="#三、ntpdate-命令">¶</a>三、ntpdate 命令</h2>
+<blockquote>
+<p>注意：NTP 服务器为一种阶层式的服务，所以 NTP 服务器本来就会与上层时间服务器作时间的同步化， 因此 <code>nptd</code> 与 <code>ntpdate</code> 两个指令不可同时使用。</p>
+</blockquote>
+<h3 id="手动执行时间同步"><a class="header-anchor" href="#手动执行时间同步">¶</a>手动执行时间同步</h3>
+<p><code>ntpdate</code> 命令是 NTP 的客户端软件，它可以用于请求时间同步。</p>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/sbin/ntpdate &lt;ntp_server&gt;</span><br></pre></td></tr></table></figure>
+<p><code>ntp_server</code> 可以从 [国内 NTP 服务器](#国内 NTP 服务器) 中选择。</p>
+<p>示例：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ntpdate cn.pool.ntp.org</span></span><br><span class="line">11 Feb 10:47:12 ntpdate[30423]: step time server 84.16.73.33 offset -49.894774 sec</span><br></pre></td></tr></table></figure>
+<h3 id="自动定时同步时间"><a class="header-anchor" href="#自动定时同步时间">¶</a>自动定时同步时间</h3>
+<p>如果需要自动定时同步时间，可以利用 <a href="#crontab">Crontab</a> 工具。本质就是用 crontab 定时执行一次手动时间同步命令 ntp。</p>
+<p>示例：执行如下命令，就可以在每天凌晨 3 点同步系统时间：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;0 3 * * * /usr/sbin/ntpdate cn.pool.ntp.org&quot; &gt;&gt; /etc/crontab # 修改 crond 服务配置</span><br><span class="line">systemctl restart crond # 重启 crond 服务以生效</span><br></pre></td></tr></table></figure>
+<h2 id="四、国内-NTP-服务器"><a class="header-anchor" href="#四、国内-NTP-服务器">¶</a>四、国内 NTP 服务器</h2>
+<p>以下 NTP 服务器搜集自网络：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">cn.pool.ntp.org  # 最常用的国内NTP服务器，参考：https://www.ntppool.org/zh/use.html</span><br><span class="line">cn.ntp.org.cn    # 中国</span><br><span class="line">edu.ntp.org.cn   # 中国教育网</span><br><span class="line">ntp1.aliyun.com  # 阿里云</span><br><span class="line">ntp2.aliyun.com  # 阿里云</span><br><span class="line">ntp.sjtu.edu.cn  # 上海交通大学</span><br><span class="line">s1a.time.edu.cn  # 北京邮电大学</span><br><span class="line">s1b.time.edu.cn  # 清华大学</span><br><span class="line">s1c.time.edu.cn  # 北京大学</span><br><span class="line">s1d.time.edu.cn  # 东南大学</span><br><span class="line">s1e.time.edu.cn  # 清华大学</span><br><span class="line">s2a.time.edu.cn  # 清华大学</span><br><span class="line">s2b.time.edu.cn  # 清华大学</span><br><span class="line">s2c.time.edu.cn  # 北京邮电大学</span><br><span class="line">s2d.time.edu.cn  # 西南地区网络中心</span><br><span class="line">s2e.time.edu.cn  # 西北地区网络中心</span><br><span class="line">s2f.time.edu.cn  # 东北地区网络中心</span><br><span class="line">s2g.time.edu.cn  # 华东南地区网络中心</span><br><span class="line">s2h.time.edu.cn  # 四川大学网络管理中心</span><br><span class="line">s2j.time.edu.cn  # 大连理工大学网络中心</span><br><span class="line">s2k.time.edu.cn  # CERNET桂林主节点</span><br></pre></td></tr></table></figure>
+<h2 id="参考资料-v3"><a class="header-anchor" href="#参考资料-v3">¶</a>参考资料</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://cn.linux.vbird.org/linux_server/0440ntp.php">鸟哥的 Linux 私房菜-- NTP 时间服务器</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/quchunhui/p/7658853.html">Linux 配置 ntp 时间服务器</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/20/samba/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -795,141 +1084,6 @@
 <li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/750be209a6f0">https://www.jianshu.com/p/750be209a6f0</a></li>
 <li><a target="_blank" rel="noopener" href="https://github.com/judasn/Linux-Tutorial/blob/master/markdown-file/Samba.md">https://github.com/judasn/Linux-Tutorial/blob/master/markdown-file/Samba.md</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lan120576664/article/details/50396511">https://blog.csdn.net/lan120576664/article/details/50396511</a></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/20/ntp/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="duzhuo">
-      <meta itemprop="description" content="duzhuo-s-blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="duzhuo's-blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/02/20/ntp/" class="post-title-link" itemprop="url">时间服务器-NTP</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-02-20 15:09:06" itemprop="dateCreated datePublished" datetime="2022-02-20T15:09:06+08:00">2022-02-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-04-07 23:10:41" itemprop="dateModified" datetime="2022-04-07T23:10:41+08:00">2022-04-07</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1>时间服务器 - NTP</h1>
-<h2 id="一、NTP-简介"><a class="header-anchor" href="#一、NTP-简介">¶</a>一、NTP 简介</h2>
-<p>网络时间协议（英语：Network Time Protocol，缩写：NTP）是在数据网络潜伏时间可变的计算机系统之间通过分组交换进行时钟同步的一个网络协议，位于 OSI 模型的应用层。自 1985 年以来，NTP 是目前仍在使用的最古老的互联网协议之一。NTP 由特拉华大学的 David L. Mills（英语：David L. Mills）设计。</p>
-<p><strong>NTP 意图将所有参与计算机的协调世界时（UTC）时间同步到几毫秒的误差内</strong>。</p>
-<p>NTP 要点：</p>
-<ul>
-<li>地球共有 24 个时区，而以格林威治时间 (GMT) 为标准时间；</li>
-<li>中国本地时间为 GMT +8 小时；</li>
-<li>最准确的时间为使用原子钟 (Atomic clock) 所计算的，例如 UTC (Coordinated Universal Time) 就是一例；</li>
-<li>Linux 系统本来就有两种时间，一种是 Linux 以 <code>1970/01/01</code> 开始计数的系统时间，一种则是 BIOS 记载的硬件时间；</li>
-<li>Linux 可以透过网络校时，最常见的网络校时为使用 NTP 服务器，这个服务启动在 <code>udp port 123</code>；</li>
-<li>时区档案主要放置于 <code>/usr/share/zoneinfo/</code> 目录下，而本地时区则参考 <code>/etc/localtime</code>；</li>
-<li>NTP 服务器为一种阶层式的服务，所以 NTP 服务器本来就会与上层时间服务器作时间的同步化， 因此 <code>nptd</code> 与 <code>ntpdate</code> 两个指令不可同时使用；</li>
-<li>NTP 服务器的联机状态可以使用 <code>ntpstat</code> 及 <code>ntpq -p</code> 来查询；</li>
-<li>NTP 提供的客户端软件为 <code>ntpdate</code> 这个指令；</li>
-<li>在 Linux 下想要手动处理时间时，需以 <code>date</code> 设定时间后，以 <code>hwclock -w</code> 来写入 BIOS 所记录的时间。</li>
-<li>NTP 服务器之间的时间误差不可超过 1000 秒，否则 NTP 服务会自动关闭。</li>
-</ul>
-<blockquote>
-<p>更多 NTP 详情可以参考：<a target="_blank" rel="noopener" href="http://cn.linux.vbird.org/linux_server/0440ntp.php">鸟哥的 Linux 私房菜-- NTP 时间服务器</a></p>
-</blockquote>
-<h2 id="二、ntpd-服务"><a class="header-anchor" href="#二、ntpd-服务">¶</a>二、ntpd 服务</h2>
-<blockquote>
-<p>环境：CentOS</p>
-</blockquote>
-<h3 id="yum-安装"><a class="header-anchor" href="#yum-安装">¶</a>yum 安装</h3>
-<p>CentOS 安装 NTP 很简单，执行以下命令即可：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install ntp</span><br></pre></td></tr></table></figure>
-<h3 id="ntpd-配置"><a class="header-anchor" href="#ntpd-配置">¶</a>ntpd 配置</h3>
-<p>ntp 的配置文件路径为： <code>/etc/ntp.conf</code> ，参考配置：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 1. 先处理权限方面的问题，包括放行上层服务器以及开放区网用户来源：</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> restrict default kod nomodify notrap nopeer noquery     <span class="comment"># 拒绝 IPv4 的用户</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> restrict -6 default kod nomodify notrap nopeer noquery  <span class="comment"># 拒绝 IPv6 的用户</span></span></span><br><span class="line">restrict default nomodify notrap nopeer noquery</span><br><span class="line"><span class="meta">#</span><span class="bash">restrict 192.168.100.0 mask 255.255.255.0 nomodify <span class="comment"># 放行同局域网来源（根据网关和子网掩码决定）</span></span></span><br><span class="line">restrict 127.0.0.1   # 默认值，放行本机 IPv4 来源</span><br><span class="line">restrict ::1         # 默认值，放行本机 IPv6 来源</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 2. 设定 NTP 主机来源</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 注释掉默认 NTP 来源</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> server 0.centos.pool.ntp.org iburst</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> server 1.centos.pool.ntp.org iburst</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> server 2.centos.pool.ntp.org iburst</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> server 3.centos.pool.ntp.org iburst</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置国内 NTP 来源</span></span><br><span class="line">server cn.pool.ntp.org prefer # 以这个主机为优先</span><br><span class="line">server ntp1.aliyun.com</span><br><span class="line">server ntp.sjtu.edu.cn</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 3. 预设时间差异分析档案与暂不用到的 keys 等，不需要更改它：</span></span><br><span class="line">driftfile /var/lib/ntp/drift</span><br><span class="line">keys /etc/ntp/keys</span><br><span class="line">includefile /etc/ntp/crypto/pw</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>注意：如果更改配置，必须重启 NTP 服务（<code>systemctl restart ntpd</code>）才能生效。</p>
-</blockquote>
-<h3 id="放开防火墙限制"><a class="header-anchor" href="#放开防火墙限制">¶</a>放开防火墙限制</h3>
-<p>NTP 服务的端口是 <code>123</code>，使用的是 udp 协议，所以 NTP 服务器的防火墙必须对外开放 udp 123 这个端口。</p>
-<p>如果防火墙使用 <strong><code>iptables</code></strong>，执行以下命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -p UDP -i eth0 -s 192.168.0.0/24 --dport 123 -j ACCEPT</span><br></pre></td></tr></table></figure>
-<p>如果防火墙使用 <strong><code>firewalld</code></strong>，执行以下命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --zone=public --add-port=123/udp --permanent</span><br></pre></td></tr></table></figure>
-<h3 id="ntpd-服务命令"><a class="header-anchor" href="#ntpd-服务命令">¶</a>ntpd 服务命令</h3>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable ntpd.service  # 开启服务（开机自动启动服务）</span><br><span class="line">systemctl disable ntpd.service # 关闭服务（开机不会自动启动服务）</span><br><span class="line">systemctl start ntpd.service   # 启动服务</span><br><span class="line">systemctl stop ntpd.service    # 停止服务</span><br><span class="line">systemctl restart ntpd.service # 重启服务</span><br><span class="line">systemctl reload ntpd.service  # 重新载入配置</span><br><span class="line">systemctl status ntpd.service  # 查看服务状态</span><br></pre></td></tr></table></figure>
-<h3 id="查看-ntp-服务状态"><a class="header-anchor" href="#查看-ntp-服务状态">¶</a>查看 ntp 服务状态</h3>
-<h4 id="验证-NTP-服务正常工作"><a class="header-anchor" href="#验证-NTP-服务正常工作">¶</a>验证 NTP 服务正常工作</h4>
-<p>执行 <code>ntpstat</code> 可以查看 ntp 服务器有无和上层 ntp 连通，，如果成功，可以看到类似以下的内容：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ntpstat</span></span><br><span class="line">synchronised to NTP server (5.79.108.34) at stratum 3</span><br><span class="line">   time correct to within 1129 ms</span><br><span class="line">   polling server every 64 s</span><br></pre></td></tr></table></figure>
-<h4 id="查看-ntp-服务器与上层-ntp-的状态"><a class="header-anchor" href="#查看-ntp-服务器与上层-ntp-的状态">¶</a>查看 ntp 服务器与上层 ntp 的状态</h4>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ntpq -p</span><br><span class="line">     remote           refid      st t when poll reach   delay   offset  jitter</span><br><span class="line">==============================================================================</span><br><span class="line">*ntp1.ams1.nl.le 130.133.1.10     2 u   36   64  367  230.801    5.271   2.791</span><br><span class="line"> 120.25.115.20   10.137.53.7      2 u   33   64  377   25.930   15.908   3.168</span><br><span class="line"> time.cloudflare 10.21.8.251      3 u   31   64  367  251.109   16.976   3.264</span><br></pre></td></tr></table></figure>
-<h2 id="三、ntpdate-命令"><a class="header-anchor" href="#三、ntpdate-命令">¶</a>三、ntpdate 命令</h2>
-<blockquote>
-<p>注意：NTP 服务器为一种阶层式的服务，所以 NTP 服务器本来就会与上层时间服务器作时间的同步化， 因此 <code>nptd</code> 与 <code>ntpdate</code> 两个指令不可同时使用。</p>
-</blockquote>
-<h3 id="手动执行时间同步"><a class="header-anchor" href="#手动执行时间同步">¶</a>手动执行时间同步</h3>
-<p><code>ntpdate</code> 命令是 NTP 的客户端软件，它可以用于请求时间同步。</p>
-<p>语法：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/sbin/ntpdate &lt;ntp_server&gt;</span><br></pre></td></tr></table></figure>
-<p><code>ntp_server</code> 可以从 [国内 NTP 服务器](#国内 NTP 服务器) 中选择。</p>
-<p>示例：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ntpdate cn.pool.ntp.org</span></span><br><span class="line">11 Feb 10:47:12 ntpdate[30423]: step time server 84.16.73.33 offset -49.894774 sec</span><br></pre></td></tr></table></figure>
-<h3 id="自动定时同步时间"><a class="header-anchor" href="#自动定时同步时间">¶</a>自动定时同步时间</h3>
-<p>如果需要自动定时同步时间，可以利用 <a href="#crontab">Crontab</a> 工具。本质就是用 crontab 定时执行一次手动时间同步命令 ntp。</p>
-<p>示例：执行如下命令，就可以在每天凌晨 3 点同步系统时间：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;0 3 * * * /usr/sbin/ntpdate cn.pool.ntp.org&quot; &gt;&gt; /etc/crontab # 修改 crond 服务配置</span><br><span class="line">systemctl restart crond # 重启 crond 服务以生效</span><br></pre></td></tr></table></figure>
-<h2 id="四、国内-NTP-服务器"><a class="header-anchor" href="#四、国内-NTP-服务器">¶</a>四、国内 NTP 服务器</h2>
-<p>以下 NTP 服务器搜集自网络：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">cn.pool.ntp.org  # 最常用的国内NTP服务器，参考：https://www.ntppool.org/zh/use.html</span><br><span class="line">cn.ntp.org.cn    # 中国</span><br><span class="line">edu.ntp.org.cn   # 中国教育网</span><br><span class="line">ntp1.aliyun.com  # 阿里云</span><br><span class="line">ntp2.aliyun.com  # 阿里云</span><br><span class="line">ntp.sjtu.edu.cn  # 上海交通大学</span><br><span class="line">s1a.time.edu.cn  # 北京邮电大学</span><br><span class="line">s1b.time.edu.cn  # 清华大学</span><br><span class="line">s1c.time.edu.cn  # 北京大学</span><br><span class="line">s1d.time.edu.cn  # 东南大学</span><br><span class="line">s1e.time.edu.cn  # 清华大学</span><br><span class="line">s2a.time.edu.cn  # 清华大学</span><br><span class="line">s2b.time.edu.cn  # 清华大学</span><br><span class="line">s2c.time.edu.cn  # 北京邮电大学</span><br><span class="line">s2d.time.edu.cn  # 西南地区网络中心</span><br><span class="line">s2e.time.edu.cn  # 西北地区网络中心</span><br><span class="line">s2f.time.edu.cn  # 东北地区网络中心</span><br><span class="line">s2g.time.edu.cn  # 华东南地区网络中心</span><br><span class="line">s2h.time.edu.cn  # 四川大学网络管理中心</span><br><span class="line">s2j.time.edu.cn  # 大连理工大学网络中心</span><br><span class="line">s2k.time.edu.cn  # CERNET桂林主节点</span><br></pre></td></tr></table></figure>
-<h2 id="参考资料-v3"><a class="header-anchor" href="#参考资料-v3">¶</a>参考资料</h2>
-<ul>
-<li><a target="_blank" rel="noopener" href="http://cn.linux.vbird.org/linux_server/0440ntp.php">鸟哥的 Linux 私房菜-- NTP 时间服务器</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/quchunhui/p/7658853.html">Linux 配置 ntp 时间服务器</a></li>
 </ul>
 
       
@@ -2077,97 +2231,6 @@ sshd 正常停止（比如执行<code>systemctl stop</code>命令），它就不
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/18/CSGO%E7%BB%83%E4%B9%A0%E6%9C%8D%E5%8A%A1%E5%99%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="duzhuo">
-      <meta itemprop="description" content="duzhuo-s-blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="duzhuo's-blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/02/18/CSGO%E7%BB%83%E4%B9%A0%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="post-title-link" itemprop="url">csgo练习服务器</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-02-18 16:55:06 / 修改时间：17:23:41" itemprop="dateCreated datePublished" datetime="2022-02-18T16:55:06+08:00">2022-02-18</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1>CSGO练习服务器</h1>
-<p><img data-src="https://cdn.jsdelivr.net/gh/duzhuoshanwai/Image-Hosting/img/20211212233026_1.jpg" alt=""></p>
-<h2 id="如何连接服务器"><a class="header-anchor" href="#如何连接服务器">¶</a>如何连接服务器</h2>
-<ul>
-<li><a href="steam://connect/csgo.saint1337.top">启动csgo并连接练习服务器</a></li>
-</ul>
-<p>​       <strong>控制台输入:</strong> <code>connect csgo.saint1337.top</code></p>
-<ul>
-<li><a href="ts3server://ts3.saint1337.top/">启动teamspeak并连接服务器</a></li>
-</ul>
-<p>​       <strong>teamspeak服务器连接地址:</strong> <code>ts3.saint1337.top</code></p>
-<h2 id="服务器有的功能"><a class="header-anchor" href="#服务器有的功能">¶</a>服务器有的功能</h2>
-<ul>
-<li>
-<p><strong>跑图插件  默认自动开启</strong></p>
-<p><a target="_blank" rel="noopener" href="https://duzhuoshanwai.github.io/2022/02/18/csgo-practice-mode%20%E6%96%87%E6%A1%A3/">推荐参考文档1</a></p>
-<p><a target="_blank" rel="noopener" href="https://duzhuoshanwai.github.io/2022/02/18/simple-practicemode%20%E6%96%87%E6%A1%A3/">推荐参考文档2</a></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/splewis/csgo-practice-mode">https://github.com/splewis/csgo-practice-mode</a></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/hx-w/simple-practicemode">https://github.com/hx-w/simple-practicemode</a></p>
-</li>
-<li>
-<p><strong>学习道具插件</strong>  <strong><s>时不时会抽风</s></strong></p>
-</li>
-</ul>
-<p>​       <a target="_blank" rel="noopener" href="https://docs.csgowiki.top/csgowiki-pack/index/#csgowiki-pack">https://docs.csgowiki.top/csgowiki-pack/index/#csgowiki-pack</a></p>
-<p>​       <a target="_blank" rel="noopener" href="https://www.mycsgolab.com/">https://www.mycsgolab.com/</a><img data-src="https://cdn.jsdelivr.net/gh/duzhuoshanwai/Image-Hosting/img/20220218164354.png" alt=""></p>
-<ul>
-<li>
-<p><strong>皮肤手套插件</strong></p>
-<p><code>!ws</code> <code>!knife</code> <code>!gloves</code></p>
-<p>我是懒狗 插件更新不及时很正常8</p>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -2237,7 +2300,7 @@ sshd 正常停止（比如执行<code>systemctl stop</code>命令），它就不
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
