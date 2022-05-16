@@ -346,6 +346,195 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/20/crontab/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="duzhuo">
+      <meta itemprop="description" content="duzhuo-s-blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="duzhuo's-blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/02/20/crontab/" class="post-title-link" itemprop="url">定时任务 - crontab</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-02-20 15:09:06" itemprop="dateCreated datePublished" datetime="2022-02-20T15:09:06+08:00">2022-02-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-04-07 23:10:38" itemprop="dateModified" datetime="2022-04-07T23:10:38+08:00">2022-04-07</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1>定时任务 - crontab</h1>
+<blockquote>
+<p>环境：CentOS</p>
+</blockquote>
+<p>通过 <code>crontab</code> 命令，我们可以在固定的间隔时间执行指定的系统指令或 shell script 脚本。时间间隔的单位可以是分钟、小时、日、月、周及以上的任意组合。这个命令非常适合周期性的日志分析或数据备份等工作。</p>
+<h2 id="crond-服务"><a class="header-anchor" href="#crond-服务">¶</a>crond 服务</h2>
+<p>Linux 通过 crond 服务来支持 crontab。</p>
+<h3 id="检查-crond-服务"><a class="header-anchor" href="#检查-crond-服务">¶</a>检查 <code>crond</code> 服务</h3>
+<p>使用 <code>systemctl list-unit-files</code> 命令确认 <code>crond</code> 服务是否已安装。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> systemctl list-unit-files | grep crond</span></span><br><span class="line">crond.service                               enabled</span><br></pre></td></tr></table></figure>
+<p>如果为 enabled，表示服务正运行。</p>
+<h3 id="crond-服务命令"><a class="header-anchor" href="#crond-服务命令">¶</a>crond 服务命令</h3>
+<p>开机自动启动 crond 服务：<code>chkconfig crond on</code></p>
+<p>或者，按以下命令手动启动：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable crond.service  # 开启服务（开机自动启动服务）</span><br><span class="line">systemctl disable crond.service # 关闭服务（开机不会自动启动服务）</span><br><span class="line">systemctl start crond.service   # 启动服务</span><br><span class="line">systemctl stop crond.service    # 停止服务</span><br><span class="line">systemctl restart crond.service # 重启服务</span><br><span class="line">systemctl reload crond.service  # 重新载入配置</span><br><span class="line">systemctl status crond.service  # 查看服务状态</span><br></pre></td></tr></table></figure>
+<h2 id="crontab"><a class="header-anchor" href="#crontab">¶</a>crontab</h2>
+<h3 id="crontab-命令"><a class="header-anchor" href="#crontab-命令">¶</a>crontab 命令</h3>
+<p>crontab 命令格式如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crontab [-u user] file crontab [-u user] [ -e | -l | -r ]</span><br></pre></td></tr></table></figure>
+<p>说明：</p>
+<ul>
+<li><code>-u user</code>：用来设定某个用户的 crontab 服务；</li>
+<li><code>file</code>：file 是命令文件的名字，表示将 file 做为 crontab 的任务列表文件并载入 crontab。如果在命令行中没有指定这个文件，crontab 命令将接受标准输入（键盘）上键入的命令，并将它们载入 crontab。</li>
+<li><code>-e</code>：编辑某个用户的 crontab 文件内容。如果不指定用户，则表示编辑当前用户的 crontab 文件。</li>
+<li><code>-l</code>：显示某个用户的 crontab 文件内容，如果不指定用户，则表示显示当前用户的 crontab 文件内容。</li>
+<li><code>-r</code>：从/var/spool/cron 目录中删除某个用户的 crontab 文件，如果不指定用户，则默认删除当前用户的 crontab 文件。</li>
+<li><code>-i</code>：在删除用户的 crontab 文件时给确认提示。</li>
+</ul>
+<p>有两种方法写入定时任务：</p>
+<ul>
+<li>在命令行输入：<code>crontab -e</code> 然后添加相应的任务，存盘退出。</li>
+<li>直接编辑 <code>/etc/crontab</code> 文件，即 <code>vi /etc/crontab</code>，添加相应的任务。</li>
+</ul>
+<h3 id="crontab-文件"><a class="header-anchor" href="#crontab-文件">¶</a>crontab 文件</h3>
+<p>crontab 要执行的定时任务都被保存在 <code>/etc/crontab</code> 文件中。</p>
+<p>crontab 的文件格式如下：</p>
+<p><img data-src="https://raw.githubusercontent.com/dunwu/images/dev/snap/20200211113339.png" alt="img"></p>
+<h4 id="标准字段"><a class="header-anchor" href="#标准字段">¶</a>标准字段</h4>
+<p><strong>逗号</strong>用于分隔列表。例如，在第 5 个字段(星期几)中使用 <code>MON,WED,FRI</code> 表示周一、周三和周五。</p>
+<p><strong>连字符</strong>定义范围。例如，<code>2000-2010</code> 表示 2000 年至 2010 年期间的每年，包括 2000 年和 2010 年。</p>
+<p>除非用反斜杠()转义，否则命令中的**百分号(%)**会被替换成换行符，第一个百分号后面的所有数据都会作为标准输入发送给命令。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">字段</th>
+<th style="text-align:left">是否必填</th>
+<th style="text-align:left">允许值</th>
+<th style="text-align:left">允许特殊字符</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Minutes</td>
+<td style="text-align:left">是</td>
+<td style="text-align:left">0–59</td>
+<td style="text-align:left"><code>*</code>,<code>-</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Hours</td>
+<td style="text-align:left">是</td>
+<td style="text-align:left">0–23</td>
+<td style="text-align:left"><code>*</code>,<code>-</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Day of month</td>
+<td style="text-align:left">是</td>
+<td style="text-align:left">1–31</td>
+<td style="text-align:left"><code>*</code>,<code>-</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Month</td>
+<td style="text-align:left">是</td>
+<td style="text-align:left">1–12 or JAN–DEC</td>
+<td style="text-align:left"><code>*</code>,<code>-</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Day of week</td>
+<td style="text-align:left">是</td>
+<td style="text-align:left">0–6 or SUN–SAT</td>
+<td style="text-align:left"><code>*</code>,<code>-</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>/etc/crontab</code> 文件示例：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">SHELL=/bin/bash</span><br><span class="line">PATH=/sbin:/bin:/usr/sbin:/usr/bin</span><br><span class="line">MAILTO=root</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> For details see man 4 crontabs</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Example of job definition:</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> .---------------- minute (0 - 59)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> |  .------------- hour (0 - 23)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> |  |  .---------- day of month (1 - 31)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> |  |  |  |  |</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> *  *  *  *  * user-name  <span class="built_in">command</span> to be executed</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 每两个小时以root身份执行 /home/hello.sh 脚本</span></span><br><span class="line">0 */2 * * * root /home/hello.sh</span><br></pre></td></tr></table></figure>
+<h3 id="crontab-实例"><a class="header-anchor" href="#crontab-实例">¶</a>crontab 实例</h3>
+<h4 id="实例-1：每-1-分钟执行一次-myCommand"><a class="header-anchor" href="#实例-1：每-1-分钟执行一次-myCommand">¶</a>实例 1：每 1 分钟执行一次 myCommand</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* * * * * myCommand</span><br></pre></td></tr></table></figure>
+<h4 id="实例-2：每小时的第-3-和第-15-分钟执行"><a class="header-anchor" href="#实例-2：每小时的第-3-和第-15-分钟执行">¶</a>实例 2：每小时的第 3 和第 15 分钟执行</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3,15 * * * * myCommand</span><br></pre></td></tr></table></figure>
+<h4 id="实例-3：在上午-8-点到-11-点的第-3-和第-15-分钟执行"><a class="header-anchor" href="#实例-3：在上午-8-点到-11-点的第-3-和第-15-分钟执行">¶</a>实例 3：在上午 8 点到 11 点的第 3 和第 15 分钟执行</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3,15 8-11 * * * myCommand</span><br></pre></td></tr></table></figure>
+<h4 id="实例-4：每隔两天的上午-8-点到-11-点的第-3-和第-15-分钟执行"><a class="header-anchor" href="#实例-4：每隔两天的上午-8-点到-11-点的第-3-和第-15-分钟执行">¶</a>实例 4：每隔两天的上午 8 点到 11 点的第 3 和第 15 分钟执行</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3,15 8-11 */2  *  * myCommand</span><br></pre></td></tr></table></figure>
+<h4 id="实例-5：每周一上午-8-点到-11-点的第-3-和第-15-分钟执行"><a class="header-anchor" href="#实例-5：每周一上午-8-点到-11-点的第-3-和第-15-分钟执行">¶</a>实例 5：每周一上午 8 点到 11 点的第 3 和第 15 分钟执行</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3,15 8-11 * * 1 myCommand</span><br></pre></td></tr></table></figure>
+<h4 id="实例-6：每晚的-21-30-重启-smb"><a class="header-anchor" href="#实例-6：每晚的-21-30-重启-smb">¶</a>实例 6：每晚的 21:30 重启 smb</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">30 21 * * * /etc/init.d/smb restart</span><br></pre></td></tr></table></figure>
+<h4 id="实例-7：每月-1、10、22-日的-4-45-重启-smb"><a class="header-anchor" href="#实例-7：每月-1、10、22-日的-4-45-重启-smb">¶</a>实例 7：每月 1、10、22 日的 4 : 45 重启 smb</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">45 4 1,10,22 * * /etc/init.d/smb restart</span><br></pre></td></tr></table></figure>
+<h4 id="实例-8：每周六、周日的-1-10-重启-smb"><a class="header-anchor" href="#实例-8：每周六、周日的-1-10-重启-smb">¶</a>实例 8：每周六、周日的 1 : 10 重启 smb</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10 1 * * 6,0 /etc/init.d/smb restart</span><br></pre></td></tr></table></figure>
+<h4 id="实例-9：每天-18-00-至-23-00-之间每隔-30-分钟重启-smb"><a class="header-anchor" href="#实例-9：每天-18-00-至-23-00-之间每隔-30-分钟重启-smb">¶</a>实例 9：每天 18 : 00 至 23 : 00 之间每隔 30 分钟重启 smb</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0,30 18-23 * * * /etc/init.d/smb restart</span><br></pre></td></tr></table></figure>
+<h4 id="实例-10：每星期六的晚上-11-00-pm-重启-smb"><a class="header-anchor" href="#实例-10：每星期六的晚上-11-00-pm-重启-smb">¶</a>实例 10：每星期六的晚上 11 : 00 pm 重启 smb</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 23 * * 6 /etc/init.d/smb restart</span><br></pre></td></tr></table></figure>
+<h4 id="实例-11：每一小时重启-smb"><a class="header-anchor" href="#实例-11：每一小时重启-smb">¶</a>实例 11：每一小时重启 smb</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* */1 * * * /etc/init.d/smb restart</span><br></pre></td></tr></table></figure>
+<h4 id="实例-12：晚上-11-点到早上-7-点之间，每隔一小时重启-smb"><a class="header-anchor" href="#实例-12：晚上-11-点到早上-7-点之间，每隔一小时重启-smb">¶</a>实例 12：晚上 11 点到早上 7 点之间，每隔一小时重启 smb</h4>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 23-7 * * * /etc/init.d/smb restart</span><br></pre></td></tr></table></figure>
+<h2 id="参考资料"><a class="header-anchor" href="#参考资料">¶</a>参考资料</h2>
+<ul>
+<li><strong>文章</strong>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/crontab.html">crontab 定时任务</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/z_yong_cool/article/details/79288397">linux 定时执行脚本</a></li>
+</ul>
+</li>
+<li><strong>在线工具</strong>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://tool.lu/crontab/">https://tool.lu/crontab/</a></li>
+<li><a target="_blank" rel="noopener" href="https://cron.qqe2.com/">https://cron.qqe2.com/</a></li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/20/iptables/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -563,7 +752,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/20/crontab/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/20/linux-cli-file-compress/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -577,7 +766,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/02/20/crontab/" class="post-title-link" itemprop="url">定时任务 - crontab</a>
+            <a href="/2022/02/20/linux-cli-file-compress/" class="post-title-link" itemprop="url">Linux 文件压缩和解压</a>
         </h2>
 
         <div class="post-meta">
@@ -594,7 +783,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-04-07 23:10:38" itemprop="dateModified" datetime="2022-04-07T23:10:38+08:00">2022-04-07</time>
+                <time title="修改时间：2022-04-07 23:10:39" itemprop="dateModified" datetime="2022-04-07T23:10:39+08:00">2022-04-07</time>
               </span>
 
           
@@ -608,131 +797,46 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1>定时任务 - crontab</h1>
+          <h1>Linux 文件压缩和解压</h1>
 <blockquote>
-<p>环境：CentOS</p>
+<p>关键词：<code>tar</code>, <code>gzip</code>, <code>zip</code>, <code>unzip</code></p>
 </blockquote>
-<p>通过 <code>crontab</code> 命令，我们可以在固定的间隔时间执行指定的系统指令或 shell script 脚本。时间间隔的单位可以是分钟、小时、日、月、周及以上的任意组合。这个命令非常适合周期性的日志分析或数据备份等工作。</p>
-<h2 id="crond-服务"><a class="header-anchor" href="#crond-服务">¶</a>crond 服务</h2>
-<p>Linux 通过 crond 服务来支持 crontab。</p>
-<h3 id="检查-crond-服务"><a class="header-anchor" href="#检查-crond-服务">¶</a>检查 <code>crond</code> 服务</h3>
-<p>使用 <code>systemctl list-unit-files</code> 命令确认 <code>crond</code> 服务是否已安装。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> systemctl list-unit-files | grep crond</span></span><br><span class="line">crond.service                               enabled</span><br></pre></td></tr></table></figure>
-<p>如果为 enabled，表示服务正运行。</p>
-<h3 id="crond-服务命令"><a class="header-anchor" href="#crond-服务命令">¶</a>crond 服务命令</h3>
-<p>开机自动启动 crond 服务：<code>chkconfig crond on</code></p>
-<p>或者，按以下命令手动启动：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable crond.service  # 开启服务（开机自动启动服务）</span><br><span class="line">systemctl disable crond.service # 关闭服务（开机不会自动启动服务）</span><br><span class="line">systemctl start crond.service   # 启动服务</span><br><span class="line">systemctl stop crond.service    # 停止服务</span><br><span class="line">systemctl restart crond.service # 重启服务</span><br><span class="line">systemctl reload crond.service  # 重新载入配置</span><br><span class="line">systemctl status crond.service  # 查看服务状态</span><br></pre></td></tr></table></figure>
-<h2 id="crontab"><a class="header-anchor" href="#crontab">¶</a>crontab</h2>
-<h3 id="crontab-命令"><a class="header-anchor" href="#crontab-命令">¶</a>crontab 命令</h3>
-<p>crontab 命令格式如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crontab [-u user] file crontab [-u user] [ -e | -l | -r ]</span><br></pre></td></tr></table></figure>
-<p>说明：</p>
+<h2 id="1-Linux-文件压缩和解压要点"><a class="header-anchor" href="#1-Linux-文件压缩和解压要点">¶</a>1. Linux 文件压缩和解压要点</h2>
 <ul>
-<li><code>-u user</code>：用来设定某个用户的 crontab 服务；</li>
-<li><code>file</code>：file 是命令文件的名字，表示将 file 做为 crontab 的任务列表文件并载入 crontab。如果在命令行中没有指定这个文件，crontab 命令将接受标准输入（键盘）上键入的命令，并将它们载入 crontab。</li>
-<li><code>-e</code>：编辑某个用户的 crontab 文件内容。如果不指定用户，则表示编辑当前用户的 crontab 文件。</li>
-<li><code>-l</code>：显示某个用户的 crontab 文件内容，如果不指定用户，则表示显示当前用户的 crontab 文件内容。</li>
-<li><code>-r</code>：从/var/spool/cron 目录中删除某个用户的 crontab 文件，如果不指定用户，则默认删除当前用户的 crontab 文件。</li>
-<li><code>-i</code>：在删除用户的 crontab 文件时给确认提示。</li>
+<li>压缩和解压 tar 文件 - 使用 <a href="#tar">tar</a></li>
+<li>压缩和解压 gz 文件 - 使用 <a href="#gzip">gzip</a></li>
+<li>压缩和解压 zip 文件 - 分别使用 <a href="#zip">zip</a>、<a href="#unzip">unzip</a></li>
 </ul>
-<p>有两种方法写入定时任务：</p>
-<ul>
-<li>在命令行输入：<code>crontab -e</code> 然后添加相应的任务，存盘退出。</li>
-<li>直接编辑 <code>/etc/crontab</code> 文件，即 <code>vi /etc/crontab</code>，添加相应的任务。</li>
-</ul>
-<h3 id="crontab-文件"><a class="header-anchor" href="#crontab-文件">¶</a>crontab 文件</h3>
-<p>crontab 要执行的定时任务都被保存在 <code>/etc/crontab</code> 文件中。</p>
-<p>crontab 的文件格式如下：</p>
-<p><img data-src="https://raw.githubusercontent.com/dunwu/images/dev/snap/20200211113339.png" alt="img"></p>
-<h4 id="标准字段"><a class="header-anchor" href="#标准字段">¶</a>标准字段</h4>
-<p><strong>逗号</strong>用于分隔列表。例如，在第 5 个字段(星期几)中使用 <code>MON,WED,FRI</code> 表示周一、周三和周五。</p>
-<p><strong>连字符</strong>定义范围。例如，<code>2000-2010</code> 表示 2000 年至 2010 年期间的每年，包括 2000 年和 2010 年。</p>
-<p>除非用反斜杠()转义，否则命令中的**百分号(%)**会被替换成换行符，第一个百分号后面的所有数据都会作为标准输入发送给命令。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">字段</th>
-<th style="text-align:left">是否必填</th>
-<th style="text-align:left">允许值</th>
-<th style="text-align:left">允许特殊字符</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">Minutes</td>
-<td style="text-align:left">是</td>
-<td style="text-align:left">0–59</td>
-<td style="text-align:left"><code>*</code>,<code>-</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Hours</td>
-<td style="text-align:left">是</td>
-<td style="text-align:left">0–23</td>
-<td style="text-align:left"><code>*</code>,<code>-</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Day of month</td>
-<td style="text-align:left">是</td>
-<td style="text-align:left">1–31</td>
-<td style="text-align:left"><code>*</code>,<code>-</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Month</td>
-<td style="text-align:left">是</td>
-<td style="text-align:left">1–12 or JAN–DEC</td>
-<td style="text-align:left"><code>*</code>,<code>-</code></td>
-</tr>
-<tr>
-<td style="text-align:left">Day of week</td>
-<td style="text-align:left">是</td>
-<td style="text-align:left">0–6 or SUN–SAT</td>
-<td style="text-align:left"><code>*</code>,<code>-</code></td>
-</tr>
-</tbody>
-</table>
-<p><code>/etc/crontab</code> 文件示例：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">SHELL=/bin/bash</span><br><span class="line">PATH=/sbin:/bin:/usr/sbin:/usr/bin</span><br><span class="line">MAILTO=root</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> For details see man 4 crontabs</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Example of job definition:</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> .---------------- minute (0 - 59)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> |  .------------- hour (0 - 23)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> |  |  .---------- day of month (1 - 31)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> |  |  |  |  |</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> *  *  *  *  * user-name  <span class="built_in">command</span> to be executed</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 每两个小时以root身份执行 /home/hello.sh 脚本</span></span><br><span class="line">0 */2 * * * root /home/hello.sh</span><br></pre></td></tr></table></figure>
-<h3 id="crontab-实例"><a class="header-anchor" href="#crontab-实例">¶</a>crontab 实例</h3>
-<h4 id="实例-1：每-1-分钟执行一次-myCommand"><a class="header-anchor" href="#实例-1：每-1-分钟执行一次-myCommand">¶</a>实例 1：每 1 分钟执行一次 myCommand</h4>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* * * * * myCommand</span><br></pre></td></tr></table></figure>
-<h4 id="实例-2：每小时的第-3-和第-15-分钟执行"><a class="header-anchor" href="#实例-2：每小时的第-3-和第-15-分钟执行">¶</a>实例 2：每小时的第 3 和第 15 分钟执行</h4>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3,15 * * * * myCommand</span><br></pre></td></tr></table></figure>
-<h4 id="实例-3：在上午-8-点到-11-点的第-3-和第-15-分钟执行"><a class="header-anchor" href="#实例-3：在上午-8-点到-11-点的第-3-和第-15-分钟执行">¶</a>实例 3：在上午 8 点到 11 点的第 3 和第 15 分钟执行</h4>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3,15 8-11 * * * myCommand</span><br></pre></td></tr></table></figure>
-<h4 id="实例-4：每隔两天的上午-8-点到-11-点的第-3-和第-15-分钟执行"><a class="header-anchor" href="#实例-4：每隔两天的上午-8-点到-11-点的第-3-和第-15-分钟执行">¶</a>实例 4：每隔两天的上午 8 点到 11 点的第 3 和第 15 分钟执行</h4>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3,15 8-11 */2  *  * myCommand</span><br></pre></td></tr></table></figure>
-<h4 id="实例-5：每周一上午-8-点到-11-点的第-3-和第-15-分钟执行"><a class="header-anchor" href="#实例-5：每周一上午-8-点到-11-点的第-3-和第-15-分钟执行">¶</a>实例 5：每周一上午 8 点到 11 点的第 3 和第 15 分钟执行</h4>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3,15 8-11 * * 1 myCommand</span><br></pre></td></tr></table></figure>
-<h4 id="实例-6：每晚的-21-30-重启-smb"><a class="header-anchor" href="#实例-6：每晚的-21-30-重启-smb">¶</a>实例 6：每晚的 21:30 重启 smb</h4>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">30 21 * * * /etc/init.d/smb restart</span><br></pre></td></tr></table></figure>
-<h4 id="实例-7：每月-1、10、22-日的-4-45-重启-smb"><a class="header-anchor" href="#实例-7：每月-1、10、22-日的-4-45-重启-smb">¶</a>实例 7：每月 1、10、22 日的 4 : 45 重启 smb</h4>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">45 4 1,10,22 * * /etc/init.d/smb restart</span><br></pre></td></tr></table></figure>
-<h4 id="实例-8：每周六、周日的-1-10-重启-smb"><a class="header-anchor" href="#实例-8：每周六、周日的-1-10-重启-smb">¶</a>实例 8：每周六、周日的 1 : 10 重启 smb</h4>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10 1 * * 6,0 /etc/init.d/smb restart</span><br></pre></td></tr></table></figure>
-<h4 id="实例-9：每天-18-00-至-23-00-之间每隔-30-分钟重启-smb"><a class="header-anchor" href="#实例-9：每天-18-00-至-23-00-之间每隔-30-分钟重启-smb">¶</a>实例 9：每天 18 : 00 至 23 : 00 之间每隔 30 分钟重启 smb</h4>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0,30 18-23 * * * /etc/init.d/smb restart</span><br></pre></td></tr></table></figure>
-<h4 id="实例-10：每星期六的晚上-11-00-pm-重启-smb"><a class="header-anchor" href="#实例-10：每星期六的晚上-11-00-pm-重启-smb">¶</a>实例 10：每星期六的晚上 11 : 00 pm 重启 smb</h4>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 23 * * 6 /etc/init.d/smb restart</span><br></pre></td></tr></table></figure>
-<h4 id="实例-11：每一小时重启-smb"><a class="header-anchor" href="#实例-11：每一小时重启-smb">¶</a>实例 11：每一小时重启 smb</h4>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* */1 * * * /etc/init.d/smb restart</span><br></pre></td></tr></table></figure>
-<h4 id="实例-12：晚上-11-点到早上-7-点之间，每隔一小时重启-smb"><a class="header-anchor" href="#实例-12：晚上-11-点到早上-7-点之间，每隔一小时重启-smb">¶</a>实例 12：晚上 11 点到早上 7 点之间，每隔一小时重启 smb</h4>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 23-7 * * * /etc/init.d/smb restart</span><br></pre></td></tr></table></figure>
-<h2 id="参考资料"><a class="header-anchor" href="#参考资料">¶</a>参考资料</h2>
-<ul>
-<li><strong>文章</strong>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/crontab.html">crontab 定时任务</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/z_yong_cool/article/details/79288397">linux 定时执行脚本</a></li>
-</ul>
-</li>
-<li><strong>在线工具</strong>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://tool.lu/crontab/">https://tool.lu/crontab/</a></li>
-<li><a target="_blank" rel="noopener" href="https://cron.qqe2.com/">https://cron.qqe2.com/</a></li>
-</ul>
-</li>
-</ul>
+<h2 id="2-命令常见用法"><a class="header-anchor" href="#2-命令常见用法">¶</a>2. 命令常见用法</h2>
+<h3 id="2-1-tar"><a class="header-anchor" href="#2-1-tar">¶</a>2.1. tar</h3>
+<blockquote>
+<p>tar 命令可以为 linux 的文件和目录创建档案。利用 tar，可以为某一特定文件创建档案（备份文件），也可以在档案中改变文件，或者向档案中加入新的文件。tar 最初被用来在磁带上创建档案，现在，用户可以在任何设备上创建档案。利用 tar 命令，可以把一大堆的文件和目录全部打包成一个文件，这对于备份文件或将几个文件组合成为一个文件以便于网络传输是非常有用的。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/tar">http://man.linuxde.net/tar</a></p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">tar -cvf log.tar log2012.log            <span class="comment"># 仅打包，不压缩</span></span><br><span class="line">tar -zcvf log.tar.gz log2012.log        <span class="comment"># 打包后，以 gzip 压缩</span></span><br><span class="line">tar -jcvf log.tar.bz2 log2012.log       <span class="comment"># 打包后，以 bzip2 压缩</span></span><br><span class="line"></span><br><span class="line">tar -ztvf log.tar.gz                    <span class="comment"># 查阅上述 tar 包内有哪些文件</span></span><br><span class="line">tar -zxvf log.tar.gz                    <span class="comment"># 将 tar 包解压缩</span></span><br><span class="line">tar -zxvf log30.tar.gz log2013.log      <span class="comment"># 只将 tar 内的部分文件解压出来</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-2-gzip"><a class="header-anchor" href="#2-2-gzip">¶</a>2.2. gzip</h3>
+<blockquote>
+<p>gzip 命令用来压缩文件。gzip 是个使用广泛的压缩程序，文件经它压缩过后，其名称后面会多出“.gz”扩展名。</p>
+<p>gzip 是在 Linux 系统中经常使用的一个对文件进行压缩和解压缩的命令，既方便又好用。gzip 不仅可以用来压缩大的、较少使用的文件以节省磁盘空间，还可以和 tar 命令一起构成 Linux 操作系统中比较流行的压缩文件格式。据统计，gzip 命令对文本文件有 60%～ 70%的压缩率。减少文件大小有两个明显的好处，一是可以减少存储空间，二是通过网络传输文件时，可以减少传输的时间。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/gzip">http://man.linuxde.net/gzip</a></p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">gzip * <span class="comment"># 将所有文件压缩成 .gz 文件</span></span><br><span class="line">gzip -l * <span class="comment"># 详细显示压缩文件的信息，并不解压</span></span><br><span class="line">gzip -dv * <span class="comment"># 解压上例中的所有压缩文件，并列出详细的信息</span></span><br><span class="line">gzip -r log.tar     <span class="comment"># 压缩一个 tar 备份文件，此时压缩文件的扩展名为.tar.gz</span></span><br><span class="line">gzip -rv <span class="built_in">test</span>/      <span class="comment"># 递归的压缩目录</span></span><br><span class="line">gzip -dr <span class="built_in">test</span>/      <span class="comment"># 递归地解压目录</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-3-zip"><a class="header-anchor" href="#2-3-zip">¶</a>2.3. zip</h3>
+<blockquote>
+<p>zip 命令可以用来解压缩文件，或者对文件进行打包操作。zip 是个使用广泛的压缩程序，文件经它压缩后会另外产生具有“.zip”扩展名的压缩文件。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/zip">http://man.linuxde.net/zip</a></p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将 /home/Blinux/html/ 这个目录下所有文件和文件夹打包为当前目录下的 html.zip</span></span><br><span class="line">zip -q -r html.zip /home/Blinux/html</span><br></pre></td></tr></table></figure>
+<h3 id="2-4-unzip"><a class="header-anchor" href="#2-4-unzip">¶</a>2.4. unzip</h3>
+<blockquote>
+<p>unzip 命令用于解压缩由 zip 命令压缩的“.zip”压缩包。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/unzip">http://man.linuxde.net/unzip</a></p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">unzip test.zip              <span class="comment"># 解压 zip 文件</span></span><br><span class="line">unzip -n test.zip -d /tmp/  <span class="comment"># 在指定目录下解压缩</span></span><br><span class="line">unzip -o test.zip -d /tmp/  <span class="comment"># 在指定目录下解压缩，如果有相同文件存在则覆盖</span></span><br><span class="line">unzip -v test.zip           <span class="comment"># 查看压缩文件目录，但不解压</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -1041,110 +1145,6 @@ x=执行属性　　//值＝ 1</p>
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/20/linux-cli-file-compress/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="duzhuo">
-      <meta itemprop="description" content="duzhuo-s-blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="duzhuo's-blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/02/20/linux-cli-file-compress/" class="post-title-link" itemprop="url">Linux 文件压缩和解压</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-02-20 15:09:06" itemprop="dateCreated datePublished" datetime="2022-02-20T15:09:06+08:00">2022-02-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-04-07 23:10:39" itemprop="dateModified" datetime="2022-04-07T23:10:39+08:00">2022-04-07</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1>Linux 文件压缩和解压</h1>
-<blockquote>
-<p>关键词：<code>tar</code>, <code>gzip</code>, <code>zip</code>, <code>unzip</code></p>
-</blockquote>
-<h2 id="1-Linux-文件压缩和解压要点"><a class="header-anchor" href="#1-Linux-文件压缩和解压要点">¶</a>1. Linux 文件压缩和解压要点</h2>
-<ul>
-<li>压缩和解压 tar 文件 - 使用 <a href="#tar">tar</a></li>
-<li>压缩和解压 gz 文件 - 使用 <a href="#gzip">gzip</a></li>
-<li>压缩和解压 zip 文件 - 分别使用 <a href="#zip">zip</a>、<a href="#unzip">unzip</a></li>
-</ul>
-<h2 id="2-命令常见用法"><a class="header-anchor" href="#2-命令常见用法">¶</a>2. 命令常见用法</h2>
-<h3 id="2-1-tar"><a class="header-anchor" href="#2-1-tar">¶</a>2.1. tar</h3>
-<blockquote>
-<p>tar 命令可以为 linux 的文件和目录创建档案。利用 tar，可以为某一特定文件创建档案（备份文件），也可以在档案中改变文件，或者向档案中加入新的文件。tar 最初被用来在磁带上创建档案，现在，用户可以在任何设备上创建档案。利用 tar 命令，可以把一大堆的文件和目录全部打包成一个文件，这对于备份文件或将几个文件组合成为一个文件以便于网络传输是非常有用的。</p>
-<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/tar">http://man.linuxde.net/tar</a></p>
-</blockquote>
-<p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">tar -cvf log.tar log2012.log            <span class="comment"># 仅打包，不压缩</span></span><br><span class="line">tar -zcvf log.tar.gz log2012.log        <span class="comment"># 打包后，以 gzip 压缩</span></span><br><span class="line">tar -jcvf log.tar.bz2 log2012.log       <span class="comment"># 打包后，以 bzip2 压缩</span></span><br><span class="line"></span><br><span class="line">tar -ztvf log.tar.gz                    <span class="comment"># 查阅上述 tar 包内有哪些文件</span></span><br><span class="line">tar -zxvf log.tar.gz                    <span class="comment"># 将 tar 包解压缩</span></span><br><span class="line">tar -zxvf log30.tar.gz log2013.log      <span class="comment"># 只将 tar 内的部分文件解压出来</span></span><br></pre></td></tr></table></figure>
-<h3 id="2-2-gzip"><a class="header-anchor" href="#2-2-gzip">¶</a>2.2. gzip</h3>
-<blockquote>
-<p>gzip 命令用来压缩文件。gzip 是个使用广泛的压缩程序，文件经它压缩过后，其名称后面会多出“.gz”扩展名。</p>
-<p>gzip 是在 Linux 系统中经常使用的一个对文件进行压缩和解压缩的命令，既方便又好用。gzip 不仅可以用来压缩大的、较少使用的文件以节省磁盘空间，还可以和 tar 命令一起构成 Linux 操作系统中比较流行的压缩文件格式。据统计，gzip 命令对文本文件有 60%～ 70%的压缩率。减少文件大小有两个明显的好处，一是可以减少存储空间，二是通过网络传输文件时，可以减少传输的时间。</p>
-<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/gzip">http://man.linuxde.net/gzip</a></p>
-</blockquote>
-<p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">gzip * <span class="comment"># 将所有文件压缩成 .gz 文件</span></span><br><span class="line">gzip -l * <span class="comment"># 详细显示压缩文件的信息，并不解压</span></span><br><span class="line">gzip -dv * <span class="comment"># 解压上例中的所有压缩文件，并列出详细的信息</span></span><br><span class="line">gzip -r log.tar     <span class="comment"># 压缩一个 tar 备份文件，此时压缩文件的扩展名为.tar.gz</span></span><br><span class="line">gzip -rv <span class="built_in">test</span>/      <span class="comment"># 递归的压缩目录</span></span><br><span class="line">gzip -dr <span class="built_in">test</span>/      <span class="comment"># 递归地解压目录</span></span><br></pre></td></tr></table></figure>
-<h3 id="2-3-zip"><a class="header-anchor" href="#2-3-zip">¶</a>2.3. zip</h3>
-<blockquote>
-<p>zip 命令可以用来解压缩文件，或者对文件进行打包操作。zip 是个使用广泛的压缩程序，文件经它压缩后会另外产生具有“.zip”扩展名的压缩文件。</p>
-<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/zip">http://man.linuxde.net/zip</a></p>
-</blockquote>
-<p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将 /home/Blinux/html/ 这个目录下所有文件和文件夹打包为当前目录下的 html.zip</span></span><br><span class="line">zip -q -r html.zip /home/Blinux/html</span><br></pre></td></tr></table></figure>
-<h3 id="2-4-unzip"><a class="header-anchor" href="#2-4-unzip">¶</a>2.4. unzip</h3>
-<blockquote>
-<p>unzip 命令用于解压缩由 zip 命令压缩的“.zip”压缩包。</p>
-<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/unzip">http://man.linuxde.net/unzip</a></p>
-</blockquote>
-<p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">unzip test.zip              <span class="comment"># 解压 zip 文件</span></span><br><span class="line">unzip -n test.zip -d /tmp/  <span class="comment"># 在指定目录下解压缩</span></span><br><span class="line">unzip -o test.zip -d /tmp/  <span class="comment"># 在指定目录下解压缩，如果有相同文件存在则覆盖</span></span><br><span class="line">unzip -v test.zip           <span class="comment"># 查看压缩文件目录，但不解压</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/20/linux-cli-file/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1288,6 +1288,116 @@ x=执行属性　　//值＝ 1</p>
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/20/linux-cli-hardware/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="duzhuo">
+      <meta itemprop="description" content="duzhuo-s-blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="duzhuo's-blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/02/20/linux-cli-hardware/" class="post-title-link" itemprop="url">Linux 硬件管理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-02-20 15:09:06" itemprop="dateCreated datePublished" datetime="2022-02-20T15:09:06+08:00">2022-02-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-04-07 23:10:39" itemprop="dateModified" datetime="2022-04-07T23:10:39+08:00">2022-04-07</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1>Linux 硬件管理</h1>
+<blockquote>
+<p>关键词：<code>df</code>, <code>du</code>, <code>top</code>, <code>free</code>, <code>iotop</code></p>
+</blockquote>
+<h2 id="1-Linux-硬件管理要点"><a class="header-anchor" href="#1-Linux-硬件管理要点">¶</a>1. Linux 硬件管理要点</h2>
+<ul>
+<li>查看磁盘空间 - 使用 <a href="#df">df</a></li>
+<li>查看文件或目录的磁盘空间 - 使用 <a href="#du">du</a></li>
+<li>实时查看系统整体运行状态（如：CPU、内存） - 使用 <a href="#top">top</a></li>
+<li>查看已使用和未使用的内存 - 使用 <a href="#free">free</a></li>
+<li>查看磁盘 I/O 使用状况 - 使用 <a href="#iotop">iotop</a></li>
+</ul>
+<h2 id="2-命令常见用法-v3"><a class="header-anchor" href="#2-命令常见用法-v3">¶</a>2. 命令常见用法</h2>
+<h3 id="2-1-df"><a class="header-anchor" href="#2-1-df">¶</a>2.1. df</h3>
+<blockquote>
+<p>df 命令用于显示磁盘分区上的可使用的磁盘空间。默认显示单位为 KB。可以利用该命令来获取硬盘被占用了多少空间，目前还剩下多少空间等信息。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/df">http://man.linuxde.net/df</a></p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看系统磁盘设备，默认是 KB 为单位</span></span><br><span class="line">[root@LinServ-1 ~]<span class="comment"># df</span></span><br><span class="line">文件系统               1K-块        已用     可用 已用% 挂载点</span><br><span class="line">/dev/sda2            146294492  28244432 110498708  21% /</span><br><span class="line">/dev/sda1              1019208     62360    904240   7% /boot</span><br><span class="line">tmpfs                  1032204         0   1032204   0% /dev/shm</span><br><span class="line">/dev/sdb1            2884284108 218826068 2518944764   8% /data1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 -h 选项以 KB 以上的单位来显示，可读性高</span></span><br><span class="line">[root@LinServ-1 ~]<span class="comment"># df -h</span></span><br><span class="line">文件系统              容量  已用 可用 已用% 挂载点</span><br><span class="line">/dev/sda2             140G   27G  106G  21% /</span><br><span class="line">/dev/sda1             996M   61M  884M   7% /boot</span><br><span class="line">tmpfs                1009M     0 1009M   0% /dev/shm</span><br><span class="line">/dev/sdb1             2.7T  209G  2.4T   8% /data1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看全部文件系统</span></span><br><span class="line">[root@LinServ-1 ~]<span class="comment"># df -a</span></span><br><span class="line">文件系统               1K-块        已用     可用 已用% 挂载点</span><br><span class="line">/dev/sda2            146294492  28244432 110498708  21% /</span><br><span class="line">proc                         0         0         0   -  /proc</span><br><span class="line">sysfs                        0         0         0   -  /sys</span><br><span class="line">devpts                       0         0         0   -  /dev/pts</span><br><span class="line">/dev/sda1              1019208     62360    904240   7% /boot</span><br><span class="line">tmpfs                  1032204         0   1032204   0% /dev/shm</span><br><span class="line">/dev/sdb1            2884284108 218826068 2518944764   8% /data1</span><br><span class="line">none                         0         0         0   -  /proc/sys/fs/binfmt_misc</span><br></pre></td></tr></table></figure>
+<h3 id="2-2-du"><a class="header-anchor" href="#2-2-du">¶</a>2.2. du</h3>
+<blockquote>
+<p>du 命令也是查看使用空间的，但是与 df 命令不同的是：du 命令是对文件和目录磁盘使用的空间的查看，还是和 df 命令有一些区别的。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/du">http://man.linuxde.net/du</a></p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 显示目录或者文件所占空间</span></span><br><span class="line">root@localhost [<span class="built_in">test</span>]<span class="comment"># du</span></span><br><span class="line">608 ./test6</span><br><span class="line">308 ./test4</span><br><span class="line">4 ./scf/lib</span><br><span class="line">4 ./scf/service/deploy/product</span><br><span class="line">4 ./scf/service/deploy/info</span><br><span class="line">12 ./scf/service/deploy</span><br><span class="line">16 ./scf/service</span><br><span class="line">4 ./scf/doc</span><br><span class="line">4 ./scf/bin</span><br><span class="line">32 ./scf</span><br><span class="line">8 ./test3</span><br><span class="line">1288 .</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示指定文件所占空间</span></span><br><span class="line">[root@localhost <span class="built_in">test</span>]<span class="comment"># du log2012.log</span></span><br><span class="line">300 log2012.log</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看指定目录的所占空间</span></span><br><span class="line">[root@localhost <span class="built_in">test</span>]<span class="comment"># du scf</span></span><br><span class="line">4 scf/lib</span><br><span class="line">4 scf/service/deploy/product</span><br><span class="line">4 scf/service/deploy/info</span><br><span class="line">12 scf/service/deploy</span><br><span class="line">16 scf/service</span><br><span class="line">4 scf/doc</span><br><span class="line">4 scf/bin</span><br><span class="line">32 scf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示多个文件所占空间</span></span><br><span class="line">[root@localhost <span class="built_in">test</span>]<span class="comment"># du log30.tar.gz log31.tar.gz</span></span><br><span class="line">4 log30.tar.gz</span><br><span class="line">4 log31.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="comment"># 只显示总和的大小</span></span><br><span class="line">[root@localhost <span class="built_in">test</span>]<span class="comment"># du -s</span></span><br><span class="line">1288 .</span><br><span class="line"></span><br><span class="line">[root@localhost <span class="built_in">test</span>]<span class="comment"># du -s scf</span></span><br><span class="line">32 scf</span><br></pre></td></tr></table></figure>
+<h3 id="2-3-top"><a class="header-anchor" href="#2-3-top">¶</a>2.3. top</h3>
+<blockquote>
+<p>top 命令可以实时动态地查看系统的整体运行情况，是一个综合了多方信息监测系统性能和运行信息的实用工具。通过 top 命令所提供的互动式界面，用热键可以管理。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/top">http://man.linuxde.net/top</a></p>
+</blockquote>
+<h3 id="2-4-free"><a class="header-anchor" href="#2-4-free">¶</a>2.4. free</h3>
+<blockquote>
+<p>free 命令可以显示当前系统未使用的和已使用的内存数目，还可以显示被内核使用的内存缓冲区。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/free">http://man.linuxde.net/free</a></p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">free -t    <span class="comment"># 以总和的形式显示内存的使用信息</span></span><br><span class="line">free -s 10 <span class="comment"># 周期性的查询内存使用信息，每10s 执行一次命令</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示内存使用情况</span></span><br><span class="line"></span><br><span class="line">free -m</span><br><span class="line">             total       used       free     shared    buffers     cached</span><br><span class="line">Mem:          2016       1973         42          0        163       1497</span><br><span class="line">-/+ buffers/cache:        312       1703</span><br><span class="line">Swap:         4094          0       4094</span><br></pre></td></tr></table></figure>
+<h3 id="2-5-iotop"><a class="header-anchor" href="#2-5-iotop">¶</a>2.5. iotop</h3>
+<blockquote>
+<p>iotop 命令是一个用来监视磁盘 I/O 使用状况的 top 类工具。iotop 具有与 top 相似的 UI，其中包括 PID、用户、I/O、进程等相关信息。Linux 下的 IO 统计工具如 iostat，nmon 等大多数是只能统计到 per 设备的读写情况，如果你想知道每个进程是如何使用 IO 的就比较麻烦，使用 iotop 命令可以很方便的查看。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/iotop">http://man.linuxde.net/iotop</a></p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Total DISK <span class="built_in">read</span>:       0.00 B/s | Total DISK write:       0.00 B/s</span><br><span class="line">  TID  PRIO  USER     DISK READ  DISK WRITE  SWAPIN     IO&gt;    <span class="built_in">command</span></span><br><span class="line">    1 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % init [3]</span><br><span class="line">    2 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [kthreadd]</span><br><span class="line">    3 rt/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [migration/0]</span><br><span class="line">    4 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [ksoftirqd/0]</span><br><span class="line">    5 rt/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [watchdog/0]</span><br><span class="line">    6 rt/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [migration/1]</span><br><span class="line">    7 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [ksoftirqd/1]</span><br><span class="line">    8 rt/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [watchdog/1]</span><br><span class="line">    9 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [events/0]</span><br><span class="line">   10 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [events/1]</span><br><span class="line">   11 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [khelper]</span><br><span class="line">2572 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [bluetooth]</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/20/linux-cli-help/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1355,7 +1465,7 @@ x=执行属性　　//值＝ 1</p>
 <li><a target="_blank" rel="noopener" href="https://github.com/jaywcjlove/linux-command">linux-command</a></li>
 </ul>
 </blockquote>
-<h2 id="2-命令常见用法-v3"><a class="header-anchor" href="#2-命令常见用法-v3">¶</a>2. 命令常见用法</h2>
+<h2 id="2-命令常见用法-v4"><a class="header-anchor" href="#2-命令常见用法-v4">¶</a>2. 命令常见用法</h2>
 <h3 id="2-1-help"><a class="header-anchor" href="#2-1-help">¶</a>2.1. help</h3>
 <blockquote>
 <p>help 命令用于查看 Shell 内部命令的帮助信息。而对于外部命令的帮助信息只能使用 man 或者 info 命令查看。</p>
@@ -1507,7 +1617,7 @@ x=执行属性　　//值＝ 1</p>
 <li>追踪数据在网络上的传输时的全部路径 - 使用 <a href="#traceroute">traceroute</a></li>
 <li>查看当前工作的端口信息 - 使用 <a href="#netstat">netstat</a></li>
 </ul>
-<h2 id="2-命令常见用法-v4"><a class="header-anchor" href="#2-命令常见用法-v4">¶</a>2. 命令常见用法</h2>
+<h2 id="2-命令常见用法-v5"><a class="header-anchor" href="#2-命令常见用法-v5">¶</a>2. 命令常见用法</h2>
 <h3 id="2-1-curl"><a class="header-anchor" href="#2-1-curl">¶</a>2.1. curl</h3>
 <blockquote>
 <p>curl 命令是一个利用 URL 规则在命令行下工作的文件传输工具。它支持文件的上传和下载，所以是综合传输工具，但按传统，习惯称 curl 为下载工具。作为一款强力工具，curl 支持包括 HTTP、HTTPS、ftp 等众多协议，还支持 POST、cookies、认证、从指定偏移处下载部分文件、用户代理字符串、限速、文件大小、进度条等特征。做网页处理流程和数据检索自动化，curl 可以祝一臂之力。</p>
@@ -1819,116 +1929,6 @@ x=执行属性　　//值＝ 1</p>
 <li><a target="_blank" rel="noopener" href="http://man.linuxde.net/apt-get">http://man.linuxde.net/apt-get</a></li>
 <li><a target="_blank" rel="noopener" href="http://www.runoob.com/linux/linux-yum.html">http://www.runoob.com/linux/linux-yum.html</a></li>
 </ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/20/linux-cli-hardware/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="duzhuo">
-      <meta itemprop="description" content="duzhuo-s-blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="duzhuo's-blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/02/20/linux-cli-hardware/" class="post-title-link" itemprop="url">Linux 硬件管理</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-02-20 15:09:06" itemprop="dateCreated datePublished" datetime="2022-02-20T15:09:06+08:00">2022-02-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-04-07 23:10:39" itemprop="dateModified" datetime="2022-04-07T23:10:39+08:00">2022-04-07</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1>Linux 硬件管理</h1>
-<blockquote>
-<p>关键词：<code>df</code>, <code>du</code>, <code>top</code>, <code>free</code>, <code>iotop</code></p>
-</blockquote>
-<h2 id="1-Linux-硬件管理要点"><a class="header-anchor" href="#1-Linux-硬件管理要点">¶</a>1. Linux 硬件管理要点</h2>
-<ul>
-<li>查看磁盘空间 - 使用 <a href="#df">df</a></li>
-<li>查看文件或目录的磁盘空间 - 使用 <a href="#du">du</a></li>
-<li>实时查看系统整体运行状态（如：CPU、内存） - 使用 <a href="#top">top</a></li>
-<li>查看已使用和未使用的内存 - 使用 <a href="#free">free</a></li>
-<li>查看磁盘 I/O 使用状况 - 使用 <a href="#iotop">iotop</a></li>
-</ul>
-<h2 id="2-命令常见用法-v5"><a class="header-anchor" href="#2-命令常见用法-v5">¶</a>2. 命令常见用法</h2>
-<h3 id="2-1-df"><a class="header-anchor" href="#2-1-df">¶</a>2.1. df</h3>
-<blockquote>
-<p>df 命令用于显示磁盘分区上的可使用的磁盘空间。默认显示单位为 KB。可以利用该命令来获取硬盘被占用了多少空间，目前还剩下多少空间等信息。</p>
-<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/df">http://man.linuxde.net/df</a></p>
-</blockquote>
-<p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看系统磁盘设备，默认是 KB 为单位</span></span><br><span class="line">[root@LinServ-1 ~]<span class="comment"># df</span></span><br><span class="line">文件系统               1K-块        已用     可用 已用% 挂载点</span><br><span class="line">/dev/sda2            146294492  28244432 110498708  21% /</span><br><span class="line">/dev/sda1              1019208     62360    904240   7% /boot</span><br><span class="line">tmpfs                  1032204         0   1032204   0% /dev/shm</span><br><span class="line">/dev/sdb1            2884284108 218826068 2518944764   8% /data1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 -h 选项以 KB 以上的单位来显示，可读性高</span></span><br><span class="line">[root@LinServ-1 ~]<span class="comment"># df -h</span></span><br><span class="line">文件系统              容量  已用 可用 已用% 挂载点</span><br><span class="line">/dev/sda2             140G   27G  106G  21% /</span><br><span class="line">/dev/sda1             996M   61M  884M   7% /boot</span><br><span class="line">tmpfs                1009M     0 1009M   0% /dev/shm</span><br><span class="line">/dev/sdb1             2.7T  209G  2.4T   8% /data1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看全部文件系统</span></span><br><span class="line">[root@LinServ-1 ~]<span class="comment"># df -a</span></span><br><span class="line">文件系统               1K-块        已用     可用 已用% 挂载点</span><br><span class="line">/dev/sda2            146294492  28244432 110498708  21% /</span><br><span class="line">proc                         0         0         0   -  /proc</span><br><span class="line">sysfs                        0         0         0   -  /sys</span><br><span class="line">devpts                       0         0         0   -  /dev/pts</span><br><span class="line">/dev/sda1              1019208     62360    904240   7% /boot</span><br><span class="line">tmpfs                  1032204         0   1032204   0% /dev/shm</span><br><span class="line">/dev/sdb1            2884284108 218826068 2518944764   8% /data1</span><br><span class="line">none                         0         0         0   -  /proc/sys/fs/binfmt_misc</span><br></pre></td></tr></table></figure>
-<h3 id="2-2-du"><a class="header-anchor" href="#2-2-du">¶</a>2.2. du</h3>
-<blockquote>
-<p>du 命令也是查看使用空间的，但是与 df 命令不同的是：du 命令是对文件和目录磁盘使用的空间的查看，还是和 df 命令有一些区别的。</p>
-<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/du">http://man.linuxde.net/du</a></p>
-</blockquote>
-<p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 显示目录或者文件所占空间</span></span><br><span class="line">root@localhost [<span class="built_in">test</span>]<span class="comment"># du</span></span><br><span class="line">608 ./test6</span><br><span class="line">308 ./test4</span><br><span class="line">4 ./scf/lib</span><br><span class="line">4 ./scf/service/deploy/product</span><br><span class="line">4 ./scf/service/deploy/info</span><br><span class="line">12 ./scf/service/deploy</span><br><span class="line">16 ./scf/service</span><br><span class="line">4 ./scf/doc</span><br><span class="line">4 ./scf/bin</span><br><span class="line">32 ./scf</span><br><span class="line">8 ./test3</span><br><span class="line">1288 .</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示指定文件所占空间</span></span><br><span class="line">[root@localhost <span class="built_in">test</span>]<span class="comment"># du log2012.log</span></span><br><span class="line">300 log2012.log</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看指定目录的所占空间</span></span><br><span class="line">[root@localhost <span class="built_in">test</span>]<span class="comment"># du scf</span></span><br><span class="line">4 scf/lib</span><br><span class="line">4 scf/service/deploy/product</span><br><span class="line">4 scf/service/deploy/info</span><br><span class="line">12 scf/service/deploy</span><br><span class="line">16 scf/service</span><br><span class="line">4 scf/doc</span><br><span class="line">4 scf/bin</span><br><span class="line">32 scf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示多个文件所占空间</span></span><br><span class="line">[root@localhost <span class="built_in">test</span>]<span class="comment"># du log30.tar.gz log31.tar.gz</span></span><br><span class="line">4 log30.tar.gz</span><br><span class="line">4 log31.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="comment"># 只显示总和的大小</span></span><br><span class="line">[root@localhost <span class="built_in">test</span>]<span class="comment"># du -s</span></span><br><span class="line">1288 .</span><br><span class="line"></span><br><span class="line">[root@localhost <span class="built_in">test</span>]<span class="comment"># du -s scf</span></span><br><span class="line">32 scf</span><br></pre></td></tr></table></figure>
-<h3 id="2-3-top"><a class="header-anchor" href="#2-3-top">¶</a>2.3. top</h3>
-<blockquote>
-<p>top 命令可以实时动态地查看系统的整体运行情况，是一个综合了多方信息监测系统性能和运行信息的实用工具。通过 top 命令所提供的互动式界面，用热键可以管理。</p>
-<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/top">http://man.linuxde.net/top</a></p>
-</blockquote>
-<h3 id="2-4-free"><a class="header-anchor" href="#2-4-free">¶</a>2.4. free</h3>
-<blockquote>
-<p>free 命令可以显示当前系统未使用的和已使用的内存数目，还可以显示被内核使用的内存缓冲区。</p>
-<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/free">http://man.linuxde.net/free</a></p>
-</blockquote>
-<p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">free -t    <span class="comment"># 以总和的形式显示内存的使用信息</span></span><br><span class="line">free -s 10 <span class="comment"># 周期性的查询内存使用信息，每10s 执行一次命令</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示内存使用情况</span></span><br><span class="line"></span><br><span class="line">free -m</span><br><span class="line">             total       used       free     shared    buffers     cached</span><br><span class="line">Mem:          2016       1973         42          0        163       1497</span><br><span class="line">-/+ buffers/cache:        312       1703</span><br><span class="line">Swap:         4094          0       4094</span><br></pre></td></tr></table></figure>
-<h3 id="2-5-iotop"><a class="header-anchor" href="#2-5-iotop">¶</a>2.5. iotop</h3>
-<blockquote>
-<p>iotop 命令是一个用来监视磁盘 I/O 使用状况的 top 类工具。iotop 具有与 top 相似的 UI，其中包括 PID、用户、I/O、进程等相关信息。Linux 下的 IO 统计工具如 iostat，nmon 等大多数是只能统计到 per 设备的读写情况，如果你想知道每个进程是如何使用 IO 的就比较麻烦，使用 iotop 命令可以很方便的查看。</p>
-<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/iotop">http://man.linuxde.net/iotop</a></p>
-</blockquote>
-<p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Total DISK <span class="built_in">read</span>:       0.00 B/s | Total DISK write:       0.00 B/s</span><br><span class="line">  TID  PRIO  USER     DISK READ  DISK WRITE  SWAPIN     IO&gt;    <span class="built_in">command</span></span><br><span class="line">    1 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % init [3]</span><br><span class="line">    2 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [kthreadd]</span><br><span class="line">    3 rt/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [migration/0]</span><br><span class="line">    4 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [ksoftirqd/0]</span><br><span class="line">    5 rt/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [watchdog/0]</span><br><span class="line">    6 rt/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [migration/1]</span><br><span class="line">    7 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [ksoftirqd/1]</span><br><span class="line">    8 rt/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [watchdog/1]</span><br><span class="line">    9 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [events/0]</span><br><span class="line">   10 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [events/1]</span><br><span class="line">   11 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [khelper]</span><br><span class="line">2572 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [bluetooth]</span><br></pre></td></tr></table></figure>
 
       
     </div>
