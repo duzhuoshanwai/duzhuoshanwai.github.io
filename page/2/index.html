@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
   <meta name="description" content="duzhuo-s-blog">
@@ -187,6 +187,250 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/20/linux-cli-net/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="duzhuo">
+      <meta itemprop="description" content="duzhuo-s-blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="duzhuo's-blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/02/20/linux-cli-net/" class="post-title-link" itemprop="url">Linux 网络管理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-02-20 15:09:06" itemprop="dateCreated datePublished" datetime="2022-02-20T15:09:06+08:00">2022-02-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-04-07 23:10:40" itemprop="dateModified" datetime="2022-04-07T23:10:40+08:00">2022-04-07</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1>Linux 网络管理</h1>
+<blockquote>
+<p>关键词：<code>curl</code>, <code>wget</code>, <code>telnet</code>, <code>ip</code>, <code>hostname</code>, <code>ifconfig</code>, <code>route</code>, <code>ssh</code>, <code>ssh-keygen</code>, <code>firewalld</code>, <code>iptables</code>, <code>host</code>, <code>nslookup</code>, <code>nc</code>/<code>netcat</code>, <code>ping</code>, <code>traceroute</code>, <code>netstat</code></p>
+</blockquote>
+<h2 id="1-Linux-网络应用要点"><a class="header-anchor" href="#1-Linux-网络应用要点">¶</a>1. Linux 网络应用要点</h2>
+<ul>
+<li>下载文件 - 使用 <a href="#curl">curl</a>、<a href="#wget">wget</a></li>
+<li>telnet 方式登录远程主机，对远程主机进行管理 - 使用 <a href="#telnet">telnet</a></li>
+<li>查看或操纵 Linux 主机的路由、网络设备、策略路由和隧道 - 使用 <a href="#ip">ip</a></li>
+<li>查看和设置系统的主机名 - 使用 <a href="#hostname">hostname</a></li>
+<li>查看和配置 Linux 内核中网络接口的网络参数 - 使用 <a href="#ifconfig">ifconfig</a></li>
+<li>查看和设置 Linux 内核中的网络路由表 - 使用 <a href="#route">route</a></li>
+<li>ssh 方式连接远程主机 - 使用 ssh</li>
+<li>为 ssh 生成、管理和转换认证密钥 - 使用 <a href="#ssh-keygen">ssh-keygen</a></li>
+<li>查看、设置防火墙（Centos7），使用 <a href="#firewalld">firewalld</a></li>
+<li>查看、设置防火墙（Centos7 以前），使用 <a href="#iptables">iptables</a></li>
+<li>查看域名信息 - 使用 <a href="#host">host</a>, <a href="#nslookup">nslookup</a></li>
+<li>设置路由 - 使用 <a href="#ncnetcat">nc/netcat</a></li>
+<li>测试主机之间网络是否连通 - 使用 <a href="#ping">ping</a></li>
+<li>追踪数据在网络上的传输时的全部路径 - 使用 <a href="#traceroute">traceroute</a></li>
+<li>查看当前工作的端口信息 - 使用 <a href="#netstat">netstat</a></li>
+</ul>
+<h2 id="2-命令常见用法-v5"><a class="header-anchor" href="#2-命令常见用法-v5">¶</a>2. 命令常见用法</h2>
+<h3 id="2-1-curl"><a class="header-anchor" href="#2-1-curl">¶</a>2.1. curl</h3>
+<blockquote>
+<p>curl 命令是一个利用 URL 规则在命令行下工作的文件传输工具。它支持文件的上传和下载，所以是综合传输工具，但按传统，习惯称 curl 为下载工具。作为一款强力工具，curl 支持包括 HTTP、HTTPS、ftp 等众多协议，还支持 POST、cookies、认证、从指定偏移处下载部分文件、用户代理字符串、限速、文件大小、进度条等特征。做网页处理流程和数据检索自动化，curl 可以祝一臂之力。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/curl">http://man.linuxde.net/curl</a></p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下载文件</span></span><br><span class="line">$ curl http://man.linuxde.net/text.iso --silent</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载文件，指定下载路径，并查看进度</span></span><br><span class="line">$ curl http://man.linuxde.net/test.iso -o filename.iso --progress</span><br><span class="line"><span class="comment">########################################## 100.0%</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-2-wget"><a class="header-anchor" href="#2-2-wget">¶</a>2.2. wget</h3>
+<blockquote>
+<p>wget 命令用来从指定的 URL 下载文件。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/wget">http://man.linuxde.net/wget</a></p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用 wget 下载单个文件</span></span><br><span class="line">$ wget http://www.linuxde.net/testfile.zip</span><br></pre></td></tr></table></figure>
+<h3 id="2-3-telnet"><a class="header-anchor" href="#2-3-telnet">¶</a>2.3. telnet</h3>
+<blockquote>
+<p>telnet 命令用于登录远程主机，对远程主机进行管理。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/telnet">http://man.linuxde.net/telnet</a></p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">telnet 192.168.2.10</span><br><span class="line">Trying 192.168.2.10...</span><br><span class="line">Connected to 192.168.2.10 (192.168.2.10).</span><br><span class="line">Escape character is <span class="string">&#x27;^]&#x27;</span>.</span><br><span class="line"></span><br><span class="line">    localhost (Linux release 2.6.18-274.18.1.el5 <span class="comment">#1 SMP Thu Feb 9 12:45:44 EST 2012) (1)</span></span><br><span class="line"></span><br><span class="line">login: root</span><br><span class="line">Password:</span><br><span class="line">Login incorrect</span><br></pre></td></tr></table></figure>
+<h3 id="2-4-ip"><a class="header-anchor" href="#2-4-ip">¶</a>2.4. ip</h3>
+<blockquote>
+<p>ip 命令用来查看或操纵 Linux 主机的路由、网络设备、策略路由和隧道，是 Linux 下较新的功能强大的网络配置工具。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/ip">http://man.linuxde.net/ip</a></p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">$ ip link show                     <span class="comment"># 查看网络接口信息</span></span><br><span class="line">$ ip link <span class="built_in">set</span> eth0 upi             <span class="comment"># 开启网卡</span></span><br><span class="line">$ ip link <span class="built_in">set</span> eth0 down            <span class="comment"># 关闭网卡</span></span><br><span class="line">$ ip link <span class="built_in">set</span> eth0 promisc on      <span class="comment"># 开启网卡的混合模式</span></span><br><span class="line">$ ip link <span class="built_in">set</span> eth0 promisc offi    <span class="comment"># 关闭网卡的混个模式</span></span><br><span class="line">$ ip link <span class="built_in">set</span> eth0 txqueuelen 1200 <span class="comment"># 设置网卡队列长度</span></span><br><span class="line">$ ip link <span class="built_in">set</span> eth0 mtu 1400        <span class="comment"># 设置网卡最大传输单元</span></span><br><span class="line">$ ip addr show     <span class="comment"># 查看网卡IP信息</span></span><br><span class="line">$ ip addr add 192.168.0.1/24 dev eth0 <span class="comment"># 设置eth0网卡IP地址192.168.0.1</span></span><br><span class="line">$ ip addr del 192.168.0.1/24 dev eth0 <span class="comment"># 删除eth0网卡IP地址</span></span><br><span class="line"></span><br><span class="line">$ ip route show <span class="comment"># 查看系统路由</span></span><br><span class="line">$ ip route add default via 192.168.1.254   <span class="comment"># 设置系统默认路由</span></span><br><span class="line">$ ip route list                 <span class="comment"># 查看路由信息</span></span><br><span class="line">$ ip route add 192.168.4.0/24  via  192.168.0.254 dev eth0 <span class="comment"># 设置192.168.4.0网段的网关为192.168.0.254,数据走eth0接口</span></span><br><span class="line">$ ip route add default via  192.168.0.254  dev eth0        <span class="comment"># 设置默认网关为192.168.0.254</span></span><br><span class="line">$ ip route del 192.168.4.0/24   <span class="comment"># 删除192.168.4.0网段的网关</span></span><br><span class="line">$ ip route del default          <span class="comment"># 删除默认路由</span></span><br><span class="line">$ ip route delete 192.168.1.0/24 dev eth0 <span class="comment"># 删除路由</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-5-hostname"><a class="header-anchor" href="#2-5-hostname">¶</a>2.5. hostname</h3>
+<blockquote>
+<p>hostname 命令用于查看和设置系统的主机名称。环境变量 HOSTNAME 也保存了当前的主机名。在使用 hostname 命令设置主机名后，系统并不会永久保存新的主机名，重新启动机器之后还是原来的主机名。如果需要永久修改主机名，需要同时修改 <code>/etc/hosts</code> 和 <code>/etc/sysconfig/network</code> 的相关内容。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/hostname">http://man.linuxde.net/hostname</a></p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hostname</span><br><span class="line">AY1307311912260196fcZ</span><br></pre></td></tr></table></figure>
+<h3 id="2-6-ifconfig"><a class="header-anchor" href="#2-6-ifconfig">¶</a>2.6. ifconfig</h3>
+<blockquote>
+<p>ifconfig 命令被用于查看和配置 Linux 内核中网络接口的网络参数。用 ifconfig 命令配置的网卡信息，在网卡重启后机器重启后，配置就不存在。要想将上述的配置信息永远的存的电脑里，那就要修改网卡的配置文件了。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/ifconfig">http://man.linuxde.net/ifconfig</a></p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看网络设备信息（激活状态的）</span></span><br><span class="line">[root@localhost ~]<span class="comment"># ifconfig</span></span><br><span class="line">eth0      Link encap:Ethernet  HWaddr 00:16:3E:00:1E:51</span><br><span class="line">          inet addr:10.160.7.81  Bcast:10.160.15.255  Mask:255.255.240.0</span><br><span class="line">          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1</span><br><span class="line">          RX packets:61430830 errors:0 dropped:0 overruns:0 frame:0</span><br><span class="line">          TX packets:88534 errors:0 dropped:0 overruns:0 carrier:0</span><br><span class="line">          collisions:0 txqueuelen:1000</span><br><span class="line">          RX bytes:3607197869 (3.3 GiB)  TX bytes:6115042 (5.8 MiB)</span><br><span class="line"></span><br><span class="line">lo        Link encap:Local Loopback</span><br><span class="line">          inet addr:127.0.0.1  Mask:255.0.0.0</span><br><span class="line">          UP LOOPBACK RUNNING  MTU:16436  Metric:1</span><br><span class="line">          RX packets:56103 errors:0 dropped:0 overruns:0 frame:0</span><br><span class="line">          TX packets:56103 errors:0 dropped:0 overruns:0 carrier:0</span><br><span class="line">          collisions:0 txqueuelen:0</span><br><span class="line">          RX bytes:5079451 (4.8 MiB)  TX bytes:5079451 (4.8 MiB)</span><br></pre></td></tr></table></figure>
+<h3 id="2-7-route"><a class="header-anchor" href="#2-7-route">¶</a>2.7. route</h3>
+<blockquote>
+<p>route 命令用来查看和设置 Linux 内核中的网络路由表，route 命令设置的路由主要是静态路由。要实现两个不同的子网之间的通信，需要一台连接两个网络的路由器，或者同时位于两个网络的网关来实现。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/route">http://man.linuxde.net/route</a></p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看当前路由</span></span><br><span class="line">route</span><br><span class="line">Kernel IP routing table</span><br><span class="line">Destination     Gateway         Genmask         Flags Metric Ref    Use Iface</span><br><span class="line">112.124.12.0    *               255.255.252.0   U     0      0        0 eth1</span><br><span class="line">10.160.0.0      *               255.255.240.0   U     0      0        0 eth0</span><br><span class="line">192.168.0.0     10.160.15.247   255.255.0.0     UG    0      0        0 eth0</span><br><span class="line">172.16.0.0      10.160.15.247   255.240.0.0     UG    0      0        0 eth0</span><br><span class="line">10.0.0.0        10.160.15.247   255.0.0.0       UG    0      0        0 eth0</span><br><span class="line">default         112.124.15.247  0.0.0.0         UG    0      0        0 eth1</span><br><span class="line"></span><br><span class="line">route add -net 224.0.0.0 netmask 240.0.0.0 dev eth0    <span class="comment"># 添加网关/设置网关</span></span><br><span class="line">route add -net 224.0.0.0 netmask 240.0.0.0 reject      <span class="comment"># 屏蔽一条路由</span></span><br><span class="line">route del -net 224.0.0.0 netmask 240.0.0.0             <span class="comment"># 删除路由记录</span></span><br><span class="line">route add default gw 192.168.120.240                   <span class="comment"># 添加默认网关</span></span><br><span class="line">route del default gw 192.168.120.240                   <span class="comment"># 删除默认网关</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-8-ssh"><a class="header-anchor" href="#2-8-ssh">¶</a>2.8. ssh</h3>
+<blockquote>
+<p>ssh 命令是 openssh 套件中的客户端连接工具，可以给予 ssh 加密协议实现安全的远程登录服务器。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/ssh">http://man.linuxde.net/ssh</a></p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ssh 用户名@远程服务器地址</span></span><br><span class="line">ssh user1@172.24.210.101</span><br><span class="line"><span class="comment"># 指定端口</span></span><br><span class="line">ssh -p 2211 root@140.206.185.170</span><br></pre></td></tr></table></figure>
+<p>引申阅读：<a target="_blank" rel="noopener" href="https://linux.cn/article-8476-1.html">ssh 背后的故事</a></p>
+<h3 id="2-9-ssh-keygen"><a class="header-anchor" href="#2-9-ssh-keygen">¶</a>2.9. ssh-keygen</h3>
+<blockquote>
+<p>ssh-keygen 命令用于为 ssh 生成、管理和转换认证密钥，它支持 RSA 和 DSA 两种认证密钥。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/ssh-keygen">http://man.linuxde.net/ssh-keygen</a></p>
+</blockquote>
+<h3 id="2-10-firewalld"><a class="header-anchor" href="#2-10-firewalld">¶</a>2.10. firewalld</h3>
+<blockquote>
+<p>firewalld 命令是 Linux 上的防火墙软件（Centos7 默认防火墙）。</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/moxiaoan/p/5683743.html">https://www.cnblogs.com/moxiaoan/p/5683743.html</a></p>
+</blockquote>
+<h4 id="2-10-1-firewalld-的基本使用"><a class="header-anchor" href="#2-10-1-firewalld-的基本使用">¶</a>2.10.1. firewalld 的基本使用</h4>
+<ul>
+<li>启动 - systemctl start firewalld</li>
+<li>关闭 - systemctl stop firewalld</li>
+<li>查看状态 - systemctl status firewalld</li>
+<li>开机禁用 - systemctl disable firewalld</li>
+<li>开机启用 - systemctl enable firewalld</li>
+</ul>
+<h4 id="2-10-2-使用-systemctl-管理-firewalld-服务"><a class="header-anchor" href="#2-10-2-使用-systemctl-管理-firewalld-服务">¶</a>2.10.2. 使用 systemctl 管理 firewalld 服务</h4>
+<p>systemctl 是 CentOS7 的服务管理工具中主要的工具，它融合之前 service 和 chkconfig 的功能于一体。</p>
+<ul>
+<li>启动一个服务 - systemctl start firewalld.service</li>
+<li>关闭一个服务 - systemctl stop firewalld.service</li>
+<li>重启一个服务 - systemctl restart firewalld.service</li>
+<li>显示一个服务的状态 - systemctl status firewalld.service</li>
+<li>在开机时启用一个服务 - systemctl enable firewalld.service</li>
+<li>在开机时禁用一个服务 - systemctl disable firewalld.service</li>
+<li>查看服务是否开机启动 - systemctl is-enabled firewalld.service</li>
+<li>查看已启动的服务列表 - systemctl list-unit-files|grep enabled</li>
+<li>查看启动失败的服务列表 - systemctl --failed</li>
+</ul>
+<h4 id="2-10-3-配置-firewalld-cmd"><a class="header-anchor" href="#2-10-3-配置-firewalld-cmd">¶</a>2.10.3. 配置 firewalld-cmd</h4>
+<ul>
+<li>查看版本 - firewall-cmd --version</li>
+<li>查看帮助 - firewall-cmd --help</li>
+<li>显示状态 - firewall-cmd --state</li>
+<li>查看所有打开的端口 - firewall-cmd --zone=public --list-ports</li>
+<li>更新防火墙规则 - firewall-cmd --reload</li>
+<li>查看区域信息: firewall-cmd --get-active-zones</li>
+<li>查看指定接口所属区域 - firewall-cmd --get-zone-of-interface=eth0</li>
+<li>拒绝所有包：firewall-cmd --panic-on</li>
+<li>取消拒绝状态 - firewall-cmd --panic-off</li>
+<li>查看是否拒绝 - firewall-cmd --query-panic</li>
+</ul>
+<h4 id="2-10-4-在防火墙中开放一个端口"><a class="header-anchor" href="#2-10-4-在防火墙中开放一个端口">¶</a>2.10.4. 在防火墙中开放一个端口</h4>
+<ul>
+<li>添加（–permanent 永久生效，没有此参数重启后失效） - firewall-cmd --zone=public --add-port=80/tcp --permanent</li>
+<li>重新载入 - firewall-cmd --reload</li>
+<li>查看 - firewall-cmd --zone= public --query-port=80/tcp</li>
+<li>删除 - firewall-cmd --zone= public --remove-port=80/tcp --permanent</li>
+</ul>
+<h3 id="2-11-iptables"><a class="header-anchor" href="#2-11-iptables">¶</a>2.11. iptables</h3>
+<blockquote>
+<p>iptables 命令是 Linux 上常用的防火墙软件，是 netfilter 项目的一部分。可以直接配置，也可以通过许多前端和图形界面配置。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/iptables">http://man.linuxde.net/iptables</a></p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 开放指定的端口</span></span><br><span class="line">iptables -A INPUT -s 127.0.0.1 -d 127.0.0.1 -j ACCEPT               <span class="comment">#允许本地回环接口(即运行本机访问本机)</span></span><br><span class="line">iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT    <span class="comment">#允许已建立的或相关连的通行</span></span><br><span class="line">iptables -A OUTPUT -j ACCEPT         <span class="comment">#允许所有本机向外的访问</span></span><br><span class="line">iptables -A INPUT -p tcp --dport 22 -j ACCEPT    <span class="comment">#允许访问22端口</span></span><br><span class="line">iptables -A INPUT -p tcp --dport 80 -j ACCEPT    <span class="comment">#允许访问80端口</span></span><br><span class="line">iptables -A INPUT -p tcp --dport 21 -j ACCEPT    <span class="comment">#允许ftp服务的21端口</span></span><br><span class="line">iptables -A INPUT -p tcp --dport 20 -j ACCEPT    <span class="comment">#允许FTP服务的20端口</span></span><br><span class="line">iptables -A INPUT -j reject       <span class="comment">#禁止其他未允许的规则访问</span></span><br><span class="line">iptables -A FORWARD -j REJECT     <span class="comment">#禁止其他未允许的规则访问</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 屏蔽IP</span></span><br><span class="line">iptables -I INPUT -s 123.45.6.7 -j DROP       <span class="comment">#屏蔽单个IP的命令</span></span><br><span class="line">iptables -I INPUT -s 123.0.0.0/8 -j DROP      <span class="comment">#封整个段即从123.0.0.1到123.255.255.254的命令</span></span><br><span class="line">iptables -I INPUT -s 124.45.0.0/16 -j DROP    <span class="comment">#封IP段即从123.45.0.1到123.45.255.254的命令</span></span><br><span class="line">iptables -I INPUT -s 123.45.6.0/24 -j DROP    <span class="comment">#封IP段即从123.45.6.1到123.45.6.254的命令是</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看已添加的iptables规则</span></span><br><span class="line">iptables -L -n -v</span><br><span class="line">Chain INPUT (policy DROP 48106 packets, 2690K bytes)</span><br><span class="line"> pkts bytes target     prot opt <span class="keyword">in</span>     out     <span class="built_in">source</span>               destination</span><br><span class="line"> 5075  589K ACCEPT     all  --  lo     *       0.0.0.0/0            0.0.0.0/0</span><br><span class="line"> 191K   90M ACCEPT     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           tcp dpt:22</span><br><span class="line">1499K  133M ACCEPT     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           tcp dpt:80</span><br><span class="line">4364K 6351M ACCEPT     all  --  *      *       0.0.0.0/0            0.0.0.0/0           state RELATED,ESTABLISHED</span><br><span class="line"> 6256  327K ACCEPT     icmp --  *      *       0.0.0.0/0            0.0.0.0/0</span><br><span class="line"></span><br><span class="line">Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)</span><br><span class="line"> pkts bytes target     prot opt <span class="keyword">in</span>     out     <span class="built_in">source</span>               destination</span><br><span class="line"></span><br><span class="line">Chain OUTPUT (policy ACCEPT 3382K packets, 1819M bytes)</span><br><span class="line"> pkts bytes target     prot opt <span class="keyword">in</span>     out     <span class="built_in">source</span>               destination</span><br><span class="line"> 5075  589K ACCEPT     all  --  *      lo      0.0.0.0/0            0.0.0.0/0</span><br></pre></td></tr></table></figure>
+<h3 id="2-12-host"><a class="header-anchor" href="#2-12-host">¶</a>2.12. host</h3>
+<blockquote>
+<p>host 命令是常用的分析域名查询工具，可以用来测试域名系统工作是否正常。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/host">http://man.linuxde.net/host</a></p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># host www.jsdig.com</span></span><br><span class="line">www.jsdig.com is an <span class="built_in">alias</span> <span class="keyword">for</span> host.1.jsdig.com.</span><br><span class="line">host.1.jsdig.com has address 100.42.212.8</span><br><span class="line"></span><br><span class="line">[root@localhost ~]<span class="comment"># host -a www.jsdig.com</span></span><br><span class="line">Trying <span class="string">&quot;www.jsdig.com&quot;</span></span><br><span class="line">;; -&gt;&gt;HEADER&lt;&lt;- <span class="string">opcode: QUERY, status: NOERROR, id: 34671</span></span><br><span class="line"><span class="string">;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 0</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">;; QUESTION SECTION:</span></span><br><span class="line"><span class="string">;www.jsdig.com.               IN      ANY</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">;; ANSWER SECTION:</span></span><br><span class="line"><span class="string">www.jsdig.com.        463     IN      CNAME   host.1.jsdig.com.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Received 54 bytes from 202.96.104.15#53 in 0 ms</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-13-nslookup"><a class="header-anchor" href="#2-13-nslookup">¶</a>2.13. nslookup</h3>
+<blockquote>
+<p>nslookup 命令是常用域名查询工具，就是查 DNS 信息用的命令。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/nslookup">http://man.linuxde.net/nslookup</a></p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># nslookup www.jsdig.com</span></span><br><span class="line">Server:         202.96.104.15</span><br><span class="line">Address:        202.96.104.15<span class="comment">#53</span></span><br><span class="line"></span><br><span class="line">Non-authoritative answer:</span><br><span class="line">www.jsdig.com canonical name = host.1.jsdig.com.</span><br><span class="line">Name:   host.1.jsdig.com</span><br><span class="line">Address: 100.42.212.8</span><br></pre></td></tr></table></figure>
+<h3 id="2-14-nc-netcat"><a class="header-anchor" href="#2-14-nc-netcat">¶</a>2.14. nc/netcat</h3>
+<blockquote>
+<p>nc 命令是 netcat 命令的简称，都是用来设置路由器。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/nc_netcat">http://man.linuxde.net/nc_netcat</a></p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># TCP 端口扫描</span></span><br><span class="line">[root@localhost ~]<span class="comment"># nc -v -z -w2 192.168.0.3 1-100</span></span><br><span class="line">192.168.0.3: inverse host lookup failed: Unknown host</span><br><span class="line">(UNKNOWN) [192.168.0.3] 80 (http) open</span><br><span class="line">(UNKNOWN) [192.168.0.3] 23 (telnet) open</span><br><span class="line">(UNKNOWN) [192.168.0.3] 22 (ssh) open</span><br><span class="line"></span><br><span class="line"><span class="comment"># UDP 端口扫描</span></span><br><span class="line">[root@localhost ~]<span class="comment"># nc -u -z -w2 192.168.0.1 1-1000  # 扫描192.168.0.3 的端口 范围是 1-1000</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-15-ping"><a class="header-anchor" href="#2-15-ping">¶</a>2.15. ping</h3>
+<blockquote>
+<p>ping 命令用来测试主机之间网络的连通性。执行 ping 指令会使用 ICMP 传输协议，发出要求回应的信息，若远端主机的网络功能没有问题，就会回应该信息，因而得知该主机运作正常。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/ping">http://man.linuxde.net/ping</a></p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@AY1307311912260196fcZ ~]<span class="comment"># ping www.jsdig.com</span></span><br><span class="line">PING host.1.jsdig.com (100.42.212.8) 56(84) bytes of data.</span><br><span class="line">64 bytes from 100-42-212-8.static.webnx.com (100.42.212.8): icmp_seq=1 ttl=50 time=177 ms</span><br><span class="line">64 bytes from 100-42-212-8.static.webnx.com (100.42.212.8): icmp_seq=2 ttl=50 time=178 ms</span><br><span class="line">64 bytes from 100-42-212-8.static.webnx.com (100.42.212.8): icmp_seq=3 ttl=50 time=174 ms</span><br><span class="line">64 bytes from 100-42-212-8.static.webnx.com (100.42.212.8): icmp_seq=4 ttl=50 time=177 ms</span><br><span class="line">...按Ctrl+C结束</span><br><span class="line"></span><br><span class="line">--- host.1.jsdig.com ping statistics ---</span><br><span class="line">4 packets transmitted, 4 received, 0% packet loss, time 2998ms</span><br><span class="line">rtt min/avg/max/mdev = 174.068/176.916/178.182/1.683 ms</span><br></pre></td></tr></table></figure>
+<h3 id="2-16-traceroute"><a class="header-anchor" href="#2-16-traceroute">¶</a>2.16. traceroute</h3>
+<blockquote>
+<p>traceroute 命令用于追踪数据包在网络上的传输时的全部路径，它默认发送的数据包大小是 40 字节。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/traceroute">http://man.linuxde.net/traceroute</a></p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">traceroute www.58.com</span><br><span class="line">traceroute to www.58.com (211.151.111.30), 30 hops max, 40 byte packets</span><br><span class="line"> 1  unknown (192.168.2.1)  3.453 ms  3.801 ms  3.937 ms</span><br><span class="line"> 2  221.6.45.33 (221.6.45.33)  7.768 ms  7.816 ms  7.840 ms</span><br><span class="line"> 3  221.6.0.233 (221.6.0.233)  13.784 ms  13.827 ms 221.6.9.81 (221.6.9.81)  9.758 ms</span><br><span class="line"> 4  221.6.2.169 (221.6.2.169)  11.777 ms 122.96.66.13 (122.96.66.13)  34.952 ms 221.6.2.53 (221.6.2.53)  41.372 ms</span><br><span class="line"> 5  219.158.96.149 (219.158.96.149)  39.167 ms  39.210 ms  39.238 ms</span><br><span class="line"> 6  123.126.0.194 (123.126.0.194)  37.270 ms 123.126.0.66 (123.126.0.66)  37.163 ms  37.441 ms</span><br><span class="line"> 7  124.65.57.26 (124.65.57.26)  42.787 ms  42.799 ms  42.809 ms</span><br><span class="line"> 8  61.148.146.210 (61.148.146.210)  30.176 ms 61.148.154.98 (61.148.154.98)  32.613 ms  32.675 ms</span><br><span class="line"> 9  202.106.42.102 (202.106.42.102)  44.563 ms  44.600 ms  44.627 ms</span><br><span class="line">10  210.77.139.150 (210.77.139.150)  53.302 ms  53.233 ms  53.032 ms</span><br><span class="line">11  211.151.104.6 (211.151.104.6)  39.585 ms  39.502 ms  39.598 ms</span><br><span class="line">12  211.151.111.30 (211.151.111.30)  35.161 ms  35.938 ms  36.005 ms</span><br></pre></td></tr></table></figure>
+<h3 id="2-17-netstat"><a class="header-anchor" href="#2-17-netstat">¶</a>2.17. netstat</h3>
+<blockquote>
+<p>netstat 命令用来打印 Linux 中网络系统的状态信息，可让你得知整个 Linux 系统的网络情况。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/netstat">http://man.linuxde.net/netstat</a></p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 列出所有端口 (包括监听和未监听的)</span></span><br><span class="line">netstat -a     <span class="comment">#列出所有端口</span></span><br><span class="line">netstat -at    <span class="comment">#列出所有tcp端口</span></span><br><span class="line">netstat -au    <span class="comment">#列出所有udp端口</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出所有处于监听状态的 Sockets</span></span><br><span class="line">netstat -l        <span class="comment">#只显示监听端口</span></span><br><span class="line">netstat -lt       <span class="comment">#只列出所有监听 tcp 端口</span></span><br><span class="line">netstat -lu       <span class="comment">#只列出所有监听 udp 端口</span></span><br><span class="line">netstat -lx       <span class="comment">#只列出所有监听 UNIX 端口</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示每个协议的统计信息</span></span><br><span class="line">netstat -s   显示所有端口的统计信息</span><br><span class="line">netstat -st   显示TCP端口的统计信息</span><br><span class="line">netstat -su   显示UDP端口的统计信息</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -801,7 +1045,7 @@
 </ol>
 <p>设置方法：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i &#x27;s/id:5:initdefault:/id:3:initdefault:/&#x27; /etc/inittab</span><br></pre></td></tr></table></figure>
-<h2 id="参考资料-v2"><a class="header-anchor" href="#参考资料-v2">¶</a>参考资料</h2>
+<h2 id="参考资料-v3"><a class="header-anchor" href="#参考资料-v3">¶</a>参考资料</h2>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/moxiaoan/p/5683743.html">CentOS7 使用 firewalld 打开关闭防火墙与端口</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/z_yong_cool/article/details/79288397">linux 定时执行脚本</a></li>
@@ -936,7 +1180,7 @@
 <h2 id="四、国内-NTP-服务器"><a class="header-anchor" href="#四、国内-NTP-服务器">¶</a>四、国内 NTP 服务器</h2>
 <p>以下 NTP 服务器搜集自网络：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">cn.pool.ntp.org  # 最常用的国内NTP服务器，参考：https://www.ntppool.org/zh/use.html</span><br><span class="line">cn.ntp.org.cn    # 中国</span><br><span class="line">edu.ntp.org.cn   # 中国教育网</span><br><span class="line">ntp1.aliyun.com  # 阿里云</span><br><span class="line">ntp2.aliyun.com  # 阿里云</span><br><span class="line">ntp.sjtu.edu.cn  # 上海交通大学</span><br><span class="line">s1a.time.edu.cn  # 北京邮电大学</span><br><span class="line">s1b.time.edu.cn  # 清华大学</span><br><span class="line">s1c.time.edu.cn  # 北京大学</span><br><span class="line">s1d.time.edu.cn  # 东南大学</span><br><span class="line">s1e.time.edu.cn  # 清华大学</span><br><span class="line">s2a.time.edu.cn  # 清华大学</span><br><span class="line">s2b.time.edu.cn  # 清华大学</span><br><span class="line">s2c.time.edu.cn  # 北京邮电大学</span><br><span class="line">s2d.time.edu.cn  # 西南地区网络中心</span><br><span class="line">s2e.time.edu.cn  # 西北地区网络中心</span><br><span class="line">s2f.time.edu.cn  # 东北地区网络中心</span><br><span class="line">s2g.time.edu.cn  # 华东南地区网络中心</span><br><span class="line">s2h.time.edu.cn  # 四川大学网络管理中心</span><br><span class="line">s2j.time.edu.cn  # 大连理工大学网络中心</span><br><span class="line">s2k.time.edu.cn  # CERNET桂林主节点</span><br></pre></td></tr></table></figure>
-<h2 id="参考资料-v3"><a class="header-anchor" href="#参考资料-v3">¶</a>参考资料</h2>
+<h2 id="参考资料-v4"><a class="header-anchor" href="#参考资料-v4">¶</a>参考资料</h2>
 <ul>
 <li><a target="_blank" rel="noopener" href="http://cn.linux.vbird.org/linux_server/0440ntp.php">鸟哥的 Linux 私房菜-- NTP 时间服务器</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/quchunhui/p/7658853.html">Linux 配置 ntp 时间服务器</a></li>
@@ -2138,80 +2382,6 @@ sshd 正常停止（比如执行<code>systemctl stop</code>命令），它就不
 <h2 id="4-参考资料-v3"><a class="header-anchor" href="#4-参考资料-v3">¶</a>4. 参考资料</h2>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://github.com/robbyrussell/oh-my-zsh">oh-my-zsh Github</a></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/20/firewalld/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="duzhuo">
-      <meta itemprop="description" content="duzhuo-s-blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="duzhuo's-blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/02/20/firewalld/" class="post-title-link" itemprop="url">防火墙 - Firewalld</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-02-20 15:09:06" itemprop="dateCreated datePublished" datetime="2022-02-20T15:09:06+08:00">2022-02-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-05-20 10:58:51" itemprop="dateModified" datetime="2022-05-20T10:58:51+08:00">2022-05-20</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1>防火墙 - Firewalld</h1>
-<h2 id="一、firewalld-服务命令"><a class="header-anchor" href="#一、firewalld-服务命令">¶</a>一、firewalld 服务命令</h2>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable firewalld.service  # 开启服务（开机自动启动服务）</span><br><span class="line">systemctl disable firewalld.service # 关闭服务（开机不会自动启动服务）</span><br><span class="line">systemctl start firewalld.service   # 启动服务</span><br><span class="line">systemctl stop firewalld.service    # 停止服务</span><br><span class="line">systemctl restart firewalld.service # 重启服务</span><br><span class="line">systemctl reload firewalld.service  # 重新载入配置</span><br><span class="line">systemctl status firewalld.service  # 查看服务状态</span><br></pre></td></tr></table></figure>
-<h2 id="二、firewall-cmd-命令"><a class="header-anchor" href="#二、firewall-cmd-命令">¶</a>二、firewall-cmd 命令</h2>
-<p><code>firewall-cmd</code> 命令用于配置防火墙。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --version                    # 查看版本</span><br><span class="line">firewall-cmd --help                       # 查看帮助</span><br><span class="line">firewall-cmd --state                      # 显示状态</span><br><span class="line">firewall-cmd --reload                     # 更新防火墙规则</span><br><span class="line">firewall-cmd --get-active-zones           # 查看区域信息</span><br><span class="line">firewall-cmd --get-zone-of-interface=eth0 # 查看指定接口所属区域</span><br><span class="line">firewall-cmd --panic-on                   # 拒绝所有包</span><br><span class="line">firewall-cmd --panic-off                  # 取消拒绝状态</span><br><span class="line">firewall-cmd --query-panic                # 查看是否拒绝</span><br><span class="line"></span><br><span class="line">firewall-cmd --zone=public --list-ports   # 查看所有打开的端口</span><br><span class="line">firewall-cmd --zone=public --query-port=80/tcp # 查看是否有开放的 80 TCP 端口</span><br><span class="line">firewall-cmd --zone=public --add-port=8080/tcp --permanent # 添加开放端口（--permanent永久生效，没有此参数重启后失效）</span><br><span class="line">firewall-cmd --zone=public --remove-port=80/tcp --permanent # 永久删除开放的 80 TCP 端口</span><br></pre></td></tr></table></figure>
-<h2 id="参考资料"><a class="header-anchor" href="#参考资料">¶</a>参考资料</h2>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/moxiaoan/p/5683743.html">CentOS7 使用 firewalld 打开关闭防火墙与端口</a></li>
 </ul>
 
       
