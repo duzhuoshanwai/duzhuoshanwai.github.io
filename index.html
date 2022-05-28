@@ -700,223 +700,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/20/iptables/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="duzhuo">
-      <meta itemprop="description" content="duzhuo-s-blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="duzhuo's-blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/02/20/iptables/" class="post-title-link" itemprop="url">Iptables 应用</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-02-20 15:09:06" itemprop="dateCreated datePublished" datetime="2022-02-20T15:09:06+08:00">2022-02-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-04-07 23:10:39" itemprop="dateModified" datetime="2022-04-07T23:10:39+08:00">2022-04-07</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1>Iptables 应用</h1>
-<blockquote>
-<p><em>iptables</em> 是一个配置 Linux 内核 <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/index.php/Firewall">防火墙</a> 的命令行工具，是 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Netfilter">netfilter</a> 项目的一部分。 可以直接配置，也可以通过许多前端和图形界面配置。</p>
-<p>iptables 也经常代指该内核级防火墙。iptables 用于 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Ipv4">ipv4</a>，<em>ip6tables</em> 用于 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Ipv6">ipv6</a>。</p>
-<p><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/index.php/Nftables">nftables</a> 已经包含在 <a target="_blank" rel="noopener" href="http://www.phoronix.com/scan.php?page=news_item&amp;px=MTQ5MDU">Linux kernel 3.13</a> 中，以后会取代 iptables 成为主要的 Linux 防火墙工具。</p>
-<p>环境：CentOS7</p>
-</blockquote>
-<h2 id="1-简介"><a class="header-anchor" href="#1-简介">¶</a>1. 简介</h2>
-<p><strong>iptables 可以检测、修改、转发、重定向和丢弃 IPv4 数据包</strong>。</p>
-<p>过滤 IPv4 数据包的代码已经内置于内核中，并且按照不同的目的被组织成 <strong>表</strong> 的集合。<strong>表</strong> 由一组预先定义的 <strong>链</strong> 组成，<strong>链</strong>包含遍历顺序规则。每一条规则包含一个谓词的潜在匹配和相应的动作（称为 <strong>目标</strong>），如果谓词为真，该动作会被执行。也就是说条件匹配。</p>
-<h2 id="2-安装-iptables"><a class="header-anchor" href="#2-安装-iptables">¶</a>2. 安装 iptables</h2>
-<p>（1）禁用 firewalld</p>
-<p>CentOS 7 上默认安装了 firewalld 作为防火墙，使用 iptables 建议关闭并禁用 firewalld。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld</span><br></pre></td></tr></table></figure>
-<p>（2）安装 iptables</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="keyword">install</span> -y iptables-services</span><br></pre></td></tr></table></figure>
-<p>（3）服务管理</p>
-<ul>
-<li>查看服务状态：<code>systemctl status iptables</code></li>
-<li>启用服务：<code>systemctl enable iptables</code></li>
-<li>禁用服务：<code>systemctl disable iptables</code></li>
-<li>启动服务：<code>systemctl start iptables</code></li>
-<li>重启服务：<code>systemctl restart iptables</code></li>
-<li>关闭服务: <code>systemctl stop iptables</code></li>
-</ul>
-<h2 id="3-命令"><a class="header-anchor" href="#3-命令">¶</a>3. 命令</h2>
-<p>基本语法：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">iptables</span><span class="params">(选项)</span><span class="params">(参数)</span></span></span><br></pre></td></tr></table></figure>
-<p>基本选项说明：</p>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>-P</td>
-<td>设置默认策略:iptables -P INPUT (DROP</td>
-</tr>
-<tr>
-<td>-F</td>
-<td>清空规则链</td>
-</tr>
-<tr>
-<td>-L</td>
-<td>查看规则链</td>
-</tr>
-<tr>
-<td>-A</td>
-<td>在规则链的末尾加入新规则</td>
-</tr>
-<tr>
-<td>-I</td>
-<td>num 在规则链的头部加入新规则</td>
-</tr>
-<tr>
-<td>-D</td>
-<td>num 删除某一条规则</td>
-</tr>
-<tr>
-<td>-s</td>
-<td>匹配来源地址 IP/MASK，加叹号&quot;!&quot;表示除这个 IP 外。</td>
-</tr>
-<tr>
-<td>-d</td>
-<td>匹配目标地址</td>
-</tr>
-<tr>
-<td>-i</td>
-<td>网卡名称 匹配从这块网卡流入的数据</td>
-</tr>
-<tr>
-<td>-o</td>
-<td>网卡名称 匹配从这块网卡流出的数据</td>
-</tr>
-<tr>
-<td>-p</td>
-<td>匹配协议,如 tcp,udp,icmp</td>
-</tr>
-<tr>
-<td>–dport num</td>
-<td>匹配目标端口号</td>
-</tr>
-<tr>
-<td>–sport num</td>
-<td>匹配来源端口号</td>
-</tr>
-</tbody>
-</table>
-<p>顺序：</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -t 表名 &lt;-A<span class="regexp">/I/</span>D<span class="regexp">/R&gt; 规则链名 [规则号] &lt;-i/</span>o 网卡名&gt; -p 协议名 &lt;-s 源IP<span class="regexp">/源子网&gt; --sport 源端口 &lt;-d 目标IP/</span>目标子网&gt; --dport 目标端口 -j 动作</span><br></pre></td></tr></table></figure>
-<h2 id="4-iptables-示例"><a class="header-anchor" href="#4-iptables-示例">¶</a>4. iptables 示例</h2>
-<h3 id="4-1-清空当前的所有规则和计数"><a class="header-anchor" href="#4-1-清空当前的所有规则和计数">¶</a>4.1. 清空当前的所有规则和计数</h3>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -F  # 清空所有的防火墙规则</span><br><span class="line">iptables -X  # 删除用户自定义的空链</span><br><span class="line">iptables -Z  # 清空计数</span><br></pre></td></tr></table></figure>
-<h3 id="4-2-配置允许-ssh-端口连接"><a class="header-anchor" href="#4-2-配置允许-ssh-端口连接">¶</a>4.2. 配置允许 ssh 端口连接</h3>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -s 192.168.1.0/24 -p tcp --dport 22 -j ACCEPT</span><br><span class="line"><span class="meta">#</span><span class="bash"> 22为你的ssh端口， -s 192.168.1.0/24表示允许这个网段的机器来连接，其它网段的ip地址是登陆不了你的机器的。 -j ACCEPT表示接受这样的请求</span></span><br></pre></td></tr></table></figure>
-<h3 id="4-3-允许本地回环地址可以正常使用"><a class="header-anchor" href="#4-3-允许本地回环地址可以正常使用">¶</a>4.3. 允许本地回环地址可以正常使用</h3>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -i lo -j ACCEPT</span><br><span class="line"><span class="meta">#</span><span class="bash">本地圆环地址就是那个127.0.0.1，是本机上使用的,它进与出都设置为允许</span></span><br><span class="line">iptables -A OUTPUT -o lo -j ACCEPT</span><br></pre></td></tr></table></figure>
-<h3 id="4-4-设置默认的规则"><a class="header-anchor" href="#4-4-设置默认的规则">¶</a>4.4. 设置默认的规则</h3>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -P INPUT DROP # 配置默认的不让进</span><br><span class="line">iptables -P FORWARD DROP # 默认的不允许转发</span><br><span class="line">iptables -P OUTPUT ACCEPT # 默认的可以出去</span><br></pre></td></tr></table></figure>
-<h3 id="4-5-配置白名单"><a class="header-anchor" href="#4-5-配置白名单">¶</a>4.5. 配置白名单</h3>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -p all -s 192.168.1.0/24 -j ACCEPT  # 允许机房内网机器可以访问</span><br><span class="line">iptables -A INPUT -p all -s 192.168.140.0/24 -j ACCEPT  # 允许机房内网机器可以访问</span><br><span class="line">iptables -A INPUT -p tcp -s 183.121.3.7 --dport 3380 -j ACCEPT # 允许183.121.3.7访问本机的3380端口</span><br></pre></td></tr></table></figure>
-<h3 id="4-6-开启相应的服务端口"><a class="header-anchor" href="#4-6-开启相应的服务端口">¶</a>4.6. 开启相应的服务端口</h3>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -p tcp --dport 80 -j ACCEPT # 开启80端口，因为web对外都是这个端口</span><br><span class="line">iptables -A INPUT -p icmp --icmp-type 8 -j ACCEPT # 允许被ping</span><br><span class="line">iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT # 已经建立的连接得让它进来</span><br></pre></td></tr></table></figure>
-<h3 id="4-7-保存规则到配置文件中"><a class="header-anchor" href="#4-7-保存规则到配置文件中">¶</a>4.7. 保存规则到配置文件中</h3>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cp /etc/sysconfig/iptables /etc/sysconfig/iptables.bak # 任何改动之前先备份，请保持这一优秀的习惯</span><br><span class="line">iptables-save &gt; /etc/sysconfig/iptables</span><br><span class="line">cat /etc/sysconfig/iptables</span><br></pre></td></tr></table></figure>
-<h3 id="4-8-列出已设置的规则"><a class="header-anchor" href="#4-8-列出已设置的规则">¶</a>4.8. 列出已设置的规则</h3>
-<blockquote>
-<p>iptables -L [-t 表名][链名]</p>
-</blockquote>
-<ul>
-<li>四个表名 <code>raw</code>，<code>nat</code>，<code>filter</code>，<code>mangle</code></li>
-<li>五个规则链名 <code>INPUT</code>、<code>OUTPUT</code>、<code>FORWARD</code>、<code>PREROUTING</code>、<code>POSTROUTING</code></li>
-<li>filter 表包含<code>INPUT</code>、<code>OUTPUT</code>、<code>FORWARD</code>三个规则链</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">iptables -L -t nat                  # 列出 nat 上面的所有规则</span><br><span class="line"><span class="meta">#</span><span class="bash">            ^ -t 参数指定，必须是 raw， nat，filter，mangle 中的一个</span></span><br><span class="line">iptables -L -t nat  --line-numbers  # 规则带编号</span><br><span class="line">iptables -L INPUT</span><br><span class="line"></span><br><span class="line">iptables -L -nv  # 查看，这个列表看起来更详细</span><br></pre></td></tr></table></figure>
-<h3 id="4-9-清除已有规则"><a class="header-anchor" href="#4-9-清除已有规则">¶</a>4.9. 清除已有规则</h3>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">iptables -F INPUT  # 清空指定链 INPUT 上面的所有规则</span><br><span class="line">iptables -X INPUT  # 删除指定的链，这个链必须没有被其它任何规则引用，而且这条上必须没有任何规则。</span><br><span class="line">                   # 如果没有指定链名，则会删除该表中所有非内置的链。</span><br><span class="line">iptables -Z INPUT  # 把指定链，或者表中的所有链上的所有计数器清零。</span><br></pre></td></tr></table></figure>
-<h3 id="4-10-删除已添加的规则"><a class="header-anchor" href="#4-10-删除已添加的规则">¶</a>4.10. 删除已添加的规则</h3>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 添加一条规则</span></span><br><span class="line">iptables -A INPUT -s 192.168.1.5 -j DROP</span><br></pre></td></tr></table></figure>
-<p>将所有 iptables 以序号标记显示，执行：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -L -n --line-numbers</span><br></pre></td></tr></table></figure>
-<p>比如要删除 INPUT 里序号为 8 的规则，执行：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -D INPUT 8</span><br></pre></td></tr></table></figure>
-<h3 id="4-11-开放指定的端口"><a class="header-anchor" href="#4-11-开放指定的端口">¶</a>4.11. 开放指定的端口</h3>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -s 127.0.0.1 -d 127.0.0.1 -j ACCEPT               #允许本地回环接口(即运行本机访问本机)</span><br><span class="line">iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT    #允许已建立的或相关连的通行</span><br><span class="line">iptables -A OUTPUT -j ACCEPT         #允许所有本机向外的访问</span><br><span class="line">iptables -A INPUT -p tcp --dport 22 -j ACCEPT    #允许访问22端口</span><br><span class="line">iptables -A INPUT -p tcp --dport 80 -j ACCEPT    #允许访问80端口</span><br><span class="line">iptables -A INPUT -p tcp --dport 21 -j ACCEPT    #允许ftp服务的21端口</span><br><span class="line">iptables -A INPUT -p tcp --dport 20 -j ACCEPT    #允许FTP服务的20端口</span><br><span class="line">iptables -A INPUT -j reject       #禁止其他未允许的规则访问</span><br><span class="line">iptables -A FORWARD -j REJECT     #禁止其他未允许的规则访问</span><br></pre></td></tr></table></figure>
-<h3 id="4-12-屏蔽-IP"><a class="header-anchor" href="#4-12-屏蔽-IP">¶</a>4.12. 屏蔽 IP</h3>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -p tcp -m tcp -s 192.168.0.8 -j DROP  # 屏蔽恶意主机（比如，192.168.0.8</span><br><span class="line">iptables -I INPUT -s 123.45.6.7 -j DROP       #屏蔽单个IP的命令</span><br><span class="line">iptables -I INPUT -s 123.0.0.0/8 -j DROP      #封整个段即从123.0.0.1到123.255.255.254的命令</span><br><span class="line">iptables -I INPUT -s 124.45.0.0/16 -j DROP    #封IP段即从123.45.0.1到123.45.255.254的命令</span><br><span class="line">iptables -I INPUT -s 123.45.6.0/24 -j DROP    #封IP段即从123.45.6.1到123.45.6.254的命令是</span><br></pre></td></tr></table></figure>
-<h3 id="4-13-指定数据包出去的网络接口"><a class="header-anchor" href="#4-13-指定数据包出去的网络接口">¶</a>4.13. 指定数据包出去的网络接口</h3>
-<p>只对 OUTPUT，FORWARD，POSTROUTING 三个链起作用。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -A FORWARD -o eth0</span><br></pre></td></tr></table></figure>
-<h3 id="4-14-查看已添加的规则"><a class="header-anchor" href="#4-14-查看已添加的规则">¶</a>4.14. 查看已添加的规则</h3>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">iptables -L -n -v</span><br><span class="line">Chain INPUT (policy DROP 48106 packets, 2690K bytes)</span><br><span class="line"> pkts bytes target     prot opt in     out     source               destination</span><br><span class="line"> 5075  589K ACCEPT     all  --  lo     *       0.0.0.0/0            0.0.0.0/0</span><br><span class="line"> 191K   90M ACCEPT     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           tcp dpt:22</span><br><span class="line">1499K  133M ACCEPT     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           tcp dpt:80</span><br><span class="line">4364K 6351M ACCEPT     all  --  *      *       0.0.0.0/0            0.0.0.0/0           state RELATED,ESTABLISHED</span><br><span class="line"> 6256  327K ACCEPT     icmp --  *      *       0.0.0.0/0            0.0.0.0/0</span><br><span class="line"></span><br><span class="line">Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)</span><br><span class="line"> pkts bytes target     prot opt in     out     source               destination</span><br><span class="line"></span><br><span class="line">Chain OUTPUT (policy ACCEPT 3382K packets, 1819M bytes)</span><br><span class="line"> pkts bytes target     prot opt in     out     source               destination</span><br><span class="line"> 5075  589K ACCEPT     all  --  *      lo      0.0.0.0/0            0.0.0.0/0</span><br></pre></td></tr></table></figure>
-<h3 id="4-15-启动网络转发规则"><a class="header-anchor" href="#4-15-启动网络转发规则">¶</a>4.15. 启动网络转发规则</h3>
-<p>公网<code>210.14.67.7</code>让内网<code>192.168.188.0/24</code>上网</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -A POSTROUTING -s 192.168.188.0/24 -j SNAT --to-source 210.14.67.127</span><br></pre></td></tr></table></figure>
-<h3 id="4-16-端口映射"><a class="header-anchor" href="#4-16-端口映射">¶</a>4.16. 端口映射</h3>
-<p>本机的 2222 端口映射到内网 虚拟机的 22 端口</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -A PREROUTING -d 210.14.67.127 -p tcp --dport 2222  -j DNAT --to-dest 192.168.188.115:22</span><br></pre></td></tr></table></figure>
-<h3 id="4-17-字符串匹配"><a class="header-anchor" href="#4-17-字符串匹配">¶</a>4.17. 字符串匹配</h3>
-<p>比如，我们要过滤所有 TCP 连接中的字符串<code>test</code>，一旦出现它我们就终止这个连接，我们可以这么做：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -p tcp -m string --algo kmp --string &quot;test&quot; -j REJECT --reject-with tcp-reset</span><br><span class="line">iptables -L</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Chain INPUT (policy ACCEPT)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> target     prot opt <span class="built_in">source</span>               destination</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> REJECT     tcp  --  anywhere             anywhere            STRING match <span class="string">&quot;test&quot;</span> ALGO name kmp TO 65535 reject-with tcp-reset</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line"><span class="bash"><span class="comment"># Chain FORWARD (policy ACCEPT)</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> target     prot opt <span class="built_in">source</span>               destination</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line"><span class="bash"><span class="comment"># Chain OUTPUT (policy ACCEPT)</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> target     prot opt <span class="built_in">source</span>               destination</span></span><br></pre></td></tr></table></figure>
-<h3 id="4-18-阻止-Windows-蠕虫的攻击"><a class="header-anchor" href="#4-18-阻止-Windows-蠕虫的攻击">¶</a>4.18. 阻止 Windows 蠕虫的攻击</h3>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -I INPUT -j DROP -p tcp -s 0.0.0.0/0 -m string --algo kmp --string &quot;cmd.exe&quot;</span><br></pre></td></tr></table></figure>
-<h3 id="4-19-防止-SYN-洪水攻击"><a class="header-anchor" href="#4-19-防止-SYN-洪水攻击">¶</a>4.19. 防止 SYN 洪水攻击</h3>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -p tcp --syn -m limit --limit 5/second -j ACCEPT</span><br></pre></td></tr></table></figure>
-<h2 id="5-参考资料"><a class="header-anchor" href="#5-参考资料">¶</a>5. 参考资料</h2>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/index.php/iptables_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">https://wiki.archlinux.org/index.php/iptables_(简体中文)</a></li>
-<li><a target="_blank" rel="noopener" href="https://wangchujiang.com/linux-command/c/iptables.html">https://wangchujiang.com/linux-command/c/iptables.html</a></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/20/linux-cli-dir/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1310,6 +1093,223 @@ x=执行属性　　//值＝ 1</p>
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/20/iptables/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="duzhuo">
+      <meta itemprop="description" content="duzhuo-s-blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="duzhuo's-blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/02/20/iptables/" class="post-title-link" itemprop="url">Iptables 应用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-02-20 15:09:06" itemprop="dateCreated datePublished" datetime="2022-02-20T15:09:06+08:00">2022-02-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-04-07 23:10:39" itemprop="dateModified" datetime="2022-04-07T23:10:39+08:00">2022-04-07</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1>Iptables 应用</h1>
+<blockquote>
+<p><em>iptables</em> 是一个配置 Linux 内核 <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/index.php/Firewall">防火墙</a> 的命令行工具，是 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Netfilter">netfilter</a> 项目的一部分。 可以直接配置，也可以通过许多前端和图形界面配置。</p>
+<p>iptables 也经常代指该内核级防火墙。iptables 用于 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Ipv4">ipv4</a>，<em>ip6tables</em> 用于 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Ipv6">ipv6</a>。</p>
+<p><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/index.php/Nftables">nftables</a> 已经包含在 <a target="_blank" rel="noopener" href="http://www.phoronix.com/scan.php?page=news_item&amp;px=MTQ5MDU">Linux kernel 3.13</a> 中，以后会取代 iptables 成为主要的 Linux 防火墙工具。</p>
+<p>环境：CentOS7</p>
+</blockquote>
+<h2 id="1-简介"><a class="header-anchor" href="#1-简介">¶</a>1. 简介</h2>
+<p><strong>iptables 可以检测、修改、转发、重定向和丢弃 IPv4 数据包</strong>。</p>
+<p>过滤 IPv4 数据包的代码已经内置于内核中，并且按照不同的目的被组织成 <strong>表</strong> 的集合。<strong>表</strong> 由一组预先定义的 <strong>链</strong> 组成，<strong>链</strong>包含遍历顺序规则。每一条规则包含一个谓词的潜在匹配和相应的动作（称为 <strong>目标</strong>），如果谓词为真，该动作会被执行。也就是说条件匹配。</p>
+<h2 id="2-安装-iptables"><a class="header-anchor" href="#2-安装-iptables">¶</a>2. 安装 iptables</h2>
+<p>（1）禁用 firewalld</p>
+<p>CentOS 7 上默认安装了 firewalld 作为防火墙，使用 iptables 建议关闭并禁用 firewalld。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld</span><br></pre></td></tr></table></figure>
+<p>（2）安装 iptables</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="keyword">install</span> -y iptables-services</span><br></pre></td></tr></table></figure>
+<p>（3）服务管理</p>
+<ul>
+<li>查看服务状态：<code>systemctl status iptables</code></li>
+<li>启用服务：<code>systemctl enable iptables</code></li>
+<li>禁用服务：<code>systemctl disable iptables</code></li>
+<li>启动服务：<code>systemctl start iptables</code></li>
+<li>重启服务：<code>systemctl restart iptables</code></li>
+<li>关闭服务: <code>systemctl stop iptables</code></li>
+</ul>
+<h2 id="3-命令"><a class="header-anchor" href="#3-命令">¶</a>3. 命令</h2>
+<p>基本语法：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">iptables</span><span class="params">(选项)</span><span class="params">(参数)</span></span></span><br></pre></td></tr></table></figure>
+<p>基本选项说明：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-P</td>
+<td>设置默认策略:iptables -P INPUT (DROP</td>
+</tr>
+<tr>
+<td>-F</td>
+<td>清空规则链</td>
+</tr>
+<tr>
+<td>-L</td>
+<td>查看规则链</td>
+</tr>
+<tr>
+<td>-A</td>
+<td>在规则链的末尾加入新规则</td>
+</tr>
+<tr>
+<td>-I</td>
+<td>num 在规则链的头部加入新规则</td>
+</tr>
+<tr>
+<td>-D</td>
+<td>num 删除某一条规则</td>
+</tr>
+<tr>
+<td>-s</td>
+<td>匹配来源地址 IP/MASK，加叹号&quot;!&quot;表示除这个 IP 外。</td>
+</tr>
+<tr>
+<td>-d</td>
+<td>匹配目标地址</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>网卡名称 匹配从这块网卡流入的数据</td>
+</tr>
+<tr>
+<td>-o</td>
+<td>网卡名称 匹配从这块网卡流出的数据</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>匹配协议,如 tcp,udp,icmp</td>
+</tr>
+<tr>
+<td>–dport num</td>
+<td>匹配目标端口号</td>
+</tr>
+<tr>
+<td>–sport num</td>
+<td>匹配来源端口号</td>
+</tr>
+</tbody>
+</table>
+<p>顺序：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -t 表名 &lt;-A<span class="regexp">/I/</span>D<span class="regexp">/R&gt; 规则链名 [规则号] &lt;-i/</span>o 网卡名&gt; -p 协议名 &lt;-s 源IP<span class="regexp">/源子网&gt; --sport 源端口 &lt;-d 目标IP/</span>目标子网&gt; --dport 目标端口 -j 动作</span><br></pre></td></tr></table></figure>
+<h2 id="4-iptables-示例"><a class="header-anchor" href="#4-iptables-示例">¶</a>4. iptables 示例</h2>
+<h3 id="4-1-清空当前的所有规则和计数"><a class="header-anchor" href="#4-1-清空当前的所有规则和计数">¶</a>4.1. 清空当前的所有规则和计数</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -F  # 清空所有的防火墙规则</span><br><span class="line">iptables -X  # 删除用户自定义的空链</span><br><span class="line">iptables -Z  # 清空计数</span><br></pre></td></tr></table></figure>
+<h3 id="4-2-配置允许-ssh-端口连接"><a class="header-anchor" href="#4-2-配置允许-ssh-端口连接">¶</a>4.2. 配置允许 ssh 端口连接</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -s 192.168.1.0/24 -p tcp --dport 22 -j ACCEPT</span><br><span class="line"><span class="meta">#</span><span class="bash"> 22为你的ssh端口， -s 192.168.1.0/24表示允许这个网段的机器来连接，其它网段的ip地址是登陆不了你的机器的。 -j ACCEPT表示接受这样的请求</span></span><br></pre></td></tr></table></figure>
+<h3 id="4-3-允许本地回环地址可以正常使用"><a class="header-anchor" href="#4-3-允许本地回环地址可以正常使用">¶</a>4.3. 允许本地回环地址可以正常使用</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -i lo -j ACCEPT</span><br><span class="line"><span class="meta">#</span><span class="bash">本地圆环地址就是那个127.0.0.1，是本机上使用的,它进与出都设置为允许</span></span><br><span class="line">iptables -A OUTPUT -o lo -j ACCEPT</span><br></pre></td></tr></table></figure>
+<h3 id="4-4-设置默认的规则"><a class="header-anchor" href="#4-4-设置默认的规则">¶</a>4.4. 设置默认的规则</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -P INPUT DROP # 配置默认的不让进</span><br><span class="line">iptables -P FORWARD DROP # 默认的不允许转发</span><br><span class="line">iptables -P OUTPUT ACCEPT # 默认的可以出去</span><br></pre></td></tr></table></figure>
+<h3 id="4-5-配置白名单"><a class="header-anchor" href="#4-5-配置白名单">¶</a>4.5. 配置白名单</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -p all -s 192.168.1.0/24 -j ACCEPT  # 允许机房内网机器可以访问</span><br><span class="line">iptables -A INPUT -p all -s 192.168.140.0/24 -j ACCEPT  # 允许机房内网机器可以访问</span><br><span class="line">iptables -A INPUT -p tcp -s 183.121.3.7 --dport 3380 -j ACCEPT # 允许183.121.3.7访问本机的3380端口</span><br></pre></td></tr></table></figure>
+<h3 id="4-6-开启相应的服务端口"><a class="header-anchor" href="#4-6-开启相应的服务端口">¶</a>4.6. 开启相应的服务端口</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -p tcp --dport 80 -j ACCEPT # 开启80端口，因为web对外都是这个端口</span><br><span class="line">iptables -A INPUT -p icmp --icmp-type 8 -j ACCEPT # 允许被ping</span><br><span class="line">iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT # 已经建立的连接得让它进来</span><br></pre></td></tr></table></figure>
+<h3 id="4-7-保存规则到配置文件中"><a class="header-anchor" href="#4-7-保存规则到配置文件中">¶</a>4.7. 保存规则到配置文件中</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cp /etc/sysconfig/iptables /etc/sysconfig/iptables.bak # 任何改动之前先备份，请保持这一优秀的习惯</span><br><span class="line">iptables-save &gt; /etc/sysconfig/iptables</span><br><span class="line">cat /etc/sysconfig/iptables</span><br></pre></td></tr></table></figure>
+<h3 id="4-8-列出已设置的规则"><a class="header-anchor" href="#4-8-列出已设置的规则">¶</a>4.8. 列出已设置的规则</h3>
+<blockquote>
+<p>iptables -L [-t 表名][链名]</p>
+</blockquote>
+<ul>
+<li>四个表名 <code>raw</code>，<code>nat</code>，<code>filter</code>，<code>mangle</code></li>
+<li>五个规则链名 <code>INPUT</code>、<code>OUTPUT</code>、<code>FORWARD</code>、<code>PREROUTING</code>、<code>POSTROUTING</code></li>
+<li>filter 表包含<code>INPUT</code>、<code>OUTPUT</code>、<code>FORWARD</code>三个规则链</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">iptables -L -t nat                  # 列出 nat 上面的所有规则</span><br><span class="line"><span class="meta">#</span><span class="bash">            ^ -t 参数指定，必须是 raw， nat，filter，mangle 中的一个</span></span><br><span class="line">iptables -L -t nat  --line-numbers  # 规则带编号</span><br><span class="line">iptables -L INPUT</span><br><span class="line"></span><br><span class="line">iptables -L -nv  # 查看，这个列表看起来更详细</span><br></pre></td></tr></table></figure>
+<h3 id="4-9-清除已有规则"><a class="header-anchor" href="#4-9-清除已有规则">¶</a>4.9. 清除已有规则</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">iptables -F INPUT  # 清空指定链 INPUT 上面的所有规则</span><br><span class="line">iptables -X INPUT  # 删除指定的链，这个链必须没有被其它任何规则引用，而且这条上必须没有任何规则。</span><br><span class="line">                   # 如果没有指定链名，则会删除该表中所有非内置的链。</span><br><span class="line">iptables -Z INPUT  # 把指定链，或者表中的所有链上的所有计数器清零。</span><br></pre></td></tr></table></figure>
+<h3 id="4-10-删除已添加的规则"><a class="header-anchor" href="#4-10-删除已添加的规则">¶</a>4.10. 删除已添加的规则</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 添加一条规则</span></span><br><span class="line">iptables -A INPUT -s 192.168.1.5 -j DROP</span><br></pre></td></tr></table></figure>
+<p>将所有 iptables 以序号标记显示，执行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -L -n --line-numbers</span><br></pre></td></tr></table></figure>
+<p>比如要删除 INPUT 里序号为 8 的规则，执行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -D INPUT 8</span><br></pre></td></tr></table></figure>
+<h3 id="4-11-开放指定的端口"><a class="header-anchor" href="#4-11-开放指定的端口">¶</a>4.11. 开放指定的端口</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -s 127.0.0.1 -d 127.0.0.1 -j ACCEPT               #允许本地回环接口(即运行本机访问本机)</span><br><span class="line">iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT    #允许已建立的或相关连的通行</span><br><span class="line">iptables -A OUTPUT -j ACCEPT         #允许所有本机向外的访问</span><br><span class="line">iptables -A INPUT -p tcp --dport 22 -j ACCEPT    #允许访问22端口</span><br><span class="line">iptables -A INPUT -p tcp --dport 80 -j ACCEPT    #允许访问80端口</span><br><span class="line">iptables -A INPUT -p tcp --dport 21 -j ACCEPT    #允许ftp服务的21端口</span><br><span class="line">iptables -A INPUT -p tcp --dport 20 -j ACCEPT    #允许FTP服务的20端口</span><br><span class="line">iptables -A INPUT -j reject       #禁止其他未允许的规则访问</span><br><span class="line">iptables -A FORWARD -j REJECT     #禁止其他未允许的规则访问</span><br></pre></td></tr></table></figure>
+<h3 id="4-12-屏蔽-IP"><a class="header-anchor" href="#4-12-屏蔽-IP">¶</a>4.12. 屏蔽 IP</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -p tcp -m tcp -s 192.168.0.8 -j DROP  # 屏蔽恶意主机（比如，192.168.0.8</span><br><span class="line">iptables -I INPUT -s 123.45.6.7 -j DROP       #屏蔽单个IP的命令</span><br><span class="line">iptables -I INPUT -s 123.0.0.0/8 -j DROP      #封整个段即从123.0.0.1到123.255.255.254的命令</span><br><span class="line">iptables -I INPUT -s 124.45.0.0/16 -j DROP    #封IP段即从123.45.0.1到123.45.255.254的命令</span><br><span class="line">iptables -I INPUT -s 123.45.6.0/24 -j DROP    #封IP段即从123.45.6.1到123.45.6.254的命令是</span><br></pre></td></tr></table></figure>
+<h3 id="4-13-指定数据包出去的网络接口"><a class="header-anchor" href="#4-13-指定数据包出去的网络接口">¶</a>4.13. 指定数据包出去的网络接口</h3>
+<p>只对 OUTPUT，FORWARD，POSTROUTING 三个链起作用。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -A FORWARD -o eth0</span><br></pre></td></tr></table></figure>
+<h3 id="4-14-查看已添加的规则"><a class="header-anchor" href="#4-14-查看已添加的规则">¶</a>4.14. 查看已添加的规则</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">iptables -L -n -v</span><br><span class="line">Chain INPUT (policy DROP 48106 packets, 2690K bytes)</span><br><span class="line"> pkts bytes target     prot opt in     out     source               destination</span><br><span class="line"> 5075  589K ACCEPT     all  --  lo     *       0.0.0.0/0            0.0.0.0/0</span><br><span class="line"> 191K   90M ACCEPT     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           tcp dpt:22</span><br><span class="line">1499K  133M ACCEPT     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           tcp dpt:80</span><br><span class="line">4364K 6351M ACCEPT     all  --  *      *       0.0.0.0/0            0.0.0.0/0           state RELATED,ESTABLISHED</span><br><span class="line"> 6256  327K ACCEPT     icmp --  *      *       0.0.0.0/0            0.0.0.0/0</span><br><span class="line"></span><br><span class="line">Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)</span><br><span class="line"> pkts bytes target     prot opt in     out     source               destination</span><br><span class="line"></span><br><span class="line">Chain OUTPUT (policy ACCEPT 3382K packets, 1819M bytes)</span><br><span class="line"> pkts bytes target     prot opt in     out     source               destination</span><br><span class="line"> 5075  589K ACCEPT     all  --  *      lo      0.0.0.0/0            0.0.0.0/0</span><br></pre></td></tr></table></figure>
+<h3 id="4-15-启动网络转发规则"><a class="header-anchor" href="#4-15-启动网络转发规则">¶</a>4.15. 启动网络转发规则</h3>
+<p>公网<code>210.14.67.7</code>让内网<code>192.168.188.0/24</code>上网</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -A POSTROUTING -s 192.168.188.0/24 -j SNAT --to-source 210.14.67.127</span><br></pre></td></tr></table></figure>
+<h3 id="4-16-端口映射"><a class="header-anchor" href="#4-16-端口映射">¶</a>4.16. 端口映射</h3>
+<p>本机的 2222 端口映射到内网 虚拟机的 22 端口</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -A PREROUTING -d 210.14.67.127 -p tcp --dport 2222  -j DNAT --to-dest 192.168.188.115:22</span><br></pre></td></tr></table></figure>
+<h3 id="4-17-字符串匹配"><a class="header-anchor" href="#4-17-字符串匹配">¶</a>4.17. 字符串匹配</h3>
+<p>比如，我们要过滤所有 TCP 连接中的字符串<code>test</code>，一旦出现它我们就终止这个连接，我们可以这么做：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -p tcp -m string --algo kmp --string &quot;test&quot; -j REJECT --reject-with tcp-reset</span><br><span class="line">iptables -L</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Chain INPUT (policy ACCEPT)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> target     prot opt <span class="built_in">source</span>               destination</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> REJECT     tcp  --  anywhere             anywhere            STRING match <span class="string">&quot;test&quot;</span> ALGO name kmp TO 65535 reject-with tcp-reset</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line"><span class="bash"><span class="comment"># Chain FORWARD (policy ACCEPT)</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> target     prot opt <span class="built_in">source</span>               destination</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line"><span class="bash"><span class="comment"># Chain OUTPUT (policy ACCEPT)</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> target     prot opt <span class="built_in">source</span>               destination</span></span><br></pre></td></tr></table></figure>
+<h3 id="4-18-阻止-Windows-蠕虫的攻击"><a class="header-anchor" href="#4-18-阻止-Windows-蠕虫的攻击">¶</a>4.18. 阻止 Windows 蠕虫的攻击</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -I INPUT -j DROP -p tcp -s 0.0.0.0/0 -m string --algo kmp --string &quot;cmd.exe&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="4-19-防止-SYN-洪水攻击"><a class="header-anchor" href="#4-19-防止-SYN-洪水攻击">¶</a>4.19. 防止 SYN 洪水攻击</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -p tcp --syn -m limit --limit 5/second -j ACCEPT</span><br></pre></td></tr></table></figure>
+<h2 id="5-参考资料"><a class="header-anchor" href="#5-参考资料">¶</a>5. 参考资料</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/index.php/iptables_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">https://wiki.archlinux.org/index.php/iptables_(简体中文)</a></li>
+<li><a target="_blank" rel="noopener" href="https://wangchujiang.com/linux-command/c/iptables.html">https://wangchujiang.com/linux-command/c/iptables.html</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/20/linux-cli-file/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1453,116 +1453,6 @@ x=执行属性　　//值＝ 1</p>
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/20/linux-cli-hardware/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="duzhuo">
-      <meta itemprop="description" content="duzhuo-s-blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="duzhuo's-blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/02/20/linux-cli-hardware/" class="post-title-link" itemprop="url">Linux 硬件管理</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-02-20 15:09:06" itemprop="dateCreated datePublished" datetime="2022-02-20T15:09:06+08:00">2022-02-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-04-07 23:10:39" itemprop="dateModified" datetime="2022-04-07T23:10:39+08:00">2022-04-07</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1>Linux 硬件管理</h1>
-<blockquote>
-<p>关键词：<code>df</code>, <code>du</code>, <code>top</code>, <code>free</code>, <code>iotop</code></p>
-</blockquote>
-<h2 id="1-Linux-硬件管理要点"><a class="header-anchor" href="#1-Linux-硬件管理要点">¶</a>1. Linux 硬件管理要点</h2>
-<ul>
-<li>查看磁盘空间 - 使用 <a href="#df">df</a></li>
-<li>查看文件或目录的磁盘空间 - 使用 <a href="#du">du</a></li>
-<li>实时查看系统整体运行状态（如：CPU、内存） - 使用 <a href="#top">top</a></li>
-<li>查看已使用和未使用的内存 - 使用 <a href="#free">free</a></li>
-<li>查看磁盘 I/O 使用状况 - 使用 <a href="#iotop">iotop</a></li>
-</ul>
-<h2 id="2-命令常见用法-v3"><a class="header-anchor" href="#2-命令常见用法-v3">¶</a>2. 命令常见用法</h2>
-<h3 id="2-1-df"><a class="header-anchor" href="#2-1-df">¶</a>2.1. df</h3>
-<blockquote>
-<p>df 命令用于显示磁盘分区上的可使用的磁盘空间。默认显示单位为 KB。可以利用该命令来获取硬盘被占用了多少空间，目前还剩下多少空间等信息。</p>
-<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/df">http://man.linuxde.net/df</a></p>
-</blockquote>
-<p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看系统磁盘设备，默认是 KB 为单位</span></span><br><span class="line">[root@LinServ-1 ~]<span class="comment"># df</span></span><br><span class="line">文件系统               1K-块        已用     可用 已用% 挂载点</span><br><span class="line">/dev/sda2            146294492  28244432 110498708  21% /</span><br><span class="line">/dev/sda1              1019208     62360    904240   7% /boot</span><br><span class="line">tmpfs                  1032204         0   1032204   0% /dev/shm</span><br><span class="line">/dev/sdb1            2884284108 218826068 2518944764   8% /data1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 -h 选项以 KB 以上的单位来显示，可读性高</span></span><br><span class="line">[root@LinServ-1 ~]<span class="comment"># df -h</span></span><br><span class="line">文件系统              容量  已用 可用 已用% 挂载点</span><br><span class="line">/dev/sda2             140G   27G  106G  21% /</span><br><span class="line">/dev/sda1             996M   61M  884M   7% /boot</span><br><span class="line">tmpfs                1009M     0 1009M   0% /dev/shm</span><br><span class="line">/dev/sdb1             2.7T  209G  2.4T   8% /data1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看全部文件系统</span></span><br><span class="line">[root@LinServ-1 ~]<span class="comment"># df -a</span></span><br><span class="line">文件系统               1K-块        已用     可用 已用% 挂载点</span><br><span class="line">/dev/sda2            146294492  28244432 110498708  21% /</span><br><span class="line">proc                         0         0         0   -  /proc</span><br><span class="line">sysfs                        0         0         0   -  /sys</span><br><span class="line">devpts                       0         0         0   -  /dev/pts</span><br><span class="line">/dev/sda1              1019208     62360    904240   7% /boot</span><br><span class="line">tmpfs                  1032204         0   1032204   0% /dev/shm</span><br><span class="line">/dev/sdb1            2884284108 218826068 2518944764   8% /data1</span><br><span class="line">none                         0         0         0   -  /proc/sys/fs/binfmt_misc</span><br></pre></td></tr></table></figure>
-<h3 id="2-2-du"><a class="header-anchor" href="#2-2-du">¶</a>2.2. du</h3>
-<blockquote>
-<p>du 命令也是查看使用空间的，但是与 df 命令不同的是：du 命令是对文件和目录磁盘使用的空间的查看，还是和 df 命令有一些区别的。</p>
-<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/du">http://man.linuxde.net/du</a></p>
-</blockquote>
-<p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 显示目录或者文件所占空间</span></span><br><span class="line">root@localhost [<span class="built_in">test</span>]<span class="comment"># du</span></span><br><span class="line">608 ./test6</span><br><span class="line">308 ./test4</span><br><span class="line">4 ./scf/lib</span><br><span class="line">4 ./scf/service/deploy/product</span><br><span class="line">4 ./scf/service/deploy/info</span><br><span class="line">12 ./scf/service/deploy</span><br><span class="line">16 ./scf/service</span><br><span class="line">4 ./scf/doc</span><br><span class="line">4 ./scf/bin</span><br><span class="line">32 ./scf</span><br><span class="line">8 ./test3</span><br><span class="line">1288 .</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示指定文件所占空间</span></span><br><span class="line">[root@localhost <span class="built_in">test</span>]<span class="comment"># du log2012.log</span></span><br><span class="line">300 log2012.log</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看指定目录的所占空间</span></span><br><span class="line">[root@localhost <span class="built_in">test</span>]<span class="comment"># du scf</span></span><br><span class="line">4 scf/lib</span><br><span class="line">4 scf/service/deploy/product</span><br><span class="line">4 scf/service/deploy/info</span><br><span class="line">12 scf/service/deploy</span><br><span class="line">16 scf/service</span><br><span class="line">4 scf/doc</span><br><span class="line">4 scf/bin</span><br><span class="line">32 scf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示多个文件所占空间</span></span><br><span class="line">[root@localhost <span class="built_in">test</span>]<span class="comment"># du log30.tar.gz log31.tar.gz</span></span><br><span class="line">4 log30.tar.gz</span><br><span class="line">4 log31.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="comment"># 只显示总和的大小</span></span><br><span class="line">[root@localhost <span class="built_in">test</span>]<span class="comment"># du -s</span></span><br><span class="line">1288 .</span><br><span class="line"></span><br><span class="line">[root@localhost <span class="built_in">test</span>]<span class="comment"># du -s scf</span></span><br><span class="line">32 scf</span><br></pre></td></tr></table></figure>
-<h3 id="2-3-top"><a class="header-anchor" href="#2-3-top">¶</a>2.3. top</h3>
-<blockquote>
-<p>top 命令可以实时动态地查看系统的整体运行情况，是一个综合了多方信息监测系统性能和运行信息的实用工具。通过 top 命令所提供的互动式界面，用热键可以管理。</p>
-<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/top">http://man.linuxde.net/top</a></p>
-</blockquote>
-<h3 id="2-4-free"><a class="header-anchor" href="#2-4-free">¶</a>2.4. free</h3>
-<blockquote>
-<p>free 命令可以显示当前系统未使用的和已使用的内存数目，还可以显示被内核使用的内存缓冲区。</p>
-<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/free">http://man.linuxde.net/free</a></p>
-</blockquote>
-<p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">free -t    <span class="comment"># 以总和的形式显示内存的使用信息</span></span><br><span class="line">free -s 10 <span class="comment"># 周期性的查询内存使用信息，每10s 执行一次命令</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示内存使用情况</span></span><br><span class="line"></span><br><span class="line">free -m</span><br><span class="line">             total       used       free     shared    buffers     cached</span><br><span class="line">Mem:          2016       1973         42          0        163       1497</span><br><span class="line">-/+ buffers/cache:        312       1703</span><br><span class="line">Swap:         4094          0       4094</span><br></pre></td></tr></table></figure>
-<h3 id="2-5-iotop"><a class="header-anchor" href="#2-5-iotop">¶</a>2.5. iotop</h3>
-<blockquote>
-<p>iotop 命令是一个用来监视磁盘 I/O 使用状况的 top 类工具。iotop 具有与 top 相似的 UI，其中包括 PID、用户、I/O、进程等相关信息。Linux 下的 IO 统计工具如 iostat，nmon 等大多数是只能统计到 per 设备的读写情况，如果你想知道每个进程是如何使用 IO 的就比较麻烦，使用 iotop 命令可以很方便的查看。</p>
-<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/iotop">http://man.linuxde.net/iotop</a></p>
-</blockquote>
-<p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Total DISK <span class="built_in">read</span>:       0.00 B/s | Total DISK write:       0.00 B/s</span><br><span class="line">  TID  PRIO  USER     DISK READ  DISK WRITE  SWAPIN     IO&gt;    <span class="built_in">command</span></span><br><span class="line">    1 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % init [3]</span><br><span class="line">    2 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [kthreadd]</span><br><span class="line">    3 rt/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [migration/0]</span><br><span class="line">    4 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [ksoftirqd/0]</span><br><span class="line">    5 rt/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [watchdog/0]</span><br><span class="line">    6 rt/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [migration/1]</span><br><span class="line">    7 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [ksoftirqd/1]</span><br><span class="line">    8 rt/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [watchdog/1]</span><br><span class="line">    9 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [events/0]</span><br><span class="line">   10 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [events/1]</span><br><span class="line">   11 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [khelper]</span><br><span class="line">2572 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [bluetooth]</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/20/linux-cli-help/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1630,7 +1520,7 @@ x=执行属性　　//值＝ 1</p>
 <li><a target="_blank" rel="noopener" href="https://github.com/jaywcjlove/linux-command">linux-command</a></li>
 </ul>
 </blockquote>
-<h2 id="2-命令常见用法-v4"><a class="header-anchor" href="#2-命令常见用法-v4">¶</a>2. 命令常见用法</h2>
+<h2 id="2-命令常见用法-v3"><a class="header-anchor" href="#2-命令常见用法-v3">¶</a>2. 命令常见用法</h2>
 <h3 id="2-1-help"><a class="header-anchor" href="#2-1-help">¶</a>2.1. help</h3>
 <blockquote>
 <p>help 命令用于查看 Shell 内部命令的帮助信息。而对于外部命令的帮助信息只能使用 man 或者 info 命令查看。</p>
@@ -1696,6 +1586,116 @@ x=执行属性　　//值＝ 1</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ man 3 <span class="built_in">printf</span></span><br></pre></td></tr></table></figure>
 <h2 id="3-参考资料-v2"><a class="header-anchor" href="#3-参考资料-v2">¶</a>3. 参考资料</h2>
 <p><a target="_blank" rel="noopener" href="https://linuxtools-rst.readthedocs.io/zh_CN/latest/base/01_use_man.html">https://linuxtools-rst.readthedocs.io/zh_CN/latest/base/01_use_man.html</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/20/linux-cli-hardware/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="duzhuo">
+      <meta itemprop="description" content="duzhuo-s-blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="duzhuo's-blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/02/20/linux-cli-hardware/" class="post-title-link" itemprop="url">Linux 硬件管理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-02-20 15:09:06" itemprop="dateCreated datePublished" datetime="2022-02-20T15:09:06+08:00">2022-02-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-04-07 23:10:39" itemprop="dateModified" datetime="2022-04-07T23:10:39+08:00">2022-04-07</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1>Linux 硬件管理</h1>
+<blockquote>
+<p>关键词：<code>df</code>, <code>du</code>, <code>top</code>, <code>free</code>, <code>iotop</code></p>
+</blockquote>
+<h2 id="1-Linux-硬件管理要点"><a class="header-anchor" href="#1-Linux-硬件管理要点">¶</a>1. Linux 硬件管理要点</h2>
+<ul>
+<li>查看磁盘空间 - 使用 <a href="#df">df</a></li>
+<li>查看文件或目录的磁盘空间 - 使用 <a href="#du">du</a></li>
+<li>实时查看系统整体运行状态（如：CPU、内存） - 使用 <a href="#top">top</a></li>
+<li>查看已使用和未使用的内存 - 使用 <a href="#free">free</a></li>
+<li>查看磁盘 I/O 使用状况 - 使用 <a href="#iotop">iotop</a></li>
+</ul>
+<h2 id="2-命令常见用法-v4"><a class="header-anchor" href="#2-命令常见用法-v4">¶</a>2. 命令常见用法</h2>
+<h3 id="2-1-df"><a class="header-anchor" href="#2-1-df">¶</a>2.1. df</h3>
+<blockquote>
+<p>df 命令用于显示磁盘分区上的可使用的磁盘空间。默认显示单位为 KB。可以利用该命令来获取硬盘被占用了多少空间，目前还剩下多少空间等信息。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/df">http://man.linuxde.net/df</a></p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看系统磁盘设备，默认是 KB 为单位</span></span><br><span class="line">[root@LinServ-1 ~]<span class="comment"># df</span></span><br><span class="line">文件系统               1K-块        已用     可用 已用% 挂载点</span><br><span class="line">/dev/sda2            146294492  28244432 110498708  21% /</span><br><span class="line">/dev/sda1              1019208     62360    904240   7% /boot</span><br><span class="line">tmpfs                  1032204         0   1032204   0% /dev/shm</span><br><span class="line">/dev/sdb1            2884284108 218826068 2518944764   8% /data1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 -h 选项以 KB 以上的单位来显示，可读性高</span></span><br><span class="line">[root@LinServ-1 ~]<span class="comment"># df -h</span></span><br><span class="line">文件系统              容量  已用 可用 已用% 挂载点</span><br><span class="line">/dev/sda2             140G   27G  106G  21% /</span><br><span class="line">/dev/sda1             996M   61M  884M   7% /boot</span><br><span class="line">tmpfs                1009M     0 1009M   0% /dev/shm</span><br><span class="line">/dev/sdb1             2.7T  209G  2.4T   8% /data1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看全部文件系统</span></span><br><span class="line">[root@LinServ-1 ~]<span class="comment"># df -a</span></span><br><span class="line">文件系统               1K-块        已用     可用 已用% 挂载点</span><br><span class="line">/dev/sda2            146294492  28244432 110498708  21% /</span><br><span class="line">proc                         0         0         0   -  /proc</span><br><span class="line">sysfs                        0         0         0   -  /sys</span><br><span class="line">devpts                       0         0         0   -  /dev/pts</span><br><span class="line">/dev/sda1              1019208     62360    904240   7% /boot</span><br><span class="line">tmpfs                  1032204         0   1032204   0% /dev/shm</span><br><span class="line">/dev/sdb1            2884284108 218826068 2518944764   8% /data1</span><br><span class="line">none                         0         0         0   -  /proc/sys/fs/binfmt_misc</span><br></pre></td></tr></table></figure>
+<h3 id="2-2-du"><a class="header-anchor" href="#2-2-du">¶</a>2.2. du</h3>
+<blockquote>
+<p>du 命令也是查看使用空间的，但是与 df 命令不同的是：du 命令是对文件和目录磁盘使用的空间的查看，还是和 df 命令有一些区别的。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/du">http://man.linuxde.net/du</a></p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 显示目录或者文件所占空间</span></span><br><span class="line">root@localhost [<span class="built_in">test</span>]<span class="comment"># du</span></span><br><span class="line">608 ./test6</span><br><span class="line">308 ./test4</span><br><span class="line">4 ./scf/lib</span><br><span class="line">4 ./scf/service/deploy/product</span><br><span class="line">4 ./scf/service/deploy/info</span><br><span class="line">12 ./scf/service/deploy</span><br><span class="line">16 ./scf/service</span><br><span class="line">4 ./scf/doc</span><br><span class="line">4 ./scf/bin</span><br><span class="line">32 ./scf</span><br><span class="line">8 ./test3</span><br><span class="line">1288 .</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示指定文件所占空间</span></span><br><span class="line">[root@localhost <span class="built_in">test</span>]<span class="comment"># du log2012.log</span></span><br><span class="line">300 log2012.log</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看指定目录的所占空间</span></span><br><span class="line">[root@localhost <span class="built_in">test</span>]<span class="comment"># du scf</span></span><br><span class="line">4 scf/lib</span><br><span class="line">4 scf/service/deploy/product</span><br><span class="line">4 scf/service/deploy/info</span><br><span class="line">12 scf/service/deploy</span><br><span class="line">16 scf/service</span><br><span class="line">4 scf/doc</span><br><span class="line">4 scf/bin</span><br><span class="line">32 scf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示多个文件所占空间</span></span><br><span class="line">[root@localhost <span class="built_in">test</span>]<span class="comment"># du log30.tar.gz log31.tar.gz</span></span><br><span class="line">4 log30.tar.gz</span><br><span class="line">4 log31.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="comment"># 只显示总和的大小</span></span><br><span class="line">[root@localhost <span class="built_in">test</span>]<span class="comment"># du -s</span></span><br><span class="line">1288 .</span><br><span class="line"></span><br><span class="line">[root@localhost <span class="built_in">test</span>]<span class="comment"># du -s scf</span></span><br><span class="line">32 scf</span><br></pre></td></tr></table></figure>
+<h3 id="2-3-top"><a class="header-anchor" href="#2-3-top">¶</a>2.3. top</h3>
+<blockquote>
+<p>top 命令可以实时动态地查看系统的整体运行情况，是一个综合了多方信息监测系统性能和运行信息的实用工具。通过 top 命令所提供的互动式界面，用热键可以管理。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/top">http://man.linuxde.net/top</a></p>
+</blockquote>
+<h3 id="2-4-free"><a class="header-anchor" href="#2-4-free">¶</a>2.4. free</h3>
+<blockquote>
+<p>free 命令可以显示当前系统未使用的和已使用的内存数目，还可以显示被内核使用的内存缓冲区。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/free">http://man.linuxde.net/free</a></p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">free -t    <span class="comment"># 以总和的形式显示内存的使用信息</span></span><br><span class="line">free -s 10 <span class="comment"># 周期性的查询内存使用信息，每10s 执行一次命令</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示内存使用情况</span></span><br><span class="line"></span><br><span class="line">free -m</span><br><span class="line">             total       used       free     shared    buffers     cached</span><br><span class="line">Mem:          2016       1973         42          0        163       1497</span><br><span class="line">-/+ buffers/cache:        312       1703</span><br><span class="line">Swap:         4094          0       4094</span><br></pre></td></tr></table></figure>
+<h3 id="2-5-iotop"><a class="header-anchor" href="#2-5-iotop">¶</a>2.5. iotop</h3>
+<blockquote>
+<p>iotop 命令是一个用来监视磁盘 I/O 使用状况的 top 类工具。iotop 具有与 top 相似的 UI，其中包括 PID、用户、I/O、进程等相关信息。Linux 下的 IO 统计工具如 iostat，nmon 等大多数是只能统计到 per 设备的读写情况，如果你想知道每个进程是如何使用 IO 的就比较麻烦，使用 iotop 命令可以很方便的查看。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/iotop">http://man.linuxde.net/iotop</a></p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Total DISK <span class="built_in">read</span>:       0.00 B/s | Total DISK write:       0.00 B/s</span><br><span class="line">  TID  PRIO  USER     DISK READ  DISK WRITE  SWAPIN     IO&gt;    <span class="built_in">command</span></span><br><span class="line">    1 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % init [3]</span><br><span class="line">    2 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [kthreadd]</span><br><span class="line">    3 rt/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [migration/0]</span><br><span class="line">    4 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [ksoftirqd/0]</span><br><span class="line">    5 rt/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [watchdog/0]</span><br><span class="line">    6 rt/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [migration/1]</span><br><span class="line">    7 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [ksoftirqd/1]</span><br><span class="line">    8 rt/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [watchdog/1]</span><br><span class="line">    9 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [events/0]</span><br><span class="line">   10 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [events/1]</span><br><span class="line">   11 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [khelper]</span><br><span class="line">2572 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [bluetooth]</span><br></pre></td></tr></table></figure>
 
       
     </div>
