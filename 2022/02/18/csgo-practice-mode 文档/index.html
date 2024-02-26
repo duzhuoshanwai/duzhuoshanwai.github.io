@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-duzhuo-32%C3%9732.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-duzhuo-16%C3%9716.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"flat"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="csgo-practice-mode Status: Supported, actively developed. Practice Mode is a sourcemod plugin for helping players&#x2F;teams run practices. See this YouTube video for a demonstration. Check out the fe">
+<meta property="og:type" content="article">
+<meta property="og:title" content="csgo-practice-mode 文档">
+<meta property="og:url" content="http://example.com/2022/02/18/csgo-practice-mode%20%E6%96%87%E6%A1%A3/index.html">
+<meta property="og:site_name" content="duzhuo&#39;s-blog">
+<meta property="og:description" content="csgo-practice-mode Status: Supported, actively developed. Practice Mode is a sourcemod plugin for helping players&#x2F;teams run practices. See this YouTube video for a demonstration. Check out the fe">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://ci.splewis.net/job/csgo-practice-mode/badge/icon">
+<meta property="og:image" content="https://img.shields.io/github/downloads/splewis/csgo-practice-mode/total.svg?style=flat-square&label=Downloads">
+<meta property="og:image" content="https://img.shields.io/discord/926309849673895966.svg">
+<meta property="article:published_time" content="2022-02-18T07:55:06.000Z">
+<meta property="article:modified_time" content="2024-02-23T12:16:40.472Z">
+<meta property="article:author" content="duzhuo">
+<meta property="article:tag" content="csgo">
+<meta property="article:tag" content="反恐精英:全球攻势">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ci.splewis.net/job/csgo-practice-mode/badge/icon">
+
+
+<link rel="canonical" href="http://example.com/2022/02/18/csgo-practice-mode%20%E6%96%87%E6%A1%A3/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2022/02/18/csgo-practice-mode%20%E6%96%87%E6%A1%A3/","path":"2022/02/18/csgo-practice-mode 文档/","title":"csgo-practice-mode 文档"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>csgo-practice-mode 文档 | duzhuo's-blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start --><script> let HEXO_MMEDIA_DATA = { js: [], css: [], aplayerData: [], metingData: [], artPlayerData: [], dplayerData: []}; </script><!-- hexo injector head_end end --><style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">duzhuo's-blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">学无止境</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#csgo-practice-mode"><span class="nav-number">1.</span> <span class="nav-text">csgo-practice-mode</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Download"><span class="nav-number">1.1.</span> <span class="nav-text">Download</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Installation"><span class="nav-number">1.1.1.</span> <span class="nav-text">Installation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Download-and-installation-for-dummies"><span class="nav-number">1.1.2.</span> <span class="nav-text">Download and installation for dummies</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Features"><span class="nav-number">1.2.</span> <span class="nav-text">Features</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Commands"><span class="nav-number">1.3.</span> <span class="nav-text">Commands</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#General-commands"><span class="nav-number">1.3.1.</span> <span class="nav-text">General commands</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Saving-grenade-positions"><span class="nav-number">1.3.2.</span> <span class="nav-text">Saving grenade positions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Modifying-a-saved-grenade"><span class="nav-number">1.3.3.</span> <span class="nav-text">Modifying a saved grenade</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Testing-grenades"><span class="nav-number">1.3.4.</span> <span class="nav-text">Testing grenades</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spawn-commands"><span class="nav-number">1.3.5.</span> <span class="nav-text">Spawn commands</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bot-commands"><span class="nav-number">1.3.6.</span> <span class="nav-text">Bot commands</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Miscellaneous-commands"><span class="nav-number">1.3.7.</span> <span class="nav-text">Miscellaneous commands</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bot-replay-commands"><span class="nav-number">1.3.8.</span> <span class="nav-text">Bot replay commands</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ConVars"><span class="nav-number">1.4.</span> <span class="nav-text">ConVars</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Discord-Chat"><span class="nav-number">1.4.1.</span> <span class="nav-text">Discord Chat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Contributions"><span class="nav-number">1.4.2.</span> <span class="nav-text">Contributions</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">duzhuo</p>
+  <div class="site-description" itemprop="description">duzhuo-s-blog</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/18/csgo-practice-mode%20%E6%96%87%E6%A1%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="duzhuo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="duzhuo's-blog">
+      <meta itemprop="description" content="duzhuo-s-blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="csgo-practice-mode 文档 | duzhuo's-blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          csgo-practice-mode 文档
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-02-18 15:55:06" itemprop="dateCreated datePublished" datetime="2022-02-18T15:55:06+08:00">2022-02-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-02-23 20:16:40" itemprop="dateModified" datetime="2024-02-23T20:16:40+08:00">2024-02-23</time>
+    </span>
+
+  
+    <span id="/2022/02/18/csgo-practice-mode%20%E6%96%87%E6%A1%A3/" class="post-meta-item twikoo_visitors" data-flag-title="csgo-practice-mode 文档" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="csgo-practice-mode"><a href="#csgo-practice-mode" class="headerlink" title="csgo-practice-mode"></a>csgo-practice-mode</h1><p><a target="_blank" rel="noopener" href="http://ci.splewis.net/job/csgo-practice-mode/"><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="http://ci.splewis.net/job/csgo-practice-mode/badge/icon" alt="Build status"></a><br><a target="_blank" rel="noopener" href="https://github.com/splewis/csgo-practice-mode/releases/latest"><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://img.shields.io/github/downloads/splewis/csgo-practice-mode/total.svg?style=flat-square&label=Downloads" alt="GitHub Downloads"></a><br><a target="_blank" rel="noopener" href="https://discord.gg/zmqEa4keCk"><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://img.shields.io/discord/926309849673895966.svg" alt="Discord Chat"></a></p>
+<p><strong>Status: Supported, actively developed.</strong></p>
+<p>Practice Mode is a sourcemod plugin for helping players&#x2F;teams run practices. See this <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=ua_I30DTggQ">YouTube video</a> for a demonstration. Check out the features and command list below for a better understanding of all the tools practicemode provides.</p>
+<h2 id="Download"><a href="#Download" class="headerlink" title="Download"></a>Download</h2><p>Download from <a target="_blank" rel="noopener" href="https://github.com/splewis/csgo-practice-mode/releases">the releases section</a>.</p>
+<p>You may also download the <a target="_blank" rel="noopener" href="http://ci.splewis.net/job/csgo-practice-mode/lastSuccessfulBuild/">latest development build</a> if you wish. If you report any bugs from these, make sure to include the build number (when typing <code>sm plugins list</code> into the server console, the build number will be displayed with the plugin version).</p>
+<h3 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h3><ol>
+<li><p>Confirm you have <a target="_blank" rel="noopener" href="https://www.sourcemod.net/downloads.php">SourceMod</a> and <a target="_blank" rel="noopener" href="https://metamodsource.net/downloads.php">MetaMod:Source</a>. You must have a 1.9+ build of sourcemod.</p>
+</li>
+<li><p>Extract <strong>all</strong> files in the release zip from above to the <code>csgo</code> server directory. You should see a <code>practicemode.smx</code> file in <code>addons/sourcemod/plugins</code>.</p>
+</li>
+<li><p>To start practicemode via the <code>.setup</code> command, either <a target="_blank" rel="noopener" href="https://github.com/splewis/csgo-practice-mode/wiki/Command-access#adding-admins-in-sourcemod">add yourself as a sourcemod admin</a> or <a target="_blank" rel="noopener" href="https://github.com/splewis/csgo-practice-mode/wiki/Command-access#launching-practicemode">remove the admin requirement</a>.</p>
+</li>
+</ol>
+<p><strong>Note</strong>: access to the .setup requires having the sourcemod admin changemap flag (“g”) by default. See <a target="_blank" rel="noopener" href="https://github.com/splewis/csgo-practice-mode/wiki/Command-access">the wiki</a> for more information on changing how admin access works.</p>
+<h3 id="Download-and-installation-for-dummies"><a href="#Download-and-installation-for-dummies" class="headerlink" title="Download and installation for dummies"></a>Download and installation for dummies</h3><p>For a more thorough guide for users new to configuring servers, please see <a target="_blank" rel="noopener" href="https://github.com/splewis/csgo-practice-mode/wiki/Step-by-step-installation-guide">this wiki page</a>.</p>
+<h2 id="Features"><a href="#Features" class="headerlink" title="Features"></a>Features</h2><ul>
+<li>Draws working grenade trajectories if <code>sv_grenade_trajectory</code> is on (since it doesn’t work on dedicated servers)</li>
+<li>Adds new cvars to give extra practice settings (infinite money, noclip without needing sv_cheats enabled)</li>
+<li>Can save users’ grenade locations&#x2F;eye-angles with a name and description for them (grenade data is saved to a file on the server in the <code>addons/sourcemod/data/practicemode/grenades</code> directory)</li>
+<li>Users can goto any players’ saved grenades to learn or revisit them</li>
+<li>Displays a menu with toggle settings to set practice cvars defined in <a href="configs/practicemode.cfg">addons&#x2F;sourcemod&#x2F;configs&#x2F;practicemode.cfg</a></li>
+<li>Maintains your grenade history on the current map so you can use <code>.back</code> and <code>.forward</code> to see all spots you threw grenades from in the current session</li>
+<li>Can replay grenade throws for testing, either in isolation or in the context of a full timed-execute</li>
+</ul>
+<h2 id="Commands"><a href="#Commands" class="headerlink" title="Commands"></a>Commands</h2><h3 id="General-commands"><a href="#General-commands" class="headerlink" title="General commands"></a>General commands</h3><ul>
+<li><code>.setup</code> displays the practicemode menu</li>
+<li><code>.prac</code> launches practice mode and displays the <code>.setup</code> menu</li>
+<li><code>.help</code>: displays this page</li>
+<li><code>.settings</code>: opens the client settings menu</li>
+</ul>
+<h3 id="Saving-grenade-positions"><a href="#Saving-grenade-positions" class="headerlink" title="Saving grenade positions"></a>Saving grenade positions</h3><ul>
+<li><code>.nades [filter]</code>: displays a menu to select saved grenade positions. <code>.nades</code> with no argument shows all nades. <code>filter</code> can be any of: nade ids, category name, player name, or part of a grenade name</li>
+<li><code>.cats </code>: displays a menu of all saved grenades by category</li>
+<li><code>.save &lt;name&gt;</code>: saves your current position as a grenade spot with the given name</li>
+<li><code>.goto &lt;grenadeid&gt;</code>: teleports you to a player’s saved grenade (or your own if no player is named)</li>
+<li><code>.delete</code>: deletes the last grenade of yours that you used .goto (or .nades) to teleport to</li>
+<li><code>.find &lt;text&gt;</code>: searches all grenade names for a text match</li>
+</ul>
+<h3 id="Modifying-a-saved-grenade"><a href="#Modifying-a-saved-grenade" class="headerlink" title="Modifying a saved grenade"></a>Modifying a saved grenade</h3><p>All of the following commands can only be used on <em>your</em> grenades. They will apply to the last saved grenade you went to, whether by <code>.save</code>, <code>.nades</code>, or <code>.goto</code>.</p>
+<ul>
+<li><code>.desc &lt;description&gt;</code>: adds a grenade description to your last grenade</li>
+<li><code>.rename &lt;new name&gt;</code>: renames your last grenade</li>
+<li><code>.addcat &lt;category&gt; ...</code>: adds a category to your last grenade</li>
+<li><code>.removecat &lt;category&gt;</code>: removes a category from your last grenade</li>
+<li><code>.clearcats</code>: removes all categories on your last grenade</li>
+<li><code>.deletecat &lt;category&gt;</code>: removes a category from <strong>all</strong> of your saved grenades</li>
+<li><code>.copy &lt;username&gt; &lt;grenadeid&gt;</code>: copies another user’s grenade and saves it for you</li>
+<li><code>.setdelay &lt;delay&gt;</code>: sets a delay on your last grenade. This is only used when using .throw against a category</li>
+</ul>
+<h3 id="Testing-grenades"><a href="#Testing-grenades" class="headerlink" title="Testing grenades"></a>Testing grenades</h3><ul>
+<li><code>.last</code>: teleports you back to where you threw your last grenade from</li>
+<li><code>.back</code>: teleports you back a position in your grenade history (you can also do <code>.back 5</code> to go to the 5th grenade you threw, for example)</li>
+<li><code>.forward</code>: teleports you forward a position in your grenade history</li>
+<li><code>.flash</code>:  saves you position to test flashbangs against it. Use this command in a spot you want to try to blind, then move and throw the flashbang; you will be teleported back to the position and see how effective the flashbang is. Use <code>.stop</code> to cancel.</li>
+<li><code>.throw [filter]</code>: automatically throws all grenades matching the filter. With no filter, throws the last grenade you threw.</li>
+<li><code>.noflash</code>: makes it so no flashbangs will blind you (they still blind others)</li>
+</ul>
+<h3 id="Spawn-commands"><a href="#Spawn-commands" class="headerlink" title="Spawn commands"></a>Spawn commands</h3><ul>
+<li><code>.respawn</code>: makes you respawn at the spot you are standing (<code>.stop</code> to cancel)</li>
+<li><code>.spawn &lt;number&gt;</code>: teleports you to a spawn #, using your team’s spawns (CT or T). Closest spawn is used if no argument is given</li>
+<li><code>.ctspawn &lt;number&gt;</code>: same as .spawn, but using CT only regardless of what team you are on</li>
+<li><code>.tspawn &lt;number&gt;</code>: same as .spawn, but using T only regardless of what team you are on</li>
+<li><code>.namespawn &lt;name&gt;</code>: saves the closest spawn to you under a name, which can then be gone to via <code>.spawn &lt;name&gt;</code></li>
+<li><code>.bestspawn</code>: teleports you to your team’s closest spawn from your current position</li>
+<li><code>.worstspawn</code>: teleports you to your team’s furthest spawn from your current position</li>
+</ul>
+<h3 id="Bot-commands"><a href="#Bot-commands" class="headerlink" title="Bot commands"></a>Bot commands</h3><ul>
+<li><code>.bots</code>: opens the bot menu for easier access to most of the below commands</li>
+<li><code>.bot</code>: adds a bot where you’re standing (or crouching!); <code>.crouchbot</code> to force a crouching bot</li>
+<li><code>.ctbot</code>, <code>.tbot</code>: same as <code>.bot</code>, but forces the bot’s team to CT or T</li>
+<li><code>.botplace</code>: adds a bot at the point you’re looking at (similar to the <code>bot_place</code> command)</li>
+<li><code>.boost</code>: spawns a bot boosting you (crouch-boosting if you’re crouching); <code>.crouchboost</code> to force a crouching bot</li>
+<li><code>.swapbot</code>: swaps your position with the nearest bot (temporarily, the bot will respawn in the original spot still)</li>
+<li><code>.movebot</code>: moves the last bot you placed to your current position</li>
+<li><code>.nobot</code>: removes the bot you’re aiming at (can also use <code>.kickbot</code> or <code>.removebot</code>)</li>
+<li><code>.nobots</code>: clears all bots (<code>.clearbots</code>, <code>.removebots</code>, <code>.kickbots</code> also work)</li>
+<li><code>.savebots</code>: saves all current bots to a file</li>
+<li><code>.loadbots</code>: loads bots from the file (written by the last <code>.savebots</code>)</li>
+</ul>
+<h3 id="Miscellaneous-commands"><a href="#Miscellaneous-commands" class="headerlink" title="Miscellaneous commands"></a>Miscellaneous commands</h3><ul>
+<li><code>.timer</code>: starts a timer when you start moving in any direction, and stops it when you stop moving, telling you the duration of time between starting&#x2F;stopping</li>
+<li><code>.timer2</code>: starts a timer immediately and stops it when you type .timer2 again, telling you the duration of time</li>
+<li><code>.countdown &lt;duration&gt;</code>: starts a countdown timer for the duration specified (in seconds), defaulting to the round duration (the <code>mp_roundtime</code> cvar).</li>
+<li><code>.fastfoward</code> (or <code>.ff</code>): speeds up the server clock briefly so smokes dissipate quickly</li>
+<li><code>.repeat &lt;interval&gt; &lt;command&gt;</code>: give a number of seconds and a chat command, the command will automatically repeat at the given interval. For example: <code>.repeat 3 .throw</code> repeats .throw every 3 seconds</li>
+<li><code>.delay &lt;duration&gt; &lt;command&gt;</code>: runs the given chat command after a given duration (in seconds)</li>
+<li><code>.map</code>: changes map (you can use a map name like <code>.map de_dust2</code> or just <code>.map</code> to get a menu)</li>
+<li><code>.dryrun</code>: disables most practicemode settings (leaving infinte money on), restarts the round, and sets freezetime to <code>sm_practicemode_dry_run_freeze_time</code> (default 6) - you can also use <code>.dry</code></li>
+<li><code>.enable &lt;arg&gt;</code>: enables a partially-named setting, or “all” settings.</li>
+<li><code>.disable &lt;arg&gt;</code>: disables a partially-named setting, or “all” settings.</li>
+<li><code>.savepos</code>: temporarily saves a position so you can <code>.back</code> to it (this adds the position to the list of grenade positions you’ve thrown)</li>
+<li><code>.god</code>: toggles god mode (alias for the <code>god</code> command in console; requires sv_cheats to be on)</li>
+<li><code>.endround</code>: ends the round (alias for the <code>endround</code> command in console; requires sv_cheats to be on)</li>
+<li><code>.break</code>: breaks all func_breakable entities (most windows)</li>
+<li><code>.stop</code>: cancels a current action (this can stop many things: the .flash command, the .repeat command, and the .timer command)</li>
+<li><code>.spec</code>, <code>.t</code>, <code>.ct</code>: joins a team</li>
+</ul>
+<h3 id="Bot-replay-commands"><a href="#Bot-replay-commands" class="headerlink" title="Bot replay commands"></a>Bot replay commands</h3><p><strong>Note:</strong> bot replay support is currently a work in progress. It’s not ready for general use yet. Installing the <a target="_blank" rel="noopener" href="http://users.alliedmods.net/~drifter/builds/dhooks/2.2/">dhooks extension</a> is also a good idea if you plan using these commands. Expect random crashes if you use these.</p>
+<ul>
+<li><code>.replays</code>: opens replay mode menu</li>
+<li><code>.replay</code>: opens the replay mode menu, or the last replay&#x2F;role menu you had open</li>
+<li><code>.namereplay</code>: names the replay you’re currently working on</li>
+<li><code>.namerole</code>: names the role you’re currently working on</li>
+<li><code>.finish</code>: finishes and saves current recording</li>
+<li><code>.cancel</code>: cancels current replay&#x2F;recording</li>
+<li><code>.play &lt;id&gt; [role]</code>: plays a replay id (all the roles), or a single role from a replay</li>
+</ul>
+<p>Also see the <a target="_blank" rel="noopener" href="https://github.com/splewis/csgo-practice-mode/wiki/Notes-for-power-users">notes for power users</a> for more detail on using these commands effectively.</p>
+<h2 id="ConVars"><a href="#ConVars" class="headerlink" title="ConVars"></a>ConVars</h2><p>You can edit these in the file <code>cfg/sourcemod/practicemode.cfg</code>, which is autogenerated when the plugin first starts.</p>
+<p>Note that this is not necessarily an exhaustive list; check <code>cfg/sourcemod/practicemode.cfg</code> for more cvars, or even consider checking the source code for a more up-to-date listing.</p>
+<ul>
+<li><code>sm_practicemode_alphabetize_nades</code>: displays grenades in alphabetical order instead of id order</li>
+<li><code>sm_practicemode_share_all_nades</code>: lets all users edit all nades, and hides who created them</li>
+<li><code>sm_practicemode_autostart</code>: whether to automatically start practicemode</li>
+<li><code>sm_practicemode_max_grenades_saved</code>: max # of grenades a user can save via <code>.save</code></li>
+<li><code>sm_infinite_money</code>: whether to give infinite money</li>
+<li><code>sm_allow_noclip</code>: whether the .noclip command is enabled</li>
+<li><code>sm_grenade_trajectory_use_player_color</code>: whether to use cl_color to get nade trajectory color</li>
+<li><code>sm_practicemode_can_be_started</code>: whether practicemode can be started</li>
+</ul>
+<h3 id="Discord-Chat"><a href="#Discord-Chat" class="headerlink" title="Discord Chat"></a>Discord Chat</h3><p>A <a target="_blank" rel="noopener" href="https://discord.gg/zmqEa4keCk">Discord</a> channel is available for general discussion.</p>
+<h3 id="Contributions"><a href="#Contributions" class="headerlink" title="Contributions"></a>Contributions</h3><p>Pull requests are welcome. Please follow the general coding formatting style as much as possible. If you’re concerned about a pull request not being merged, please feel free to make an <a target="_blank" rel="noopener" href="https://github.com/splewis/csgo-practice-mode/issues">issue</a> and inquire if the feature is worth adding. I greatly appreciate anyone trying to contribute!</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/csgo/" rel="tag"># csgo</a>
+              <a href="/tags/%E5%8F%8D%E6%81%90%E7%B2%BE%E8%8B%B1-%E5%85%A8%E7%90%83%E6%94%BB%E5%8A%BF/" rel="tag"># 反恐精英:全球攻势</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/02/18/simple-practicemode%20%E6%96%87%E6%A1%A3/" rel="prev" title="simple-practicemode 文档">
+                  <i class="fa fa-angle-left"></i> simple-practicemode 文档
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/02/19/teamspeak/" rel="next" title="teamspeak教程">
+                  teamspeak教程 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">duzhuo</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: '32px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":true,"envId":"https://twikoo.saint1337.top/","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+<!-- hexo injector body_end start --><script src="/assets/mmedia/mmedia-loader.js"></script><!-- hexo injector body_end end -->
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body>
+</html>
