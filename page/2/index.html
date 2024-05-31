@@ -149,7 +149,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">54</span>
+          <span class="site-state-item-count">55</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -172,6 +172,103 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/30/Debian-wifi/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="duzhuo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="duzhuo's-blog">
+      <meta itemprop="description" content="duzhuo-s-blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | duzhuo's-blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/10/30/Debian-wifi/" class="post-title-link" itemprop="url">GNU/Linux 使用 CLi 连接无线网</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-10-30 10:55:06" itemprop="dateCreated datePublished" datetime="2023-10-30T10:55:06+08:00">2023-10-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-02-23 20:16:40" itemprop="dateModified" datetime="2024-02-23T20:16:40+08:00">2024-02-23</time>
+    </span>
+
+  
+    <span id="/2023/10/30/Debian-wifi/" class="post-meta-item twikoo_visitors" data-flag-title="GNU/Linux 使用 CLi 连接无线网" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="查看当前无线网卡并启用"><a href="#查看当前无线网卡并启用" class="headerlink" title="查看当前无线网卡并启用"></a>查看当前无线网卡并启用</h2><p><code>sudo iwconfig</code> 查看得到我当前的无线网卡名称是 <code>wlan0</code></p>
+<p><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://s2.loli.net/2023/10/30/9c68AOBhnV1jCRm.png" alt="Screenshot_20231030_170101.png"></p>
+<p><code>sudo ifconfig wlan0 up</code> 启用无线网卡</p>
+<p><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://s2.loli.net/2023/10/30/dLewbAYZVifng18.png" alt="Screenshot_20231030_171338_看图王1.png"></p>
+<h2 id="扫描可用网络"><a href="#扫描可用网络" class="headerlink" title="扫描可用网络"></a>扫描可用网络</h2><p><code>sudo iwlist wlan0 scan</code> 查找当前可用网络 结果过多的情况下使用  <code>grep</code> 找出 SSID</p>
+<p><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://s2.loli.net/2023/10/30/nmWhKYZrxMzvk1V.png" alt="Screenshot_20231030_171426_看图王.png"></p>
+<h2 id="使用-wpa-supplicant-连接网络"><a href="#使用-wpa-supplicant-连接网络" class="headerlink" title="使用 wpa_supplicant 连接网络"></a>使用 <code>wpa_supplicant</code> 连接网络</h2><p><code>sudo wpa_passphrase &#123;SSID&#125; &#123;PASSWD&#125; &gt; sudo /etc/wpa_supplicant/&#123;SSID&#125;.conf</code></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/10/30/Debian-wifi/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1065,113 +1162,6 @@
 <li>疑难解答 → 高级选项 → 卸载更新</li>
 </ol>
 <p><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://s2.loli.net/2023/04/01/rSDnE8X9tI4ofiL.png"><br><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://s2.loli.net/2023/04/01/Xo3VqpAR6mGBzfF.png"><br><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://s2.loli.net/2023/04/01/FPnYEfvHyBK6Iwl.png"><br><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://s2.loli.net/2023/04/01/HIZANxR7Lkn2sFJ.png"></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/02/22/ClashX+UnblockNeteaseMusic/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="duzhuo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="duzhuo's-blog">
-      <meta itemprop="description" content="duzhuo-s-blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | duzhuo's-blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/02/22/ClashX+UnblockNeteaseMusic/" class="post-title-link" itemprop="url">ClashX Pro + UnblockNeteaseMusic</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-02-22 21:31:06" itemprop="dateCreated datePublished" datetime="2023-02-22T21:31:06+08:00">2023-02-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-23 20:16:40" itemprop="dateModified" datetime="2024-02-23T20:16:40+08:00">2024-02-23</time>
-    </span>
-
-  
-    <span id="/2023/02/22/ClashX+UnblockNeteaseMusic/" class="post-meta-item twikoo_visitors" data-flag-title="ClashX Pro + UnblockNeteaseMusic" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span id="twikoo_visitors"></span>
-    </span>
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><ul>
-<li><p><a target="_blank" rel="noopener" href="https://github.com/UnblockNeteaseMusic/server">UnblockNeteaseMusic&#x2F;server</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://install.appcenter.ms/users/clashx/apps/clashx-pro/distribution_groups/public">ClashX Pro</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://d1.music.126.net/dmusic/NeteaseMusic_2.3.12_956_web.dmg">网易云音乐 2.3.12_956</a></p>
-</li>
-<li><p>安装证书 <a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/nondanee/UnblockNeteaseMusic/master/ca.crt">ca.crt</a></p>
-</li>
-</ul>
-<h2 id="ClashX-Pro-设置并添加规则"><a href="#ClashX-Pro-设置并添加规则" class="headerlink" title="ClashX Pro 设置并添加规则"></a>ClashX Pro 设置并添加规则</h2><ul>
-<li><p>开启 Enhanced mode</p>
-<ul>
-<li>Enhanced mode Config → DNS mode → Mapping</li>
-</ul>
-</li>
-<li><p>编辑 config.yaml</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">proxies:</span></span><br><span class="line">  <span class="bullet">-</span> &#123; <span class="attr">name:</span> <span class="string">NeteaseMusicUnlock</span>, <span class="attr">type:</span> <span class="string">http</span>, <span class="attr">server:</span> <span class="number">192.168</span><span class="number">.1</span><span class="number">.2</span>, <span class="attr">port:</span> <span class="number">8080</span> &#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">proxy-groups:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">NeteaseMusic</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">select</span></span><br><span class="line"><span class="attr">proxies:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DIRECT</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">NeteaseMusicUnlock</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">rules:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,music.163.com,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,music.126.net,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,163yun.com,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,api.iplay.163.com,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,apm.music.163.com,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,apm3.music.163.com,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,interface.music.163.com,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,interface3.music.163.com,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,mam.netease.com,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,hz.netease.com,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,39.105.63.80/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,45.254.48.1/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,47.100.127.239/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,59.111.21.14/31,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,59.111.179.214/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,59.111.181.38/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,59.111.181.60/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,59.111.160.195/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,59.111.160.197/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,59.111.181.35/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,59.111.238.29/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,101.71.154.241/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,103.126.92.132/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,103.126.92.133/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,112.13.119.17/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,112.13.122.1/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,115.236.118.33/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,115.236.121.1/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,118.24.63.156/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,193.112.159.225/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,223.252.199.66/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,223.252.199.67/32,NeteaseMusic</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="Reload-Config-And-Enjoy"><a href="#Reload-Config-And-Enjoy" class="headerlink" title="Reload Config And Enjoy !"></a>Reload Config And Enjoy !</h2><p><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302222256214.png"></p>
 
       
     </div>
