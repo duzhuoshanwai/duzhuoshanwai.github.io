@@ -149,7 +149,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">55</span>
+          <span class="site-state-item-count">56</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -172,6 +172,118 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/20/linux-cli-user/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="duzhuo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="duzhuo's-blog">
+      <meta itemprop="description" content="duzhuo-s-blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | duzhuo's-blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/02/20/linux-cli-user/" class="post-title-link" itemprop="url">Linux 用户管理</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-02-20 15:09:06" itemprop="dateCreated datePublished" datetime="2022-02-20T15:09:06+08:00">2022-02-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-02-23 20:16:40" itemprop="dateModified" datetime="2024-02-23T20:16:40+08:00">2024-02-23</time>
+    </span>
+
+  
+    <span id="/2022/02/20/linux-cli-user/" class="post-meta-item twikoo_visitors" data-flag-title="Linux 用户管理" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Linux-用户管理"><a href="#Linux-用户管理" class="headerlink" title="Linux 用户管理"></a>Linux 用户管理</h1><blockquote>
+<p>关键词：<code>groupadd</code>, <code>groupdel</code>, <code>groupmod</code>, <code>useradd</code>, <code>userdel</code>, <code>usermod</code>, <code>passwd</code>, <code>su</code>, <code>sudo</code></p>
+</blockquote>
+<h2 id="1-Linux-用户管理要点"><a href="#1-Linux-用户管理要点" class="headerlink" title="1. Linux 用户管理要点"></a>1. Linux 用户管理要点</h2><ul>
+<li>创建用户组 - 使用 <a href="#groupadd">groupadd</a></li>
+<li>删除用户组 - 使用 <a href="#groupdel">groupdel</a></li>
+<li>修改用户组信息 - 使用 <a href="#groupmod">groupmod</a></li>
+<li>创建用户 - 使用 <a href="#useradd">useradd</a></li>
+<li>删除用户 - 使用 <a href="#userdel">userdel</a></li>
+<li>修改用户信息 - 使用 <a href="#usermod">usermod</a></li>
+<li>设置用户认证信息 - 使用 <a href="#passwd">passwd</a></li>
+<li>切换用户 - 使用 <a href="#su">su</a></li>
+<li>当前用户想执行没有权限执行的命令时，使用其他用户身份去执行 - 使用 <a href="#sudo">sudo</a></li>
+</ul>
+<h2 id="2-命令常见用法"><a href="#2-命令常见用法" class="headerlink" title="2. 命令常见用法"></a>2. 命令常见用法</h2><h3 id="2-1-groupadd"><a href="#2-1-groupadd" class="headerlink" title="2.1. groupadd"></a>2.1. groupadd</h3><blockquote>
+<p>groupadd 命令用于创建一个新的用户组，新用户组的信息将被添加到系统文件中。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/groupadd">http://man.linuxde.net/groupadd</a></p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 建立一个新组，并设置组 ID 加入系统</span></span><br><span class="line">$ groupadd -g 344 jsdigname</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-groupdel"><a href="#2-2-groupdel" class="headerlink" title="2.2. groupdel"></a>2.2. groupdel</h3>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/02/20/linux-cli-user/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1074,109 +1186,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/02/18/simple-practicemode%20%E6%96%87%E6%A1%A3/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/18/CSGO%E7%BB%83%E4%B9%A0%E6%9C%8D%E5%8A%A1%E5%99%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="duzhuo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="duzhuo's-blog">
-      <meta itemprop="description" content="duzhuo-s-blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | duzhuo's-blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/02/18/CSGO%E7%BB%83%E4%B9%A0%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="post-title-link" itemprop="url">csgo练习服务器</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-02-18 12:13:19" itemprop="dateCreated datePublished" datetime="2022-02-18T12:13:19+08:00">2022-02-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-23 20:16:40" itemprop="dateModified" datetime="2024-02-23T20:16:40+08:00">2024-02-23</time>
-    </span>
-
-  
-    <span id="/2022/02/18/CSGO%E7%BB%83%E4%B9%A0%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="post-meta-item twikoo_visitors" data-flag-title="csgo练习服务器" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span id="twikoo_visitors"></span>
-    </span>
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="CSGO练习服务器"><a href="#CSGO练习服务器" class="headerlink" title="CSGO练习服务器"></a>CSGO练习服务器</h1><h2 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h2><ul>
-<li><strong>20220528</strong> 更新最新贴纸 包括2022 安普卫特major</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://cdn.jsdelivr.net/gh/duzhuoshanwai/Image-Hosting/img/20211212233026_1.jpg"></p>
-<h2 id="如何连接服务器"><a href="#如何连接服务器" class="headerlink" title="如何连接服务器"></a>如何连接服务器</h2><ul>
-<li><a href="steam://connect/csgo.saint1337.top">启动csgo并连接练习服务器</a></li>
-</ul>
-<p>​       <strong>控制台输入:</strong> <code>connect csgo.saint1337.top</code></p>
-<ul>
-<li><a href="ts3server://ts3.saint1337.top/">启动teamspeak并连接服务器</a></li>
-</ul>
-<p>​       <strong>teamspeak服务器连接地址:</strong> <code>ts3.saint1337.top</code></p>
-<h2 id="服务器有的功能"><a href="#服务器有的功能" class="headerlink" title="服务器有的功能"></a>服务器有的功能</h2>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/02/18/CSGO%E7%BB%83%E4%B9%A0%E6%9C%8D%E5%8A%A1%E5%99%A8/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
