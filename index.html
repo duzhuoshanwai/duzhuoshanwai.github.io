@@ -149,7 +149,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">56</span>
+          <span class="site-state-item-count">57</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -172,6 +172,90 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/06/05/fix-sqlacodegen-2.3.0.post1-on-python3.11.py/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="duzhuo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="duzhuo's-blog">
+      <meta itemprop="description" content="duzhuo-s-blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | duzhuo's-blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/06/05/fix-sqlacodegen-2.3.0.post1-on-python3.11.py/" class="post-title-link" itemprop="url">解决sqlacodegen2.3.0.post1在python3.11下使用报错</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-06-05 21:01:00 / 修改时间：21:04:14" itemprop="dateCreated datePublished" datetime="2024-06-05T21:01:00+08:00">2024-06-05</time>
+    </span>
+
+  
+    <span id="/2024/06/05/fix-sqlacodegen-2.3.0.post1-on-python3.11.py/" class="post-meta-item twikoo_visitors" data-flag-title="解决sqlacodegen2.3.0.post1在python3.11下使用报错" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="错误提示"><a href="#错误提示" class="headerlink" title="错误提示"></a>错误提示</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;/home/duzhuo/src/scraper-test/.venv/bin/sqlacodegen&quot;, line 5, in &lt;module&gt;</span><br><span class="line">    from sqlacodegen.main import main</span><br><span class="line">  File &quot;/home/duzhuo/src/scraper-test/.venv/lib/python3.11/site-packages/sqlacodegen/main.py&quot;, line 11, in &lt;module&gt;</span><br><span class="line">    from sqlacodegen.codegen import CodeGenerator</span><br><span class="line">  File &quot;/home/duzhuo/src/scraper-test/.venv/lib/python3.11/site-packages/sqlacodegen/codegen.py&quot;, line 9, in &lt;module&gt;</span><br><span class="line">    from inspect import ArgSpec</span><br><span class="line">ImportError: cannot import name &#x27;ArgSpec&#x27; from &#x27;inspect&#x27; (/usr/lib/python3.11/inspect.py)</span><br></pre></td></tr></table></figure>
+
+<p>来自GPT的错误分析：您遇到的错误消息是由于 <code>inspect.ArgSpec</code> 类在 Python 3.11 中被移除了。<code>ArgSpec</code> 类在 Python 3.5 中已被弃用，并在 Python 3.11 中被移除。</p>
+<p>当前使用的sqlacodegen版本为2.3.0.post1。是pypi上面的默认release版本。</p>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>编辑 <code>.venv/lib/python3.11/site-packages/sqlacodegen/codegen.py</code></p>
+<p>找到<code>from inspect import ArgSpec</code>替换成<code>from inspect import FullArgSpec as ArgSpec</code></p>
+<p>或者升级sqlacodegen版本到3.0.0 rc3以上。来源：<a target="_blank" rel="noopener" href="https://github.com/agronholm/sqlacodegen/issues/239#issuecomment-1871370700">https://github.com/agronholm/sqlacodegen/issues/239#issuecomment-1871370700</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1033,94 +1117,6 @@
             </div>
           <!--/noindex-->
         
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/09/sudo-unable-to-resolve-host-hostname-Name-or-service-not-known/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="duzhuo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="duzhuo's-blog">
-      <meta itemprop="description" content="duzhuo-s-blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | duzhuo's-blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/11/09/sudo-unable-to-resolve-host-hostname-Name-or-service-not-known/" class="post-title-link" itemprop="url">sudo: unable to resolve host hostname: Name or service not known</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-11-09 01:11:17" itemprop="dateCreated datePublished" datetime="2023-11-09T01:11:17+08:00">2023-11-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-23 20:16:40" itemprop="dateModified" datetime="2024-02-23T20:16:40+08:00">2024-02-23</time>
-    </span>
-
-  
-    <span id="/2023/11/09/sudo-unable-to-resolve-host-hostname-Name-or-service-not-known/" class="post-meta-item twikoo_visitors" data-flag-title="sudo: unable to resolve host hostname: Name or service not known" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span id="twikoo_visitors"></span>
-    </span>
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="问题复现"><a href="#问题复现" class="headerlink" title="问题复现"></a>问题复现</h2><p>使用 <code>hostnamectl hostname </code> 命令更改 hostname 之后使用 <code>sudo</code> 后出现报错 <code> sudo: unable to resolve host cloudcone: Name or service not known</code></p>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>修改 <code>/etc/hosts</code> 文件 添加 <code>127.0.0.1 cloudcone</code> <code>::1 cloudcone</code> cloudcone 是我设置的新 hostname</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">27.0.0.1       localhost</span><br><span class="line">127.0.0.1       cloudcone</span><br><span class="line"></span><br><span class="line"># The following lines are desirable for IPv6 capable hosts</span><br><span class="line">::1     localhost ip6-localhost ip6-loopback</span><br><span class="line">::1     cloudcone</span><br><span class="line">ff02::1 ip6-allnodes</span><br><span class="line">ff02::2 ip6-allrouters</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://s2.loli.net/2023/11/06/5JPyEbeZHoS3xjR.png" alt="Screenshot_20231106_125230.png"></p>
-
       
     </div>
 
