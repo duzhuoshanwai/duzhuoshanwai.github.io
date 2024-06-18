@@ -149,7 +149,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">57</span>
+          <span class="site-state-item-count">58</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -172,6 +172,110 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/20/linux-cli-software/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="duzhuo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="duzhuo's-blog">
+      <meta itemprop="description" content="duzhuo-s-blog">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | duzhuo's-blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/02/20/linux-cli-software/" class="post-title-link" itemprop="url">Linux 软件管理</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-02-20 15:09:06" itemprop="dateCreated datePublished" datetime="2022-02-20T15:09:06+08:00">2022-02-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-02-23 20:16:40" itemprop="dateModified" datetime="2024-02-23T20:16:40+08:00">2024-02-23</time>
+    </span>
+
+  
+    <span id="/2022/02/20/linux-cli-software/" class="post-meta-item twikoo_visitors" data-flag-title="Linux 软件管理" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Linux-软件管理"><a href="#Linux-软件管理" class="headerlink" title="Linux 软件管理"></a>Linux 软件管理</h1><blockquote>
+<p>关键词：<code>rpm</code>, <code>yum</code>, <code>apt-get</code></p>
+</blockquote>
+<h2 id="1-rpm"><a href="#1-rpm" class="headerlink" title="1. rpm"></a>1. rpm</h2><blockquote>
+<p>rpm 命令是 RPM 软件包的管理工具。rpm 原本是 Red Hat Linux 发行版专门用来管理 Linux 各项套件的程序，由于它遵循 GPL 规则且功能强大方便，因而广受欢迎。逐渐受到其他发行版的采用。RPM 套件管理方式的出现，让 Linux 易于安装，升级，间接提升了 Linux 的适用度。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/rpm">http://man.linuxde.net/rpm</a></p>
+</blockquote>
+<p>示例：</p>
+<p>（1）安装 rpm 包</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh xxx.rpm</span><br></pre></td></tr></table></figure>
+
+<p>（2）安装.src.rpm 软件包</p>
+<p>这类软件包是包含了源代码的 rpm 包，在安装时需要进行编译</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">rpm -i xxx.src.rpm</span><br><span class="line"><span class="built_in">cd</span> /usr/src/redhat/SPECS</span><br><span class="line">rpmbuild -bp xxx.specs             <span class="comment">#一个和你的软件包同名的specs文件</span></span><br><span class="line"><span class="built_in">cd</span> /usr/src/redhat/BUILD/xxx/      <span class="comment">#一个和你的软件包同名的目录</span></span><br><span class="line">./configure                        <span class="comment">#这一步和编译普通的源码软件一样，可以加上参数</span></span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/02/20/linux-cli-software/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1091,110 +1195,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/02/19/teamspeak/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/18/csgo-practice-mode%20%E6%96%87%E6%A1%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="duzhuo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="duzhuo's-blog">
-      <meta itemprop="description" content="duzhuo-s-blog">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | duzhuo's-blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/02/18/csgo-practice-mode%20%E6%96%87%E6%A1%A3/" class="post-title-link" itemprop="url">csgo-practice-mode 文档</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-02-18 15:55:06" itemprop="dateCreated datePublished" datetime="2022-02-18T15:55:06+08:00">2022-02-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-23 20:16:40" itemprop="dateModified" datetime="2024-02-23T20:16:40+08:00">2024-02-23</time>
-    </span>
-
-  
-    <span id="/2022/02/18/csgo-practice-mode%20%E6%96%87%E6%A1%A3/" class="post-meta-item twikoo_visitors" data-flag-title="csgo-practice-mode 文档" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span id="twikoo_visitors"></span>
-    </span>
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="csgo-practice-mode"><a href="#csgo-practice-mode" class="headerlink" title="csgo-practice-mode"></a>csgo-practice-mode</h1><p><a target="_blank" rel="noopener" href="http://ci.splewis.net/job/csgo-practice-mode/"><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="http://ci.splewis.net/job/csgo-practice-mode/badge/icon" alt="Build status"></a><br><a target="_blank" rel="noopener" href="https://github.com/splewis/csgo-practice-mode/releases/latest"><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://img.shields.io/github/downloads/splewis/csgo-practice-mode/total.svg?style=flat-square&label=Downloads" alt="GitHub Downloads"></a><br><a target="_blank" rel="noopener" href="https://discord.gg/zmqEa4keCk"><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://img.shields.io/discord/926309849673895966.svg" alt="Discord Chat"></a></p>
-<p><strong>Status: Supported, actively developed.</strong></p>
-<p>Practice Mode is a sourcemod plugin for helping players&#x2F;teams run practices. See this <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=ua_I30DTggQ">YouTube video</a> for a demonstration. Check out the features and command list below for a better understanding of all the tools practicemode provides.</p>
-<h2 id="Download"><a href="#Download" class="headerlink" title="Download"></a>Download</h2><p>Download from <a target="_blank" rel="noopener" href="https://github.com/splewis/csgo-practice-mode/releases">the releases section</a>.</p>
-<p>You may also download the <a target="_blank" rel="noopener" href="http://ci.splewis.net/job/csgo-practice-mode/lastSuccessfulBuild/">latest development build</a> if you wish. If you report any bugs from these, make sure to include the build number (when typing <code>sm plugins list</code> into the server console, the build number will be displayed with the plugin version).</p>
-<h3 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h3><ol>
-<li><p>Confirm you have <a target="_blank" rel="noopener" href="https://www.sourcemod.net/downloads.php">SourceMod</a> and <a target="_blank" rel="noopener" href="https://metamodsource.net/downloads.php">MetaMod:Source</a>. You must have a 1.9+ build of sourcemod.</p>
-</li>
-<li><p>Extract <strong>all</strong> files in the release zip from above to the <code>csgo</code> server directory. You should see a <code>practicemode.smx</code> file in <code>addons/sourcemod/plugins</code>.</p>
-</li>
-<li><p>To start practicemode via the <code>.setup</code> command, either <a target="_blank" rel="noopener" href="https://github.com/splewis/csgo-practice-mode/wiki/Command-access#adding-admins-in-sourcemod">add yourself as a sourcemod admin</a> or <a target="_blank" rel="noopener" href="https://github.com/splewis/csgo-practice-mode/wiki/Command-access#launching-practicemode">remove the admin requirement</a>.</p>
-</li>
-</ol>
-<p><strong>Note</strong>: access to the .setup requires having the sourcemod admin changemap flag (“g”) by default. See <a target="_blank" rel="noopener" href="https://github.com/splewis/csgo-practice-mode/wiki/Command-access">the wiki</a> for more information on changing how admin access works.</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/02/18/csgo-practice-mode%20%E6%96%87%E6%A1%A3/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
