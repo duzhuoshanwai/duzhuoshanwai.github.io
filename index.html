@@ -6,18 +6,18 @@
 <meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-duzhuo-32%C3%9732.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-duzhuo-16%C3%9716.ico">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
 <link rel="stylesheet" href="/css/main.css">
 
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.saint1337.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.saint1337.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"flat"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="记录，分享一些我觉得好玩的内容。">
 <meta property="og:type" content="website">
@@ -63,6 +63,9 @@
       <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
@@ -78,15 +81,46 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
 
 
 
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </header>
         
@@ -184,6 +218,14 @@
     </span>
 
   
+    <span id="/2024/07/04/CVE-2024-6387%E6%BC%8F%E6%B4%9EDebian%E4%BF%AE%E5%A4%8D/" class="post-meta-item twikoo_visitors" data-flag-title="CVE-2024-6387漏洞Debian修复" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
+  
 </div>
 
         </div>
@@ -193,7 +235,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="喜报-openssh远程代码执行漏洞CVE-2024-6387-Debian发行版已经全部修补"><a href="#喜报-openssh远程代码执行漏洞CVE-2024-6387-Debian发行版已经全部修补" class="headerlink" title="喜报 openssh远程代码执行漏洞CVE-2024-6387 Debian发行版已经全部修补"></a>喜报 openssh远程代码执行漏洞CVE-2024-6387 Debian发行版已经全部修补</h2><p><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://s2.loli.net/2024/07/04/FaSGIRocklTBh8L.png" alt="Screenshot_20240704_081856.png"></p>
+          <h2 id="喜报-openssh远程代码执行漏洞CVE-2024-6387-Debian发行版已经全部修补"><a href="#喜报-openssh远程代码执行漏洞CVE-2024-6387-Debian发行版已经全部修补" class="headerlink" title="喜报 openssh远程代码执行漏洞CVE-2024-6387 Debian发行版已经全部修补"></a>喜报 openssh远程代码执行漏洞CVE-2024-6387 Debian发行版已经全部修补</h2><p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2024/07/04/FaSGIRocklTBh8L.png" alt="Screenshot_20240704_081856.png"></p>
 <p><strong>注意：</strong> 有些使用DD重装脚本安装的Debian bookworm 没有开启 <code>bookworm-security</code>源，需要手动开启。</p>
 <ul>
 <li>[2024-07-03] <a target="_blank" rel="noopener" href="https://tracker.debian.org/news/1541564/openssh-197p1-7-migrated-to-testing/">openssh 1:9.7p1-7 MIGRATED to testing </a>(Debian testing watch)</li>
@@ -261,6 +303,14 @@
     </span>
 
   
+    <span id="/2024/07/02/%E4%BD%BF%E7%94%A8%E4%B8%AA%E4%BA%BA%E7%94%A8%E6%88%B7%E5%85%8D%E8%B4%B9%E7%9A%84ubuntu-pro/" class="post-meta-item twikoo_visitors" data-flag-title="使用个人用户免费的ubuntu-pro" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
+  
 </div>
 
         </div>
@@ -272,12 +322,12 @@
     <div class="post-body" itemprop="articleBody">
           <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Ubuntu发行版的终端广告（<a target="_blank" rel="noopener" href="https://bugs.launchpad.net/ubuntu/+source/ubuntu-advantage-tools/+bug/1950692">Bug #1950692</a>）和snap（<a target="_blank" rel="noopener" href="https://blog.linuxmint.com/?p=3766">Mint Blog中的观点</a>）一直是令人诟病的内容，也是我切换到Debian的原因。</p>
 <p>但是，今天还是要注册一下Ubuntu Pro，毕竟还有一些以前安装的机器在运行着已经EOL的Ubuntu版本，需要安装一些安全补丁。</p>
-<img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://s2.loli.net/2024/07/02/zZBFKwEVMH9YtJP.jpg" alt="pic" height="400">
+<img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2024/07/02/zZBFKwEVMH9YtJP.jpg" alt="pic" height="400">
 
 <h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><p>打开Ubuntu Pro的网站 <a target="_blank" rel="noopener" href="https://ubuntu.com/pro">https://ubuntu.com/pro</a></p>
 <p>点击Get Ubuntu Pro now并选择Myself，点击Register登录帐号确认。</p>
 <p>获取Token，复制下面的命令。</p>
-<p><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://s2.loli.net/2024/07/02/d8pbVvHP6MJm5yF.png" alt="Screenshot_20240702_201037-1.png"></p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2024/07/02/d8pbVvHP6MJm5yF.png" alt="Screenshot_20240702_201037-1.png"></p>
 <p>这里以**Ubuntu 18.04 LTS (Bionic Beaver)**为例：</p>
           <!--noindex-->
             <div class="post-button">
@@ -345,6 +395,14 @@
       <time title="创建时间：2024-06-19 09:21:32 / 修改时间：10:33:28" itemprop="dateCreated datePublished" datetime="2024-06-19T09:21:32+08:00">2024-06-19</time>
     </span>
 
+  
+    <span id="/2024/06/19/python%E4%B8%ADmain%E5%87%BD%E6%95%B0%E7%9A%84%E4%BD%BF%E7%94%A8/" class="post-meta-item twikoo_visitors" data-flag-title="Python中main函数的使用" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
   
 </div>
 
@@ -437,6 +495,14 @@
     </span>
 
   
+    <span id="/2024/06/18/%E8%83%A1%E9%94%A1%E8%BF%9B%E7%AC%91%E8%AF%9D2024-06-18/" class="post-meta-item twikoo_visitors" data-flag-title="胡锡进笑话一则——老胡论安检" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
+  
 </div>
 
         </div>
@@ -446,11 +512,11 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://s2.loli.net/2024/06/18/Iq4lGRszJ7Le3jn.png" alt="ScreenShot Tool -20240618085004.png"></p>
+          <p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2024/06/18/Iq4lGRszJ7Le3jn.png" alt="ScreenShot Tool -20240618085004.png"></p>
 <p>源链接位置：<a target="_blank" rel="noopener" href="https://weibo.com/7217947278/OixgbndYl">https://weibo.com/7217947278/OixgbndYl</a></p>
-<p><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://s2.loli.net/2024/06/18/8OB1veZos7SRdmE.jpg" alt="007StLOuly1hqlovgfk7aj30zu227tum.jpg"></p>
-<p><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://s2.loli.net/2024/06/18/NLdEhi2pW59xAcu.jpg" alt="007StLOuly1hqlovguke4j30ok1fhtjf.jpg"></p>
-<p><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://s2.loli.net/2024/06/18/dgxl4vHOKSf5iJI.jpg" alt="007StLOuly1hqlovh3nvkj30fy0m2jtd.jpg"></p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2024/06/18/8OB1veZos7SRdmE.jpg" alt="007StLOuly1hqlovgfk7aj30zu227tum.jpg"></p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2024/06/18/NLdEhi2pW59xAcu.jpg" alt="007StLOuly1hqlovguke4j30ok1fhtjf.jpg"></p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2024/06/18/dgxl4vHOKSf5iJI.jpg" alt="007StLOuly1hqlovh3nvkj30fy0m2jtd.jpg"></p>
 
       
     </div>
@@ -510,6 +576,14 @@
       <time title="创建时间：2024-06-05 21:01:00 / 修改时间：21:08:19" itemprop="dateCreated datePublished" datetime="2024-06-05T21:01:00+08:00">2024-06-05</time>
     </span>
 
+  
+    <span id="/2024/06/05/fix-sqlacodegen-2.3.0.post1-on-python3.11.py/" class="post-meta-item twikoo_visitors" data-flag-title="解决sqlacodegen2.3.0.post1在python3.11下使用报错" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
   
 </div>
 
@@ -586,6 +660,14 @@
       <time title="创建时间：2024-06-01 09:48:00 / 修改时间：09:49:12" itemprop="dateCreated datePublished" datetime="2024-06-01T09:48:00+08:00">2024-06-01</time>
     </span>
 
+  
+    <span id="/2024/06/01/%E6%B5%81%E5%BC%8F%E4%B8%8E%E9%9D%9E%E6%B5%81%E5%BC%8F%E5%A4%A7%E5%9E%8B%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%EF%BC%9A%E4%BA%86%E8%A7%A3%E5%AE%9E%E6%97%B6%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%B7%AE%E5%BC%82/" class="post-meta-item twikoo_visitors" data-flag-title="流式与非流式大型语言模型：了解实时应用程序的差异" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
   
 </div>
 
@@ -676,6 +758,14 @@
     </span>
 
   
+    <span id="/2024/05/30/%E6%9D%BE%E9%A6%99%E5%9C%A8%E7%84%8A%E6%8E%A5%E4%B8%AD%E7%9A%84%E4%BD%9C%E7%94%A8/" class="post-meta-item twikoo_visitors" data-flag-title="松香在焊接中的作用" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
+  
 </div>
 
         </div>
@@ -687,7 +777,7 @@
     <div class="post-body" itemprop="articleBody">
           <h2 id="为什么要使用松香"><a href="#为什么要使用松香" class="headerlink" title="为什么要使用松香"></a>为什么要使用松香</h2><p>松香是腐蚀性低，不会腐蚀电路元件和烙铁头，其熔点为127℃，活性可持续到315℃。</p>
 <p>松香有很高的<strong>抗氧化</strong>性能，可以在焊接过程中去除氧化膜、防止焊接面再次氧化。</p>
-<h2 id="购买哪种松香"><a href="#购买哪种松香" class="headerlink" title="购买哪种松香"></a>购买哪种松香</h2><p><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://s2.loli.net/2024/05/31/wd1T4kGnsQNOat9.png" alt="Snipaste_2024-05-31_08-09-06.png"></p>
+<h2 id="购买哪种松香"><a href="#购买哪种松香" class="headerlink" title="购买哪种松香"></a>购买哪种松香</h2><p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2024/05/31/wd1T4kGnsQNOat9.png" alt="Snipaste_2024-05-31_08-09-06.png"></p>
 <h2 id="松香的使用"><a href="#松香的使用" class="headerlink" title="松香的使用"></a>松香的使用</h2><p>空心的低温焊锡丝中通常自带松香。</p>
 <p>盒装的松香使用时可以先将烙铁头上挂上锡，然后快速沾一下固态松香，再按到需要焊接的部分就可以轻松焊接。</p>
 <p>也可溶解在酒精中使用（我没试过，一般直接用焊油焊膏但是清洁麻烦）。</p>
@@ -764,6 +854,14 @@
       <time title="修改时间：2024-04-21 22:08:19" itemprop="dateModified" datetime="2024-04-21T22:08:19+08:00">2024-04-21</time>
     </span>
 
+  
+    <span id="/2024/04/20/%E6%8E%8C%E7%8E%A9mini-Alldocube-iPlay-50-mini-pro-T811M-%E5%88%B7%E5%85%A5%E5%AE%89%E5%8D%93GSI/" class="post-meta-item twikoo_visitors" data-flag-title="掌玩mini(Alldocube iPlay 50 mini pro/T811M)刷入安卓GSI和简单的体验报告" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
   
 </div>
 
@@ -858,6 +956,14 @@
     </span>
 
   
+    <span id="/2024/02/28/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%A2%AB%E9%BB%91%E4%B9%8B%E5%90%8E%E5%AF%B9ssh%E6%9C%8D%E5%8A%A1%E7%9A%84%E4%BA%A1%E7%BE%8A%E8%A1%A5%E7%89%A2/" class="post-meta-item twikoo_visitors" data-flag-title="服务器被黑之后对ssh服务的亡羊补牢" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
+  
 </div>
 
         </div>
@@ -868,9 +974,9 @@
     
     <div class="post-body" itemprop="articleBody">
           <h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>前几天突然发现一台服务器掉线了…打开后台一看一整页全部都是Abuse Report，服务器也被suspend。在面板发现服务器被冻结前处于很长一段时间的满负载状态，Ticket内容显示这个ip被举报有扫描行为。</p>
-<p><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://s2.loli.net/2024/02/28/SyiU2cPsfXGdEK3.png"></p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2024/02/28/SyiU2cPsfXGdEK3.png"></p>
 <p>通过提交工单请求解冻之后登录，过一段时间发现tor这个用户被盗用并且启动了一个叫<code>blitz64</code>的服务。</p>
-<p><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://s2.loli.net/2024/02/28/M8e71vyWri53Yoa.png"></p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2024/02/28/M8e71vyWri53Yoa.png"></p>
 <p>后面通过删除被修改的<code>crontab</code>条目并重启修复，但是<strong>因为我忘了修改密码又被冻结了</strong>。^_^</p>
 <p>修复过程因为比较匆忙没有记录，这里附上参考资料。</p>
 <p><a target="_blank" rel="noopener" href="https://www.yanxurui.cc/posts/tool/2023-01-02-my-VPS-is-under-attack/">My VPS is under attack</a></p>
@@ -949,6 +1055,14 @@
     </span>
 
   
+    <span id="/2024/02/24/%E5%B0%9D%E8%AF%95%E4%B8%BA%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%88%B7%E5%85%A5Armbian/" class="post-meta-item twikoo_visitors" data-flag-title="尝试为电视盒子刷入Armbian" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
+  
 </div>
 
         </div>
@@ -966,7 +1080,7 @@
 <li><p>一个闲置的空u盘</p>
 </li>
 <li><p>（可选)晶晨盒子短接神器 没有的话其实用镊子短接也可以</p>
-<p><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://s2.loli.net/2024/02/24/m8dgyULcaBI5ehl.jpg"></p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2024/02/24/m8dgyULcaBI5ehl.jpg"></p>
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://download.saint1337.top/tools/%E8%BF%90%E8%90%A5%E5%95%86%E7%9B%92%E5%AD%90Armbian/">晶晨烧录工具Amlogic_USB_Burning_Tool</a></p>
 </li>
@@ -977,11 +1091,11 @@
 <li><p><a target="_blank" rel="noopener" href="https://etcher.balena.io/">balena etcher</a> 或者 <a target="_blank" rel="noopener" href="https://rufus.ie/zh/">rufus</a> 用来写入Armbian镜像到u盘</p>
 </li>
 </ul>
-<h2 id="刷入底包"><a href="#刷入底包" class="headerlink" title="刷入底包"></a>刷入底包</h2><p><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://s2.loli.net/2024/02/24/4ctyfg5TbmIhWl8.png" alt="Snipaste_2024-02-24_12-19-51.png"></p>
+<h2 id="刷入底包"><a href="#刷入底包" class="headerlink" title="刷入底包"></a>刷入底包</h2><p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2024/02/24/4ctyfg5TbmIhWl8.png" alt="Snipaste_2024-02-24_12-19-51.png"></p>
 <p>打开晶晨刷机工具，设置→导入镜像。</p>
-<p><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://s2.loli.net/2024/02/24/MuJr4amDBENfAIq.png" alt="Snipaste_2024-02-24_12-22-46.png"></p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2024/02/24/MuJr4amDBENfAIq.png" alt="Snipaste_2024-02-24_12-22-46.png"></p>
 <p>点击开始后准备接入线。</p>
-<p><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://s2.loli.net/2024/02/24/VwXUPdhJ7rEM4pG.jpg" alt="1000070790.jpg"></p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2024/02/24/VwXUPdhJ7rEM4pG.jpg" alt="1000070790.jpg"></p>
 <p>关闭电源！！！ 插入刷机神器，双公线一头插入盒子靠近网口的那个usb口，另一头接入电脑usb口（2.0的可能好一点）。先在烧录工具上点开始，接入线，然后打开盒子上的电源开关等待烧录工具的提示即可。</p>
 <h2 id="刷入Armbian镜像到U盘"><a href="#刷入Armbian镜像到U盘" class="headerlink" title="刷入Armbian镜像到U盘"></a>刷入Armbian镜像到U盘</h2>
           <!--noindex-->
@@ -1051,21 +1165,64 @@
 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
 <script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
 
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
   
 
 
 
 
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
 
-
-  
-
-
-
-
+<script>
+var options = {
+  bottom: '64px',
+  right: '32px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":true,"envId":"https://twikoo.saint1337.top/","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
 
 
         <style>

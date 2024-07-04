@@ -6,18 +6,18 @@
 <meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-duzhuo-32%C3%9732.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-duzhuo-16%C3%9716.ico">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
 <link rel="stylesheet" href="/css/main.css">
 
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.saint1337.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.saint1337.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"flat"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="记录，分享一些我觉得好玩的内容。">
 <meta property="og:type" content="website">
@@ -63,6 +63,9 @@
       <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
@@ -78,15 +81,46 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
 
 
 
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </header>
         
@@ -190,6 +224,14 @@
     </span>
 
   
+    <span id="/2023/05/31/%E8%A7%82%E7%9C%8B%E5%A4%A7%E5%AD%A6%E7%94%9F%E6%93%8D%E4%BD%9C%E7%94%B5%E8%84%91/" class="post-meta-item twikoo_visitors" data-flag-title="观看大学生操作电脑" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
+  
 </div>
 
         </div>
@@ -287,6 +329,14 @@
       <time title="修改时间：2024-02-23 20:16:40" itemprop="dateModified" datetime="2024-02-23T20:16:40+08:00">2024-02-23</time>
     </span>
 
+  
+    <span id="/2023/05/31/%E4%BF%AE%E7%94%B5%E8%84%91%E5%86%9B%E8%A7%84%E5%AE%8C%E6%95%B4%E7%89%8820%E6%9D%A1/" class="post-meta-item twikoo_visitors" data-flag-title="修电脑军规 完整版 20条" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
   
 </div>
 
@@ -394,6 +444,14 @@
     </span>
 
   
+    <span id="/2023/04/20/wsl-fix-systemd-issue/" class="post-meta-item twikoo_visitors" data-flag-title="System has not been booted with systemd as init system (PID 1)." title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
+  
 </div>
 
         </div>
@@ -482,6 +540,14 @@
       <time title="修改时间：2024-02-23 20:16:40" itemprop="dateModified" datetime="2024-02-23T20:16:40+08:00">2024-02-23</time>
     </span>
 
+  
+    <span id="/2023/04/13/wsl-debian-proxy/" class="post-meta-item twikoo_visitors" data-flag-title="wsl2+宿主机v2rayN 实现命令行proxy" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
   
 </div>
 
@@ -593,6 +659,14 @@
     </span>
 
   
+    <span id="/2023/04/06/pandora-guide/" class="post-meta-item twikoo_visitors" data-flag-title="pandora+docker 私有化部署ChatGPT" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
+  
 </div>
 
         </div>
@@ -700,6 +774,14 @@
     </span>
 
   
+    <span id="/2023/04/01/Windows11-Update-Rollback/" class="post-meta-item twikoo_visitors" data-flag-title="Windows11更新后出错后卸载更新" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
+  
 </div>
 
         </div>
@@ -709,17 +791,17 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://s2.loli.net/2023/04/01/68huJF3Dfn7EUBb.png"></p>
+          <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2023/04/01/68huJF3Dfn7EUBb.png"></p>
 <ul>
 <li>设备 : Swift SF314-512</li>
 <li>系统 : Windows11 22H2 22621.525</li>
 </ul>
 <p>推送补丁 KB5023778 更新后出现进入桌面闪屏 无法加载桌面图标的问题</p>
 <h2 id="解决方法-卸载-KB5023778"><a href="#解决方法-卸载-KB5023778" class="headerlink" title="解决方法 卸载 KB5023778"></a>解决方法 卸载 KB5023778</h2><ol>
-<li>Win+Alt+Del 按住 Shift 点击重启<br><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://s2.loli.net/2023/04/01/s5wDXgEMLuTelhI.png"></li>
+<li>Win+Alt+Del 按住 Shift 点击重启<br><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2023/04/01/s5wDXgEMLuTelhI.png"></li>
 <li>疑难解答 → 高级选项 → 卸载更新</li>
 </ol>
-<p><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://s2.loli.net/2023/04/01/rSDnE8X9tI4ofiL.png"><br><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://s2.loli.net/2023/04/01/Xo3VqpAR6mGBzfF.png"><br><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://s2.loli.net/2023/04/01/FPnYEfvHyBK6Iwl.png"><br><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://s2.loli.net/2023/04/01/HIZANxR7Lkn2sFJ.png"></p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2023/04/01/rSDnE8X9tI4ofiL.png"><br><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2023/04/01/Xo3VqpAR6mGBzfF.png"><br><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2023/04/01/FPnYEfvHyBK6Iwl.png"><br><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2023/04/01/HIZANxR7Lkn2sFJ.png"></p>
 
       
     </div>
@@ -786,6 +868,14 @@
     </span>
 
   
+    <span id="/2023/02/22/ClashX+UnblockNeteaseMusic/" class="post-meta-item twikoo_visitors" data-flag-title="ClashX Pro + UnblockNeteaseMusic" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
+  
 </div>
 
         </div>
@@ -818,7 +908,7 @@
 
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">rules:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,music.163.com,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,music.126.net,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,163yun.com,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,api.iplay.163.com,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,apm.music.163.com,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,apm3.music.163.com,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,interface.music.163.com,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,interface3.music.163.com,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,mam.netease.com,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,hz.netease.com,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,39.105.63.80/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,45.254.48.1/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,47.100.127.239/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,59.111.21.14/31,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,59.111.179.214/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,59.111.181.38/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,59.111.181.60/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,59.111.160.195/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,59.111.160.197/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,59.111.181.35/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,59.111.238.29/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,101.71.154.241/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,103.126.92.132/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,103.126.92.133/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,112.13.119.17/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,112.13.122.1/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,115.236.118.33/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,115.236.121.1/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,118.24.63.156/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,193.112.159.225/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,223.252.199.66/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,223.252.199.67/32,NeteaseMusic</span></span><br></pre></td></tr></table></figure></li>
 </ul>
-<h2 id="Reload-Config-And-Enjoy"><a href="#Reload-Config-And-Enjoy" class="headerlink" title="Reload Config And Enjoy !"></a>Reload Config And Enjoy !</h2><p><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302222256214.png"></p>
+<h2 id="Reload-Config-And-Enjoy"><a href="#Reload-Config-And-Enjoy" class="headerlink" title="Reload Config And Enjoy !"></a>Reload Config And Enjoy !</h2><p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302222256214.png"></p>
 
       
     </div>
@@ -885,6 +975,14 @@
     </span>
 
   
+    <span id="/2023/02/06/VMware-tools-Issue/" class="post-meta-item twikoo_visitors" data-flag-title="VMware-tools 无法安装问题解决" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
+  
 </div>
 
         </div>
@@ -899,14 +997,14 @@
 <li>安装镜像版本:Windows7 x64</li>
 <li>自动安装的VMware Tools 版本为11.3.5<br>出现提示Windows无法验证此驱动程序软件发布者<br>导致出错无法安装</li>
 </ul>
-<h3 id="图示如下"><a href="#图示如下" class="headerlink" title="图示如下"></a>图示如下</h3><p><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302060941347.png"><br><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302060941335.png"><br><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302060941323.png"></p>
+<h3 id="图示如下"><a href="#图示如下" class="headerlink" title="图示如下"></a>图示如下</h3><p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302060941347.png"><br><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302060941335.png"><br><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302060941323.png"></p>
 <h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><ul>
 <li>安装 VMware Tools 11.0.0</li>
 <li>挂载iso镜像到虚拟机</li>
 <li>运行setup64.exe</li>
 <li>安装成功后重启</li>
 </ul>
-<h3 id="图示如下-1"><a href="#图示如下-1" class="headerlink" title="图示如下"></a>图示如下</h3><p><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302060941309.png"><br><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302060941297.png"><br><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302060941281.png"><br><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302060941271.png"><br><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302060941258.png"><br><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302060941246.png"></p>
+<h3 id="图示如下-1"><a href="#图示如下-1" class="headerlink" title="图示如下"></a>图示如下</h3><p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302060941309.png"><br><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302060941297.png"><br><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302060941281.png"><br><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302060941271.png"><br><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302060941258.png"><br><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302060941246.png"></p>
 <h2 id="相关下载链接与分流"><a href="#相关下载链接与分流" class="headerlink" title="相关下载链接与分流"></a>相关下载链接与分流</h2><p><a target="_blank" rel="noopener" href="http://softwareupdate.vmware.com/cds/vmw-desktop/ws/15.5.0/14665864/windows/packages/tools-windows.tar">VM-tools</a><br><a target="_blank" rel="noopener" href="https://dlink.host/sharepoint/aHR0cHM6Ly9zYWludDEzMzctbXkuc2hhcmVwb2ludC5jb20vOnU6L2cvcGVyc29uYWwvZHV6aHVvX3NhaW50MTMzN19vbm1pY3Jvc29mdF9jb20vRWFsZ0UyeWMtZUpEdTdaZW1ZWlllX1VCakF4cFNzd2d1NlNqNDU1dzZqdVFLZz9lPXk3MGhETQ.iso">VM-tools OneDrive分流</a></p>
           <!--noindex-->
             <div class="post-button">
@@ -981,6 +1079,14 @@
     </span>
 
   
+    <span id="/2022/11/17/%E7%90%86%E5%A1%98%E9%87%91%E6%9B%B2I-Got-Smoke1376%E5%B1%8A%E6%A0%BC%E8%8E%B1%E7%BE%8E%E8%AF%B4%E5%94%B1%E9%92%BB%E7%9F%B3%E5%8D%95%E6%9B%B2/" class="post-meta-item twikoo_visitors" data-flag-title="理塘金曲I Got Smoke1376届格莱美说唱钻石单曲" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
+  
 </div>
 
         </div>
@@ -990,7 +1096,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <div id="mmedia-pSpqrvxoijIkFYAg" style="width:100%;height:650px;max-width:1200px;center"></div><script> var pSpqrvxoijIkFYAg_options = JSON.parse('{\"style\":\"width:100%;height:650px;max-width:1200px;center\",\"url\":\"https://dlink.host/sharepoint/aHR0cHM6Ly9zYWludDEzMzctbXkuc2hhcmVwb2ludC5jb20vOnY6L2cvcGVyc29uYWwvZHV6aHVvX3NhaW50MTMzN19vbm1pY3Jvc29mdF9jb20vRWEwTU56ejhFOEpPbFFoT0RZSXZTX2tCTnZQYTg2NmxVS1JyVTZUa3pnUldNdz9lPWg3cVV0Rw.mp4\",\"autoSize\":true,\"autoMini\":false,\"fullscreen\":true,\"fullscreenWeb\":true}'); pSpqrvxoijIkFYAg_options.container = "#mmedia-pSpqrvxoijIkFYAg"; HEXO_MMEDIA_DATA.js.push("https://cdn.jsdelivr.net/npm/artplayer/dist/artplayer.js");HEXO_MMEDIA_DATA.artPlayerData.push(pSpqrvxoijIkFYAg_options); </script>
+          <div id="mmedia-QKACKfQbYWQsgQXR" style="width:100%;height:650px;max-width:1200px;center"></div><script> var QKACKfQbYWQsgQXR_options = JSON.parse('{\"style\":\"width:100%;height:650px;max-width:1200px;center\",\"url\":\"https://dlink.host/sharepoint/aHR0cHM6Ly9zYWludDEzMzctbXkuc2hhcmVwb2ludC5jb20vOnY6L2cvcGVyc29uYWwvZHV6aHVvX3NhaW50MTMzN19vbm1pY3Jvc29mdF9jb20vRWEwTU56ejhFOEpPbFFoT0RZSXZTX2tCTnZQYTg2NmxVS1JyVTZUa3pnUldNdz9lPWg3cVV0Rw.mp4\",\"autoSize\":true,\"autoMini\":false,\"fullscreen\":true,\"fullscreenWeb\":true}'); QKACKfQbYWQsgQXR_options.container = "#mmedia-QKACKfQbYWQsgQXR"; HEXO_MMEDIA_DATA.js.push("https://cdn.jsdelivr.net/npm/artplayer/dist/artplayer.js");HEXO_MMEDIA_DATA.artPlayerData.push(QKACKfQbYWQsgQXR_options); </script>
       
     </div>
 
@@ -1055,6 +1161,14 @@
       <time title="修改时间：2024-02-23 20:16:40" itemprop="dateModified" datetime="2024-02-23T20:16:40+08:00">2024-02-23</time>
     </span>
 
+  
+    <span id="/2022/10/22/TCP%E7%9A%84%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E4%B8%8E%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/" class="post-meta-item twikoo_visitors" data-flag-title="TCP 的三次握手和四次挥手" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
   
 </div>
 
@@ -1147,21 +1261,64 @@
 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
 <script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
 
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
   
 
 
 
 
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
 
-
-  
-
-
-
-
+<script>
+var options = {
+  bottom: '64px',
+  right: '32px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":true,"envId":"https://twikoo.saint1337.top/","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
 
 
         <style>

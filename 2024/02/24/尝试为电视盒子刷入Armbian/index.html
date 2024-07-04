@@ -6,18 +6,18 @@
 <meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-duzhuo-32%C3%9732.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-duzhuo-16%C3%9716.ico">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
 <link rel="stylesheet" href="/css/main.css">
 
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.saint1337.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.saint1337.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"flat"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="准备 运营商的电视盒子一只 以晶晨芯片的CM311-1为例 查看目前可用的设备列表  双公头usb线 没有现成的可以用两根不要的线剥开对接四芯自己制作  一个闲置的空u盘  （可选)晶晨盒子短接神器 没有的话其实用镊子短接也可以   晶晨烧录工具Amlogic_USB_Burning_Tool  选择合适的安卓底包用来开启adb   部分底包分流  adb工具 xda的安装教程参考 或者使用开心电">
 <meta property="og:type" content="article">
@@ -74,6 +74,9 @@
       <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
@@ -89,15 +92,46 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
 
 
 
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </header>
         
@@ -203,6 +237,14 @@
     </span>
 
   
+    <span id="/2024/02/24/%E5%B0%9D%E8%AF%95%E4%B8%BA%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%88%B7%E5%85%A5Armbian/" class="post-meta-item twikoo_visitors" data-flag-title="尝试为电视盒子刷入Armbian" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
+  
 </div>
 
         </div>
@@ -219,7 +261,7 @@
 <li><p>一个闲置的空u盘</p>
 </li>
 <li><p>（可选)晶晨盒子短接神器 没有的话其实用镊子短接也可以</p>
-<p><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://s2.loli.net/2024/02/24/m8dgyULcaBI5ehl.jpg"></p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2024/02/24/m8dgyULcaBI5ehl.jpg"></p>
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://download.saint1337.top/tools/%E8%BF%90%E8%90%A5%E5%95%86%E7%9B%92%E5%AD%90Armbian/">晶晨烧录工具Amlogic_USB_Burning_Tool</a></p>
 </li>
@@ -230,24 +272,24 @@
 <li><p><a target="_blank" rel="noopener" href="https://etcher.balena.io/">balena etcher</a> 或者 <a target="_blank" rel="noopener" href="https://rufus.ie/zh/">rufus</a> 用来写入Armbian镜像到u盘</p>
 </li>
 </ul>
-<h2 id="刷入底包"><a href="#刷入底包" class="headerlink" title="刷入底包"></a>刷入底包</h2><p><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://s2.loli.net/2024/02/24/4ctyfg5TbmIhWl8.png" alt="Snipaste_2024-02-24_12-19-51.png"></p>
+<h2 id="刷入底包"><a href="#刷入底包" class="headerlink" title="刷入底包"></a>刷入底包</h2><p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2024/02/24/4ctyfg5TbmIhWl8.png" alt="Snipaste_2024-02-24_12-19-51.png"></p>
 <p>打开晶晨刷机工具，设置→导入镜像。</p>
-<p><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://s2.loli.net/2024/02/24/MuJr4amDBENfAIq.png" alt="Snipaste_2024-02-24_12-22-46.png"></p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2024/02/24/MuJr4amDBENfAIq.png" alt="Snipaste_2024-02-24_12-22-46.png"></p>
 <p>点击开始后准备接入线。</p>
-<p><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://s2.loli.net/2024/02/24/VwXUPdhJ7rEM4pG.jpg" alt="1000070790.jpg"></p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2024/02/24/VwXUPdhJ7rEM4pG.jpg" alt="1000070790.jpg"></p>
 <p>关闭电源！！！ 插入刷机神器，双公线一头插入盒子靠近网口的那个usb口，另一头接入电脑usb口（2.0的可能好一点）。先在烧录工具上点开始，接入线，然后打开盒子上的电源开关等待烧录工具的提示即可。</p>
 <h2 id="刷入Armbian镜像到U盘"><a href="#刷入Armbian镜像到U盘" class="headerlink" title="刷入Armbian镜像到U盘"></a>刷入Armbian镜像到U盘</h2><p>到<a target="_blank" rel="noopener" href="https://github.com/ophub/amlogic-s9xxx-armbian/releases">release</a>中选择适合自己硬件的固件 使用Balena Etcher刷入</p>
 <p>刷写之后的U盘，在设置盒子从U盘启动前先不要插入盒子。</p>
-<p><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://s2.loli.net/2024/02/24/rSdYsG67kZhORzo.png" alt="Snipaste_2024-02-24_18-03-10.png"></p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2024/02/24/rSdYsG67kZhORzo.png" alt="Snipaste_2024-02-24_18-03-10.png"></p>
 <h2 id="使用ABD设置电视盒子从usb启动"><a href="#使用ABD设置电视盒子从usb启动" class="headerlink" title="使用ABD设置电视盒子从usb启动"></a>使用ABD设置电视盒子从usb启动</h2><h3 id="开启ADB"><a href="#开启ADB" class="headerlink" title="开启ADB"></a>开启ADB</h3><p>大部分安卓刷机包都已经设置了ADB调试。如果没有的话需要连点版本号进入开发者选项自行开启。</p>
 <h3 id="使用命令行的ADB命令"><a href="#使用命令行的ADB命令" class="headerlink" title="使用命令行的ADB命令"></a>使用命令行的ADB命令</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adb connect 192.168.2.162</span><br><span class="line">adb shell reboot update #输入命令之后再插入U盘！！！</span><br></pre></td></tr></table></figure>
 
 <h3 id="使用开心电视助手"><a href="#使用开心电视助手" class="headerlink" title="使用开心电视助手"></a>使用开心电视助手</h3><p>在首页输入电视盒子的ip和默认端口5555→调试→从U盘&#x2F;SD卡启动 ！！！点击之后再插入U盘！！！</p>
 <p>不要在安卓系统下插入U盘！！！可能会导致U盘中文件权限损坏，修复需要重新刷入Armbian镜像。</p>
-<p><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://s2.loli.net/2024/02/24/oTN5jRtLBuQKPCM.png" alt="Snipaste_2024-02-24_17-48-47.png"></p>
-<p><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://s2.loli.net/2024/02/24/9iB5pnROVIZHWza.png" alt="Snipaste_2024-02-24_17-49-02.png"></p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2024/02/24/oTN5jRtLBuQKPCM.png" alt="Snipaste_2024-02-24_17-48-47.png"></p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2024/02/24/9iB5pnROVIZHWza.png" alt="Snipaste_2024-02-24_17-49-02.png"></p>
 <h2 id="使用SSH连接到重启之后的盒子并写入EMMC"><a href="#使用SSH连接到重启之后的盒子并写入EMMC" class="headerlink" title="使用SSH连接到重启之后的盒子并写入EMMC"></a>使用SSH连接到重启之后的盒子并写入EMMC</h2><p>盒子成功启动后会自动从DHCP服务器获取IP地址，进入路由器后台查看</p>
-<p><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://s2.loli.net/2024/02/24/IOmpHJrMWlknZ9N.png" alt="Snipaste_2024-02-24_18-09-44.png"></p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2024/02/24/IOmpHJrMWlknZ9N.png" alt="Snipaste_2024-02-24_18-09-44.png"></p>
 <p>使用SSH连接工具连接后默认的用户&#x2F;密码是 root&#x2F;1234 跟随提示设置普通用户和更改密码</p>
 <h3 id="写入EMMC"><a href="#写入EMMC" class="headerlink" title="写入EMMC"></a>写入EMMC</h3><p>这里直接照搬项目README</p>
 <p>登录 Armbian 系统 (默认用户: root, 默认密码: 1234) → 输入命令：</p>
@@ -321,6 +363,7 @@
 
 
 
+    <div class="comments"><div id="twikoo-comments"></div></div>
 </div>
   </main>
 
@@ -359,21 +402,64 @@
 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
 <script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
 
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
   
 
 
 
 
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
 
-
-  
-
-
-
-
+<script>
+var options = {
+  bottom: '64px',
+  right: '32px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":true,"envId":"https://twikoo.saint1337.top/","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
 
 <!-- hexo injector body_end start --><script src="/assets/mmedia/mmedia-loader.js"></script><!-- hexo injector body_end end -->
         <style>

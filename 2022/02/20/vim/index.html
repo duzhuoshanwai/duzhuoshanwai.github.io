@@ -6,18 +6,18 @@
 <meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-duzhuo-32%C3%9732.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-duzhuo-16%C3%9716.ico">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
 <link rel="stylesheet" href="/css/main.css">
 
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.saint1337.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.saint1337.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"flat"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="Vim 应用1. 概念1.1. 什么是 vimVim 是从 vi 发展出来的一个文本编辑器。代码补完、编译及错误跳转等方便编程的功能特别丰富，在程序员中被广泛使用。和 Emacs 并列成为类 Unix 系统用户最喜欢的编辑器。 1.2. Vim 的模式基本上 vi&#x2F;vim 共分为三种模式，分别是命令模式（Command mode），插入模式（Insert mode）和底线命令模式（Las">
 <meta property="og:type" content="article">
@@ -80,6 +80,9 @@
       <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
@@ -95,15 +98,46 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
 
 
 
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </header>
         
@@ -208,6 +242,14 @@
       <time title="修改时间：2024-02-23 20:16:40" itemprop="dateModified" datetime="2024-02-23T20:16:40+08:00">2024-02-23</time>
     </span>
 
+  
+    <span id="/2022/02/20/vim/" class="post-meta-item twikoo_visitors" data-flag-title="Vim 应用" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
   
 </div>
 
@@ -348,7 +390,7 @@
 </ol>
 <p>&gt; 如果你认为单词是由默认方式，那么就用小写的 e 和 w。默认上来说，一个单词由字母，数字和下划线组成（注：程序变量）</p>
 <p>&gt; 如果你认为单词是由 blank 字符分隔符，那么你需要使用大写的 E 和 W。（注：程序语句）</p>
-<p><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="http://upload-images.jianshu.io/upload_images/3101171-46f752c581d79057.jpg" alt="img"></p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="http://upload-images.jianshu.io/upload_images/3101171-46f752c581d79057.jpg" alt="img"></p>
 </blockquote>
 </li>
 </ol>
@@ -389,7 +431,7 @@
 <li><code>fa</code> → 到下一个为 a 的字符处，你也可以 fs 到下一个为 s 的字符。</li>
 <li><code>t,</code> → 到逗号前的第一个字符。逗号可以变成其它字符。</li>
 <li><code>3fa</code> → 在当前行查找第三个出现的 a。</li>
-<li><code>F</code> 和 <code>T</code> → 和 <code>f</code> 和 <code>t</code> 一样，只不过是相反方向。<br><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="http://upload-images.jianshu.io/upload_images/3101171-00835b8316330c58.jpg" alt="img"></li>
+<li><code>F</code> 和 <code>T</code> → 和 <code>f</code> 和 <code>t</code> 一样，只不过是相反方向。<br><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="http://upload-images.jianshu.io/upload_images/3101171-00835b8316330c58.jpg" alt="img"></li>
 </ul>
 </blockquote>
 <p>还有一个很有用的命令是 <code>dt&quot;</code> → 删除所有的内容，直到遇到双引号—— <code>&quot;。</code></p>
@@ -410,7 +452,7 @@
 <li><code>v2a)</code> → 会选择 <code>(map (+) (&quot;foo&quot;))</code></li>
 </ul>
 </blockquote>
-<p><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="http://upload-images.jianshu.io/upload_images/3101171-0b109d66a6111c83.png" alt="img"></p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="http://upload-images.jianshu.io/upload_images/3101171-0b109d66a6111c83.png" alt="img"></p>
 <h4 id="2-4-3-块操作"><a href="#2-4-3-块操作" class="headerlink" title="2.4.3. 块操作: &lt;C-v&gt;"></a>2.4.3. 块操作: <code>&lt;C-v&gt;</code></h4><p>块操作，典型的操作： <code>0 &lt;C-v&gt; &lt;C-d&gt; I-- [ESC]</code></p>
 <ul>
 <li><code>^</code> → 到行头</li>
@@ -418,10 +460,10 @@
 <li><code>&lt;C-d&gt;</code> → 向下移动 (你也可以使用 hjkl 来移动光标，或是使用%，或是别的)</li>
 <li><code>I-- [ESC]</code> → I 是插入，插入“<code>--</code>”，按 ESC 键来为每一行生效。</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="http://upload-images.jianshu.io/upload_images/3101171-8b093a0f65707949.gif?imageMogr2/auto-orient/strip" alt="img"></p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="http://upload-images.jianshu.io/upload_images/3101171-8b093a0f65707949.gif?imageMogr2/auto-orient/strip" alt="img"></p>
 <p>在 Windows 下的 vim，你需要使用 <code>&lt;C-q&gt;</code> 而不是 <code>&lt;C-v&gt;</code> ，<code>&lt;C-v&gt;</code> 是拷贝剪贴板。</p>
 <h4 id="2-4-4-自动提示：-和"><a href="#2-4-4-自动提示：-和" class="headerlink" title="2.4.4. 自动提示： &lt;C-n&gt; 和 &lt;C-p&gt;"></a>2.4.4. 自动提示： <code>&lt;C-n&gt;</code> 和 <code>&lt;C-p&gt;</code></h4><p>在 Insert 模式下，你可以输入一个词的开头，然后按 <code>&lt;C-p&gt;或是&lt;C-n&gt;，自动补齐功能就出现了……</code></p>
-<p><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="http://upload-images.jianshu.io/upload_images/3101171-e2ae877e67880ff7.gif?imageMogr2/auto-orient/strip" alt="img"></p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="http://upload-images.jianshu.io/upload_images/3101171-e2ae877e67880ff7.gif?imageMogr2/auto-orient/strip" alt="img"></p>
 <h4 id="2-4-5-宏录制：-qa-操作序列-q-a"><a href="#2-4-5-宏录制：-qa-操作序列-q-a" class="headerlink" title="2.4.5. 宏录制： qa 操作序列 q, @a, @@"></a>2.4.5. 宏录制： <code>qa</code> 操作序列 <code>q</code>, <code>@a</code>, <code>@@</code></h4><ul>
 <li><code>qa</code> 把你的操作记录在寄存器 <code>a。</code></li>
 <li>于是 <code>@a</code> 会 replay 被录制的宏。</li>
@@ -449,14 +491,14 @@
 </li>
 </ul>
 </blockquote>
-<p><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="http://upload-images.jianshu.io/upload_images/3101171-f1889f8bca723964.gif?imageMogr2/auto-orient/strip" alt="img"></p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="http://upload-images.jianshu.io/upload_images/3101171-f1889f8bca723964.gif?imageMogr2/auto-orient/strip" alt="img"></p>
 <h4 id="2-4-6-可视化选择：-v-V"><a href="#2-4-6-可视化选择：-v-V" class="headerlink" title="2.4.6. 可视化选择： v,V,&lt;C-v&gt;"></a>2.4.6. 可视化选择： <code>v</code>,<code>V</code>,<code>&lt;C-v&gt;</code></h4><p>前面，我们看到了 <code>&lt;C-v&gt;</code>的示例 （在 Windows 下应该是<C-q>），我们可以使用 <code>v</code> 和 <code>V</code>。一但被选好了，你可以做下面的事：</p>
 <ul>
 <li><code>J</code> → 把所有的行连接起来（变成一行）</li>
 <li><code>&lt;</code> 或 <code>&gt;</code> → 左右缩进</li>
 <li><code>=</code> → 自动给缩进 （注：这个功能相当强大，我太喜欢了）</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="http://upload-images.jianshu.io/upload_images/3101171-fe1e19983fca213f.gif?imageMogr2/auto-orient/strip" alt="img"></p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="http://upload-images.jianshu.io/upload_images/3101171-fe1e19983fca213f.gif?imageMogr2/auto-orient/strip" alt="img"></p>
 <p>在所有被选择的行后加上点东西：</p>
 <ul>
 <li><code>&lt;C-v&gt;</code></li>
@@ -464,7 +506,7 @@
 <li><code>$</code> 到行最后</li>
 <li><code>A</code>, 输入字符串，按 <code>ESC。</code></li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="http://upload-images.jianshu.io/upload_images/3101171-b192601247334c4e.gif?imageMogr2/auto-orient/strip" alt="img"></p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="http://upload-images.jianshu.io/upload_images/3101171-b192601247334c4e.gif?imageMogr2/auto-orient/strip" alt="img"></p>
 <h4 id="2-4-7-分屏-split-和-vsplit"><a href="#2-4-7-分屏-split-和-vsplit" class="headerlink" title="2.4.7. 分屏: :split 和 vsplit."></a>2.4.7. 分屏: <code>:split</code> 和 <code>vsplit</code>.</h4><p>下面是主要的命令，你可以使用 VIM 的帮助 <code>:help split</code>. 你可以参考本站以前的一篇文章<a target="_blank" rel="noopener" href="https://coolshell.cn/articles/1679.html">VIM 分屏</a>。</p>
 <blockquote>
 <ul>
@@ -474,22 +516,22 @@
 <li><code>&lt;C-w&gt;+</code> (或 <code>&lt;C-w&gt;-</code>) : 增加尺寸</li>
 </ul>
 </blockquote>
-<p><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="http://upload-images.jianshu.io/upload_images/3101171-f329d01e299cb366.gif?imageMogr2/auto-orient/strip" alt="img"></p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="http://upload-images.jianshu.io/upload_images/3101171-f329d01e299cb366.gif?imageMogr2/auto-orient/strip" alt="img"></p>
 <h2 id="3-Vim-Cheat-Sheet"><a href="#3-Vim-Cheat-Sheet" class="headerlink" title="3. Vim Cheat Sheet"></a>3. Vim Cheat Sheet</h2><blockquote>
 <p>本节内容的原文地址：<a target="_blank" rel="noopener" href="http://cenalulu.github.io/linux/all-vim-cheatsheat/">http://cenalulu.github.io/linux/all-vim-cheatsheat/</a></p>
 </blockquote>
 <h3 id="3-1-经典版"><a href="#3-1-经典版" class="headerlink" title="3.1. 经典版"></a>3.1. 经典版</h3><p>下面这个键位图应该是大家最常看见的经典版了。其实这个版本是一系列的入门教程键位图的组合结果。要查看不同编辑模式下的键位图，可以看<a target="_blank" rel="noopener" href="http://www.viemu.com/a_vi_vim_graphical_cheat_sheet_tutorial.html">这里打包下载</a></p>
 <p>此外，<a target="_blank" rel="noopener" href="http://blog.ngedit.com/vi-vim-cheat-sheet-sch.gif">这里</a>还有简体中文版。</p>
-<p><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://raw.githubusercontent.com/dunwu/images/dev/cs/os/linux/vim/vim-cheat-sheet.png" alt="img"></p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://raw.githubusercontent.com/dunwu/images/dev/cs/os/linux/vim/vim-cheat-sheet.png" alt="img"></p>
 <h3 id="3-2-入门版"><a href="#3-2-入门版" class="headerlink" title="3.2. 入门版"></a>3.2. 入门版</h3><p>基本操作的入门版。<a target="_blank" rel="noopener" href="https://github.com/ahrencode/Miscellaneous">原版出处</a>还有 keynote 版本可供 DIY 以及其他相关有用的 cheatsheet。</p>
-<p><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://raw.githubusercontent.com/dunwu/images/dev/cs/os/linux/vim/basic-vim-cheat-sheet.png" alt="img"></p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://raw.githubusercontent.com/dunwu/images/dev/cs/os/linux/vim/basic-vim-cheat-sheet.png" alt="img"></p>
 <h3 id="3-3-进阶版"><a href="#3-3-进阶版" class="headerlink" title="3.3. 进阶版"></a>3.3. 进阶版</h3><p>下图是 300DPI 的超清大图，另外<a target="_blank" rel="noopener" href="http://michael.peopleofhonoronly.com/vim/">查看原文</a>还有更多版本：黑白，低分辨率，色盲等</p>
-<p><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://raw.githubusercontent.com/dunwu/images/dev/cs/os/linux/vim/vim-cheat-sheet-for-programmers.png" alt="img"></p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://raw.githubusercontent.com/dunwu/images/dev/cs/os/linux/vim/vim-cheat-sheet-for-programmers.png" alt="img"></p>
 <h3 id="3-4-增强版"><a href="#3-4-增强版" class="headerlink" title="3.4. 增强版"></a>3.4. 增强版</h3><p>下图是一个更新时间较新的现代版，含有的信息也更丰富。<a target="_blank" rel="noopener" href="http://vimcheatsheet.com/">原文链接</a></p>
-<p><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://raw.githubusercontent.com/dunwu/images/dev/cs/os/linux/vim/vim-cheat-sheet-02.png" alt="img"></p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://raw.githubusercontent.com/dunwu/images/dev/cs/os/linux/vim/vim-cheat-sheet-02.png" alt="img"></p>
 <h3 id="3-5-文字版"><a href="#3-5-文字版" class="headerlink" title="3.5. 文字版"></a>3.5. 文字版</h3><p><a target="_blank" rel="noopener" href="http://tnerual.eriogerg.free.fr/vimqrc.pdf">原文链接</a></p>
-<p><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://raw.githubusercontent.com/dunwu/images/dev/cs/os/linux/vim/vim-cheat-sheet-text-01.png" alt="img"></p>
-<p><img src="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302070659106.gif" data-original="https://raw.githubusercontent.com/dunwu/images/dev/cs/os/linux/vim/vim-cheat-sheet-text-02.png" alt="img"></p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://raw.githubusercontent.com/dunwu/images/dev/cs/os/linux/vim/vim-cheat-sheet-text-01.png" alt="img"></p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://raw.githubusercontent.com/dunwu/images/dev/cs/os/linux/vim/vim-cheat-sheet-text-02.png" alt="img"></p>
 <h2 id="4-资料"><a href="#4-资料" class="headerlink" title="4. 资料"></a>4. 资料</h2><ul>
 <li><a target="_blank" rel="noopener" href="https://coolshell.cn/articles/5426.html">简明 VIM 练级攻略</a> ，Vim 渐进学习内容来源于这篇文章，作为 Vim 新手，我觉得入门效果很好。</li>
 <li><a target="_blank" rel="noopener" href="https://vim.sourceforge.io/docs.php">vim 官方文档</a></li>
@@ -532,6 +574,7 @@
 
 
 
+    <div class="comments"><div id="twikoo-comments"></div></div>
 </div>
   </main>
 
@@ -570,21 +613,64 @@
 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
 <script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
 
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
   
 
 
 
 
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
 
-
-  
-
-
-
-
+<script>
+var options = {
+  bottom: '64px',
+  right: '32px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":true,"envId":"https://twikoo.saint1337.top/","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
 
 <!-- hexo injector body_end start --><script src="/assets/mmedia/mmedia-loader.js"></script><!-- hexo injector body_end end -->
         <style>
