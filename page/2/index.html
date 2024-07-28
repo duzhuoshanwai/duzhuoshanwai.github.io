@@ -152,7 +152,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">61</span>
+          <span class="site-state-item-count">62</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -175,6 +175,122 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2024/02/24/%E5%B0%9D%E8%AF%95%E4%B8%BA%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%88%B7%E5%85%A5Armbian/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="duzhuo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="duzhuo's-blog">
+      <meta itemprop="description" content="记录，分享一些我觉得好玩的内容。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | duzhuo's-blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/02/24/%E5%B0%9D%E8%AF%95%E4%B8%BA%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%88%B7%E5%85%A5Armbian/" class="post-title-link" itemprop="url">尝试为电视盒子刷入Armbian</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-02-24 09:52:06" itemprop="dateCreated datePublished" datetime="2024-02-24T09:52:06+08:00">2024-02-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-02-26 11:13:57" itemprop="dateModified" datetime="2024-02-26T11:13:57+08:00">2024-02-26</time>
+    </span>
+
+  
+    <span id="/2024/02/24/%E5%B0%9D%E8%AF%95%E4%B8%BA%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%88%B7%E5%85%A5Armbian/" class="post-meta-item twikoo_visitors" data-flag-title="尝试为电视盒子刷入Armbian" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><ul>
+<li><p>运营商的电视盒子一只 以晶晨芯片的CM311-1为例 <a target="_blank" rel="noopener" href="https://github.com/ophub/amlogic-s9xxx-armbian/blob/main/README.cn.md">查看目前可用的设备列表</a></p>
+</li>
+<li><p>双公头usb线 没有现成的可以用两根不要的线剥开对接四芯自己制作</p>
+</li>
+<li><p>一个闲置的空u盘</p>
+</li>
+<li><p>（可选)晶晨盒子短接神器 没有的话其实用镊子短接也可以</p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2024/02/24/m8dgyULcaBI5ehl.jpg"></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://download.saint1337.top/tools/%E8%BF%90%E8%90%A5%E5%95%86%E7%9B%92%E5%AD%90Armbian/">晶晨烧录工具Amlogic_USB_Burning_Tool</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/ophub/kernel/releases/tag/tools">选择合适的安卓底包用来开启adb</a>   <a target="_blank" rel="noopener" href="https://download.saint1337.top/tools/%E8%BF%90%E8%90%A5%E5%95%86%E7%9B%92%E5%AD%90Armbian/%E5%AE%89%E5%8D%93%E5%BA%95%E5%8C%85/">部分底包分流</a></p>
+</li>
+<li><p>adb工具 <a target="_blank" rel="noopener" href="https://www.xda-developers.com/install-adb-windows-macos-linux/">xda的安装教程参考</a> 或者使用开心电视助手替代 <a href>链接</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://etcher.balena.io/">balena etcher</a> 或者 <a target="_blank" rel="noopener" href="https://rufus.ie/zh/">rufus</a> 用来写入Armbian镜像到u盘</p>
+</li>
+</ul>
+<h2 id="刷入底包"><a href="#刷入底包" class="headerlink" title="刷入底包"></a>刷入底包</h2><p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2024/02/24/4ctyfg5TbmIhWl8.png" alt="Snipaste_2024-02-24_12-19-51.png"></p>
+<p>打开晶晨刷机工具，设置→导入镜像。</p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2024/02/24/MuJr4amDBENfAIq.png" alt="Snipaste_2024-02-24_12-22-46.png"></p>
+<p>点击开始后准备接入线。</p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2024/02/24/VwXUPdhJ7rEM4pG.jpg" alt="1000070790.jpg"></p>
+<p>关闭电源！！！ 插入刷机神器，双公线一头插入盒子靠近网口的那个usb口，另一头接入电脑usb口（2.0的可能好一点）。先在烧录工具上点开始，接入线，然后打开盒子上的电源开关等待烧录工具的提示即可。</p>
+<h2 id="刷入Armbian镜像到U盘"><a href="#刷入Armbian镜像到U盘" class="headerlink" title="刷入Armbian镜像到U盘"></a>刷入Armbian镜像到U盘</h2>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/02/24/%E5%B0%9D%E8%AF%95%E4%B8%BA%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%88%B7%E5%85%A5Armbian/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -990,96 +1106,6 @@
 <li>指纹不工作</li>
 <li>无法查看风扇转速 ( Windows下一样 )</li>
 </ol>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2023/06/01/mourn-rarbg/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="duzhuo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="duzhuo's-blog">
-      <meta itemprop="description" content="记录，分享一些我觉得好玩的内容。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | duzhuo's-blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/06/01/mourn-rarbg/" class="post-title-link" itemprop="url">Mourn RARBG</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-06-01 10:55:06" itemprop="dateCreated datePublished" datetime="2023-06-01T10:55:06+08:00">2023-06-01</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-23 20:16:40" itemprop="dateModified" datetime="2024-02-23T20:16:40+08:00">2024-02-23</time>
-    </span>
-
-  
-    <span id="/2023/06/01/mourn-rarbg/" class="post-meta-item twikoo_visitors" data-flag-title="Mourn RARBG" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span id="twikoo_visitors"></span>
-    </span>
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <blockquote>
-<p>Hello guys,<br>We would like to inform you that we have decided to shut down our site.<br>The past 2 years have been very difficult for us - some of the people in our team died due to covid complications,<br>others still suffer the side effects of it - not being able to work at all.<br>Some are also fighting the war in Europe - ON BOTH SIDES.<br>Also, the power price increase in data centers in Europe hit us pretty hard.<br>Inflation makes our daily expenses impossible to bare.<br>Therefore we can no longer run this site without massive expenses that we can no longer cover out of pocket.<br>After an unanimous vote we’ve decided that we can no longer do it.<br>We are sorry :(<br>Bye</p>
-</blockquote>
-<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202306011052237.jpg"></p>
-<p>妈的 我用 AdBlock 把 RARBG 的广告屏蔽了 我真是个畜生 😭</p>
-<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202306011057458.png"></p>
-<p>Peace. 🥀</p>
 
       
     </div>
