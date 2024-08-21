@@ -152,7 +152,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">62</span>
+          <span class="site-state-item-count">63</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -175,6 +175,112 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2022/02/20/linux-cli-file-compress/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="duzhuo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="duzhuo's-blog">
+      <meta itemprop="description" content="记录，分享一些我觉得好玩的内容。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | duzhuo's-blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/02/20/linux-cli-file-compress/" class="post-title-link" itemprop="url">Linux 文件压缩和解压</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-02-20 15:09:06" itemprop="dateCreated datePublished" datetime="2022-02-20T15:09:06+08:00">2022-02-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-02-23 20:16:40" itemprop="dateModified" datetime="2024-02-23T20:16:40+08:00">2024-02-23</time>
+    </span>
+
+  
+    <span id="/2022/02/20/linux-cli-file-compress/" class="post-meta-item twikoo_visitors" data-flag-title="Linux 文件压缩和解压" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Linux-文件压缩和解压"><a href="#Linux-文件压缩和解压" class="headerlink" title="Linux 文件压缩和解压"></a>Linux 文件压缩和解压</h1><blockquote>
+<p>关键词：<code>tar</code>, <code>gzip</code>, <code>zip</code>, <code>unzip</code></p>
+</blockquote>
+<h2 id="1-Linux-文件压缩和解压要点"><a href="#1-Linux-文件压缩和解压要点" class="headerlink" title="1. Linux 文件压缩和解压要点"></a>1. Linux 文件压缩和解压要点</h2><ul>
+<li>压缩和解压 tar 文件 - 使用 <a href="#tar">tar</a></li>
+<li>压缩和解压 gz 文件 - 使用 <a href="#gzip">gzip</a></li>
+<li>压缩和解压 zip 文件 - 分别使用 <a href="#zip">zip</a>、<a href="#unzip">unzip</a></li>
+</ul>
+<h2 id="2-命令常见用法"><a href="#2-命令常见用法" class="headerlink" title="2. 命令常见用法"></a>2. 命令常见用法</h2><h3 id="2-1-tar"><a href="#2-1-tar" class="headerlink" title="2.1. tar"></a>2.1. tar</h3><blockquote>
+<p>tar 命令可以为 linux 的文件和目录创建档案。利用 tar，可以为某一特定文件创建档案（备份文件），也可以在档案中改变文件，或者向档案中加入新的文件。tar 最初被用来在磁带上创建档案，现在，用户可以在任何设备上创建档案。利用 tar 命令，可以把一大堆的文件和目录全部打包成一个文件，这对于备份文件或将几个文件组合成为一个文件以便于网络传输是非常有用的。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/tar">http://man.linuxde.net/tar</a></p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">tar -cvf log.tar log2012.log            <span class="comment"># 仅打包，不压缩</span></span><br><span class="line">tar -zcvf log.tar.gz log2012.log        <span class="comment"># 打包后，以 gzip 压缩</span></span><br><span class="line">tar -jcvf log.tar.bz2 log2012.log       <span class="comment"># 打包后，以 bzip2 压缩</span></span><br><span class="line"></span><br><span class="line">tar -ztvf log.tar.gz                    <span class="comment"># 查阅上述 tar 包内有哪些文件</span></span><br><span class="line">tar -zxvf log.tar.gz                    <span class="comment"># 将 tar 包解压缩</span></span><br><span class="line">tar -zxvf log30.tar.gz log2013.log      <span class="comment"># 只将 tar 内的部分文件解压出来</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-gzip"><a href="#2-2-gzip" class="headerlink" title="2.2. gzip"></a>2.2. gzip</h3>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/02/20/linux-cli-file-compress/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1157,112 +1263,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/02/20/ntp/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2022/02/20/samba/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="duzhuo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="duzhuo's-blog">
-      <meta itemprop="description" content="记录，分享一些我觉得好玩的内容。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | duzhuo's-blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/02/20/samba/" class="post-title-link" itemprop="url">Samba</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-02-20 15:09:06" itemprop="dateCreated datePublished" datetime="2022-02-20T15:09:06+08:00">2022-02-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-23 20:16:40" itemprop="dateModified" datetime="2024-02-23T20:16:40+08:00">2024-02-23</time>
-    </span>
-
-  
-    <span id="/2022/02/20/samba/" class="post-meta-item twikoo_visitors" data-flag-title="Samba" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span id="twikoo_visitors"></span>
-    </span>
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="Samba-应用"><a href="#Samba-应用" class="headerlink" title="Samba 应用"></a>Samba 应用</h1><blockquote>
-<p>samba 是在 Linux 和 UNIX 系统上实现 SMB 协议的一个免费软件。</p>
-<p>samba 提供了在不同计算机（即使操作系统不同）上共享服务的能力。</p>
-<p>关键词：<code>samba</code>, <code>selinux</code></p>
-</blockquote>
-<h2 id="1-安装配置-samba"><a href="#1-安装配置-samba" class="headerlink" title="1. 安装配置 samba"></a>1. 安装配置 samba</h2><p>本文将以一个完整的示例来展示如何配置 samba 来实现 Linux 和 Windows 的文件共享。</p>
-<p>目标：假设希望共享 Linux 服务器上的 &#x2F;share&#x2F;fs 目录。</p>
-<h3 id="1-1-查看是否已经安装-samba"><a href="#1-1-查看是否已经安装-samba" class="headerlink" title="1.1. 查看是否已经安装 samba"></a>1.1. 查看是否已经安装 samba</h3><ul>
-<li>CentOS：<code>rpm -qa | grep samba</code></li>
-<li>Ubuntu：<code>dpkg -l | grep samba</code></li>
-</ul>
-<h3 id="1-2-安装-samba-工具"><a href="#1-2-安装-samba-工具" class="headerlink" title="1.2. 安装 samba 工具"></a>1.2. 安装 samba 工具</h3><ul>
-<li>CentOS：<code>yum install -y samba samba-client samba-common</code></li>
-<li>Ubuntu：<code>sudo apt-get install -y samba samba-client</code></li>
-</ul>
-<h3 id="1-3-配置-samba"><a href="#1-3-配置-samba" class="headerlink" title="1.3. 配置 samba"></a>1.3. 配置 samba</h3>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/02/20/samba/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
