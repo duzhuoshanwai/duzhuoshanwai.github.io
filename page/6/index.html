@@ -152,7 +152,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">64</span>
+          <span class="site-state-item-count">65</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -175,6 +175,106 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2022/02/20/network-ops/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="duzhuo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="duzhuo's-blog">
+      <meta itemprop="description" content="记录，分享一些我觉得好玩的内容。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | duzhuo's-blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/02/20/network-ops/" class="post-title-link" itemprop="url">Linux 典型运维应用</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-02-20 15:09:06" itemprop="dateCreated datePublished" datetime="2022-02-20T15:09:06+08:00">2022-02-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-02-23 20:16:40" itemprop="dateModified" datetime="2024-02-23T20:16:40+08:00">2024-02-23</time>
+    </span>
+
+  
+    <span id="/2022/02/20/network-ops/" class="post-meta-item twikoo_visitors" data-flag-title="Linux 典型运维应用" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Linux-典型运维应用"><a href="#Linux-典型运维应用" class="headerlink" title="Linux 典型运维应用"></a>Linux 典型运维应用</h1><blockquote>
+<p>💡 如果没有特殊说明，本文的案例都是针对 Centos 发行版本。</p>
+</blockquote>
+<h2 id="网络操作"><a href="#网络操作" class="headerlink" title="网络操作"></a>网络操作</h2><h3 id="无法访问外网域名"><a href="#无法访问外网域名" class="headerlink" title="无法访问外网域名"></a>无法访问外网域名</h3><p>（1）在 hosts 中添加本机实际 IP 和本机实际域名的映射</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;192.168.0.1 hostname&quot; &gt;&gt; /etc/hosts</span><br></pre></td></tr></table></figure>
+
+<p>如果不知道本机域名，使用 <code>hostname</code> 命令查一下；如果不知道本机实际 IP，使用 <code>ifconfig</code> 查一下。</p>
+<p>（2）配置信赖的 DNS 服务器</p>
+<p>执行 <code>vi /etc/resolv.conf</code> ，添加以下内容：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nameserver 114.114.114.114</span><br><span class="line">nameserver 8.8.8.8</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/02/20/network-ops/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1080,105 +1180,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/02/18/CSGO%E7%BB%83%E4%B9%A0%E6%9C%8D%E5%8A%A1%E5%99%A8/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2022/01/28/%E6%8F%90%E9%97%AE%E7%9A%84%E6%99%BA%E6%85%A7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="duzhuo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="duzhuo's-blog">
-      <meta itemprop="description" content="记录，分享一些我觉得好玩的内容。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | duzhuo's-blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/01/28/%E6%8F%90%E9%97%AE%E7%9A%84%E6%99%BA%E6%85%A7/" class="post-title-link" itemprop="url">提问的智慧</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-01-28 17:55:06" itemprop="dateCreated datePublished" datetime="2022-01-28T17:55:06+08:00">2022-01-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-23 20:16:40" itemprop="dateModified" datetime="2024-02-23T20:16:40+08:00">2024-02-23</time>
-    </span>
-
-  
-    <span id="/2022/01/28/%E6%8F%90%E9%97%AE%E7%9A%84%E6%99%BA%E6%85%A7/" class="post-meta-item twikoo_visitors" data-flag-title="提问的智慧" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span id="twikoo_visitors"></span>
-    </span>
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="提问的智慧"><a href="#提问的智慧" class="headerlink" title="提问的智慧"></a>提问的智慧</h1><p><a target="_blank" rel="noopener" href="https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/pulls"><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome"></a></p>
-<p><strong>How To Ask Questions The Smart Way</strong></p>
-<p>Copyright © 2001,2006,2014 Eric S. Raymond, Rick Moen</p>
-<p>本指南英文版版权为 Eric S. Raymond, Rick Moen 所有。</p>
-<p>原文网址：<a target="_blank" rel="noopener" href="http://www.catb.org/~esr/faqs/smart-questions.html">http://www.catb.org/~esr&#x2F;faqs&#x2F;smart-questions.html</a></p>
-<p>Copyleft 2001 by D.H.Grand(nOBODY&#x2F;Ginux), 2010 by Gasolin, 2015 by Ryan Wu</p>
-<p>本中文指南是基于原文 3.10 版以及 2010 年由 <a target="_blank" rel="noopener" href="https://github.com/gasolin">Gasolin</a> 所翻译版本的最新翻译；</p>
-<p>协助指出翻译问题，<strong>请<a target="_blank" rel="noopener" href="https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/issues/new">发 issue</a>，或直接<a target="_blank" rel="noopener" href="https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/compare">发 pull request</a> 给我。</strong></p>
-<p>本文另有<a href="README.md">繁體中文版</a>。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/01/28/%E6%8F%90%E9%97%AE%E7%9A%84%E6%99%BA%E6%85%A7/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
