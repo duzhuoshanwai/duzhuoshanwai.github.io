@@ -152,7 +152,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-count">66</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -175,6 +175,104 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2023/11/06/%E8%A7%A3%E5%86%B3%E4%BC%98%E9%BA%92%E9%BA%9F%E7%89%88%E5%BE%AE%E4%BF%A1%E4%BF%AE%E6%94%B9%E2%81%84etc%E2%81%84lsb-release%E7%9A%84%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="duzhuo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="duzhuo's-blog">
+      <meta itemprop="description" content="记录，分享一些我觉得好玩的内容。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | duzhuo's-blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/11/06/%E8%A7%A3%E5%86%B3%E4%BC%98%E9%BA%92%E9%BA%9F%E7%89%88%E5%BE%AE%E4%BF%A1%E4%BF%AE%E6%94%B9%E2%81%84etc%E2%81%84lsb-release%E7%9A%84%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">优麒麟版微信修改/etc/lsb-release后识别错误问题</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-11-06 11:55:06" itemprop="dateCreated datePublished" datetime="2023-11-06T11:55:06+08:00">2023-11-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-02-23 20:16:40" itemprop="dateModified" datetime="2024-02-23T20:16:40+08:00">2024-02-23</time>
+    </span>
+
+  
+    <span id="/2023/11/06/%E8%A7%A3%E5%86%B3%E4%BC%98%E9%BA%92%E9%BA%9F%E7%89%88%E5%BE%AE%E4%BF%A1%E4%BF%AE%E6%94%B9%E2%81%84etc%E2%81%84lsb-release%E7%9A%84%E9%97%AE%E9%A2%98/" class="post-meta-item twikoo_visitors" data-flag-title="优麒麟版微信修改/etc/lsb-release后识别错误问题" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="问题发现"><a href="#问题发现" class="headerlink" title="问题发现"></a>问题发现</h2><p>使用 <a target="_blank" rel="noopener" href="https://tabby.sh/">tabby</a> 官方提供的 Debian repo 时 发现识别系统为 Kylin 导致无法使用脚本添加 repo</p>
+<p>查看脚本信息发现检测的文件为 <code>/etc/lsb-release</code> </p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2023/11/06/jFpxWTIfl6gtmQ5.png" alt="Screenshot_20231106_094050.png"></p>
+<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>一番检索后找到了这个帖子 <a target="_blank" rel="noopener" href="https://v2ex.com/t/906470">https://v2ex.com/t/906470</a> 发现应该是优麒麟版微信在 <code>/etc</code> 里面拉屎 <del>张小龙你吗死了</del></p>
+<p>添加 repo 的脚本内容先检测是否存在 <code>/etc/lsb-release</code> 再查看二进制文件 <code>lsb_release</code> 所以识别到的系统是 <code>Kylin</code></p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2023/11/06/o4MYQ3CG6WXNzV5.png" alt="Screenshot_20231106_104227.png"></p>
+<p>查看原版 Debian 使用的的是 <code>lsb_release</code> 所以我们可以直接删除 <code>/etc/lsb-release</code> 这个文件 或者手动修改 <code>/etc/lsb-release</code> </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">DISTRIB_ID=Debian</span><br><span class="line">DISTRIB_RELEASE=n/a</span><br><span class="line">DISTRIB_CODENAME=trixie</span><br><span class="line">DISTRIB_DESCRIPTION=&quot;Debian GNU/Linux trixie/sid&quot;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/11/06/%E8%A7%A3%E5%86%B3%E4%BC%98%E9%BA%92%E9%BA%9F%E7%89%88%E5%BE%AE%E4%BF%A1%E4%BF%AE%E6%94%B9%E2%81%84etc%E2%81%84lsb-release%E7%9A%84%E9%97%AE%E9%A2%98/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1072,100 +1170,6 @@
             </div>
           <!--/noindex-->
         
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2023/04/01/Windows11-Update-Rollback/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="duzhuo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="duzhuo's-blog">
-      <meta itemprop="description" content="记录，分享一些我觉得好玩的内容。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | duzhuo's-blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/04/01/Windows11-Update-Rollback/" class="post-title-link" itemprop="url">Windows11更新后出错后卸载更新</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-04-01 21:31:06" itemprop="dateCreated datePublished" datetime="2023-04-01T21:31:06+08:00">2023-04-01</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-23 20:16:40" itemprop="dateModified" datetime="2024-02-23T20:16:40+08:00">2024-02-23</time>
-    </span>
-
-  
-    <span id="/2023/04/01/Windows11-Update-Rollback/" class="post-meta-item twikoo_visitors" data-flag-title="Windows11更新后出错后卸载更新" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span id="twikoo_visitors"></span>
-    </span>
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2023/04/01/68huJF3Dfn7EUBb.png"></p>
-<ul>
-<li>设备 : Swift SF314-512</li>
-<li>系统 : Windows11 22H2 22621.525</li>
-</ul>
-<p>推送补丁 KB5023778 更新后出现进入桌面闪屏 无法加载桌面图标的问题</p>
-<h2 id="解决方法-卸载-KB5023778"><a href="#解决方法-卸载-KB5023778" class="headerlink" title="解决方法 卸载 KB5023778"></a>解决方法 卸载 KB5023778</h2><ol>
-<li>Win+Alt+Del 按住 Shift 点击重启<br><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2023/04/01/s5wDXgEMLuTelhI.png"></li>
-<li>疑难解答 → 高级选项 → 卸载更新</li>
-</ol>
-<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2023/04/01/rSDnE8X9tI4ofiL.png"><br><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2023/04/01/Xo3VqpAR6mGBzfF.png"><br><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2023/04/01/FPnYEfvHyBK6Iwl.png"><br><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2023/04/01/HIZANxR7Lkn2sFJ.png"></p>
-
       
     </div>
 
