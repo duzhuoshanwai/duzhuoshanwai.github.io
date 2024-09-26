@@ -152,7 +152,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">66</span>
+          <span class="site-state-item-count">67</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -175,6 +175,116 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2022/02/18/simple-practicemode%20%E6%96%87%E6%A1%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="duzhuo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="duzhuo's-blog">
+      <meta itemprop="description" content="记录，分享一些我觉得好玩的内容。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | duzhuo's-blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/02/18/simple-practicemode%20%E6%96%87%E6%A1%A3/" class="post-title-link" itemprop="url">simple-practicemode 文档</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-02-18 15:55:06" itemprop="dateCreated datePublished" datetime="2022-02-18T15:55:06+08:00">2022-02-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-02-23 20:16:40" itemprop="dateModified" datetime="2024-02-23T20:16:40+08:00">2024-02-23</time>
+    </span>
+
+  
+    <span id="/2022/02/18/simple-practicemode%20%E6%96%87%E6%A1%A3/" class="post-meta-item twikoo_visitors" data-flag-title="simple-practicemode 文档" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="simple-practicemode"><a href="#simple-practicemode" class="headerlink" title="simple-practicemode"></a>simple-practicemode</h1><h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2><p>基于<a target="_blank" rel="noopener" href="https://github.com/splewis/csgo-practice-mode"><strong>csgo-practice-mode</strong></a>，删减了部分内容，更好地适配<a target="_blank" rel="noopener" href="https://github.com/hx-w/CSGOWiki-Plugins"><strong>csgowiki-pack</strong></a></p>
+<h2 id="Feature"><a href="#Feature" class="headerlink" title="Feature"></a>Feature</h2><ul>
+<li><input checked disabled type="checkbox"> 不再与<a target="_blank" rel="noopener" href="https://github.com/splewis/csgo-pug-setup"><strong>csgo-pug-setup</strong></a>和<a target="_blank" rel="noopener" href="https://github.com/splewis/get5"><strong>get5</strong></a>兼容。<code>simple-practicemode</code>是一个单独且纯粹的跑图插件。</li>
+<li><input checked disabled type="checkbox"> 删除原跑图插件的<strong>本地道具仓库</strong>功能，<code>.nades</code>、<code>.cats</code>相关功能取消。因为<code>csgowiki-pack</code>已经具有部分道具合集的功能。</li>
+<li><input checked disabled type="checkbox"> 重构<code>botmimic</code>插件，使其适配<code>sourcemod v1.11</code>语法，重构后的插件名&#x2F;Libary名称为<code>botmimic_fix</code>。</li>
+<li><input checked disabled type="checkbox"> 新增计时器面板功能，<code>.timers</code>或<code>。timers</code>开启，整合了三种计时器类型。</li>
+<li><input checked disabled type="checkbox"> 新增<code>。command</code>指令触发方式，方便中文输入法用户避免频繁切换输入法。</li>
+<li><input checked disabled type="checkbox"> 更全面友好的汉化内容。</li>
+</ul>
+<h2 id="Compiling"><a href="#Compiling" class="headerlink" title="Compiling"></a>Compiling</h2><p>necessary <code>.inc</code> needed</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.sourcemod.net/downloads.php?branch=stable"><strong>sourcemod v1.10 stable</strong></a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/bcserv/smlib/tree/transitional_syntax"><strong>smlib</strong></a></li>
+</ul>
+<p>compiled files:</p>
+<ul>
+<li><code>botmimic_fix.smx</code></li>
+<li><code>csutils.smx</code></li>
+<li><code>practicemode.smx</code></li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/02/18/simple-practicemode%20%E6%96%87%E6%A1%A3/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
