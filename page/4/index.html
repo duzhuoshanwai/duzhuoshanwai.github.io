@@ -152,7 +152,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">67</span>
+          <span class="site-state-item-count">68</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -175,6 +175,124 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2023/04/13/wsl-debian-proxy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="duzhuo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="duzhuo's-blog">
+      <meta itemprop="description" content="记录，分享一些我觉得好玩的内容。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | duzhuo's-blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/04/13/wsl-debian-proxy/" class="post-title-link" itemprop="url">wsl2+宿主机v2rayN 实现命令行proxy</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-04-13 15:09:06" itemprop="dateCreated datePublished" datetime="2023-04-13T15:09:06+08:00">2023-04-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-02-23 20:16:40" itemprop="dateModified" datetime="2024-02-23T20:16:40+08:00">2024-02-23</time>
+    </span>
+
+  
+    <span id="/2023/04/13/wsl-debian-proxy/" class="post-meta-item twikoo_visitors" data-flag-title="wsl2+宿主机v2rayN 实现命令行proxy" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul>
+<li>v2rayn version 5.39</li>
+<li>wsl2 + Debian</li>
+</ul>
+<h2 id="v2rayN-设置局域网-socks5-http-proxy"><a href="#v2rayN-设置局域网-socks5-http-proxy" class="headerlink" title="v2rayN 设置局域网 socks5 &#x2F; http proxy"></a>v2rayN 设置局域网 socks5 &#x2F; http proxy</h2><ul>
+<li>core:基础设置中勾选允许来自局域网的连接和开启 Mux 多路复用 ( 推荐设置认证密码 )</li>
+<li>在选择节点窗口下方查看共享给局域网的端口</li>
+</ul>
+<h2 id="查看宿主机的-ip-和-wsl-的-ip"><a href="#查看宿主机的-ip-和-wsl-的-ip" class="headerlink" title="查看宿主机的 ip 和 wsl 的 ip"></a>查看宿主机的 ip 和 wsl 的 ip</h2><ul>
+<li><p>获取宿主机 ip <code>cat /etc/resolv.conf</code></p>
+</li>
+<li><p>同时添加代理到 <code>/etc/environment</code> <code>~/.profile</code></p>
+<p>也可以添加到 <code>~/.bashrc</code> <code>~/.zshrc</code></p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">### http代理</span><br><span class="line"></span><br><span class="line">export windows_host=`cat /etc/resolv.conf|grep nameserver|awk &#x27;&#123;print $2&#125;&#x27;`</span><br><span class="line">export ALL_PROXY=socks5://&#123;username&#125;:&#123;passwd&#125;@$windows_host:&#123;port&#125;</span><br><span class="line">export HTTP_PROXY=$ALL_PROXY</span><br><span class="line">export http_proxy=$ALL_PROXY</span><br><span class="line">export HTTPS_PROXY=$ALL_PROXY</span><br><span class="line">export https_proxy=$ALL_PROXY</span><br><span class="line">export no_proxy=127.0.0.1,.devops.com,localhost,local,.local,172.28.0.0/16</span><br><span class="line"></span><br><span class="line">if [ &quot;`git config --global --get proxy.https`&quot; != &quot;socks5://&#123;username&#125;:&#123;passwd&#125;@$windows_host:&#123;port&#125;&quot; ]; then</span><br><span class="line">            git config --global proxy.https socks5://&#123;username&#125;:&#123;passwd&#125;@$windows_host:&#123;port&#125;</span><br><span class="line">fi</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>source /etc/environment&amp;&amp;source ~/.profile</code></li>
+</ul>
+<h2 id="测试连接"><a href="#测试连接" class="headerlink" title="测试连接"></a>测试连接</h2><ul>
+<li><p><code>wget google.com</code></p>
+</li>
+<li><p><code>curl google.com</code></p>
+</li>
+<li><p>有返回值说明正常</p>
+</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/04/13/wsl-debian-proxy/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -661,7 +779,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <div id="mmedia-OyiVizpEtLdxcTpn" style="width:100%;height:650px;max-width:1200px;center"></div><script> var OyiVizpEtLdxcTpn_options = JSON.parse('{\"style\":\"width:100%;height:650px;max-width:1200px;center\",\"url\":\"https://dlink.host/sharepoint/aHR0cHM6Ly9zYWludDEzMzctbXkuc2hhcmVwb2ludC5jb20vOnY6L2cvcGVyc29uYWwvZHV6aHVvX3NhaW50MTMzN19vbm1pY3Jvc29mdF9jb20vRWEwTU56ejhFOEpPbFFoT0RZSXZTX2tCTnZQYTg2NmxVS1JyVTZUa3pnUldNdz9lPWg3cVV0Rw.mp4\",\"autoSize\":true,\"autoMini\":false,\"fullscreen\":true,\"fullscreenWeb\":true}'); OyiVizpEtLdxcTpn_options.container = "#mmedia-OyiVizpEtLdxcTpn"; HEXO_MMEDIA_DATA.js.push("https://cdn.jsdelivr.net/npm/artplayer/dist/artplayer.js");HEXO_MMEDIA_DATA.artPlayerData.push(OyiVizpEtLdxcTpn_options); </script>
+          <div id="mmedia-jIUvXDYSYbDqcNpY" style="width:100%;height:650px;max-width:1200px;center"></div><script> var jIUvXDYSYbDqcNpY_options = JSON.parse('{\"style\":\"width:100%;height:650px;max-width:1200px;center\",\"url\":\"https://dlink.host/sharepoint/aHR0cHM6Ly9zYWludDEzMzctbXkuc2hhcmVwb2ludC5jb20vOnY6L2cvcGVyc29uYWwvZHV6aHVvX3NhaW50MTMzN19vbm1pY3Jvc29mdF9jb20vRWEwTU56ejhFOEpPbFFoT0RZSXZTX2tCTnZQYTg2NmxVS1JyVTZUa3pnUldNdz9lPWg3cVV0Rw.mp4\",\"autoSize\":true,\"autoMini\":false,\"fullscreen\":true,\"fullscreenWeb\":true}'); jIUvXDYSYbDqcNpY_options.container = "#mmedia-jIUvXDYSYbDqcNpY"; HEXO_MMEDIA_DATA.js.push("https://cdn.jsdelivr.net/npm/artplayer/dist/artplayer.js");HEXO_MMEDIA_DATA.artPlayerData.push(jIUvXDYSYbDqcNpY_options); </script>
       
     </div>
 
@@ -849,7 +967,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <div id="mmedia-ltXFgvKjKlpMoSBt" style="width:100%;height:650px;max-width:1200px;center"></div><script> var ltXFgvKjKlpMoSBt_options = JSON.parse('{\"style\":\"width:100%;height:650px;max-width:1200px;center\",\"url\":\"https://dlink.host/sharepoint/aHR0cHM6Ly9zYWludDEzMzctbXkuc2hhcmVwb2ludC5jb20vOnY6L2cvcGVyc29uYWwvZHV6aHVvX3NhaW50MTMzN19vbm1pY3Jvc29mdF9jb20vRVk2bUthczJ5dDVDZ280c21kdjJXa01CeDlpZWlWNjZYWDhYU2VLeGtXSkFrUT9lPWc1RmpZYQ.mp4\",\"autoSize\":true,\"autoMini\":false,\"fullscreen\":true,\"fullscreenWeb\":true}'); ltXFgvKjKlpMoSBt_options.container = "#mmedia-ltXFgvKjKlpMoSBt"; HEXO_MMEDIA_DATA.js.push("https://cdn.jsdelivr.net/npm/artplayer/dist/artplayer.js");HEXO_MMEDIA_DATA.artPlayerData.push(ltXFgvKjKlpMoSBt_options); </script>
+          <div id="mmedia-XNHzxYqcBLRHwwdL" style="width:100%;height:650px;max-width:1200px;center"></div><script> var XNHzxYqcBLRHwwdL_options = JSON.parse('{\"style\":\"width:100%;height:650px;max-width:1200px;center\",\"url\":\"https://dlink.host/sharepoint/aHR0cHM6Ly9zYWludDEzMzctbXkuc2hhcmVwb2ludC5jb20vOnY6L2cvcGVyc29uYWwvZHV6aHVvX3NhaW50MTMzN19vbm1pY3Jvc29mdF9jb20vRVk2bUthczJ5dDVDZ280c21kdjJXa01CeDlpZWlWNjZYWDhYU2VLeGtXSkFrUT9lPWc1RmpZYQ.mp4\",\"autoSize\":true,\"autoMini\":false,\"fullscreen\":true,\"fullscreenWeb\":true}'); XNHzxYqcBLRHwwdL_options.container = "#mmedia-XNHzxYqcBLRHwwdL"; HEXO_MMEDIA_DATA.js.push("https://cdn.jsdelivr.net/npm/artplayer/dist/artplayer.js");HEXO_MMEDIA_DATA.artPlayerData.push(XNHzxYqcBLRHwwdL_options); </script>
 
       
     </div>
@@ -937,10 +1055,10 @@
 <li>update hexo-theme-next 7.8.0 → 8.12.3</li>
 <li>add hexo-next-twikoo</li>
 </ul>
-<h4 id="hexo-tag-mmedia-test"><a href="#hexo-tag-mmedia-test" class="headerlink" title="hexo-tag-mmedia test"></a>hexo-tag-mmedia test</h4><div id="mmedia-YUZSfzAEjlzWnMmA" style="width:100%;height:650px;max-width:1200px;center"></div><script> var YUZSfzAEjlzWnMmA_options = JSON.parse('{\"style\":\"width:100%;height:650px;max-width:1200px;center\",\"url\":\"https://dlink.host/sharepoint/aHR0cHM6Ly9zYWludDEzMzctbXkuc2hhcmVwb2ludC5jb20vOnY6L2cvcGVyc29uYWwvZHV6aHVvX3NhaW50MTMzN19vbm1pY3Jvc29mdF9jb20vRWFpY2hQZ21JaEZIaEVLRVpFdUN3OVlCTnpxVV9xUnkxYm1GR2prR20yZDVnUT9lPWJRbkR4bA.mp4\",\"autoSize\":true,\"autoMini\":false,\"fullscreen\":true,\"fullscreenWeb\":true}'); YUZSfzAEjlzWnMmA_options.container = "#mmedia-YUZSfzAEjlzWnMmA"; HEXO_MMEDIA_DATA.js.push("https://cdn.jsdelivr.net/npm/artplayer/dist/artplayer.js");HEXO_MMEDIA_DATA.artPlayerData.push(YUZSfzAEjlzWnMmA_options); </script>
+<h4 id="hexo-tag-mmedia-test"><a href="#hexo-tag-mmedia-test" class="headerlink" title="hexo-tag-mmedia test"></a>hexo-tag-mmedia test</h4><div id="mmedia-jFjFMEfNqTerXLsa" style="width:100%;height:650px;max-width:1200px;center"></div><script> var jFjFMEfNqTerXLsa_options = JSON.parse('{\"style\":\"width:100%;height:650px;max-width:1200px;center\",\"url\":\"https://dlink.host/sharepoint/aHR0cHM6Ly9zYWludDEzMzctbXkuc2hhcmVwb2ludC5jb20vOnY6L2cvcGVyc29uYWwvZHV6aHVvX3NhaW50MTMzN19vbm1pY3Jvc29mdF9jb20vRWFpY2hQZ21JaEZIaEVLRVpFdUN3OVlCTnpxVV9xUnkxYm1GR2prR20yZDVnUT9lPWJRbkR4bA.mp4\",\"autoSize\":true,\"autoMini\":false,\"fullscreen\":true,\"fullscreenWeb\":true}'); jFjFMEfNqTerXLsa_options.container = "#mmedia-jFjFMEfNqTerXLsa"; HEXO_MMEDIA_DATA.js.push("https://cdn.jsdelivr.net/npm/artplayer/dist/artplayer.js");HEXO_MMEDIA_DATA.artPlayerData.push(jFjFMEfNqTerXLsa_options); </script>
 
-<div id="mmedia-GyLSZDylhUOsgdEF"></div><script> var GyLSZDylhUOsgdEF_options = JSON.parse('{\"audio\":[{\"name\":\"Sweety - 樱花草\",\"url\":\"https://dlink.host/sharepoint/aHR0cHM6Ly9zYWludDEzMzctbXkuc2hhcmVwb2ludC5jb20vOnU6L2cvcGVyc29uYWwvZHV6aHVvX3NhaW50MTMzN19vbm1pY3Jvc29mdF9jb20vRWNCZGxoUDdxQVJIaVBzY2NvSXFndm9CYURseDZhWVlYNUpsZHc0b1FlckhVZz9lPTJrSmhmcQ.mp3\"}]}');
-    GyLSZDylhUOsgdEF_options.container = document.getElementById("mmedia-GyLSZDylhUOsgdEF");HEXO_MMEDIA_DATA.css.push("https://cdn.jsdelivr.net/npm/aplayer@1/dist/APlayer.min.css");HEXO_MMEDIA_DATA.js.push("https://cdn.jsdelivr.net/npm/aplayer@1/dist/APlayer.min.js");HEXO_MMEDIA_DATA.aplayerData.push(GyLSZDylhUOsgdEF_options); </script>
+<div id="mmedia-LiWzuSeihudykrMR"></div><script> var LiWzuSeihudykrMR_options = JSON.parse('{\"audio\":[{\"name\":\"Sweety - 樱花草\",\"url\":\"https://dlink.host/sharepoint/aHR0cHM6Ly9zYWludDEzMzctbXkuc2hhcmVwb2ludC5jb20vOnU6L2cvcGVyc29uYWwvZHV6aHVvX3NhaW50MTMzN19vbm1pY3Jvc29mdF9jb20vRWNCZGxoUDdxQVJIaVBzY2NvSXFndm9CYURseDZhWVlYNUpsZHc0b1FlckhVZz9lPTJrSmhmcQ.mp3\"}]}');
+    LiWzuSeihudykrMR_options.container = document.getElementById("mmedia-LiWzuSeihudykrMR");HEXO_MMEDIA_DATA.css.push("https://cdn.jsdelivr.net/npm/aplayer@1/dist/APlayer.min.css");HEXO_MMEDIA_DATA.js.push("https://cdn.jsdelivr.net/npm/aplayer@1/dist/APlayer.min.js");HEXO_MMEDIA_DATA.aplayerData.push(LiWzuSeihudykrMR_options); </script>
 
 <h4 id="涩图赠送"><a href="#涩图赠送" class="headerlink" title="涩图赠送"></a>涩图赠送</h4><p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://cdn.jsdelivr.net/gh/duzhuoshanwai/Image-Hosting/img/2020-09-12%20094740/2022/08/21/22-21-42.jpg"><br><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://cdn.jsdelivr.net/gh/duzhuoshanwai/Image-Hosting/img/%20-3-/2022/08/21/22-12-45.jpg"></p>
 
@@ -1032,110 +1150,6 @@
 <p>免费的核酸就嗯造是吧 政府是真几把有钱 <del>大概看上海那样害怕了</del></p>
 <p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://cdn.jsdelivr.net/gh/duzhuoshanwai/Image-Hosting/img/220517-041724.png"></p>
 
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2022/03/20/dota2-deward/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="duzhuo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="duzhuo's-blog">
-      <meta itemprop="description" content="记录，分享一些我觉得好玩的内容。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | duzhuo's-blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/03/20/dota2-deward/" class="post-title-link" itemprop="url">dota2 反高台眼</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-03-20 10:55:06" itemprop="dateCreated datePublished" datetime="2022-03-20T10:55:06+08:00">2022-03-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-23 20:16:40" itemprop="dateModified" datetime="2024-02-23T20:16:40+08:00">2024-02-23</time>
-    </span>
-
-  
-    <span id="/2022/03/20/dota2-deward/" class="post-meta-item twikoo_visitors" data-flag-title="dota2 反高台眼" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span id="twikoo_visitors"></span>
-    </span>
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="dota2反高台眼"><a href="#dota2反高台眼" class="headerlink" title="dota2反高台眼"></a>dota2反高台眼</h1><h2 id="常规的"><a href="#常规的" class="headerlink" title="常规的"></a>常规的</h2><h3 id="直接插真眼"><a href="#直接插真眼" class="headerlink" title="直接插真眼"></a>直接插真眼</h3><video id="video" controls preload="none">
-<source id="mp4" src="https://dlink.host/sharepoint/aHR0cHM6Ly9zYWludDEzMzctbXkuc2hhcmVwb2ludC5jb20vOnY6L2cvcGVyc29uYWwvZHV6aHVvX3NhaW50MTMzN19vbm1pY3Jvc29mdF9jb20vRWJsNWpqcnU3ZEJFbUNZOG5pNnhqSGdCTG94WFp3eWpVZF9HNE9ON0dnMnl5Zz9lPUpNTW9ucQ.mp4" type="video/mp4">
-</video>
-
-<h3 id="把鸡拉上高台"><a href="#把鸡拉上高台" class="headerlink" title="把鸡拉上高台"></a>把鸡拉上高台</h3><video id="video" controls preload="none">
-<source id="mp4" src="https://dlink.host/sharepoint/aHR0cHM6Ly9zYWludDEzMzctbXkuc2hhcmVwb2ludC5jb20vOnY6L2cvcGVyc29uYWwvZHV6aHVvX3NhaW50MTMzN19vbm1pY3Jvc29mdF9jb20vRWZIekg4LU9feXBQbjM2akJEVkNIV1VCenNqTHBmRko0TXhwS3FFdGRLc2djdz9lPTBDV0E1NA.mp4" type="video/mp4">
-</video>
-
-
-<h2 id="英雄技能的"><a href="#英雄技能的" class="headerlink" title="英雄技能的"></a>英雄技能的</h2><h3 id="VS"><a href="#VS" class="headerlink" title="VS"></a>VS</h3><video id="video" controls preload="none">
-<source id="mp4" src="https://dlink.host/sharepoint/aHR0cHM6Ly9zYWludDEzMzctbXkuc2hhcmVwb2ludC5jb20vOnY6L2cvcGVyc29uYWwvZHV6aHVvX3NhaW50MTMzN19vbm1pY3Jvc29mdF9jb20vRVdkb2dtU2NzY05NbEJnRm5TTE5hU29CNUxyWTJuMG5QODZfazNfbndKd2RxUT9lPXh6NjRVaw.mp4" type="video/mp4">
-</video>
-
-<h3 id="宙斯"><a href="#宙斯" class="headerlink" title="宙斯"></a>宙斯</h3>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/03/20/dota2-deward/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
       
     </div>
 
