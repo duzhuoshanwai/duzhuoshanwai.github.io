@@ -19,15 +19,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"blog.saint1337.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"flat"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="升级 wsl 注意开启 windows update wsl --update wsl --version1234567WSL version: 1.1.3.0Kernel version: 5.15.90.1WSLg version: 1.0.49MSRDC version: 1.2.3770Direct3D version: 1.608.2-61064218DXCore version: 10">
+    <meta name="description" content="分页？ 显著提高查询速度，每次只处理一小部分数据减少了数据库的负担。 简化数据展示，能让用户方便地浏览和查找所需信息。  用户界面展示使用 HTTP GET 方法来获取分页的数据，其中page为数据页索引size为数据页大小： &#x2F;products?page&#x3D;&#123;page&#125;&amp;size&#x3D;&#123;size&#125; 以表 products 为例 其中返回的数据的应该包含：">
 <meta property="og:type" content="article">
-<meta property="og:title" content="System has not been booted with systemd as init system (PID 1).">
-<meta property="og:url" content="https://blog.saint1337.top/2023/04/20/wsl-fix-systemd-issue/index.html">
+<meta property="og:title" content="MongoDB中实现查询结果分页">
+<meta property="og:url" content="https://blog.saint1337.top/2024/11/25/MongoDB%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C%E5%88%86%E9%A1%B5/index.html">
 <meta property="og:site_name" content="duzhuo&#39;s-blog">
-<meta property="og:description" content="升级 wsl 注意开启 windows update wsl --update wsl --version1234567WSL version: 1.1.3.0Kernel version: 5.15.90.1WSLg version: 1.0.49MSRDC version: 1.2.3770Direct3D version: 1.608.2-61064218DXCore version: 10">
+<meta property="og:description" content="分页？ 显著提高查询速度，每次只处理一小部分数据减少了数据库的负担。 简化数据展示，能让用户方便地浏览和查找所需信息。  用户界面展示使用 HTTP GET 方法来获取分页的数据，其中page为数据页索引size为数据页大小： &#x2F;products?page&#x3D;&#123;page&#125;&amp;size&#x3D;&#123;size&#125; 以表 products 为例 其中返回的数据的应该包含：">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-04-20T07:09:06.000Z">
-<meta property="article:modified_time" content="2024-02-23T12:16:40.478Z">
+<meta property="article:published_time" content="2024-11-25T03:09:32.000Z">
+<meta property="article:modified_time" content="2024-11-25T05:54:09.058Z">
 <meta property="article:author" content="duzhuo">
 <meta property="article:tag" content="博客">
 <meta property="article:tag" content="技术">
@@ -35,14 +35,14 @@
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://blog.saint1337.top/2023/04/20/wsl-fix-systemd-issue/">
+<link rel="canonical" href="https://blog.saint1337.top/2024/11/25/MongoDB%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C%E5%88%86%E9%A1%B5/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.saint1337.top/2023/04/20/wsl-fix-systemd-issue/","path":"2023/04/20/wsl-fix-systemd-issue/","title":"System has not been booted with systemd as init system (PID 1)."}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.saint1337.top/2024/11/25/MongoDB%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C%E5%88%86%E9%A1%B5/","path":"2024/11/25/MongoDB中实现查询结果分页/","title":"MongoDB中实现查询结果分页"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>System has not been booted with systemd as init system (PID 1). | duzhuo's-blog</title>
+<title>MongoDB中实现查询结果分页 | duzhuo's-blog</title>
   
 
 
@@ -142,7 +142,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%87%E7%BA%A7-wsl"><span class="nav-number">1.</span> <span class="nav-text">升级 wsl</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E5%90%AF-Systemd-support"><span class="nav-number">2.</span> <span class="nav-text">开启 Systemd support</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Enjoy"><span class="nav-number">3.</span> <span class="nav-text">Enjoy !</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E9%A1%B5%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">分页？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2%E5%B1%95%E7%A4%BA"><span class="nav-number">2.</span> <span class="nav-text">用户界面展示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%A4%E4%BA%92%E9%80%BB%E8%BE%91"><span class="nav-number">3.</span> <span class="nav-text">服务端与数据库交互逻辑</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -188,7 +188,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2023/04/20/wsl-fix-systemd-issue/">
+    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2024/11/25/MongoDB%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C%E5%88%86%E9%A1%B5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -201,12 +201,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="System has not been booted with systemd as init system (PID 1). | duzhuo's-blog">
+      <meta itemprop="name" content="MongoDB中实现查询结果分页 | duzhuo's-blog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          System has not been booted with systemd as init system (PID 1).
+          MongoDB中实现查询结果分页
         </h1>
 
         <div class="post-meta-container">
@@ -216,19 +216,13 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2023-04-20 15:09:06" itemprop="dateCreated datePublished" datetime="2023-04-20T15:09:06+08:00">2023-04-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-23 20:16:40" itemprop="dateModified" datetime="2024-02-23T20:16:40+08:00">2024-02-23</time>
+      <time title="创建时间：2024-11-25 11:09:32 / 修改时间：13:54:09" itemprop="dateCreated datePublished" datetime="2024-11-25T11:09:32+08:00">2024-11-25</time>
     </span>
 
   
-    <span id="/2023/04/20/wsl-fix-systemd-issue/" class="post-meta-item twikoo_visitors" data-flag-title="System has not been booted with systemd as init system (PID 1)." title="阅读次数">
+    <span id="/2024/11/25/MongoDB%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C%E5%88%86%E9%A1%B5/" class="post-meta-item twikoo_visitors" data-flag-title="MongoDB中实现查询结果分页" title="阅读次数">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -244,21 +238,39 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="升级-wsl"><a href="#升级-wsl" class="headerlink" title="升级 wsl"></a>升级 wsl</h2><ul>
-<li><strong>注意开启 windows update</strong></li>
-<li><code>wsl --update</code></li>
-<li><code>wsl --version</code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">WSL version: 1.1.3.0</span><br><span class="line">Kernel version: 5.15.90.1</span><br><span class="line">WSLg version: 1.0.49</span><br><span class="line">MSRDC version: 1.2.3770</span><br><span class="line">Direct3D version: 1.608.2-61064218</span><br><span class="line">DXCore version: 10.0.25131.1002-220531-1700.rs-onecore-base2-hyp</span><br><span class="line">Windows version: 10.0.22621.525</span><br></pre></td></tr></table></figure></li>
+    <div class="post-body" itemprop="articleBody"><h2 id="分页？"><a href="#分页？" class="headerlink" title="分页？"></a>分页？</h2><ul>
+<li>显著提高查询速度，每次只处理一小部分数据减少了数据库的负担。</li>
+<li>简化数据展示，能让用户方便地浏览和查找所需信息。</li>
 </ul>
-<h2 id="开启-Systemd-support"><a href="#开启-Systemd-support" class="headerlink" title="开启 Systemd support"></a>开启 Systemd support</h2><ul>
-<li><p><code>sudo nano /etc/wsl.conf</code></p>
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[boot]</span><br><span class="line">systemd=true</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>^O</code> + <code>^X</code></p>
-</li>
-<li><p><code>wsl --shutdown</code></p>
-</li>
+<h2 id="用户界面展示"><a href="#用户界面展示" class="headerlink" title="用户界面展示"></a>用户界面展示</h2><p>使用 HTTP GET 方法来获取分页的数据，其中page为数据页索引size为数据页大小：</p>
+<p><code>/products?page=&#123;page&#125;&amp;size=&#123;size&#125;</code></p>
+<p>以表 products 为例</p>
+<p>其中返回的数据的应该包含：全部商品数量，总页数，当前是第几页，当前页的全部产品数据。</p>
+<h2 id="服务端与数据库交互逻辑"><a href="#服务端与数据库交互逻辑" class="headerlink" title="服务端与数据库交互逻辑"></a>服务端与数据库交互逻辑</h2><p>代码片段以 express + MongoDB 为例：</p>
+<ul>
+<li>服务端提取出 query 中的page和size</li>
 </ul>
-<h2 id="Enjoy"><a href="#Enjoy" class="headerlink" title="Enjoy !"></a>Enjoy !</h2>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> page = <span class="title class_">Number</span>(req.<span class="property">query</span>.<span class="property">page</span>) || <span class="number">1</span>;</span><br><span class="line"><span class="keyword">const</span> size = <span class="title class_">Number</span>(req.<span class="property">query</span>.<span class="property">size</span>) || <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>进行数据库查询，提取 collection 中的当前页数据</p>
+<p>根据 <a target="_blank" rel="noopener" href="https://www.mongodb.com/zh-cn/docs/manual/reference/method/db.collection.find/#options">db.collection.find()</a> 中的 limit 和 skip 选项来进行查询。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> skip = (page - <span class="number">1</span>) *size;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 当前页的产品数据</span></span><br><span class="line"><span class="keyword">const</span> products = <span class="keyword">await</span> collection.<span class="title function_">find</span>()</span><br><span class="line">  .<span class="title function_">skip</span>(skip)</span><br><span class="line">  .<span class="title function_">limit</span>(size)</span><br><span class="line">  .<span class="title function_">toArray</span>();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查询 collection 中的数据总条数</p>
+<p><a target="_blank" rel="noopener" href="https://www.mongodb.com/zh-cn/docs/manual/reference/method/db.collection.estimatedDocumentCount/">db.collection.estimatedDocumentCount()</a> 不采用查询过滤，而是使用元数据返回集合的计数。</p>
+<p><a target="_blank" rel="noopener" href="https://www.mongodb.com/zh-cn/docs/manual/reference/method/db.collection.countDocuments/">db.collection.countDocuments()</a> 返回一个整数，代表与该集合或视图的查询匹配的文档数量。此方法可用于<a target="_blank" rel="noopener" href="https://www.mongodb.com/zh-cn/docs/manual/core/transactions/#std-label-transactions">事务</a>。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> totalCount = <span class="keyword">await</span> collection.<span class="title function_">estimatedDocumentCount</span>(); </span><br><span class="line"><span class="comment">//返回快 无法过滤</span></span><br></pre></td></tr></table></figure>
+
+  <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> totalCount = <span class="keyword">await</span> collection.<span class="title function_">countDocuments</span>(&#123; <span class="attr">deleted</span>: &#123; <span class="attr">$ne</span>: <span class="literal">true</span> &#125; &#125;);</span><br><span class="line"><span class="comment">// 过滤掉所有 deleted: true 的 document</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>根据总条数和每页大小计算总页数</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> totalPages = <span class="title class_">Math</span>.<span class="title function_">ceil</span>(totalCount / size);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>返回数据（以json为例）：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">res.<span class="title function_">json</span>(&#123;</span><br><span class="line">  totalCount,</span><br><span class="line">  totalPages,</span><br><span class="line">  <span class="attr">currentPage</span>: page,</span><br><span class="line">  products</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
+</ul>
+
     </div>
 
     
@@ -271,14 +283,11 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2023/04/13/wsl-debian-proxy/" rel="prev" title="wsl2+宿主机v2rayN 实现命令行proxy">
-                  <i class="fa fa-angle-left"></i> wsl2+宿主机v2rayN 实现命令行proxy
+                <a href="/2024/09/29/%E8%AE%BE%E7%BD%AEDebian%E4%B8%8D%E8%87%AA%E5%8A%A8%E5%90%AF%E5%8A%A8%E6%96%B0%E5%AE%89%E8%A3%85%E7%9A%84%E6%9C%8D%E5%8A%A1/" rel="prev" title="设置Debian不自动启动新安装的服务">
+                  <i class="fa fa-angle-left"></i> 设置Debian不自动启动新安装的服务
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2023/05/31/%E4%BF%AE%E7%94%B5%E8%84%91%E5%86%9B%E8%A7%84%E5%AE%8C%E6%95%B4%E7%89%8820%E6%9D%A1/" rel="next" title="修电脑军规 完整版 20条">
-                  修电脑军规 完整版 20条 <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>
