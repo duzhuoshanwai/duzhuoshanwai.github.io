@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://blog.saint1337.top/baidu_verify_codeva-ycRaxCjYIL.html</loc>
+    <loc>https://blog.saint1337.top/2024/11/27/%E5%85%B3%E4%BA%8E%E5%A4%84%E7%90%86CORS%E9%97%AE%E9%A2%98/</loc>
     
     <lastmod>2024-11-27</lastmod>
     
@@ -11,7 +11,7 @@
   </url>
   
   <url>
-    <loc>https://blog.saint1337.top/2024/11/27/%E4%BD%BF%E7%94%A8Cloudflare-Workers%E4%BB%A3%E7%90%86CORS%E8%AF%B7%E6%B1%82/</loc>
+    <loc>https://blog.saint1337.top/2022/08/21/2022-08-21-blogupdate/</loc>
     
     <lastmod>2024-11-27</lastmod>
     
@@ -353,7 +353,7 @@
   </url>
   
   <url>
-    <loc>https://blog.saint1337.top/2022/02/19/teamspeak/</loc>
+    <loc>https://blog.saint1337.top/2022/02/20/systemd/</loc>
     
     <lastmod>2024-02-23</lastmod>
     
@@ -362,7 +362,7 @@
   </url>
   
   <url>
-    <loc>https://blog.saint1337.top/2022/02/20/systemd/</loc>
+    <loc>https://blog.saint1337.top/2022/02/19/teamspeak/</loc>
     
     <lastmod>2024-02-23</lastmod>
     
@@ -552,15 +552,6 @@
   
   <url>
     <loc>https://blog.saint1337.top/2022/02/20/ntp/</loc>
-    
-    <lastmod>2024-02-23</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.saint1337.top/2022/08/21/2022-08-21-blogupdate/</loc>
     
     <lastmod>2024-02-23</lastmod>
     

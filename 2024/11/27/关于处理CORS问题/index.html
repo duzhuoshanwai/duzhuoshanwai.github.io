@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-duzhuo-32%C3%9732.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-duzhuo-16%C3%9716.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.saint1337.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"flat"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="CORS（跨源资源共享）？ 以下内容引用自 mdn web docs 跨源资源共享（CORS，或通俗地译为跨域资源共享）是一种基于 HTTP 头的机制，该机制通过允许服务器标示除了它自己以外的其他源（域、协议或端口），使得浏览器允许这些源访问加载自己的资源。跨源资源共享还通过一种机制来检查服务器是否会允许要发送的真实请求，该机制通过浏览器发起一个到服务器托管的跨源资源的“预检”请求。在预检中，浏览">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于处理CORS问题">
+<meta property="og:url" content="https://blog.saint1337.top/2024/11/27/%E5%85%B3%E4%BA%8E%E5%A4%84%E7%90%86CORS%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:site_name" content="duzhuo&#39;s-blog">
+<meta property="og:description" content="CORS（跨源资源共享）？ 以下内容引用自 mdn web docs 跨源资源共享（CORS，或通俗地译为跨域资源共享）是一种基于 HTTP 头的机制，该机制通过允许服务器标示除了它自己以外的其他源（域、协议或端口），使得浏览器允许这些源访问加载自己的资源。跨源资源共享还通过一种机制来检查服务器是否会允许要发送的真实请求，该机制通过浏览器发起一个到服务器托管的跨源资源的“预检”请求。在预检中，浏览">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-11-27T06:47:47.000Z">
+<meta property="article:modified_time" content="2024-11-27T06:48:41.649Z">
+<meta property="article:author" content="duzhuo">
+<meta property="article:tag" content="博客">
+<meta property="article:tag" content="技术">
+<meta property="article:tag" content="分享">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://blog.saint1337.top/2024/11/27/%E5%85%B3%E4%BA%8E%E5%A4%84%E7%90%86CORS%E9%97%AE%E9%A2%98/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.saint1337.top/2024/11/27/%E5%85%B3%E4%BA%8E%E5%A4%84%E7%90%86CORS%E9%97%AE%E9%A2%98/","path":"2024/11/27/关于处理CORS问题/","title":"关于处理CORS问题"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>关于处理CORS问题 | duzhuo's-blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start --><script> let HEXO_MMEDIA_DATA = { js: [], css: [], aplayerData: [], metingData: [], artPlayerData: [], dplayerData: []}; </script><!-- hexo injector head_end end --><style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">duzhuo's-blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">学无止境</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#CORS%EF%BC%88%E8%B7%A8%E6%BA%90%E8%B5%84%E6%BA%90%E5%85%B1%E4%BA%AB%EF%BC%89%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">CORS（跨源资源共享）？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">解决方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E6%8E%A8%E8%8D%90"><span class="nav-number">3.</span> <span class="nav-text">相关推荐</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">duzhuo</p>
+  <div class="site-description" itemprop="description">记录，分享一些我觉得好玩的内容。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">70</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2024/11/27/%E5%85%B3%E4%BA%8E%E5%A4%84%E7%90%86CORS%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="duzhuo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="duzhuo's-blog">
+      <meta itemprop="description" content="记录，分享一些我觉得好玩的内容。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="关于处理CORS问题 | duzhuo's-blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          关于处理CORS问题
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-11-27 14:47:47 / 修改时间：14:48:41" itemprop="dateCreated datePublished" datetime="2024-11-27T14:47:47+08:00">2024-11-27</time>
+    </span>
+
+  
+    <span id="/2024/11/27/%E5%85%B3%E4%BA%8E%E5%A4%84%E7%90%86CORS%E9%97%AE%E9%A2%98/" class="post-meta-item twikoo_visitors" data-flag-title="关于处理CORS问题" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="CORS（跨源资源共享）？"><a href="#CORS（跨源资源共享）？" class="headerlink" title="CORS（跨源资源共享）？"></a>CORS（跨源资源共享）？</h2><blockquote>
+<p>以下内容引用自 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CORS">mdn web docs</a></p>
+<p><strong>跨源资源共享</strong>（<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Glossary/CORS">CORS</a>，或通俗地译为跨域资源共享）是一种基于 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Glossary/HTTP">HTTP</a> 头的机制，该机制通过允许服务器标示除了它自己以外的其他<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Glossary/Origin">源</a>（域、协议或端口），使得浏览器允许这些源访问加载自己的资源。跨源资源共享还通过一种机制来检查服务器是否会允许要发送的真实请求，该机制通过浏览器发起一个到服务器托管的跨源资源的“预检”请求。在预检中，浏览器发送的头中标示有 HTTP 方法和真实请求中会用到的头。</p>
+</blockquote>
+<p>举例：在 <code>http://localhost:8000</code> 的网页上使用 <code>fetch()</code> 对 <code>https://sm.ms/api/v2/</code> 这个图床的api接口发送请求即会产生CORS问题。</p>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><ul>
+<li><p>在Web服务器设置HTTP头部信息，比如<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Access-Control-Allow-Origin">Access-Control-Allow-Origin</a></p>
+<p>这里以 Nginx 为例：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># https://enable-cors.org/server_nginx.html</span></span><br><span class="line"><span class="comment"># 为nginx配置一个宽松的CORS（跨域资源共享）设置</span></span><br><span class="line"></span><br><span class="line"><span class="section">location</span> / &#123;</span><br><span class="line">    <span class="comment"># 处理预检请求（OPTIONS请求）</span></span><br><span class="line">    <span class="attribute">if</span> (<span class="variable">$request_method</span> = <span class="string">&#x27;OPTIONS&#x27;</span>) &#123;</span><br><span class="line">        <span class="comment"># 允许所有来源的请求</span></span><br><span class="line">        <span class="attribute">add_header</span> <span class="string">&#x27;Access-Control-Allow-Origin&#x27;</span> <span class="string">&#x27;*&#x27;</span>;</span><br><span class="line">        <span class="comment"># 允许的HTTP方法</span></span><br><span class="line">        <span class="attribute">add_header</span> <span class="string">&#x27;Access-Control-Allow-Methods&#x27;</span> <span class="string">&#x27;GET, POST, OPTIONS&#x27;</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 自定义头部和其他浏览器应该支持但可能不支持的头部</span></span><br><span class="line">        <span class="attribute">add_header</span> <span class="string">&#x27;Access-Control-Allow-Headers&#x27;</span> <span class="string">&#x27;DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range&#x27;</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 告诉客户端此预检信息有效期为20天（1728000秒）</span></span><br><span class="line">        <span class="attribute">add_header</span> <span class="string">&#x27;Access-Control-Max-Age&#x27;</span> <span class="number">1728000</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 返回一个空的响应体，状态码为204（无内容）</span></span><br><span class="line">        <span class="attribute">add_header</span> <span class="string">&#x27;Content-Type&#x27;</span> <span class="string">&#x27;text/plain; charset=utf-8&#x27;</span>;</span><br><span class="line">        <span class="attribute">add_header</span> <span class="string">&#x27;Content-Length&#x27;</span> <span class="number">0</span>;</span><br><span class="line">        <span class="attribute">return</span> <span class="number">204</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 处理POST请求</span></span><br><span class="line">    <span class="attribute">if</span> (<span class="variable">$request_method</span> = <span class="string">&#x27;POST&#x27;</span>) &#123;</span><br><span class="line">        <span class="comment"># 允许所有来源的请求</span></span><br><span class="line">        <span class="attribute">add_header</span> <span class="string">&#x27;Access-Control-Allow-Origin&#x27;</span> <span class="string">&#x27;*&#x27;</span> always;</span><br><span class="line">        <span class="comment"># 允许的HTTP方法</span></span><br><span class="line">        <span class="attribute">add_header</span> <span class="string">&#x27;Access-Control-Allow-Methods&#x27;</span> <span class="string">&#x27;GET, POST, OPTIONS&#x27;</span> always;</span><br><span class="line">        <span class="comment"># 允许的请求头部</span></span><br><span class="line">        <span class="attribute">add_header</span> <span class="string">&#x27;Access-Control-Allow-Headers&#x27;</span> <span class="string">&#x27;DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range&#x27;</span> always;</span><br><span class="line">        <span class="comment"># 允许客户端访问的响应头部</span></span><br><span class="line">        <span class="attribute">add_header</span> <span class="string">&#x27;Access-Control-Expose-Headers&#x27;</span> <span class="string">&#x27;Content-Length,Content-Range&#x27;</span> always;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 处理GET请求</span></span><br><span class="line">    <span class="attribute">if</span> (<span class="variable">$request_method</span> = <span class="string">&#x27;GET&#x27;</span>) &#123;</span><br><span class="line">        <span class="comment"># 允许所有来源的请求</span></span><br><span class="line">        <span class="attribute">add_header</span> <span class="string">&#x27;Access-Control-Allow-Origin&#x27;</span> <span class="string">&#x27;*&#x27;</span> always;</span><br><span class="line">        <span class="comment"># 允许的HTTP方法</span></span><br><span class="line">        <span class="attribute">add_header</span> <span class="string">&#x27;Access-Control-Allow-Methods&#x27;</span> <span class="string">&#x27;GET, POST, OPTIONS&#x27;</span> always;</span><br><span class="line">        <span class="comment"># 允许的请求头部</span></span><br><span class="line">        <span class="attribute">add_header</span> <span class="string">&#x27;Access-Control-Allow-Headers&#x27;</span> <span class="string">&#x27;DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range&#x27;</span> always;</span><br><span class="line">        <span class="comment"># 允许客户端访问的响应头部</span></span><br><span class="line">        <span class="attribute">add_header</span> <span class="string">&#x27;Access-Control-Expose-Headers&#x27;</span> <span class="string">&#x27;Content-Length,Content-Range&#x27;</span> always;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>使用CORS header proxy 服务器</p>
+<p>这里以 Cloudflare Workers 为例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// https://developers.cloudflare.com/workers/examples/cors-header-proxy/</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    <span class="keyword">async</span> <span class="title function_">fetch</span>(<span class="params">request</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> corsHeaders = &#123;</span><br><span class="line">            <span class="string">&quot;Access-Control-Allow-Origin&quot;</span>: <span class="string">&quot;*&quot;</span>, <span class="comment">// 允许所有来源的请求</span></span><br><span class="line">            <span class="string">&quot;Access-Control-Allow-Methods&quot;</span>: <span class="string">&quot;GET,HEAD,POST,OPTIONS&quot;</span>, <span class="comment">// 允许的HTTP方法</span></span><br><span class="line">            <span class="string">&quot;Access-Control-Max-Age&quot;</span>: <span class="string">&quot;86400&quot;</span>, <span class="comment">// 预检请求的缓存时间（24小时）</span></span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 远程第三方API的URL，该API没有实现CORS</span></span><br><span class="line">        <span class="keyword">const</span> <span class="variable constant_">API_URL</span> = <span class="string">&quot;https://examples.cloudflareworkers.com/demos/demoapi&quot;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// CORS反向代理的端点</span></span><br><span class="line">        <span class="keyword">const</span> <span class="variable constant_">PROXY_ENDPOINT</span> = <span class="string">&quot;/corsproxy/&quot;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 用于返回HTML响应的辅助函数</span></span><br><span class="line">        <span class="keyword">function</span> <span class="title function_">rawHtmlResponse</span>(<span class="params">html</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Response</span>(html, &#123;</span><br><span class="line">                <span class="attr">headers</span>: &#123;</span><br><span class="line">                    <span class="string">&quot;content-type&quot;</span>: <span class="string">&quot;text/html;charset=UTF-8&quot;</span>, <span class="comment">// 设置响应头为HTML</span></span><br><span class="line">                &#125;,</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 演示页面的HTML内容</span></span><br><span class="line">        <span class="keyword">const</span> <span class="variable constant_">DEMO_PAGE</span> = <span class="string">`</span></span><br><span class="line"><span class="string">        &lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="string">        &lt;html&gt;</span></span><br><span class="line"><span class="string">        &lt;body&gt;</span></span><br><span class="line"><span class="string">          &lt;h1&gt;API GET without CORS Proxy&lt;/h1&gt;</span></span><br><span class="line"><span class="string">          &lt;a target=&quot;_blank&quot; href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#Checking_that_the_fetch_was_successful&quot;&gt;Shows TypeError: Failed to fetch since CORS is misconfigured&lt;/a&gt;</span></span><br><span class="line"><span class="string">          &lt;p id=&quot;noproxy-status&quot;/&gt;</span></span><br><span class="line"><span class="string">          &lt;code id=&quot;noproxy&quot;&gt;Waiting&lt;/code&gt;</span></span><br><span class="line"><span class="string">          &lt;h1&gt;API GET with CORS Proxy&lt;/h1&gt;</span></span><br><span class="line"><span class="string">          &lt;p id=&quot;proxy-status&quot;/&gt;</span></span><br><span class="line"><span class="string">          &lt;code id=&quot;proxy&quot;&gt;Waiting&lt;/code&gt;</span></span><br><span class="line"><span class="string">          &lt;h1&gt;API POST with CORS Proxy + Preflight&lt;/h1&gt;</span></span><br><span class="line"><span class="string">          &lt;p id=&quot;proxypreflight-status&quot;/&gt;</span></span><br><span class="line"><span class="string">          &lt;code id=&quot;proxypreflight&quot;&gt;Waiting&lt;/code&gt;</span></span><br><span class="line"><span class="string">          &lt;script&gt;</span></span><br><span class="line"><span class="string">          let reqs = &#123;&#125;;</span></span><br><span class="line"><span class="string">          reqs.noproxy = () =&gt; &#123;</span></span><br><span class="line"><span class="string">            return fetch(&quot;<span class="subst">$&#123;API_URL&#125;</span>&quot;).then(r =&gt; r.json())</span></span><br><span class="line"><span class="string">          &#125;</span></span><br><span class="line"><span class="string">          reqs.proxy = async () =&gt; &#123;</span></span><br><span class="line"><span class="string">            let href = &quot;<span class="subst">$&#123;PROXY_ENDPOINT&#125;</span>?apiurl=<span class="subst">$&#123;API_URL&#125;</span>&quot;</span></span><br><span class="line"><span class="string">            return fetch(window.location.origin + href).then(r =&gt; r.json())</span></span><br><span class="line"><span class="string">          &#125;</span></span><br><span class="line"><span class="string">          reqs.proxypreflight = async () =&gt; &#123;</span></span><br><span class="line"><span class="string">            let href = &quot;<span class="subst">$&#123;PROXY_ENDPOINT&#125;</span>?apiurl=<span class="subst">$&#123;API_URL&#125;</span>&quot;</span></span><br><span class="line"><span class="string">            let response = await fetch(window.location.origin + href, &#123;</span></span><br><span class="line"><span class="string">              method: &quot;POST&quot;,</span></span><br><span class="line"><span class="string">              headers: &#123;</span></span><br><span class="line"><span class="string">                &quot;Content-Type&quot;: &quot;application/json&quot;</span></span><br><span class="line"><span class="string">              &#125;,</span></span><br><span class="line"><span class="string">              body: JSON.stringify(&#123;</span></span><br><span class="line"><span class="string">                msg: &quot;Hello world!&quot;</span></span><br><span class="line"><span class="string">              &#125;)</span></span><br><span class="line"><span class="string">            &#125;)</span></span><br><span class="line"><span class="string">            return response.json()</span></span><br><span class="line"><span class="string">          &#125;</span></span><br><span class="line"><span class="string">          (async () =&gt; &#123;</span></span><br><span class="line"><span class="string">          for (const [reqName, req] of Object.entries(reqs)) &#123;</span></span><br><span class="line"><span class="string">            try &#123;</span></span><br><span class="line"><span class="string">              let data = await req()</span></span><br><span class="line"><span class="string">              document.getElementById(reqName).innerHTML = JSON.stringify(data)</span></span><br><span class="line"><span class="string">            &#125; catch (e) &#123;</span></span><br><span class="line"><span class="string">              document.getElementById(reqName).innerHTML = e</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">          &#125;</span></span><br><span class="line"><span class="string">        &#125;)()</span></span><br><span class="line"><span class="string">          &lt;/script&gt;</span></span><br><span class="line"><span class="string">        &lt;/body&gt;</span></span><br><span class="line"><span class="string">        &lt;/html&gt;</span></span><br><span class="line"><span class="string">      `</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 处理请求的函数</span></span><br><span class="line">        <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">handleRequest</span>(<span class="params">request</span>) &#123;</span><br><span class="line">            <span class="keyword">const</span> url = <span class="keyword">new</span> <span class="title function_">URL</span>(request.<span class="property">url</span>);</span><br><span class="line">            <span class="keyword">let</span> apiUrl = url.<span class="property">searchParams</span>.<span class="title function_">get</span>(<span class="string">&quot;apiurl&quot;</span>); <span class="comment">// 获取请求中的apiurl参数</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (apiUrl == <span class="literal">null</span>) &#123;</span><br><span class="line">                apiUrl = <span class="variable constant_">API_URL</span>; <span class="comment">// 如果没有提供apiurl参数，则使用默认的API_URL</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 重写请求以指向API URL，并设置Origin头以避免CORS问题</span></span><br><span class="line">            request = <span class="keyword">new</span> <span class="title class_">Request</span>(apiUrl, request);</span><br><span class="line">            request.<span class="property">headers</span>.<span class="title function_">set</span>(<span class="string">&quot;Origin&quot;</span>, <span class="keyword">new</span> <span class="title function_">URL</span>(apiUrl).<span class="property">origin</span>);</span><br><span class="line">            <span class="keyword">let</span> response = <span class="keyword">await</span> <span class="title function_">fetch</span>(request);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 重新创建响应以便修改响应头</span></span><br><span class="line">            response = <span class="keyword">new</span> <span class="title class_">Response</span>(response.<span class="property">body</span>, response);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 设置CORS头</span></span><br><span class="line">            response.<span class="property">headers</span>.<span class="title function_">set</span>(<span class="string">&quot;Access-Control-Allow-Origin&quot;</span>, url.<span class="property">origin</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 添加Vary头以便浏览器正确缓存响应</span></span><br><span class="line">            response.<span class="property">headers</span>.<span class="title function_">append</span>(<span class="string">&quot;Vary&quot;</span>, <span class="string">&quot;Origin&quot;</span>);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> response;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 处理OPTIONS请求的函数</span></span><br><span class="line">        <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">handleOptions</span>(<span class="params">request</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (</span><br><span class="line">                request.<span class="property">headers</span>.<span class="title function_">get</span>(<span class="string">&quot;Origin&quot;</span>) !== <span class="literal">null</span> &amp;&amp;</span><br><span class="line">                request.<span class="property">headers</span>.<span class="title function_">get</span>(<span class="string">&quot;Access-Control-Request-Method&quot;</span>) !== <span class="literal">null</span> &amp;&amp;</span><br><span class="line">                request.<span class="property">headers</span>.<span class="title function_">get</span>(<span class="string">&quot;Access-Control-Request-Headers&quot;</span>) !== <span class="literal">null</span></span><br><span class="line">            ) &#123;</span><br><span class="line">                <span class="comment">// 处理CORS预检请求</span></span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Response</span>(<span class="literal">null</span>, &#123;</span><br><span class="line">                    <span class="attr">headers</span>: &#123;</span><br><span class="line">                        ...corsHeaders,</span><br><span class="line">                        <span class="string">&quot;Access-Control-Allow-Headers&quot;</span>: request.<span class="property">headers</span>.<span class="title function_">get</span>(</span><br><span class="line">                            <span class="string">&quot;Access-Control-Request-Headers&quot;</span>,</span><br><span class="line">                        ),</span><br><span class="line">                    &#125;,</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// 处理标准的OPTIONS请求</span></span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Response</span>(<span class="literal">null</span>, &#123;</span><br><span class="line">                    <span class="attr">headers</span>: &#123;</span><br><span class="line">                        <span class="title class_">Allow</span>: <span class="string">&quot;GET, HEAD, POST, OPTIONS&quot;</span>,</span><br><span class="line">                    &#125;,</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">const</span> url = <span class="keyword">new</span> <span class="title function_">URL</span>(request.<span class="property">url</span>);</span><br><span class="line">        <span class="keyword">if</span> (url.<span class="property">pathname</span>.<span class="title function_">startsWith</span>(<span class="variable constant_">PROXY_ENDPOINT</span>)) &#123;</span><br><span class="line">            <span class="keyword">if</span> (request.<span class="property">method</span> === <span class="string">&quot;OPTIONS&quot;</span>) &#123;</span><br><span class="line">                <span class="comment">// 处理CORS预检请求</span></span><br><span class="line">                <span class="keyword">return</span> <span class="title function_">handleOptions</span>(request);</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (</span><br><span class="line">                request.<span class="property">method</span> === <span class="string">&quot;GET&quot;</span> ||</span><br><span class="line">                request.<span class="property">method</span> === <span class="string">&quot;HEAD&quot;</span> ||</span><br><span class="line">                request.<span class="property">method</span> === <span class="string">&quot;POST&quot;</span></span><br><span class="line">            ) &#123;</span><br><span class="line">                <span class="comment">// 处理对API服务器的请求</span></span><br><span class="line">                <span class="keyword">return</span> <span class="title function_">handleRequest</span>(request);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Response</span>(<span class="literal">null</span>, &#123;</span><br><span class="line">                    <span class="attr">status</span>: <span class="number">405</span>,</span><br><span class="line">                    <span class="attr">statusText</span>: <span class="string">&quot;Method Not Allowed&quot;</span>, <span class="comment">// 返回405状态码，表示方法不允许</span></span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="title function_">rawHtmlResponse</span>(<span class="variable constant_">DEMO_PAGE</span>); <span class="comment">// 返回演示页面的HTML内容</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="相关推荐"><a href="#相关推荐" class="headerlink" title="相关推荐"></a>相关推荐</h2><p><a target="_blank" rel="noopener" href="https://github.com/Zibri/cloudflare-cors-anywhere">使用Cloudflare Workers转发任意请求 Zibri&#x2F;cloudflare-cors-anywhere</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/duzhuoshanwai/smms-proxy-workers">我写的smms-proxy-workers，用于代理smms图床api duzhuoshanwai&#x2F;smms-proxy-workers</a></p>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CORS/Errors">mdn web docs - CORS 错误</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/11/25/MongoDB%E4%B8%AD%E5%AE%9E%E7%8E%B0%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C%E5%88%86%E9%A1%B5/" rel="prev" title="MongoDB中实现查询结果分页">
+                  <i class="fa fa-angle-left"></i> MongoDB中实现查询结果分页
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">duzhuo</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: '32px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":true,"envId":"https://twikoo.saint1337.top/","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+<!-- hexo injector body_end start --><script src="/assets/mmedia/mmedia-loader.js"></script><!-- hexo injector body_end end -->
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body>
+</html>
