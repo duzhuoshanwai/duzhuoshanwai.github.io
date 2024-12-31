@@ -152,7 +152,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">71</span>
+          <span class="site-state-item-count">72</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -175,6 +175,111 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2022/10/22/TCP%E7%9A%84%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E4%B8%8E%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="duzhuo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="duzhuo's-blog">
+      <meta itemprop="description" content="记录，分享一些我觉得好玩的内容。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | duzhuo's-blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/10/22/TCP%E7%9A%84%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E4%B8%8E%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/" class="post-title-link" itemprop="url">TCP 的三次握手和四次挥手</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-10-22 12:33:19" itemprop="dateCreated datePublished" datetime="2022-10-22T12:33:19+08:00">2022-10-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-02-23 20:16:40" itemprop="dateModified" datetime="2024-02-23T20:16:40+08:00">2024-02-23</time>
+    </span>
+
+  
+    <span id="/2022/10/22/TCP%E7%9A%84%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E4%B8%8E%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/" class="post-meta-item twikoo_visitors" data-flag-title="TCP 的三次握手和四次挥手" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <ul>
+<li>本文来源 : <a target="_blank" rel="noopener" href="https://github.com/opsxin/markdown-notes/blob/master/Other/TCP/TCP%E7%9A%84%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E4%B8%8E%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B.md">链接</a></li>
+</ul>
+<h1 id="TCP-的三次握手和挥手"><a href="#TCP-的三次握手和挥手" class="headerlink" title="TCP 的三次握手和挥手"></a>TCP 的三次握手和挥手</h1><p>[TOC]</p>
+<h2 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h2><ul>
+<li>TCP 提供一种<strong>面向连接的、可靠的</strong>字节流服务。</li>
+<li>在一个 TCP 连接中，仅有两方进行彼此通信，广播和多播不能用于 TCP。</li>
+<li>TCP 使用校验和，确认和重传机制来保证可靠传输。</li>
+<li>TCP 给数据分节进行排序，并使用累积确认保证数据的顺序不变和非重复。</li>
+<li>TCP 使用滑动窗口机制来实现流量控制，通过动态改变窗口的大小进行拥塞控制。</li>
+</ul>
+<p><strong>注意</strong>：TCP 并不能保证数据一定会被对方接收到，因为这是不可能的。<strong>TCP 能够做到的是，如果有可能，就把数据尽可能递送到接收方</strong>，否则就（通过放弃重传并且中断连接这一手段）通知用户。因此准确说 TCP 也不是 100% 可靠的协议，它所能提供的是<strong>数据的可靠递送或故障的可靠通知</strong>。</p>
+<h2 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h2><p>三次握手（Three-way Handshake），是指建立一个 TCP 连接时，需要客户端和服务器总共发送 3 个包。</p>
+<p>三次握手的目的是连接服务器指定端口，建立 TCP 连接，并同步连接双方的序列号和确认号，交换 TCP 窗口大小信息。在 socket 编程中，客户端执行 <code>connect()</code> 时。将触发三次握手。</p>
+<h3 id="第一次握手（SYN-SEND）"><a href="#第一次握手（SYN-SEND）" class="headerlink" title="第一次握手（SYN_SEND）"></a>第一次握手（SYN_SEND）</h3>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/10/22/TCP%E7%9A%84%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E4%B8%8E%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1027,117 +1132,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/02/20/linux-cli-file-compress/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2022/02/20/linux-cli-file/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="duzhuo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="duzhuo's-blog">
-      <meta itemprop="description" content="记录，分享一些我觉得好玩的内容。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | duzhuo's-blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/02/20/linux-cli-file/" class="post-title-link" itemprop="url">Linux 文件内容查看编辑</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-02-20 15:09:06" itemprop="dateCreated datePublished" datetime="2022-02-20T15:09:06+08:00">2022-02-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-23 20:16:40" itemprop="dateModified" datetime="2024-02-23T20:16:40+08:00">2024-02-23</time>
-    </span>
-
-  
-    <span id="/2022/02/20/linux-cli-file/" class="post-meta-item twikoo_visitors" data-flag-title="Linux 文件内容查看编辑" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span id="twikoo_visitors"></span>
-    </span>
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="Linux-文件内容查看编辑"><a href="#Linux-文件内容查看编辑" class="headerlink" title="Linux 文件内容查看编辑"></a>Linux 文件内容查看编辑</h1><blockquote>
-<p>关键词：<code>cat</code>, <code>head</code>, <code>tail</code>, <code>more</code>, <code>less</code>, <code>sed</code>, <code>vi</code>, <code>grep</code></p>
-</blockquote>
-<h2 id="1-Linux-文件内容查看编辑要点"><a href="#1-Linux-文件内容查看编辑要点" class="headerlink" title="1. Linux 文件内容查看编辑要点"></a>1. Linux 文件内容查看编辑要点</h2><ul>
-<li>连接文件并打印到标准输出设备 - 使用 <a href="#cat">cat</a></li>
-<li>显示指定文件的开头若干行 - 使用 <a href="#head">head</a></li>
-<li>显示指定文件的末尾若干行，常用于实时打印日志文件内容 - 使用 <a href="#tail">tail</a></li>
-<li>显示文件内容，每次显示一屏 - 使用 <a href="#more">more</a></li>
-<li>显示文件内容，每次显示一屏 - 使用 <a href="#less">less</a></li>
-<li>自动编辑一个或多个文件；简化对文件的反复操作；编写转换程序等 - 使用 <a href="#sed">sed</a></li>
-<li>文本编辑器 - 使用 <a href="#vi">vi</a></li>
-<li>使用正则表达式搜索文本，并把匹配的行打印出来 - 使用 <a href="#grep">grep</a></li>
-</ul>
-<h2 id="2-命令常见用法"><a href="#2-命令常见用法" class="headerlink" title="2. 命令常见用法"></a>2. 命令常见用法</h2><h3 id="2-1-cat"><a href="#2-1-cat" class="headerlink" title="2.1. cat"></a>2.1. cat</h3><blockquote>
-<p>cat 命令用于连接文件并打印到标准输出设备上。</p>
-<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/cat">http://man.linuxde.net/cat</a></p>
-</blockquote>
-<p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> m1              <span class="comment"># 在屏幕上显示文件 ml 的内容</span></span><br><span class="line"><span class="built_in">cat</span> m1 m2           <span class="comment"># 同时显示文件 ml 和 m2 的内容</span></span><br><span class="line"><span class="built_in">cat</span> m1 m2 &gt; file    <span class="comment"># 将文件 ml 和 m2 合并后放入文件 file 中</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="2-2-head"><a href="#2-2-head" class="headerlink" title="2.2. head"></a>2.2. head</h3>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/02/20/linux-cli-file/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>

@@ -152,7 +152,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">71</span>
+          <span class="site-state-item-count">72</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -175,6 +175,100 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2024/07/27/jellyfin-api/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="duzhuo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="duzhuo's-blog">
+      <meta itemprop="description" content="记录，分享一些我觉得好玩的内容。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | duzhuo's-blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/07/27/jellyfin-api/" class="post-title-link" itemprop="url">关于jellyfin的api调用</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-07-27 17:37:11" itemprop="dateCreated datePublished" datetime="2024-07-27T17:37:11+08:00">2024-07-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-07-28 12:52:49" itemprop="dateModified" datetime="2024-07-28T12:52:49+08:00">2024-07-28</time>
+    </span>
+
+  
+    <span id="/2024/07/27/jellyfin-api/" class="post-meta-item twikoo_visitors" data-flag-title="关于jellyfin的api调用" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>前两天尝试写一个给jellyfin服务器添加演员信息的程序，读issue和参考别人的代码的时候发现很多验证的步骤比较过时，故自己写一点留档参考。</p>
+<p>swagger api文档 <a target="_blank" rel="noopener" href="http://localhost:8096/api-docs/swagger">http://localhost:8096/api-docs/swagger</a></p>
+<p>在请求头添加验证 <a target="_blank" rel="noopener" href="https://gist.github.com/nielsvanvelzen/ea047d9028f676185832e51ffaf12a6f">https://gist.github.com/nielsvanvelzen/ea047d9028f676185832e51ffaf12a6f</a></p>
+<p>服务端创建api密钥 <a target="_blank" rel="noopener" href="http://localhost:8096/web/#/dashboard/keys">http://localhost:8096/web/#/dashboard/keys</a></p>
+<p>userId获取 <a target="_blank" rel="noopener" href="http://localhost:8096/web/#/dashboard/users">http://localhost:8096/web/#/dashboard/users</a> 点击你想获得userId的用户并在url的query部分查看</p>
+<p>例如 <a target="_blank" rel="noopener" href="http://192.168.2.202:8096/web/#/dashboard/users/profile?userId=99e7058d92d34f74bd369728f432a0e2">http://192.168.2.202:8096/web/#/dashboard/users/profile?userId=99e7058d92d34f74bd369728f432a0e2</a></p>
+<h2 id="代码参考"><a href="#代码参考" class="headerlink" title="代码参考"></a>代码参考</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line">jellyfin_apiKey = <span class="string">&quot;3287930a2ab9422eaa6e1dc4a5f23c24&quot;</span></span><br><span class="line">jellyfin_host = <span class="string">&quot;http://192.168.2.202:8096&quot;</span></span><br><span class="line">jellyfin_userId = <span class="string">&quot;99e7058d92d34f74bd369728f432a0e2&quot;</span></span><br><span class="line"></span><br><span class="line">jellyfin_headers = &#123;</span><br><span class="line">    <span class="string">&#x27;accept&#x27;</span>: <span class="string">&#x27;*/*&#x27;</span>,</span><br><span class="line">    <span class="string">&quot;Authorization&quot;</span>: <span class="string">f&#x27;MediaBrowser Token=&quot;<span class="subst">&#123;jellyfin_apiKey&#125;</span>&quot;&#x27;</span>,</span><br><span class="line">    <span class="string">&quot;Content-Type&quot;</span>: <span class="string">&quot;application/json&quot;</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取全部演员信息，返回json</span></span><br><span class="line">response = requests.get(<span class="string">f&#x27;<span class="subst">&#123;jellyfin_host&#125;</span>/Persons?userId=<span class="subst">&#123;jellyfin_userId&#125;</span>&#x27;</span>,headers=jellyfin_headers)</span><br><span class="line"><span class="built_in">dict</span> = response.json()</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">dict</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取单个演员信息</span></span><br><span class="line">actor_name = <span class="string">&#x27;波多野結衣&#x27;</span></span><br><span class="line">response = requests.get(<span class="string">f&#x27;<span class="subst">&#123;jellyfin_host&#125;</span>/Persons/<span class="subst">&#123;actor_name&#125;</span>?userId=<span class="subst">&#123;jellyfin_userId&#125;</span>&#x27;</span>,headers=jellyfin_headers)</span><br><span class="line"><span class="built_in">dict</span> = response.json()</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">dict</span>)</span><br><span class="line"><span class="comment"># 修改演员Overview并提交</span></span><br><span class="line">actor_id = <span class="built_in">dict</span>[<span class="string">&quot;Id&quot;</span>]</span><br><span class="line"><span class="comment"># Overview支持html标签</span></span><br><span class="line"><span class="built_in">dict</span>[<span class="string">&quot;Overview&quot;</span>] = <span class="string">&quot;&quot;&quot;1988年5月24日生まれ&lt;br&gt;</span></span><br><span class="line"><span class="string">身長&lt;b&gt;163cm&lt;/b&gt;&lt;br&gt;</span></span><br><span class="line"><span class="string">&lt;b&gt;Ｂ88cm&lt;/b&gt;&lt;br&gt;</span></span><br><span class="line"><span class="string">&lt;b&gt;Ｗ59cm&lt;/b&gt;&lt;br&gt;</span></span><br><span class="line"><span class="string">&lt;b&gt;Ｈ85cm&lt;/b&gt;&lt;br&gt;</span></span><br><span class="line"><span class="string">ブラ &lt;b&gt;Eカップ&lt;/b&gt;&quot;&quot;&quot;</span></span><br><span class="line">response = requests.post(<span class="string">f&#x27;<span class="subst">&#123;jellyfin_host&#125;</span>/Items/<span class="subst">&#123;actor_id&#125;</span>?userId=<span class="subst">&#123;jellyfin_userId&#125;</span>&#x27;</span>, headers=jellyfin_headers,json=<span class="built_in">dict</span>)</span><br><span class="line"><span class="comment"># 成功返回204</span></span><br><span class="line"><span class="built_in">print</span>(response.status_code)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -985,122 +1079,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2024/02/28/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%A2%AB%E9%BB%91%E4%B9%8B%E5%90%8E%E5%AF%B9ssh%E6%9C%8D%E5%8A%A1%E7%9A%84%E4%BA%A1%E7%BE%8A%E8%A1%A5%E7%89%A2/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2024/02/24/%E5%B0%9D%E8%AF%95%E4%B8%BA%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%88%B7%E5%85%A5Armbian/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="duzhuo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="duzhuo's-blog">
-      <meta itemprop="description" content="记录，分享一些我觉得好玩的内容。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | duzhuo's-blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/02/24/%E5%B0%9D%E8%AF%95%E4%B8%BA%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%88%B7%E5%85%A5Armbian/" class="post-title-link" itemprop="url">尝试为电视盒子刷入Armbian</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-02-24 09:52:06" itemprop="dateCreated datePublished" datetime="2024-02-24T09:52:06+08:00">2024-02-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-26 11:13:57" itemprop="dateModified" datetime="2024-02-26T11:13:57+08:00">2024-02-26</time>
-    </span>
-
-  
-    <span id="/2024/02/24/%E5%B0%9D%E8%AF%95%E4%B8%BA%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%88%B7%E5%85%A5Armbian/" class="post-meta-item twikoo_visitors" data-flag-title="尝试为电视盒子刷入Armbian" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span id="twikoo_visitors"></span>
-    </span>
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><ul>
-<li><p>运营商的电视盒子一只 以晶晨芯片的CM311-1为例 <a target="_blank" rel="noopener" href="https://github.com/ophub/amlogic-s9xxx-armbian/blob/main/README.cn.md">查看目前可用的设备列表</a></p>
-</li>
-<li><p>双公头usb线 没有现成的可以用两根不要的线剥开对接四芯自己制作</p>
-</li>
-<li><p>一个闲置的空u盘</p>
-</li>
-<li><p>（可选)晶晨盒子短接神器 没有的话其实用镊子短接也可以</p>
-<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2024/02/24/m8dgyULcaBI5ehl.jpg"></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://download.saint1337.top/tools/%E8%BF%90%E8%90%A5%E5%95%86%E7%9B%92%E5%AD%90Armbian/">晶晨烧录工具Amlogic_USB_Burning_Tool</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://github.com/ophub/kernel/releases/tag/tools">选择合适的安卓底包用来开启adb</a>   <a target="_blank" rel="noopener" href="https://download.saint1337.top/tools/%E8%BF%90%E8%90%A5%E5%95%86%E7%9B%92%E5%AD%90Armbian/%E5%AE%89%E5%8D%93%E5%BA%95%E5%8C%85/">部分底包分流</a></p>
-</li>
-<li><p>adb工具 <a target="_blank" rel="noopener" href="https://www.xda-developers.com/install-adb-windows-macos-linux/">xda的安装教程参考</a> 或者使用开心电视助手替代 <a href>链接</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://etcher.balena.io/">balena etcher</a> 或者 <a target="_blank" rel="noopener" href="https://rufus.ie/zh/">rufus</a> 用来写入Armbian镜像到u盘</p>
-</li>
-</ul>
-<h2 id="刷入底包"><a href="#刷入底包" class="headerlink" title="刷入底包"></a>刷入底包</h2><p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2024/02/24/4ctyfg5TbmIhWl8.png" alt="Snipaste_2024-02-24_12-19-51.png"></p>
-<p>打开晶晨刷机工具，设置→导入镜像。</p>
-<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2024/02/24/MuJr4amDBENfAIq.png" alt="Snipaste_2024-02-24_12-22-46.png"></p>
-<p>点击开始后准备接入线。</p>
-<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2024/02/24/VwXUPdhJ7rEM4pG.jpg" alt="1000070790.jpg"></p>
-<p>关闭电源！！！ 插入刷机神器，双公线一头插入盒子靠近网口的那个usb口，另一头接入电脑usb口（2.0的可能好一点）。先在烧录工具上点开始，接入线，然后打开盒子上的电源开关等待烧录工具的提示即可。</p>
-<h2 id="刷入Armbian镜像到U盘"><a href="#刷入Armbian镜像到U盘" class="headerlink" title="刷入Armbian镜像到U盘"></a>刷入Armbian镜像到U盘</h2>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/02/24/%E5%B0%9D%E8%AF%95%E4%B8%BA%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%88%B7%E5%85%A5Armbian/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
