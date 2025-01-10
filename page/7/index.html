@@ -152,7 +152,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">72</span>
+          <span class="site-state-item-count">74</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -175,6 +175,225 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2022/02/20/ntp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="duzhuo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="duzhuo's-blog">
+      <meta itemprop="description" content="记录，分享一些我觉得好玩的内容。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | duzhuo's-blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/02/20/ntp/" class="post-title-link" itemprop="url">时间服务器-NTP</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-02-20 15:09:06" itemprop="dateCreated datePublished" datetime="2022-02-20T15:09:06+08:00">2022-02-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-02-23 20:16:40" itemprop="dateModified" datetime="2024-02-23T20:16:40+08:00">2024-02-23</time>
+    </span>
+
+  
+    <span id="/2022/02/20/ntp/" class="post-meta-item twikoo_visitors" data-flag-title="时间服务器-NTP" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="时间服务器-NTP"><a href="#时间服务器-NTP" class="headerlink" title="时间服务器 - NTP"></a>时间服务器 - NTP</h1><h2 id="一、NTP-简介"><a href="#一、NTP-简介" class="headerlink" title="一、NTP 简介"></a>一、NTP 简介</h2><p>网络时间协议（英语：Network Time Protocol，缩写：NTP）是在数据网络潜伏时间可变的计算机系统之间通过分组交换进行时钟同步的一个网络协议，位于 OSI 模型的应用层。自 1985 年以来，NTP 是目前仍在使用的最古老的互联网协议之一。NTP 由特拉华大学的 David L. Mills（英语：David L. Mills）设计。</p>
+<p><strong>NTP 意图将所有参与计算机的协调世界时（UTC）时间同步到几毫秒的误差内</strong>。</p>
+<p>NTP 要点：</p>
+<ul>
+<li>地球共有 24 个时区，而以格林威治时间 (GMT) 为标准时间；</li>
+<li>中国本地时间为 GMT +8 小时；</li>
+<li>最准确的时间为使用原子钟 (Atomic clock) 所计算的，例如 UTC (Coordinated Universal Time) 就是一例；</li>
+<li>Linux 系统本来就有两种时间，一种是 Linux 以 <code>1970/01/01</code> 开始计数的系统时间，一种则是 BIOS 记载的硬件时间；</li>
+<li>Linux 可以透过网络校时，最常见的网络校时为使用 NTP 服务器，这个服务启动在 <code>udp port 123</code>；</li>
+<li>时区档案主要放置于 <code>/usr/share/zoneinfo/</code> 目录下，而本地时区则参考 <code>/etc/localtime</code>；</li>
+<li>NTP 服务器为一种阶层式的服务，所以 NTP 服务器本来就会与上层时间服务器作时间的同步化， 因此 <code>nptd</code> 与 <code>ntpdate</code> 两个指令不可同时使用；</li>
+<li>NTP 服务器的联机状态可以使用 <code>ntpstat</code> 及 <code>ntpq -p</code> 来查询；</li>
+<li>NTP 提供的客户端软件为 <code>ntpdate</code> 这个指令；</li>
+<li>在 Linux 下想要手动处理时间时，需以 <code>date</code> 设定时间后，以 <code>hwclock -w</code> 来写入 BIOS 所记录的时间。</li>
+<li>NTP 服务器之间的时间误差不可超过 1000 秒，否则 NTP 服务会自动关闭。</li>
+</ul>
+<blockquote>
+<p>更多 NTP 详情可以参考：<a target="_blank" rel="noopener" href="http://cn.linux.vbird.org/linux_server/0440ntp.php">鸟哥的 Linux 私房菜– NTP 时间服务器</a></p>
+</blockquote>
+<h2 id="二、ntpd-服务"><a href="#二、ntpd-服务" class="headerlink" title="二、ntpd 服务"></a>二、ntpd 服务</h2><blockquote>
+<p>环境：CentOS</p>
+</blockquote>
+<h3 id="yum-安装"><a href="#yum-安装" class="headerlink" title="yum 安装"></a>yum 安装</h3>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/02/20/ntp/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2022/02/20/samba/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="duzhuo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="duzhuo's-blog">
+      <meta itemprop="description" content="记录，分享一些我觉得好玩的内容。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | duzhuo's-blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/02/20/samba/" class="post-title-link" itemprop="url">Samba</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-02-20 15:09:06" itemprop="dateCreated datePublished" datetime="2022-02-20T15:09:06+08:00">2022-02-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-02-23 20:16:40" itemprop="dateModified" datetime="2024-02-23T20:16:40+08:00">2024-02-23</time>
+    </span>
+
+  
+    <span id="/2022/02/20/samba/" class="post-meta-item twikoo_visitors" data-flag-title="Samba" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Samba-应用"><a href="#Samba-应用" class="headerlink" title="Samba 应用"></a>Samba 应用</h1><blockquote>
+<p>samba 是在 Linux 和 UNIX 系统上实现 SMB 协议的一个免费软件。</p>
+<p>samba 提供了在不同计算机（即使操作系统不同）上共享服务的能力。</p>
+<p>关键词：<code>samba</code>, <code>selinux</code></p>
+</blockquote>
+<h2 id="1-安装配置-samba"><a href="#1-安装配置-samba" class="headerlink" title="1. 安装配置 samba"></a>1. 安装配置 samba</h2><p>本文将以一个完整的示例来展示如何配置 samba 来实现 Linux 和 Windows 的文件共享。</p>
+<p>目标：假设希望共享 Linux 服务器上的 &#x2F;share&#x2F;fs 目录。</p>
+<h3 id="1-1-查看是否已经安装-samba"><a href="#1-1-查看是否已经安装-samba" class="headerlink" title="1.1. 查看是否已经安装 samba"></a>1.1. 查看是否已经安装 samba</h3><ul>
+<li>CentOS：<code>rpm -qa | grep samba</code></li>
+<li>Ubuntu：<code>dpkg -l | grep samba</code></li>
+</ul>
+<h3 id="1-2-安装-samba-工具"><a href="#1-2-安装-samba-工具" class="headerlink" title="1.2. 安装 samba 工具"></a>1.2. 安装 samba 工具</h3><ul>
+<li>CentOS：<code>yum install -y samba samba-client samba-common</code></li>
+<li>Ubuntu：<code>sudo apt-get install -y samba samba-client</code></li>
+</ul>
+<h3 id="1-3-配置-samba"><a href="#1-3-配置-samba" class="headerlink" title="1.3. 配置 samba"></a>1.3. 配置 samba</h3>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/02/20/samba/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -982,205 +1201,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2022/01/18/%E5%8C%BA%E5%88%92%E4%BB%A3%E7%A0%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="duzhuo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="duzhuo's-blog">
-      <meta itemprop="description" content="记录，分享一些我觉得好玩的内容。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | duzhuo's-blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/01/18/%E5%8C%BA%E5%88%92%E4%BB%A3%E7%A0%81/" class="post-title-link" itemprop="url">行政区划代码</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-01-18 17:55:06" itemprop="dateCreated datePublished" datetime="2022-01-18T17:55:06+08:00">2022-01-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-23 20:16:40" itemprop="dateModified" datetime="2024-02-23T20:16:40+08:00">2024-02-23</time>
-    </span>
-
-  
-    <span id="/2022/01/18/%E5%8C%BA%E5%88%92%E4%BB%A3%E7%A0%81/" class="post-meta-item twikoo_visitors" data-flag-title="行政区划代码" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span id="twikoo_visitors"></span>
-    </span>
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="县及县以上行政区划代码"><a href="#县及县以上行政区划代码" class="headerlink" title="县及县以上行政区划代码"></a>县及县以上行政区划代码</h1><p><a target="_blank" rel="noopener" href="https://gitter.im/cn/GB2260"><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://badges.gitter.im/Join%20Chat.svg" alt="Join the chat at https://gitter.im/cn/GB2260"></a><br><a href="spec.md"><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="http://img.shields.io/badge/GB%2FT-2260-blue.svg?style=flat" alt="GB/T 2260"></a></p>
-<p>中华人民共和国国家标准 GB&#x2F;T 2260 行政区划代码</p>
-<p>数据来源：</p>
-<ol>
-<li><a target="_blank" rel="noopener" href="http://www.stats.gov.cn/tjsj/tjbz/xzqhdm/">http://www.stats.gov.cn/tjsj/tjbz/xzqhdm/</a></li>
-<li><a target="_blank" rel="noopener" href="http://www.mca.gov.cn/article/sj/tjbz/a/">http://www.mca.gov.cn/article/sj/tjbz/a/</a></li>
-</ol>
-<p>你可以利用国家标准数据构建自己项目的数据库。</p>
-<h2 id="Badges"><a href="#Badges" class="headerlink" title="Badges"></a>Badges</h2><p>Badges with spec versions:</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/cn/GB2260/blob/v0.2/spec.md"><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://img.shields.io/badge/GB%2FT%202260-v0.2-blue.svg" alt="Spec v0.2"></a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Badge: https://img.shields.io/badge/GB%2FT%202260-v0.2-blue.svg</span><br><span class="line">Link: https://github.com/cn/GB2260/blob/v0.2/spec.md</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/01/18/%E5%8C%BA%E5%88%92%E4%BB%A3%E7%A0%81/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2022/01/15/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="duzhuo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="duzhuo's-blog">
-      <meta itemprop="description" content="记录，分享一些我觉得好玩的内容。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | duzhuo's-blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/01/15/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-01-15 04:05:06" itemprop="dateCreated datePublished" datetime="2022-01-15T04:05:06+08:00">2022-01-15</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-23 20:16:40" itemprop="dateModified" datetime="2024-02-23T20:16:40+08:00">2024-02-23</time>
-    </span>
-
-  
-    <span id="/2022/01/15/hello-world/" class="post-meta-item twikoo_visitors" data-flag-title="Hello World" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span id="twikoo_visitors"></span>
-    </span>
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/01/15/hello-world/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/8/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -1193,7 +1213,7 @@
 
   <div class="copyright">
     &copy; 
-    <span itemprop="copyrightYear">2024</span>
+    <span itemprop="copyrightYear">2025</span>
     <span class="with-love">
       <i class="fa fa-heart"></i>
     </span>
