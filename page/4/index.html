@@ -152,7 +152,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">74</span>
+          <span class="site-state-item-count">73</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -175,89 +175,6 @@
     </div>
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2023/09/12/phpMyAdmin-MySQL/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="duzhuo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="duzhuo's-blog">
-      <meta itemprop="description" content="记录，分享一些我觉得好玩的内容。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | duzhuo's-blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/09/12/phpMyAdmin-MySQL/" class="post-title-link" itemprop="url">phpMyAdmin + MySQL docker-compose.yaml</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-09-12 15:09:06" itemprop="dateCreated datePublished" datetime="2023-09-12T15:09:06+08:00">2023-09-12</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-23 20:16:40" itemprop="dateModified" datetime="2024-02-23T20:16:40+08:00">2024-02-23</time>
-    </span>
-
-  
-    <span id="/2023/09/12/phpMyAdmin-MySQL/" class="post-meta-item twikoo_visitors" data-flag-title="phpMyAdmin + MySQL docker-compose.yaml" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span id="twikoo_visitors"></span>
-    </span>
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">version: &#x27;3&#x27;</span><br><span class="line"></span><br><span class="line">networks:</span><br><span class="line">  mysql-phpmyadmin:</span><br><span class="line">    name: mysql-phpmyadmin</span><br><span class="line">    driver: bridge</span><br><span class="line"></span><br><span class="line">volumes:</span><br><span class="line">  mysqldata:</span><br><span class="line">    driver: local</span><br><span class="line">    driver_opts:</span><br><span class="line">      type: &#x27;none&#x27;</span><br><span class="line">      o: &#x27;bind&#x27;</span><br><span class="line">      device: &#x27;/home/duzhuo/docker/mysql/data&#x27;</span><br><span class="line"></span><br><span class="line">services:</span><br><span class="line">  mysql:</span><br><span class="line">    image: mysql</span><br><span class="line">    container_name: mysql</span><br><span class="line">    environment:</span><br><span class="line">      MYSQL_ROOT_PASSWORD: 123456</span><br><span class="line">      MYSQL_DATABASE: database</span><br><span class="line">      MYSQL_USER: duzhuo</span><br><span class="line">      MYSQL_PASSWORD: 123456</span><br><span class="line">    ports:</span><br><span class="line">      - &quot;33060:3306&quot;</span><br><span class="line">    volumes:</span><br><span class="line">      - mysqldata:/var/lib/mysql</span><br><span class="line">    networks:</span><br><span class="line">      # Connect the mysql container to the mysql-phpmyadmin network and set the alias as mysql</span><br><span class="line">      mysql-phpmyadmin:</span><br><span class="line">        aliases:</span><br><span class="line">          - mysql</span><br><span class="line"></span><br><span class="line">  phpmyadmin:</span><br><span class="line">    image: phpmyadmin</span><br><span class="line">    container_name: phpmyadmin</span><br><span class="line">    links:</span><br><span class="line">      - mysql</span><br><span class="line">    environment:</span><br><span class="line">      PMA_HOST: mysql</span><br><span class="line">      PMA_PORT: 3306</span><br><span class="line">    ports:</span><br><span class="line">      - 8081:80</span><br><span class="line">    networks:</span><br><span class="line">      # Connect the phpmyadmin container to the mysql-phpmyadmin network and set the alias as phpmyadmin</span><br><span class="line">      mysql-phpmyadmin:</span><br><span class="line">        aliases:</span><br><span class="line">          - phpmyadmin</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -1176,6 +1093,110 @@
 </ul>
 <h2 id="Reload-Config-And-Enjoy"><a href="#Reload-Config-And-Enjoy" class="headerlink" title="Reload Config And Enjoy !"></a>Reload Config And Enjoy !</h2><p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302222256214.png"></p>
 
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2023/02/06/VMware-tools-Issue/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="duzhuo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="duzhuo's-blog">
+      <meta itemprop="description" content="记录，分享一些我觉得好玩的内容。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | duzhuo's-blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/02/06/VMware-tools-Issue/" class="post-title-link" itemprop="url">VMware-tools 无法安装问题解决</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-02-06 09:29:00" itemprop="dateCreated datePublished" datetime="2023-02-06T09:29:00+08:00">2023-02-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-02-23 20:16:40" itemprop="dateModified" datetime="2024-02-23T20:16:40+08:00">2024-02-23</time>
+    </span>
+
+  
+    <span id="/2023/02/06/VMware-tools-Issue/" class="post-meta-item twikoo_visitors" data-flag-title="VMware-tools 无法安装问题解决" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><ul>
+<li>WMware版本 WMware Workstation PRO 16.2.3</li>
+<li>安装镜像版本:Windows7 x64</li>
+<li>自动安装的VMware Tools 版本为11.3.5<br>出现提示Windows无法验证此驱动程序软件发布者<br>导致出错无法安装</li>
+</ul>
+<h3 id="图示如下"><a href="#图示如下" class="headerlink" title="图示如下"></a>图示如下</h3><p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302060941347.png"><br><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302060941335.png"><br><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302060941323.png"></p>
+<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><ul>
+<li>安装 VMware Tools 11.0.0</li>
+<li>挂载iso镜像到虚拟机</li>
+<li>运行setup64.exe</li>
+<li>安装成功后重启</li>
+</ul>
+<h3 id="图示如下-1"><a href="#图示如下-1" class="headerlink" title="图示如下"></a>图示如下</h3><p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302060941309.png"><br><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302060941297.png"><br><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302060941281.png"><br><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302060941271.png"><br><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302060941258.png"><br><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302060941246.png"></p>
+<h2 id="相关下载链接与分流"><a href="#相关下载链接与分流" class="headerlink" title="相关下载链接与分流"></a>相关下载链接与分流</h2><p><a target="_blank" rel="noopener" href="http://softwareupdate.vmware.com/cds/vmw-desktop/ws/15.5.0/14665864/windows/packages/tools-windows.tar">VM-tools</a><br><a target="_blank" rel="noopener" href="https://dlink.host/sharepoint/aHR0cHM6Ly9zYWludDEzMzctbXkuc2hhcmVwb2ludC5jb20vOnU6L2cvcGVyc29uYWwvZHV6aHVvX3NhaW50MTMzN19vbm1pY3Jvc29mdF9jb20vRWFsZ0UyeWMtZUpEdTdaZW1ZWlllX1VCakF4cFNzd2d1NlNqNDU1dzZqdVFLZz9lPXk3MGhETQ.iso">VM-tools OneDrive分流</a></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/02/06/VMware-tools-Issue/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 

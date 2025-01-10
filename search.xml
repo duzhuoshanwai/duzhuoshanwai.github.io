@@ -3766,12 +3766,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>使用column工具格式化文本输出</title>
-    <url>/2025/01/10/%E4%BD%BF%E7%94%A8column%E5%B7%A5%E5%85%B7%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%96%87%E6%9C%AC%E8%BE%93%E5%87%BA/</url>
-    <content><![CDATA[<span id="more"></span>
-]]></content>
-  </entry>
-  <entry>
     <title>使用个人用户免费的ubuntu-pro</title>
     <url>/2024/07/02/%E4%BD%BF%E7%94%A8%E4%B8%AA%E4%BA%BA%E7%94%A8%E6%88%B7%E5%85%8D%E8%B4%B9%E7%9A%84ubuntu-pro/</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Ubuntu发行版的终端广告（<a href="https://bugs.launchpad.net/ubuntu/+source/ubuntu-advantage-tools/+bug/1950692">Bug #1950692</a>）和snap（<a href="https://blog.linuxmint.com/?p=3766">Mint Blog中的观点</a>）一直是令人诟病的内容，也是我切换到Debian的原因。</p>
