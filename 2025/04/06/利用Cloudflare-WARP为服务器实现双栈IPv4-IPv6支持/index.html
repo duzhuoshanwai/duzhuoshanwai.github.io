@@ -19,33 +19,32 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"blog.saint1337.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":true,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="前言Ubuntu发行版的终端广告（Bug #1950692）和snap（Mint Blog中的观点）一直是令人诟病的内容，也是我切换到Debian的原因。 但是，今天还是要注册一下Ubuntu Pro，毕竟还有一些以前安装的机器在运行着已经EOL的Ubuntu版本，需要安装一些安全补丁。   操作打开Ubuntu Pro的网站 https:&#x2F;&#x2F;ubuntu.com&#x2F;pro 点击Get Ubuntu">
+    <meta name="description" content="场景需求：购买的VPS仅分配有IPv4&#x2F;IPv6地址，但需访问仅支持IPv4&#x2F;IPv6的服务。我们可以利用Cloudflare WARP的代理隧道，为这台VPS添加双栈网络访问支持。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用个人用户免费的ubuntu-pro">
-<meta property="og:url" content="https://blog.saint1337.top/2024/07/02/%E4%BD%BF%E7%94%A8%E4%B8%AA%E4%BA%BA%E7%94%A8%E6%88%B7%E5%85%8D%E8%B4%B9%E7%9A%84ubuntu-pro/index.html">
+<meta property="og:title" content="利用Cloudflare WARP为服务器实现双栈IPv4&#x2F;IPv6支持">
+<meta property="og:url" content="https://blog.saint1337.top/2025/04/06/%E5%88%A9%E7%94%A8Cloudflare-WARP%E4%B8%BA%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%9E%E7%8E%B0%E5%8F%8C%E6%A0%88IPv4-IPv6%E6%94%AF%E6%8C%81/index.html">
 <meta property="og:site_name" content="duzhuo&#39;s-blog">
-<meta property="og:description" content="前言Ubuntu发行版的终端广告（Bug #1950692）和snap（Mint Blog中的观点）一直是令人诟病的内容，也是我切换到Debian的原因。 但是，今天还是要注册一下Ubuntu Pro，毕竟还有一些以前安装的机器在运行着已经EOL的Ubuntu版本，需要安装一些安全补丁。   操作打开Ubuntu Pro的网站 https:&#x2F;&#x2F;ubuntu.com&#x2F;pro 点击Get Ubuntu">
+<meta property="og:description" content="场景需求：购买的VPS仅分配有IPv4&#x2F;IPv6地址，但需访问仅支持IPv4&#x2F;IPv6的服务。我们可以利用Cloudflare WARP的代理隧道，为这台VPS添加双栈网络访问支持。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://s2.loli.net/2024/07/02/zZBFKwEVMH9YtJP.jpg">
-<meta property="og:image" content="https://s2.loli.net/2024/07/02/d8pbVvHP6MJm5yF.png">
-<meta property="article:published_time" content="2024-07-02T12:28:20.000Z">
-<meta property="article:modified_time" content="2024-07-02T12:28:59.490Z">
+<meta property="og:image" content="https://images.duzhuo.icu/2025-04/2025-04-07-22:49:39-cf449c8673430b05.webp">
+<meta property="article:published_time" content="2025-04-06T13:43:43.000Z">
+<meta property="article:modified_time" content="2025-04-07T14:54:04.362Z">
 <meta property="article:author" content="duzhuo">
 <meta property="article:tag" content="博客">
 <meta property="article:tag" content="技术">
 <meta property="article:tag" content="分享">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://s2.loli.net/2024/07/02/zZBFKwEVMH9YtJP.jpg">
+<meta name="twitter:image" content="https://images.duzhuo.icu/2025-04/2025-04-07-22:49:39-cf449c8673430b05.webp">
 
 
-<link rel="canonical" href="https://blog.saint1337.top/2024/07/02/%E4%BD%BF%E7%94%A8%E4%B8%AA%E4%BA%BA%E7%94%A8%E6%88%B7%E5%85%8D%E8%B4%B9%E7%9A%84ubuntu-pro/">
+<link rel="canonical" href="https://blog.saint1337.top/2025/04/06/%E5%88%A9%E7%94%A8Cloudflare-WARP%E4%B8%BA%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%9E%E7%8E%B0%E5%8F%8C%E6%A0%88IPv4-IPv6%E6%94%AF%E6%8C%81/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.saint1337.top/2024/07/02/%E4%BD%BF%E7%94%A8%E4%B8%AA%E4%BA%BA%E7%94%A8%E6%88%B7%E5%85%8D%E8%B4%B9%E7%9A%84ubuntu-pro/","path":"2024/07/02/使用个人用户免费的ubuntu-pro/","title":"使用个人用户免费的ubuntu-pro"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.saint1337.top/2025/04/06/%E5%88%A9%E7%94%A8Cloudflare-WARP%E4%B8%BA%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%9E%E7%8E%B0%E5%8F%8C%E6%A0%88IPv4-IPv6%E6%94%AF%E6%8C%81/","path":"2025/04/06/利用Cloudflare-WARP为服务器实现双栈IPv4-IPv6支持/","title":"利用Cloudflare WARP为服务器实现双栈IPv4/IPv6支持"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>使用个人用户免费的ubuntu-pro | duzhuo's-blog</title>
+<title>利用Cloudflare WARP为服务器实现双栈IPv4/IPv6支持 | duzhuo's-blog</title>
   
 
 
@@ -145,7 +144,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text">操作</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-cloudflare-warp-%E8%BD%AF%E4%BB%B6%E5%8C%85"><span class="nav-number">1.</span> <span class="nav-text">安装 cloudflare-warp 软件包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E8%BF%9E%E6%8E%A5"><span class="nav-number">2.</span> <span class="nav-text">配置连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5"><span class="nav-number">3.</span> <span class="nav-text">检查</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -191,7 +190,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2024/07/02/%E4%BD%BF%E7%94%A8%E4%B8%AA%E4%BA%BA%E7%94%A8%E6%88%B7%E5%85%8D%E8%B4%B9%E7%9A%84ubuntu-pro/">
+    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2025/04/06/%E5%88%A9%E7%94%A8Cloudflare-WARP%E4%B8%BA%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%9E%E7%8E%B0%E5%8F%8C%E6%A0%88IPv4-IPv6%E6%94%AF%E6%8C%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -204,12 +203,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="使用个人用户免费的ubuntu-pro | duzhuo's-blog">
+      <meta itemprop="name" content="利用Cloudflare WARP为服务器实现双栈IPv4/IPv6支持 | duzhuo's-blog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          使用个人用户免费的ubuntu-pro
+          利用Cloudflare WARP为服务器实现双栈IPv4/IPv6支持
         </h1>
 
         <div class="post-meta-container">
@@ -219,13 +218,19 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2024-07-02 20:28:20 / 修改时间：20:28:59" itemprop="dateCreated datePublished" datetime="2024-07-02T20:28:20+08:00">2024-07-02</time>
+      <time title="创建时间：2025-04-06 21:43:43" itemprop="dateCreated datePublished" datetime="2025-04-06T21:43:43+08:00">2025-04-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-04-07 22:54:04" itemprop="dateModified" datetime="2025-04-07T22:54:04+08:00">2025-04-07</time>
     </span>
 
   
-    <span id="/2024/07/02/%E4%BD%BF%E7%94%A8%E4%B8%AA%E4%BA%BA%E7%94%A8%E6%88%B7%E5%85%8D%E8%B4%B9%E7%9A%84ubuntu-pro/" class="post-meta-item twikoo_visitors" data-flag-title="使用个人用户免费的ubuntu-pro" title="阅读次数">
+    <span id="/2025/04/06/%E5%88%A9%E7%94%A8Cloudflare-WARP%E4%B8%BA%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%9E%E7%8E%B0%E5%8F%8C%E6%A0%88IPv4-IPv6%E6%94%AF%E6%8C%81/" class="post-meta-item twikoo_visitors" data-flag-title="利用Cloudflare WARP为服务器实现双栈IPv4/IPv6支持" title="阅读次数">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -241,22 +246,21 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Ubuntu发行版的终端广告（<a target="_blank" rel="noopener" href="https://bugs.launchpad.net/ubuntu/+source/ubuntu-advantage-tools/+bug/1950692">Bug #1950692</a>）和snap（<a target="_blank" rel="noopener" href="https://blog.linuxmint.com/?p=3766">Mint Blog中的观点</a>）一直是令人诟病的内容，也是我切换到Debian的原因。</p>
-<p>但是，今天还是要注册一下Ubuntu Pro，毕竟还有一些以前安装的机器在运行着已经EOL的Ubuntu版本，需要安装一些安全补丁。</p>
-<img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2024/07/02/zZBFKwEVMH9YtJP.jpg" alt="pic" height="400">
+    <div class="post-body" itemprop="articleBody"><p><strong>场景需求</strong>：<br>购买的VPS仅分配有IPv4&#x2F;IPv6地址，但需访问仅支持IPv4&#x2F;IPv6的服务。我们可以利用Cloudflare WARP的代理隧道，为这台VPS添加双栈网络访问支持。</p>
+<span id="more"></span>
 
-<h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><p>打开Ubuntu Pro的网站 <a target="_blank" rel="noopener" href="https://ubuntu.com/pro">https://ubuntu.com/pro</a></p>
-<p>点击Get Ubuntu Pro now并选择Myself，点击Register登录帐号确认。</p>
-<p>获取Token，复制下面的命令。</p>
-<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2024/07/02/d8pbVvHP6MJm5yF.png" alt="Screenshot_20240702_201037-1.png"></p>
-<p>这里以**Ubuntu 18.04 LTS (Bionic Beaver)**为例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@ecs-a2nGQ:~<span class="comment"># pro version</span></span><br><span class="line">32.3~18.04</span><br></pre></td></tr></table></figure>
+<h3 id="安装-cloudflare-warp-软件包"><a href="#安装-cloudflare-warp-软件包" class="headerlink" title="安装 cloudflare-warp 软件包"></a>安装 cloudflare-warp 软件包</h3><p>参考：<a target="_blank" rel="noopener" href="https://pkg.cloudflareclient.com/">https://pkg.cloudflareclient.com/</a></p>
+<h3 id="配置连接"><a href="#配置连接" class="headerlink" title="配置连接"></a>配置连接</h3><p>注：我组网使用的是<code>Tailscale</code>，所以下面只考虑使用普通的<code>WARP Client</code>而不使用<code>Cloudflare Zero Trust</code>，如有需要请查看<a target="_blank" rel="noopener" href="https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/">https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/</a>。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">使用前必须先注册这个client</span></span><br><span class="line">root@zgocloud:~# warp-cli registration new</span><br><span class="line">Success</span><br><span class="line">root@zgocloud:~# warp-cli registration show</span><br><span class="line">Account type: Free</span><br><span class="line">ID: 264065dc-95fc-400b-a8de-b89a5795275d</span><br><span class="line">Device ID: 264065dc-95fc-400b-a8de-b89a5795275d</span><br><span class="line">Public key: 3059301306072a8648ce3d020106082a8648ce3d03010703420004d13537da59da4a1587e0c730bc213d651d8327ef6e01da64302518fe7ac2ba826f7d712c9ed5ff8ea6e6570491b5989c4cd684a9fddf4d4ec3bcb0c6d0b6eaac</span><br><span class="line">Account ID: 8856c87c48e94d92acf64f02216d26d1</span><br><span class="line">License: 170D3IGe-x8NR01Z6-HtL0751B</span><br><span class="line">root@zgocloud:~# </span><br></pre></td></tr></table></figure>
 
-<p>如果不存在<code>pro</code> 命令，使用 <code>sudo apt update &amp;&amp; sudo apt install ubuntu-advantage-tools</code>安装。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">root@ecs-a2nGQ:~<span class="comment"># sudo pro attach &#123;token&#125;</span></span><br><span class="line">Enabling Ubuntu Pro: ESM Apps</span><br><span class="line">Ubuntu Pro: ESM Apps enabled</span><br><span class="line">Enabling Ubuntu Pro: ESM Infra</span><br><span class="line">Ubuntu Pro: ESM Infra enabled</span><br><span class="line">Enabling Livepatch</span><br><span class="line">Livepatch enabled</span><br><span class="line">This machine is now attached to <span class="string">&#x27;Ubuntu Pro - free personal subscription&#x27;</span></span><br><span class="line"></span><br><span class="line">SERVICE          ENTITLED  STATUS       DESCRIPTION</span><br><span class="line">cc-eal           <span class="built_in">yes</span>       disabled     Common Criteria EAL2 Provisioning Packages</span><br><span class="line">cis              <span class="built_in">yes</span>       disabled     Security compliance and audit tools</span><br><span class="line">esm-apps         <span class="built_in">yes</span>       enabled      Expanded Security Maintenance <span class="keyword">for</span> Applications</span><br><span class="line">esm-infra        <span class="built_in">yes</span>       enabled      Expanded Security Maintenance <span class="keyword">for</span> Infrastructure</span><br><span class="line">fips             <span class="built_in">yes</span>       disabled     NIST-certified FIPS crypto packages</span><br><span class="line">fips-updates     <span class="built_in">yes</span>       disabled     FIPS compliant crypto packages with stable security updates</span><br><span class="line">livepatch        <span class="built_in">yes</span>       enabled      Canonical Livepatch service</span><br><span class="line">ros              <span class="built_in">yes</span>       disabled     Security Updates <span class="keyword">for</span> the Robot Operating System</span><br><span class="line">ros-updates      <span class="built_in">yes</span>       disabled     All Updates <span class="keyword">for</span> the Robot Operating System</span><br><span class="line"></span><br><span class="line">NOTICES</span><br><span class="line">Operation <span class="keyword">in</span> progress: pro attach</span><br><span class="line"></span><br><span class="line">For a list of all Ubuntu Pro services, run <span class="string">&#x27;pro status --all&#x27;</span></span><br><span class="line">Enable services with: pro <span class="built_in">enable</span> &lt;service&gt;</span><br><span class="line"></span><br><span class="line">     Account: &#123;you_email_address&#125;</span><br><span class="line">Subscription: Ubuntu Pro - free personal subscription</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">root@ecs-a2nGQ:~<span class="comment"># apt update</span></span><br><span class="line">Hit:1 http://security.ubuntu.com/ubuntu bionic-security InRelease</span><br><span class="line">Hit:2 http://archive.ubuntu.com/ubuntu bionic InRelease                 </span><br><span class="line">Hit:3 http://archive.ubuntu.com/ubuntu bionic-updates InRelease         </span><br><span class="line">Hit:4 http://archive.ubuntu.com/ubuntu bionic-backports InRelease                                </span><br><span class="line">Hit:5 https://esm.ubuntu.com/apps/ubuntu bionic-apps-security InRelease                          </span><br><span class="line">Hit:6 https://esm.ubuntu.com/apps/ubuntu bionic-apps-updates InRelease</span><br><span class="line">Hit:7 https://esm.ubuntu.com/infra/ubuntu bionic-infra-security InRelease</span><br><span class="line">Hit:8 https://esm.ubuntu.com/infra/ubuntu bionic-infra-updates InRelease</span><br><span class="line">Reading package lists... Done                     </span><br><span class="line">Building dependency tree       </span><br><span class="line">Reading state information... Done</span><br><span class="line">123 packages can be upgraded. Run <span class="string">&#x27;apt list --upgradable&#x27;</span> to see them.</span><br><span class="line">root@ecs-a2nGQ:~<span class="comment"># </span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>管理隧道IP范围（需要添加你需要保留的IP段，比如为服务器添加IPv6访问能力就需要添加绕过IPv4全段）</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">排除所有IPv4流量</span></span><br><span class="line">warp-cli tunnel ip add-range 0.0.0.0/0</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">排除所有IPv6流量</span></span><br><span class="line">warp-cli tunnel ip add-range ::/0</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看已配置的IP范围</span></span><br><span class="line">root@zgocloud:~# warp-cli tunnel ip list</span><br><span class="line">Excluded routes:</span><br><span class="line">  10.0.0.0/8</span><br><span class="line">  100.64.0.0/10</span><br><span class="line">  169.254.0.0/16</span><br><span class="line">  172.16.0.0/12</span><br><span class="line">  192.0.0.0/24</span><br><span class="line">  192.168.0.0/16</span><br><span class="line">  224.0.0.0/24</span><br><span class="line">  240.0.0.0/4</span><br><span class="line">  239.255.255.250/32</span><br><span class="line">  255.255.255.255/32</span><br><span class="line">  fe80::/10</span><br><span class="line">  fd00::/8</span><br><span class="line">  ff01::/16</span><br><span class="line">  ff02::/16</span><br><span class="line">  ff03::/16</span><br><span class="line">  ff04::/16</span><br><span class="line">  ff05::/16</span><br><span class="line">  fc00::/7</span><br><span class="line">  17.249.0.0/16</span><br><span class="line">  17.252.0.0/16</span><br><span class="line">  17.57.144.0/22</span><br><span class="line">  17.188.128.0/18</span><br><span class="line">  17.188.20.0/23</span><br><span class="line">  2620:149:a44::/48</span><br><span class="line">  2403:300:a42::/48</span><br><span class="line">  2403:300:a51::/48</span><br><span class="line">  2a01:b740:a42::/48</span><br><span class="line">  0.0.0.0/0 (CLI exclude)</span><br></pre></td></tr></table></figure>
 
-<p>upgrade 之后重启机器，完成更新。</p>
+<h3 id="检查"><a href="#检查" class="headerlink" title="检查"></a>检查</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@zgocloud:~# curl -6 ip.sb</span><br><span class="line">2a09:bac5:636a:1173::2bd:d4</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://images.duzhuo.icu/2025-04/2025-04-07-22:49:39-cf449c8673430b05.webp"></p>
 
     </div>
 
@@ -270,14 +274,11 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2024/06/19/python%E4%B8%ADmain%E5%87%BD%E6%95%B0%E7%9A%84%E4%BD%BF%E7%94%A8/" rel="prev" title="Python中main函数的使用">
-                  <i class="fa fa-angle-left"></i> Python中main函数的使用
+                <a href="/2025/03/01/AI%E7%AC%91%E8%AF%9D%E4%B9%8B%E7%8C%B4%E5%AD%90%E6%9C%89%E6%9E%AA/" rel="prev" title="AI笑话之猴子有枪">
+                  <i class="fa fa-angle-left"></i> AI笑话之猴子有枪
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2024/07/04/CVE-2024-6387%E6%BC%8F%E6%B4%9EDebian%E4%BF%AE%E5%A4%8D/" rel="next" title="CVE-2024-6387漏洞Debian修复">
-                  CVE-2024-6387漏洞Debian修复 <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>

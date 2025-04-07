@@ -152,7 +152,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">74</span>
+          <span class="site-state-item-count">75</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -175,6 +175,113 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2023/02/22/ClashX+UnblockNeteaseMusic/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="duzhuo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="duzhuo's-blog">
+      <meta itemprop="description" content="记录，分享一些我觉得好玩的内容。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | duzhuo's-blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/02/22/ClashX+UnblockNeteaseMusic/" class="post-title-link" itemprop="url">ClashX Pro + UnblockNeteaseMusic</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-02-22 21:31:06" itemprop="dateCreated datePublished" datetime="2023-02-22T21:31:06+08:00">2023-02-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-02-23 20:16:40" itemprop="dateModified" datetime="2024-02-23T20:16:40+08:00">2024-02-23</time>
+    </span>
+
+  
+    <span id="/2023/02/22/ClashX+UnblockNeteaseMusic/" class="post-meta-item twikoo_visitors" data-flag-title="ClashX Pro + UnblockNeteaseMusic" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><ul>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/UnblockNeteaseMusic/server">UnblockNeteaseMusic&#x2F;server</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://install.appcenter.ms/users/clashx/apps/clashx-pro/distribution_groups/public">ClashX Pro</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://d1.music.126.net/dmusic/NeteaseMusic_2.3.12_956_web.dmg">网易云音乐 2.3.12_956</a></p>
+</li>
+<li><p>安装证书 <a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/nondanee/UnblockNeteaseMusic/master/ca.crt">ca.crt</a></p>
+</li>
+</ul>
+<h2 id="ClashX-Pro-设置并添加规则"><a href="#ClashX-Pro-设置并添加规则" class="headerlink" title="ClashX Pro 设置并添加规则"></a>ClashX Pro 设置并添加规则</h2><ul>
+<li><p>开启 Enhanced mode</p>
+<ul>
+<li>Enhanced mode Config → DNS mode → Mapping</li>
+</ul>
+</li>
+<li><p>编辑 config.yaml</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">proxies:</span></span><br><span class="line">  <span class="bullet">-</span> &#123; <span class="attr">name:</span> <span class="string">NeteaseMusicUnlock</span>, <span class="attr">type:</span> <span class="string">http</span>, <span class="attr">server:</span> <span class="number">192.168</span><span class="number">.1</span><span class="number">.2</span>, <span class="attr">port:</span> <span class="number">8080</span> &#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">proxy-groups:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">NeteaseMusic</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">select</span></span><br><span class="line"><span class="attr">proxies:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DIRECT</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">NeteaseMusicUnlock</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">rules:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,music.163.com,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,music.126.net,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,163yun.com,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,api.iplay.163.com,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,apm.music.163.com,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,apm3.music.163.com,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,interface.music.163.com,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,interface3.music.163.com,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,mam.netease.com,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">DOMAIN-SUFFIX,hz.netease.com,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,39.105.63.80/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,45.254.48.1/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,47.100.127.239/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,59.111.21.14/31,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,59.111.179.214/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,59.111.181.38/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,59.111.181.60/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,59.111.160.195/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,59.111.160.197/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,59.111.181.35/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,59.111.238.29/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,101.71.154.241/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,103.126.92.132/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,103.126.92.133/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,112.13.119.17/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,112.13.122.1/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,115.236.118.33/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,115.236.121.1/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,118.24.63.156/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,193.112.159.225/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,223.252.199.66/32,NeteaseMusic</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">IP-CIDR,223.252.199.67/32,NeteaseMusic</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="Reload-Config-And-Enjoy"><a href="#Reload-Config-And-Enjoy" class="headerlink" title="Reload Config And Enjoy !"></a>Reload Config And Enjoy !</h2><p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202302222256214.png"></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1016,109 +1123,6 @@
 <li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/moxiaoan/p/5683743.html">CentOS7 使用 firewalld 打开关闭防火墙与端口</a></li>
 </ul>
 
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2022/02/20/iptables/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="duzhuo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="duzhuo's-blog">
-      <meta itemprop="description" content="记录，分享一些我觉得好玩的内容。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | duzhuo's-blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/02/20/iptables/" class="post-title-link" itemprop="url">Iptables 应用</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-02-20 15:09:06" itemprop="dateCreated datePublished" datetime="2022-02-20T15:09:06+08:00">2022-02-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-23 20:16:40" itemprop="dateModified" datetime="2024-02-23T20:16:40+08:00">2024-02-23</time>
-    </span>
-
-  
-    <span id="/2022/02/20/iptables/" class="post-meta-item twikoo_visitors" data-flag-title="Iptables 应用" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span id="twikoo_visitors"></span>
-    </span>
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="Iptables-应用"><a href="#Iptables-应用" class="headerlink" title="Iptables 应用"></a>Iptables 应用</h1><blockquote>
-<p><em>iptables</em> 是一个配置 Linux 内核 <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/index.php/Firewall">防火墙</a> 的命令行工具，是 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Netfilter">netfilter</a> 项目的一部分。 可以直接配置，也可以通过许多前端和图形界面配置。</p>
-<p>iptables 也经常代指该内核级防火墙。iptables 用于 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Ipv4">ipv4</a>，<em>ip6tables</em> 用于 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Ipv6">ipv6</a>。</p>
-<p><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/index.php/Nftables">nftables</a> 已经包含在 <a target="_blank" rel="noopener" href="http://www.phoronix.com/scan.php?page=news_item&px=MTQ5MDU">Linux kernel 3.13</a> 中，以后会取代 iptables 成为主要的 Linux 防火墙工具。</p>
-<p>环境：CentOS7</p>
-</blockquote>
-<h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h2><p><strong>iptables 可以检测、修改、转发、重定向和丢弃 IPv4 数据包</strong>。</p>
-<p>过滤 IPv4 数据包的代码已经内置于内核中，并且按照不同的目的被组织成 <strong>表</strong> 的集合。<strong>表</strong> 由一组预先定义的 <strong>链</strong> 组成，<strong>链</strong>包含遍历顺序规则。每一条规则包含一个谓词的潜在匹配和相应的动作（称为 <strong>目标</strong>），如果谓词为真，该动作会被执行。也就是说条件匹配。</p>
-<h2 id="2-安装-iptables"><a href="#2-安装-iptables" class="headerlink" title="2. 安装 iptables"></a>2. 安装 iptables</h2><p>（1）禁用 firewalld</p>
-<p>CentOS 7 上默认安装了 firewalld 作为防火墙，使用 iptables 建议关闭并禁用 firewalld。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld</span><br></pre></td></tr></table></figure>
-
-<p>（2）安装 iptables</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/02/20/iptables/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
       
     </div>
 

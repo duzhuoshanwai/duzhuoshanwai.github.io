@@ -4745,6 +4745,26 @@
 ]]></content>
   </entry>
   <entry>
+    <title>利用Cloudflare WARP为服务器实现双栈IPv4/IPv6支持</title>
+    <url>/2025/04/06/%E5%88%A9%E7%94%A8Cloudflare-WARP%E4%B8%BA%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%9E%E7%8E%B0%E5%8F%8C%E6%A0%88IPv4-IPv6%E6%94%AF%E6%8C%81/</url>
+    <content><![CDATA[<p><strong>场景需求</strong>：<br>购买的VPS仅分配有IPv4&#x2F;IPv6地址，但需访问仅支持IPv4&#x2F;IPv6的服务。我们可以利用Cloudflare WARP的代理隧道，为这台VPS添加双栈网络访问支持。</p>
+<span id="more"></span>
+
+<h3 id="安装-cloudflare-warp-软件包"><a href="#安装-cloudflare-warp-软件包" class="headerlink" title="安装 cloudflare-warp 软件包"></a>安装 cloudflare-warp 软件包</h3><p>参考：<a href="https://pkg.cloudflareclient.com/">https://pkg.cloudflareclient.com/</a></p>
+<h3 id="配置连接"><a href="#配置连接" class="headerlink" title="配置连接"></a>配置连接</h3><p>注：我组网使用的是<code>Tailscale</code>，所以下面只考虑使用普通的<code>WARP Client</code>而不使用<code>Cloudflare Zero Trust</code>，如有需要请查看<a href="https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/">https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/</a>。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">使用前必须先注册这个client</span></span><br><span class="line">root@zgocloud:~# warp-cli registration new</span><br><span class="line">Success</span><br><span class="line">root@zgocloud:~# warp-cli registration show</span><br><span class="line">Account type: Free</span><br><span class="line">ID: 264065dc-95fc-400b-a8de-b89a5795275d</span><br><span class="line">Device ID: 264065dc-95fc-400b-a8de-b89a5795275d</span><br><span class="line">Public key: 3059301306072a8648ce3d020106082a8648ce3d03010703420004d13537da59da4a1587e0c730bc213d651d8327ef6e01da64302518fe7ac2ba826f7d712c9ed5ff8ea6e6570491b5989c4cd684a9fddf4d4ec3bcb0c6d0b6eaac</span><br><span class="line">Account ID: 8856c87c48e94d92acf64f02216d26d1</span><br><span class="line">License: 170D3IGe-x8NR01Z6-HtL0751B</span><br><span class="line">root@zgocloud:~# </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>管理隧道IP范围（需要添加你需要保留的IP段，比如为服务器添加IPv6访问能力就需要添加绕过IPv4全段）</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">排除所有IPv4流量</span></span><br><span class="line">warp-cli tunnel ip add-range 0.0.0.0/0</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">排除所有IPv6流量</span></span><br><span class="line">warp-cli tunnel ip add-range ::/0</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看已配置的IP范围</span></span><br><span class="line">root@zgocloud:~# warp-cli tunnel ip list</span><br><span class="line">Excluded routes:</span><br><span class="line">  10.0.0.0/8</span><br><span class="line">  100.64.0.0/10</span><br><span class="line">  169.254.0.0/16</span><br><span class="line">  172.16.0.0/12</span><br><span class="line">  192.0.0.0/24</span><br><span class="line">  192.168.0.0/16</span><br><span class="line">  224.0.0.0/24</span><br><span class="line">  240.0.0.0/4</span><br><span class="line">  239.255.255.250/32</span><br><span class="line">  255.255.255.255/32</span><br><span class="line">  fe80::/10</span><br><span class="line">  fd00::/8</span><br><span class="line">  ff01::/16</span><br><span class="line">  ff02::/16</span><br><span class="line">  ff03::/16</span><br><span class="line">  ff04::/16</span><br><span class="line">  ff05::/16</span><br><span class="line">  fc00::/7</span><br><span class="line">  17.249.0.0/16</span><br><span class="line">  17.252.0.0/16</span><br><span class="line">  17.57.144.0/22</span><br><span class="line">  17.188.128.0/18</span><br><span class="line">  17.188.20.0/23</span><br><span class="line">  2620:149:a44::/48</span><br><span class="line">  2403:300:a42::/48</span><br><span class="line">  2403:300:a51::/48</span><br><span class="line">  2a01:b740:a42::/48</span><br><span class="line">  0.0.0.0/0 (CLI exclude)</span><br></pre></td></tr></table></figure>
+
+<h3 id="检查"><a href="#检查" class="headerlink" title="检查"></a>检查</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">root@zgocloud:~# curl -6 ip.sb</span><br><span class="line">2a09:bac5:636a:1173::2bd:d4</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://images.duzhuo.icu/2025-04/2025-04-07-22:49:39-cf449c8673430b05.webp"></p>
+]]></content>
+  </entry>
+  <entry>
     <title>csgo练习服务器</title>
     <url>/csgo-server.html</url>
     <content><![CDATA[<h1 id="CSGO练习服务器"><a href="#CSGO练习服务器" class="headerlink" title="CSGO练习服务器"></a>CSGO练习服务器</h1><h2 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h2><ul>
