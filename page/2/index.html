@@ -152,7 +152,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">75</span>
+          <span class="site-state-item-count">76</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -175,6 +175,134 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2024/09/24/%E5%85%B3%E4%BA%8E%E5%9C%A8%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E5%AD%98%E5%82%A8%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81%E5%92%8C%E9%AA%8C%E8%AF%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="duzhuo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="duzhuo's-blog">
+      <meta itemprop="description" content="记录，分享一些我觉得好玩的内容。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | duzhuo's-blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/09/24/%E5%85%B3%E4%BA%8E%E5%9C%A8%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E5%AD%98%E5%82%A8%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81%E5%92%8C%E9%AA%8C%E8%AF%81/" class="post-title-link" itemprop="url">关于在数据库中存储用户密码和验证</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-09-24 12:19:11 / 修改时间：13:50:10" itemprop="dateCreated datePublished" datetime="2024-09-24T12:19:11+08:00">2024-09-24</time>
+    </span>
+
+  
+    <span id="/2024/09/24/%E5%85%B3%E4%BA%8E%E5%9C%A8%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E5%AD%98%E5%82%A8%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81%E5%92%8C%E9%AA%8C%E8%AF%81/" class="post-meta-item twikoo_visitors" data-flag-title="关于在数据库中存储用户密码和验证" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="数据库中加密存储密码和验证密码的步骤"><a href="#数据库中加密存储密码和验证密码的步骤" class="headerlink" title="数据库中加密存储密码和验证密码的步骤"></a>数据库中加密存储密码和验证密码的步骤</h2><p><strong>以下内容来自ChatGLM</strong></p>
+<h3 id="存储密码"><a href="#存储密码" class="headerlink" title="存储密码"></a>存储密码</h3><ol>
+<li><strong>生成盐（Salt）</strong>：<ul>
+<li>为每个用户生成一个随机盐。</li>
+</ul>
+</li>
+<li><strong>密码与盐结合</strong>：<ul>
+<li>将用户密码与盐值结合。</li>
+</ul>
+</li>
+<li><strong>加密</strong>：<ul>
+<li>使用上述算法对结合后的密码进行加密。</li>
+</ul>
+</li>
+<li><strong>存储</strong>：<ul>
+<li>将加密后的密码（哈希值）和盐存储在数据库中。</li>
+</ul>
+</li>
+</ol>
+<h3 id="验证密码"><a href="#验证密码" class="headerlink" title="验证密码"></a>验证密码</h3><ol>
+<li><p><strong>从数据库中取出盐和哈希值</strong>：</p>
+<ul>
+<li>在用户尝试登录时，系统需要从数据库中检索与该用户账户关联的盐值和之前存储的哈希密码。</li>
+</ul>
+</li>
+<li><p><strong>使用相同的算法和盐对用户输入的密码进行加密</strong>：</p>
+<ul>
+<li>将用户输入的密码与从数据库中取出的盐值结合，然后使用相同的加密算法对结合后的密码进行加密。</li>
+</ul>
+</li>
+<li><p><strong>比较加密后的值与数据库中的哈希值是否相同</strong>：</p>
+<ul>
+<li>将新计算出的哈希值与数据库中存储的哈希值进行比较。如果两者匹配，说明用户输入的密码正确；如果不匹配，说明密码错误。</li>
+</ul>
+</li>
+</ol>
+<p><strong>关于盐：</strong></p>
+<p>内容来自 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/xjnotxj/p/12716981.html">https://www.cnblogs.com/xjnotxj/p/12716981.html</a></p>
+<ul>
+<li>盐不能太短</li>
+<li>盐不能重复使用（否则一破解，所有的都遭殃）</li>
+<li>盐随机变化（例如，虽用户名不重复，但用户名不能拿来当盐）</li>
+</ul>
+<h2 id="TypeScript-代码实现"><a href="#TypeScript-代码实现" class="headerlink" title="TypeScript 代码实现"></a>TypeScript 代码实现</h2>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/09/24/%E5%85%B3%E4%BA%8E%E5%9C%A8%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E5%AD%98%E5%82%A8%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81%E5%92%8C%E9%AA%8C%E8%AF%81/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -951,97 +1079,6 @@
 <p>找到<code>from inspect import ArgSpec</code>替换成<code>from inspect import FullArgSpec as ArgSpec</code></p>
 <p>或者升级sqlacodegen版本到3.0.0 rc3以上。来源：<a target="_blank" rel="noopener" href="https://github.com/agronholm/sqlacodegen/issues/239#issuecomment-1871370700">https://github.com/agronholm/sqlacodegen/issues/239#issuecomment-1871370700</a></p>
 
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2024/06/01/%E6%B5%81%E5%BC%8F%E4%B8%8E%E9%9D%9E%E6%B5%81%E5%BC%8F%E5%A4%A7%E5%9E%8B%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%EF%BC%9A%E4%BA%86%E8%A7%A3%E5%AE%9E%E6%97%B6%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%B7%AE%E5%BC%82/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="duzhuo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="duzhuo's-blog">
-      <meta itemprop="description" content="记录，分享一些我觉得好玩的内容。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | duzhuo's-blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/06/01/%E6%B5%81%E5%BC%8F%E4%B8%8E%E9%9D%9E%E6%B5%81%E5%BC%8F%E5%A4%A7%E5%9E%8B%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%EF%BC%9A%E4%BA%86%E8%A7%A3%E5%AE%9E%E6%97%B6%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%B7%AE%E5%BC%82/" class="post-title-link" itemprop="url">流式与非流式大型语言模型：了解实时应用程序的差异</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2024-06-01 09:48:00 / 修改时间：09:49:12" itemprop="dateCreated datePublished" datetime="2024-06-01T09:48:00+08:00">2024-06-01</time>
-    </span>
-
-  
-    <span id="/2024/06/01/%E6%B5%81%E5%BC%8F%E4%B8%8E%E9%9D%9E%E6%B5%81%E5%BC%8F%E5%A4%A7%E5%9E%8B%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%EF%BC%9A%E4%BA%86%E8%A7%A3%E5%AE%9E%E6%97%B6%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%B7%AE%E5%BC%82/" class="post-meta-item twikoo_visitors" data-flag-title="流式与非流式大型语言模型：了解实时应用程序的差异" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span id="twikoo_visitors"></span>
-    </span>
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>原文链接：<a target="_blank" rel="noopener" href="https://medium.com/@koutsiyrgken/the-streaming-revolution-how-ais-real-time-language-models-are-changing-the-game-d9d0beb18ae2">https:&#x2F;&#x2F;medium.com&#x2F;@koutsiyrgken&#x2F;the-streaming-revolution-how-ais-real-time-language-models-are-changing-the-game-d9d0beb18ae2</a></p>
-<p>翻译：GPT</p>
-<p>在人工智能和自然语言处理领域，大型语言模型已经成为焦点。这些模型由先进的算法和海量数据集驱动，能够理解和生成类似人类的文本。然而，在大型语言模型的领域中，有一个重要的区别——流式模型与非流式模型。理解这一差异至关重要，尤其是在涉及实时应用时。</p>
-<h3 id="大型语言模型的崛起"><a href="#大型语言模型的崛起" class="headerlink" title="大型语言模型的崛起"></a>大型语言模型的崛起</h3><p>大型语言模型，如GPT-3及其后继者，改变了我们与技术互动的方式。它们使得聊天机器人、虚拟助手和内容生成引擎变得更加对话化、信息化和上下文感知。但是，为了有效地利用这些模型，理解流式与非流式模型的范式非常重要。</p>
-<h3 id="非流式大型语言模型"><a href="#非流式大型语言模型" class="headerlink" title="非流式大型语言模型"></a>非流式大型语言模型</h3><p>首先，让我们了解非流式大型语言模型。这些模型类似于传统的文本生成器，需要在生成响应之前提供整个输入。换句话说，它们将输入作为一个整体进行处理，然后生成相应的输出。这种方法适用于实时交互不是主要关注点的任务。</p>
-<p>例如，当你在搜索引擎中输入查询时，搜索引擎通常会使用非流式模型来处理你的查询并返回搜索结果。对于大多数用户来说，接收搜索结果的延迟可以忽略不计，因此实时处理不是首要任务。</p>
-<h3 id="流式大型语言模型"><a href="#流式大型语言模型" class="headerlink" title="流式大型语言模型"></a>流式大型语言模型</h3><p>另一方面，流式大型语言模型旨在处理连续的、实时的或互动的输入。它们以流式方式处理数据，使其能够在输入到达时实时提供响应。这使得它们非常适合低延迟和即时互动至关重要的应用。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/06/01/%E6%B5%81%E5%BC%8F%E4%B8%8E%E9%9D%9E%E6%B5%81%E5%BC%8F%E5%A4%A7%E5%9E%8B%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%EF%BC%9A%E4%BA%86%E8%A7%A3%E5%AE%9E%E6%97%B6%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%B7%AE%E5%BC%82/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
       
     </div>
 

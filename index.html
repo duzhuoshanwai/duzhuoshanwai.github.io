@@ -152,7 +152,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">75</span>
+          <span class="site-state-item-count">76</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -175,6 +175,100 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2025/05/11/Python3-14%E6%96%B0%E7%89%B9%E6%80%A7Template-Strings-t-string%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="duzhuo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="duzhuo's-blog">
+      <meta itemprop="description" content="记录，分享一些我觉得好玩的内容。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | duzhuo's-blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/05/11/Python3-14%E6%96%B0%E7%89%B9%E6%80%A7Template-Strings-t-string%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B/" class="post-title-link" itemprop="url">Python3.14新特性Template Strings(t-string)使用示例</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-05-11 18:53:43" itemprop="dateCreated datePublished" datetime="2025-05-11T18:53:43+08:00">2025-05-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-05-12 00:10:26" itemprop="dateModified" datetime="2025-05-12T00:10:26+08:00">2025-05-12</time>
+    </span>
+
+  
+    <span id="/2025/05/11/Python3-14%E6%96%B0%E7%89%B9%E6%80%A7Template-Strings-t-string%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B/" class="post-meta-item twikoo_visitors" data-flag-title="Python3.14新特性Template Strings(t-string)使用示例" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>Python中可能已经有很多类似模板字符串的东西，但都和 PEP 750 中的 string.templatelib 不一样</strong></p>
+<p>比如：<a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3.13/library/string.html#string.Template">string.Template</a> 、<a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3.13/library/string.html#string.Formatter">string.Formatter&#x2F;str.format()</a> 、 <a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3.13/reference/lexical_analysis.html#f-strings">f-string</a> 和<code>%</code>这种上古写法。</p>
+<p>在 <a target="_blank" rel="noopener" href="https://peps.python.org/pep-0750/#motivation">PEP 750中提到的Motivation</a>中指出f-string的语法虽然方便，但经常会因为操作者处理SQL语句或者HTML文档时直接拼接导致出现安全漏洞。<br>（实话说这里确实挺抽象的。f-string没有任何问题，问题出在程序员没有对输入的内容进行预处理而直接拼接。）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>name = <span class="string">&#x27;duzhuo&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>template = t<span class="string">&#x27;Hello,&#123;name&#125;&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>template</span><br><span class="line">Template(strings=(<span class="string">&#x27;Hello,&#x27;</span>, <span class="string">&#x27;&#x27;</span>), interpolations=(Interpolation(<span class="string">&#x27;duzhuo&#x27;</span>, <span class="string">&#x27;name&#x27;</span>, <span class="literal">None</span>, <span class="string">&#x27;&#x27;</span>),))</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/05/11/Python3-14%E6%96%B0%E7%89%B9%E6%80%A7Template-Strings-t-string%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -984,134 +1078,6 @@
 <li>熊德 4v5打了40min两个盾拆掉高地</li>
 </ol>
 
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2024/09/24/%E5%85%B3%E4%BA%8E%E5%9C%A8%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E5%AD%98%E5%82%A8%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81%E5%92%8C%E9%AA%8C%E8%AF%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="duzhuo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="duzhuo's-blog">
-      <meta itemprop="description" content="记录，分享一些我觉得好玩的内容。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | duzhuo's-blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/09/24/%E5%85%B3%E4%BA%8E%E5%9C%A8%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E5%AD%98%E5%82%A8%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81%E5%92%8C%E9%AA%8C%E8%AF%81/" class="post-title-link" itemprop="url">关于在数据库中存储用户密码和验证</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2024-09-24 12:19:11 / 修改时间：13:50:10" itemprop="dateCreated datePublished" datetime="2024-09-24T12:19:11+08:00">2024-09-24</time>
-    </span>
-
-  
-    <span id="/2024/09/24/%E5%85%B3%E4%BA%8E%E5%9C%A8%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E5%AD%98%E5%82%A8%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81%E5%92%8C%E9%AA%8C%E8%AF%81/" class="post-meta-item twikoo_visitors" data-flag-title="关于在数据库中存储用户密码和验证" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span id="twikoo_visitors"></span>
-    </span>
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="数据库中加密存储密码和验证密码的步骤"><a href="#数据库中加密存储密码和验证密码的步骤" class="headerlink" title="数据库中加密存储密码和验证密码的步骤"></a>数据库中加密存储密码和验证密码的步骤</h2><p><strong>以下内容来自ChatGLM</strong></p>
-<h3 id="存储密码"><a href="#存储密码" class="headerlink" title="存储密码"></a>存储密码</h3><ol>
-<li><strong>生成盐（Salt）</strong>：<ul>
-<li>为每个用户生成一个随机盐。</li>
-</ul>
-</li>
-<li><strong>密码与盐结合</strong>：<ul>
-<li>将用户密码与盐值结合。</li>
-</ul>
-</li>
-<li><strong>加密</strong>：<ul>
-<li>使用上述算法对结合后的密码进行加密。</li>
-</ul>
-</li>
-<li><strong>存储</strong>：<ul>
-<li>将加密后的密码（哈希值）和盐存储在数据库中。</li>
-</ul>
-</li>
-</ol>
-<h3 id="验证密码"><a href="#验证密码" class="headerlink" title="验证密码"></a>验证密码</h3><ol>
-<li><p><strong>从数据库中取出盐和哈希值</strong>：</p>
-<ul>
-<li>在用户尝试登录时，系统需要从数据库中检索与该用户账户关联的盐值和之前存储的哈希密码。</li>
-</ul>
-</li>
-<li><p><strong>使用相同的算法和盐对用户输入的密码进行加密</strong>：</p>
-<ul>
-<li>将用户输入的密码与从数据库中取出的盐值结合，然后使用相同的加密算法对结合后的密码进行加密。</li>
-</ul>
-</li>
-<li><p><strong>比较加密后的值与数据库中的哈希值是否相同</strong>：</p>
-<ul>
-<li>将新计算出的哈希值与数据库中存储的哈希值进行比较。如果两者匹配，说明用户输入的密码正确；如果不匹配，说明密码错误。</li>
-</ul>
-</li>
-</ol>
-<p><strong>关于盐：</strong></p>
-<p>内容来自 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/xjnotxj/p/12716981.html">https://www.cnblogs.com/xjnotxj/p/12716981.html</a></p>
-<ul>
-<li>盐不能太短</li>
-<li>盐不能重复使用（否则一破解，所有的都遭殃）</li>
-<li>盐随机变化（例如，虽用户名不重复，但用户名不能拿来当盐）</li>
-</ul>
-<h2 id="TypeScript-代码实现"><a href="#TypeScript-代码实现" class="headerlink" title="TypeScript 代码实现"></a>TypeScript 代码实现</h2>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/09/24/%E5%85%B3%E4%BA%8E%E5%9C%A8%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E5%AD%98%E5%82%A8%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81%E5%92%8C%E9%AA%8C%E8%AF%81/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
       
     </div>
 
