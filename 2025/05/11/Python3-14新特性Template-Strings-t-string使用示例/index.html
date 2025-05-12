@@ -14,10 +14,10 @@
 
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.saint1337.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":true,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.saint1337.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.23.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true,"trigger":"auto"}}</script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/config.min.js" defer></script>
 
     <meta name="description" content="Python中可能已经有很多类似模板字符串的东西，但都和 PEP 750 中的 string.templatelib 不一样 比如：string.Template 、string.Formatter&#x2F;str.format() 、 f-string 和%这种上古写法。 在 PEP 750中提到的Motivation中指出f-string的语法虽然方便，但经常会因为操作者处理SQL语句或者H">
 <meta property="og:type" content="article">
@@ -38,7 +38,6 @@
 <link rel="canonical" href="https://blog.saint1337.top/2025/05/11/Python3-14%E6%96%B0%E7%89%B9%E6%80%A7Template-Strings-t-string%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B/">
 
 
-
 <script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.saint1337.top/2025/05/11/Python3-14%E6%96%B0%E7%89%B9%E6%80%A7Template-Strings-t-string%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B/","path":"2025/05/11/Python3-14新特性Template-Strings-t-string使用示例/","title":"Python3.14新特性Template Strings(t-string)使用示例"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
@@ -47,6 +46,28 @@
 
 
 
+
+
+
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/components/prism-core.min.js" integrity="sha256-bKrTFt2ZHyT4AE4LnBnAVctYKf9l6XP77kBvltgbjn4=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha256-9cmf7tcLdXpKsPi/2AWE93PbZpTp4M4tqzFk+lWomjU=" crossorigin="anonymous" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/utils.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/motion.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/sidebar.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/next-boot.min.js" defer></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/third-party/search/local-search.min.js" defer></script>
+
+
+
+
+
+
+
+  
 
 
 
@@ -91,7 +112,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -102,25 +123,25 @@
 
 
   <div class="search-pop-overlay">
-    <div class="popup search-popup"><div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off" maxlength="80"
-           placeholder="搜索..." spellcheck="false"
-           type="search" class="search-input">
-  </div>
-  <span class="popup-btn-close" role="button">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div class="search-result-container no-result">
-  <div class="search-result-icon">
-    <i class="fa fa-spinner fa-pulse fa-5x"></i>
-  </div>
-</div>
-
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -166,6 +187,11 @@
       </div>
   </nav>
 </div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/duzhuoshanwai" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;duzhuoshanwai" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
 
         </div>
       </div>
@@ -247,12 +273,78 @@
     <div class="post-body" itemprop="articleBody"><p><strong>Python中可能已经有很多类似模板字符串的东西，但都和 PEP 750 中的 string.templatelib 不一样</strong></p>
 <p>比如：<a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3.13/library/string.html#string.Template">string.Template</a> 、<a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3.13/library/string.html#string.Formatter">string.Formatter&#x2F;str.format()</a> 、 <a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3.13/reference/lexical_analysis.html#f-strings">f-string</a> 和<code>%</code>这种上古写法。</p>
 <p>在 <a target="_blank" rel="noopener" href="https://peps.python.org/pep-0750/#motivation">PEP 750中提到的Motivation</a>中指出f-string的语法虽然方便，但经常会因为操作者处理SQL语句或者HTML文档时直接拼接导致出现安全漏洞。<br>（实话说这里确实挺抽象的。f-string没有任何问题，问题出在程序员没有对输入的内容进行预处理而直接拼接。）</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>name = <span class="string">&#x27;duzhuo&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>template = t<span class="string">&#x27;Hello,&#123;name&#125;&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>template</span><br><span class="line">Template(strings=(<span class="string">&#x27;Hello,&#x27;</span>, <span class="string">&#x27;&#x27;</span>), interpolations=(Interpolation(<span class="string">&#x27;duzhuo&#x27;</span>, <span class="string">&#x27;name&#x27;</span>, <span class="literal">None</span>, <span class="string">&#x27;&#x27;</span>),))</span><br></pre></td></tr></table></figure>
+<pre class="language-python" data-language="python"><code class="language-python">&gt;&gt;&gt; name &#x3D; &#39;duzhuo&#39;
+&gt;&gt;&gt; template &#x3D; t&#39;Hello,&#123;name&#125;&#39;
+&gt;&gt;&gt; template
+Template(strings&#x3D;(&#39;Hello,&#39;, &#39;&#39;), interpolations&#x3D;(Interpolation(&#39;duzhuo&#39;, &#39;name&#39;, None, &#39;&#39;),))</code></pre>
 <span id="more"></span>
 
-<h3 id="SQL参数化查询"><a href="#SQL参数化查询" class="headerlink" title="SQL参数化查询"></a>SQL参数化查询</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> string.templatelib <span class="keyword">import</span> Template, Interpolation</span><br><span class="line"><span class="keyword">import</span> sqlite3</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">run_query</span>(<span class="params">db, template: Template</span>):</span><br><span class="line">    parts = []</span><br><span class="line">    params = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> template:</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">type</span>(i) <span class="keyword">is</span> <span class="built_in">str</span>:</span><br><span class="line">            parts.append(i)</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">type</span>(i) <span class="keyword">is</span> Interpolation:</span><br><span class="line">            parts.append(<span class="string">&quot;?&quot;</span>)</span><br><span class="line">            <span class="comment"># i.value是一个tuple</span></span><br><span class="line">            params.append(i.value)</span><br><span class="line">        query_string = <span class="string">&quot;&quot;</span>.join(parts)</span><br><span class="line">    <span class="built_in">print</span>(query_string)</span><br><span class="line">    <span class="comment">#    SELECT * FROM products</span></span><br><span class="line">    <span class="comment">#    WHERE is_available = ? AND category = ?</span></span><br><span class="line">    <span class="keyword">return</span> db.execute(<span class="string">&quot;&quot;</span>.join(parts), params)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line">    db = sqlite3.connect(<span class="string">&quot;./test.db&quot;</span>)</span><br><span class="line">    is_available = <span class="number">1</span></span><br><span class="line">    category = <span class="string">&quot;Home&quot;</span></span><br><span class="line">    template = t<span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    SELECT * FROM products</span></span><br><span class="line"><span class="string">    WHERE is_available = &#123;is_available&#125; AND category = &#123;category&#125;</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">list</span>(run_query(db, template)))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<h3 id="SQL参数化查询"><a href="#SQL参数化查询" class="headerlink" title="SQL参数化查询"></a>SQL参数化查询</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python">from string.templatelib import Template, Interpolation
+import sqlite3
 
-<h3 id="HTML转义"><a href="#HTML转义" class="headerlink" title="HTML转义"></a>HTML转义</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> html <span class="keyword">import</span> escape</span><br><span class="line"><span class="keyword">from</span> string.templatelib <span class="keyword">import</span> Template, Interpolation</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">safe_html</span>(<span class="params">template: Template</span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">    parts = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> template:</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">type</span>(i) <span class="keyword">is</span> <span class="built_in">str</span>:</span><br><span class="line">            parts.append(i)</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">type</span>(i) <span class="keyword">is</span> Interpolation:</span><br><span class="line">            parts.append(escape(i.value))</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;&quot;</span>.join(parts)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line">    user_input1 = <span class="string">&quot;duzhuo&quot;</span></span><br><span class="line">    user_input2 = <span class="string">&#x27;&lt;script&gt;alert(&quot;XSS Attacking&quot;)&lt;/script&gt;&#x27;</span></span><br><span class="line">    html_template = t<span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    &lt;div&gt;</span></span><br><span class="line"><span class="string">    My name is &lt;strong&gt;&#123;user_input1&#125;&lt;/strong&gt;, Here is my Message: &#123;user_input2&#125;</span></span><br><span class="line"><span class="string">    &lt;/div&gt;</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="built_in">print</span>(safe_html(html_template))</span><br><span class="line">	<span class="comment">#</span></span><br><span class="line">	<span class="comment">#    &lt;div&gt;</span></span><br><span class="line">	<span class="comment">#    My name is &lt;strong&gt;duzhuo&lt;/strong&gt;, Here is my Message: &amp;lt;script&amp;gt;alert(&amp;quot;XSS Attacking&amp;quot;)&amp;lt;/script&amp;gt;</span></span><br><span class="line">	<span class="comment">#    &lt;/div&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+def run_query(db, template: Template):
+    parts &#x3D; []
+    params &#x3D; []
+    for i in template:
+        if type(i) is str:
+            parts.append(i)
+        if type(i) is Interpolation:
+            parts.append(&quot;?&quot;)
+            # i.value是一个tuple
+            params.append(i.value)
+        query_string &#x3D; &quot;&quot;.join(parts)
+    print(query_string)
+    #    SELECT * FROM products
+    #    WHERE is_available &#x3D; ? AND category &#x3D; ?
+    return db.execute(&quot;&quot;.join(parts), params)
+
+
+def main():
+    db &#x3D; sqlite3.connect(&quot;.&#x2F;test.db&quot;)
+    is_available &#x3D; 1
+    category &#x3D; &quot;Home&quot;
+    template &#x3D; t&quot;&quot;&quot;
+    SELECT * FROM products
+    WHERE is_available &#x3D; &#123;is_available&#125; AND category &#x3D; &#123;category&#125;
+    &quot;&quot;&quot;
+    print(list(run_query(db, template)))
+
+
+if __name__ &#x3D;&#x3D; &quot;__main__&quot;:
+    main()</code></pre>
+
+<h3 id="HTML转义"><a href="#HTML转义" class="headerlink" title="HTML转义"></a>HTML转义</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python">from html import escape
+from string.templatelib import Template, Interpolation
+
+
+def safe_html(template: Template) -&gt; str:
+    parts &#x3D; []
+    for i in template:
+        if type(i) is str:
+            parts.append(i)
+        if type(i) is Interpolation:
+            parts.append(escape(i.value))
+    return &quot;&quot;.join(parts)
+
+
+def main():
+    user_input1 &#x3D; &quot;duzhuo&quot;
+    user_input2 &#x3D; &#39;&lt;script&gt;alert(&quot;XSS Attacking&quot;)&lt;&#x2F;script&gt;&#39;
+    html_template &#x3D; t&quot;&quot;&quot;
+    &lt;div&gt;
+    My name is &lt;strong&gt;&#123;user_input1&#125;&lt;&#x2F;strong&gt;, Here is my Message: &#123;user_input2&#125;
+    &lt;&#x2F;div&gt;
+    &quot;&quot;&quot;
+    print(safe_html(html_template))
+    #
+    #    &lt;div&gt;
+    #    My name is &lt;strong&gt;duzhuo&lt;&#x2F;strong&gt;, Here is my Message: &lt;script&gt;alert(&quot;XSS Attacking&quot;)&lt;&#x2F;script&gt;
+    #    &lt;&#x2F;div&gt;
+
+
+if __name__ &#x3D;&#x3D; &quot;__main__&quot;:
+    main()</code></pre>
 
 
 
@@ -292,7 +384,7 @@
     <div class="footer-inner">
 
   <div class="copyright">
-    &copy; 
+    &copy; 2022 – 
     <span itemprop="copyrightYear">2025</span>
     <span class="with-love">
       <i class="fa fa-heart"></i>
@@ -320,26 +412,6 @@
 <noscript>
   <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
 </noscript>
-
-
-  
-  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
-
-  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
-<script src="/js/third-party/search/local-search.js"></script>
-
-
-
-
-
-
-
-  
-
-
-
-
 <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
 
 <script>

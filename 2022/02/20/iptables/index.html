@@ -14,10 +14,10 @@
 
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.saint1337.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":true,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.saint1337.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.23.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true,"trigger":"auto"}}</script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/config.min.js" defer></script>
 
     <meta name="description" content="Iptables 应用 iptables 是一个配置 Linux 内核 防火墙 的命令行工具，是 netfilter 项目的一部分。 可以直接配置，也可以通过许多前端和图形界面配置。 iptables 也经常代指该内核级防火墙。iptables 用于 ipv4，ip6tables 用于 ipv6。 nftables 已经包含在 Linux kernel 3.13 中，以后会取代 iptables">
 <meta property="og:type" content="article">
@@ -37,7 +37,6 @@
 <link rel="canonical" href="https://blog.saint1337.top/2022/02/20/iptables/">
 
 
-
 <script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.saint1337.top/2022/02/20/iptables/","path":"2022/02/20/iptables/","title":"Iptables 应用"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
@@ -46,6 +45,28 @@
 
 
 
+
+
+
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/components/prism-core.min.js" integrity="sha256-bKrTFt2ZHyT4AE4LnBnAVctYKf9l6XP77kBvltgbjn4=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha256-9cmf7tcLdXpKsPi/2AWE93PbZpTp4M4tqzFk+lWomjU=" crossorigin="anonymous" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/utils.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/motion.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/sidebar.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/next-boot.min.js" defer></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/third-party/search/local-search.min.js" defer></script>
+
+
+
+
+
+
+
+  
 
 
 
@@ -90,7 +111,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -101,25 +122,25 @@
 
 
   <div class="search-pop-overlay">
-    <div class="popup search-popup"><div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off" maxlength="80"
-           placeholder="搜索..." spellcheck="false"
-           type="search" class="search-input">
-  </div>
-  <span class="popup-btn-close" role="button">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div class="search-result-container no-result">
-  <div class="search-result-icon">
-    <i class="fa fa-spinner fa-pulse fa-5x"></i>
-  </div>
-</div>
-
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -165,6 +186,11 @@
       </div>
   </nav>
 </div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/duzhuoshanwai" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;duzhuoshanwai" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
 
         </div>
       </div>
@@ -253,10 +279,11 @@
 <p>过滤 IPv4 数据包的代码已经内置于内核中，并且按照不同的目的被组织成 <strong>表</strong> 的集合。<strong>表</strong> 由一组预先定义的 <strong>链</strong> 组成，<strong>链</strong>包含遍历顺序规则。每一条规则包含一个谓词的潜在匹配和相应的动作（称为 <strong>目标</strong>），如果谓词为真，该动作会被执行。也就是说条件匹配。</p>
 <h2 id="2-安装-iptables"><a href="#2-安装-iptables" class="headerlink" title="2. 安装 iptables"></a>2. 安装 iptables</h2><p>（1）禁用 firewalld</p>
 <p>CentOS 7 上默认安装了 firewalld 作为防火墙，使用 iptables 建议关闭并禁用 firewalld。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld</span><br></pre></td></tr></table></figure>
+<pre class="language-bash" data-language="bash"><code class="language-bash">systemctl stop firewalld
+systemctl disable firewalld</code></pre>
 
 <p>（2）安装 iptables</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y iptables-services</span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">yum install -y iptables-services</code></pre>
 
 <p>（3）服务管理</p>
 <ul>
@@ -268,7 +295,7 @@
 <li>关闭服务: <code>systemctl stop iptables</code></li>
 </ul>
 <h2 id="3-命令"><a href="#3-命令" class="headerlink" title="3. 命令"></a>3. 命令</h2><p>基本语法：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables(选项)(参数)</span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">iptables(选项)(参数)</code></pre>
 
 <p>基本选项说明：</p>
 <table>
@@ -332,21 +359,34 @@
 </tr>
 </tbody></table>
 <p>顺序：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -t 表名 &lt;-A/I/D/R&gt; 规则链名 [规则号] &lt;-i/o 网卡名&gt; -p 协议名 &lt;-s 源IP/源子网&gt; --sport 源端口 &lt;-d 目标IP/目标子网&gt; --dport 目标端口 -j 动作</span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">iptables -t 表名 &lt;-A&#x2F;I&#x2F;D&#x2F;R&gt; 规则链名 [规则号] &lt;-i&#x2F;o 网卡名&gt; -p 协议名 &lt;-s 源IP&#x2F;源子网&gt; --sport 源端口 &lt;-d 目标IP&#x2F;目标子网&gt; --dport 目标端口 -j 动作</code></pre>
 
-<h2 id="4-iptables-示例"><a href="#4-iptables-示例" class="headerlink" title="4. iptables 示例"></a>4. iptables 示例</h2><h3 id="4-1-清空当前的所有规则和计数"><a href="#4-1-清空当前的所有规则和计数" class="headerlink" title="4.1. 清空当前的所有规则和计数"></a>4.1. 清空当前的所有规则和计数</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -F  # 清空所有的防火墙规则</span><br><span class="line">iptables -X  # 删除用户自定义的空链</span><br><span class="line">iptables -Z  # 清空计数</span><br></pre></td></tr></table></figure>
+<h2 id="4-iptables-示例"><a href="#4-iptables-示例" class="headerlink" title="4. iptables 示例"></a>4. iptables 示例</h2><h3 id="4-1-清空当前的所有规则和计数"><a href="#4-1-清空当前的所有规则和计数" class="headerlink" title="4.1. 清空当前的所有规则和计数"></a>4.1. 清空当前的所有规则和计数</h3><pre class="language-bash" data-language="bash"><code class="language-bash">iptables -F  # 清空所有的防火墙规则
+iptables -X  # 删除用户自定义的空链
+iptables -Z  # 清空计数</code></pre>
 
-<h3 id="4-2-配置允许-ssh-端口连接"><a href="#4-2-配置允许-ssh-端口连接" class="headerlink" title="4.2. 配置允许 ssh 端口连接"></a>4.2. 配置允许 ssh 端口连接</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -s 192.168.1.0/24 -p tcp --dport 22 -j ACCEPT</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">22为你的ssh端口， -s 192.168.1.0/24表示允许这个网段的机器来连接，其它网段的ip地址是登陆不了你的机器的。 -j ACCEPT表示接受这样的请求</span></span><br></pre></td></tr></table></figure>
+<h3 id="4-2-配置允许-ssh-端口连接"><a href="#4-2-配置允许-ssh-端口连接" class="headerlink" title="4.2. 配置允许 ssh 端口连接"></a>4.2. 配置允许 ssh 端口连接</h3><pre class="language-bash" data-language="bash"><code class="language-bash">iptables -A INPUT -s 192.168.1.0&#x2F;24 -p tcp --dport 22 -j ACCEPT
+# 22为你的ssh端口， -s 192.168.1.0&#x2F;24表示允许这个网段的机器来连接，其它网段的ip地址是登陆不了你的机器的。 -j ACCEPT表示接受这样的请求</code></pre>
 
-<h3 id="4-3-允许本地回环地址可以正常使用"><a href="#4-3-允许本地回环地址可以正常使用" class="headerlink" title="4.3. 允许本地回环地址可以正常使用"></a>4.3. 允许本地回环地址可以正常使用</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -i lo -j ACCEPT</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">本地圆环地址就是那个127.0.0.1，是本机上使用的,它进与出都设置为允许</span></span><br><span class="line">iptables -A OUTPUT -o lo -j ACCEPT</span><br></pre></td></tr></table></figure>
+<h3 id="4-3-允许本地回环地址可以正常使用"><a href="#4-3-允许本地回环地址可以正常使用" class="headerlink" title="4.3. 允许本地回环地址可以正常使用"></a>4.3. 允许本地回环地址可以正常使用</h3><pre class="language-bash" data-language="bash"><code class="language-bash">iptables -A INPUT -i lo -j ACCEPT
+#本地圆环地址就是那个127.0.0.1，是本机上使用的,它进与出都设置为允许
+iptables -A OUTPUT -o lo -j ACCEPT</code></pre>
 
-<h3 id="4-4-设置默认的规则"><a href="#4-4-设置默认的规则" class="headerlink" title="4.4. 设置默认的规则"></a>4.4. 设置默认的规则</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -P INPUT DROP # 配置默认的不让进</span><br><span class="line">iptables -P FORWARD DROP # 默认的不允许转发</span><br><span class="line">iptables -P OUTPUT ACCEPT # 默认的可以出去</span><br></pre></td></tr></table></figure>
+<h3 id="4-4-设置默认的规则"><a href="#4-4-设置默认的规则" class="headerlink" title="4.4. 设置默认的规则"></a>4.4. 设置默认的规则</h3><pre class="language-bash" data-language="bash"><code class="language-bash">iptables -P INPUT DROP # 配置默认的不让进
+iptables -P FORWARD DROP # 默认的不允许转发
+iptables -P OUTPUT ACCEPT # 默认的可以出去</code></pre>
 
-<h3 id="4-5-配置白名单"><a href="#4-5-配置白名单" class="headerlink" title="4.5. 配置白名单"></a>4.5. 配置白名单</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -p all -s 192.168.1.0/24 -j ACCEPT  # 允许机房内网机器可以访问</span><br><span class="line">iptables -A INPUT -p all -s 192.168.140.0/24 -j ACCEPT  # 允许机房内网机器可以访问</span><br><span class="line">iptables -A INPUT -p tcp -s 183.121.3.7 --dport 3380 -j ACCEPT # 允许183.121.3.7访问本机的3380端口</span><br></pre></td></tr></table></figure>
+<h3 id="4-5-配置白名单"><a href="#4-5-配置白名单" class="headerlink" title="4.5. 配置白名单"></a>4.5. 配置白名单</h3><pre class="language-bash" data-language="bash"><code class="language-bash">iptables -A INPUT -p all -s 192.168.1.0&#x2F;24 -j ACCEPT  # 允许机房内网机器可以访问
+iptables -A INPUT -p all -s 192.168.140.0&#x2F;24 -j ACCEPT  # 允许机房内网机器可以访问
+iptables -A INPUT -p tcp -s 183.121.3.7 --dport 3380 -j ACCEPT # 允许183.121.3.7访问本机的3380端口</code></pre>
 
-<h3 id="4-6-开启相应的服务端口"><a href="#4-6-开启相应的服务端口" class="headerlink" title="4.6. 开启相应的服务端口"></a>4.6. 开启相应的服务端口</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -p tcp --dport 80 -j ACCEPT # 开启80端口，因为web对外都是这个端口</span><br><span class="line">iptables -A INPUT -p icmp --icmp-type 8 -j ACCEPT # 允许被ping</span><br><span class="line">iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT # 已经建立的连接得让它进来</span><br></pre></td></tr></table></figure>
+<h3 id="4-6-开启相应的服务端口"><a href="#4-6-开启相应的服务端口" class="headerlink" title="4.6. 开启相应的服务端口"></a>4.6. 开启相应的服务端口</h3><pre class="language-bash" data-language="bash"><code class="language-bash">iptables -A INPUT -p tcp --dport 80 -j ACCEPT # 开启80端口，因为web对外都是这个端口
+iptables -A INPUT -p icmp --icmp-type 8 -j ACCEPT # 允许被ping
+iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT # 已经建立的连接得让它进来</code></pre>
 
-<h3 id="4-7-保存规则到配置文件中"><a href="#4-7-保存规则到配置文件中" class="headerlink" title="4.7. 保存规则到配置文件中"></a>4.7. 保存规则到配置文件中</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cp /etc/sysconfig/iptables /etc/sysconfig/iptables.bak # 任何改动之前先备份，请保持这一优秀的习惯</span><br><span class="line">iptables-save &gt; /etc/sysconfig/iptables</span><br><span class="line">cat /etc/sysconfig/iptables</span><br></pre></td></tr></table></figure>
+<h3 id="4-7-保存规则到配置文件中"><a href="#4-7-保存规则到配置文件中" class="headerlink" title="4.7. 保存规则到配置文件中"></a>4.7. 保存规则到配置文件中</h3><pre class="language-bash" data-language="bash"><code class="language-bash">cp &#x2F;etc&#x2F;sysconfig&#x2F;iptables &#x2F;etc&#x2F;sysconfig&#x2F;iptables.bak # 任何改动之前先备份，请保持这一优秀的习惯
+iptables-save &gt; &#x2F;etc&#x2F;sysconfig&#x2F;iptables
+cat &#x2F;etc&#x2F;sysconfig&#x2F;iptables</code></pre>
 
 <h3 id="4-8-列出已设置的规则"><a href="#4-8-列出已设置的规则" class="headerlink" title="4.8. 列出已设置的规则"></a>4.8. 列出已设置的规则</h3><blockquote>
 <p>iptables -L [-t 表名][链名]</p>
@@ -356,39 +396,85 @@
 <li>五个规则链名 <code>INPUT</code>、<code>OUTPUT</code>、<code>FORWARD</code>、<code>PREROUTING</code>、<code>POSTROUTING</code></li>
 <li>filter 表包含<code>INPUT</code>、<code>OUTPUT</code>、<code>FORWARD</code>三个规则链</li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">iptables -L -t nat                  # 列出 nat 上面的所有规则</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">           ^ -t 参数指定，必须是 raw， nat，filter，mangle 中的一个</span></span><br><span class="line">iptables -L -t nat  --line-numbers  # 规则带编号</span><br><span class="line">iptables -L INPUT</span><br><span class="line"></span><br><span class="line">iptables -L -nv  # 查看，这个列表看起来更详细</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">iptables -L -t nat                  # 列出 nat 上面的所有规则
+#            ^ -t 参数指定，必须是 raw， nat，filter，mangle 中的一个
+iptables -L -t nat  --line-numbers  # 规则带编号
+iptables -L INPUT
 
-<h3 id="4-9-清除已有规则"><a href="#4-9-清除已有规则" class="headerlink" title="4.9. 清除已有规则"></a>4.9. 清除已有规则</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">iptables -F INPUT  # 清空指定链 INPUT 上面的所有规则</span><br><span class="line">iptables -X INPUT  # 删除指定的链，这个链必须没有被其它任何规则引用，而且这条上必须没有任何规则。</span><br><span class="line">                   # 如果没有指定链名，则会删除该表中所有非内置的链。</span><br><span class="line">iptables -Z INPUT  # 把指定链，或者表中的所有链上的所有计数器清零。</span><br></pre></td></tr></table></figure>
+iptables -L -nv  # 查看，这个列表看起来更详细</code></pre>
 
-<h3 id="4-10-删除已添加的规则"><a href="#4-10-删除已添加的规则" class="headerlink" title="4.10. 删除已添加的规则"></a>4.10. 删除已添加的规则</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">添加一条规则</span></span><br><span class="line">iptables -A INPUT -s 192.168.1.5 -j DROP</span><br></pre></td></tr></table></figure>
+<h3 id="4-9-清除已有规则"><a href="#4-9-清除已有规则" class="headerlink" title="4.9. 清除已有规则"></a>4.9. 清除已有规则</h3><pre class="language-bash" data-language="bash"><code class="language-bash">iptables -F INPUT  # 清空指定链 INPUT 上面的所有规则
+iptables -X INPUT  # 删除指定的链，这个链必须没有被其它任何规则引用，而且这条上必须没有任何规则。
+                   # 如果没有指定链名，则会删除该表中所有非内置的链。
+iptables -Z INPUT  # 把指定链，或者表中的所有链上的所有计数器清零。</code></pre>
+
+<h3 id="4-10-删除已添加的规则"><a href="#4-10-删除已添加的规则" class="headerlink" title="4.10. 删除已添加的规则"></a>4.10. 删除已添加的规则</h3><pre class="language-bash" data-language="bash"><code class="language-bash"># 添加一条规则
+iptables -A INPUT -s 192.168.1.5 -j DROP</code></pre>
 
 <p>将所有 iptables 以序号标记显示，执行：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -L -n --line-numbers</span><br></pre></td></tr></table></figure>
+<pre class="language-bash" data-language="bash"><code class="language-bash">iptables -L -n --line-numbers</code></pre>
 
 <p>比如要删除 INPUT 里序号为 8 的规则，执行：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -D INPUT 8</span><br></pre></td></tr></table></figure>
+<pre class="language-bash" data-language="bash"><code class="language-bash">iptables -D INPUT 8</code></pre>
 
-<h3 id="4-11-开放指定的端口"><a href="#4-11-开放指定的端口" class="headerlink" title="4.11. 开放指定的端口"></a>4.11. 开放指定的端口</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -s 127.0.0.1 -d 127.0.0.1 -j ACCEPT               #允许本地回环接口(即运行本机访问本机)</span><br><span class="line">iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT    #允许已建立的或相关连的通行</span><br><span class="line">iptables -A OUTPUT -j ACCEPT         #允许所有本机向外的访问</span><br><span class="line">iptables -A INPUT -p tcp --dport 22 -j ACCEPT    #允许访问22端口</span><br><span class="line">iptables -A INPUT -p tcp --dport 80 -j ACCEPT    #允许访问80端口</span><br><span class="line">iptables -A INPUT -p tcp --dport 21 -j ACCEPT    #允许ftp服务的21端口</span><br><span class="line">iptables -A INPUT -p tcp --dport 20 -j ACCEPT    #允许FTP服务的20端口</span><br><span class="line">iptables -A INPUT -j reject       #禁止其他未允许的规则访问</span><br><span class="line">iptables -A FORWARD -j REJECT     #禁止其他未允许的规则访问</span><br></pre></td></tr></table></figure>
+<h3 id="4-11-开放指定的端口"><a href="#4-11-开放指定的端口" class="headerlink" title="4.11. 开放指定的端口"></a>4.11. 开放指定的端口</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">iptables -A INPUT -s 127.0.0.1 -d 127.0.0.1 -j ACCEPT               #允许本地回环接口(即运行本机访问本机)
+iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT    #允许已建立的或相关连的通行
+iptables -A OUTPUT -j ACCEPT         #允许所有本机向外的访问
+iptables -A INPUT -p tcp --dport 22 -j ACCEPT    #允许访问22端口
+iptables -A INPUT -p tcp --dport 80 -j ACCEPT    #允许访问80端口
+iptables -A INPUT -p tcp --dport 21 -j ACCEPT    #允许ftp服务的21端口
+iptables -A INPUT -p tcp --dport 20 -j ACCEPT    #允许FTP服务的20端口
+iptables -A INPUT -j reject       #禁止其他未允许的规则访问
+iptables -A FORWARD -j REJECT     #禁止其他未允许的规则访问</code></pre>
 
-<h3 id="4-12-屏蔽-IP"><a href="#4-12-屏蔽-IP" class="headerlink" title="4.12. 屏蔽 IP"></a>4.12. 屏蔽 IP</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -p tcp -m tcp -s 192.168.0.8 -j DROP  # 屏蔽恶意主机（比如，192.168.0.8</span><br><span class="line">iptables -I INPUT -s 123.45.6.7 -j DROP       #屏蔽单个IP的命令</span><br><span class="line">iptables -I INPUT -s 123.0.0.0/8 -j DROP      #封整个段即从123.0.0.1到123.255.255.254的命令</span><br><span class="line">iptables -I INPUT -s 124.45.0.0/16 -j DROP    #封IP段即从123.45.0.1到123.45.255.254的命令</span><br><span class="line">iptables -I INPUT -s 123.45.6.0/24 -j DROP    #封IP段即从123.45.6.1到123.45.6.254的命令是</span><br></pre></td></tr></table></figure>
+<h3 id="4-12-屏蔽-IP"><a href="#4-12-屏蔽-IP" class="headerlink" title="4.12. 屏蔽 IP"></a>4.12. 屏蔽 IP</h3><pre class="language-bash" data-language="bash"><code class="language-bash">iptables -A INPUT -p tcp -m tcp -s 192.168.0.8 -j DROP  # 屏蔽恶意主机（比如，192.168.0.8
+iptables -I INPUT -s 123.45.6.7 -j DROP       #屏蔽单个IP的命令
+iptables -I INPUT -s 123.0.0.0&#x2F;8 -j DROP      #封整个段即从123.0.0.1到123.255.255.254的命令
+iptables -I INPUT -s 124.45.0.0&#x2F;16 -j DROP    #封IP段即从123.45.0.1到123.45.255.254的命令
+iptables -I INPUT -s 123.45.6.0&#x2F;24 -j DROP    #封IP段即从123.45.6.1到123.45.6.254的命令是</code></pre>
 
 <h3 id="4-13-指定数据包出去的网络接口"><a href="#4-13-指定数据包出去的网络接口" class="headerlink" title="4.13. 指定数据包出去的网络接口"></a>4.13. 指定数据包出去的网络接口</h3><p>只对 OUTPUT，FORWARD，POSTROUTING 三个链起作用。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -A FORWARD -o eth0</span><br></pre></td></tr></table></figure>
+<pre class="language-bash" data-language="bash"><code class="language-bash">iptables -A FORWARD -o eth0</code></pre>
 
-<h3 id="4-14-查看已添加的规则"><a href="#4-14-查看已添加的规则" class="headerlink" title="4.14. 查看已添加的规则"></a>4.14. 查看已添加的规则</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">iptables -L -n -v</span><br><span class="line">Chain INPUT (policy DROP 48106 packets, 2690K bytes)</span><br><span class="line"> pkts bytes target     prot opt in     out     source               destination</span><br><span class="line"> 5075  589K ACCEPT     all  --  lo     *       0.0.0.0/0            0.0.0.0/0</span><br><span class="line"> 191K   90M ACCEPT     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           tcp dpt:22</span><br><span class="line">1499K  133M ACCEPT     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           tcp dpt:80</span><br><span class="line">4364K 6351M ACCEPT     all  --  *      *       0.0.0.0/0            0.0.0.0/0           state RELATED,ESTABLISHED</span><br><span class="line"> 6256  327K ACCEPT     icmp --  *      *       0.0.0.0/0            0.0.0.0/0</span><br><span class="line"></span><br><span class="line">Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)</span><br><span class="line"> pkts bytes target     prot opt in     out     source               destination</span><br><span class="line"></span><br><span class="line">Chain OUTPUT (policy ACCEPT 3382K packets, 1819M bytes)</span><br><span class="line"> pkts bytes target     prot opt in     out     source               destination</span><br><span class="line"> 5075  589K ACCEPT     all  --  *      lo      0.0.0.0/0            0.0.0.0/0</span><br></pre></td></tr></table></figure>
+<h3 id="4-14-查看已添加的规则"><a href="#4-14-查看已添加的规则" class="headerlink" title="4.14. 查看已添加的规则"></a>4.14. 查看已添加的规则</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">iptables -L -n -v
+Chain INPUT (policy DROP 48106 packets, 2690K bytes)
+ pkts bytes target     prot opt in     out     source               destination
+ 5075  589K ACCEPT     all  --  lo     *       0.0.0.0&#x2F;0            0.0.0.0&#x2F;0
+ 191K   90M ACCEPT     tcp  --  *      *       0.0.0.0&#x2F;0            0.0.0.0&#x2F;0           tcp dpt:22
+1499K  133M ACCEPT     tcp  --  *      *       0.0.0.0&#x2F;0            0.0.0.0&#x2F;0           tcp dpt:80
+4364K 6351M ACCEPT     all  --  *      *       0.0.0.0&#x2F;0            0.0.0.0&#x2F;0           state RELATED,ESTABLISHED
+ 6256  327K ACCEPT     icmp --  *      *       0.0.0.0&#x2F;0            0.0.0.0&#x2F;0
+
+Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+
+Chain OUTPUT (policy ACCEPT 3382K packets, 1819M bytes)
+ pkts bytes target     prot opt in     out     source               destination
+ 5075  589K ACCEPT     all  --  *      lo      0.0.0.0&#x2F;0            0.0.0.0&#x2F;0</code></pre>
 
 <h3 id="4-15-启动网络转发规则"><a href="#4-15-启动网络转发规则" class="headerlink" title="4.15. 启动网络转发规则"></a>4.15. 启动网络转发规则</h3><p>公网<code>210.14.67.7</code>让内网<code>192.168.188.0/24</code>上网</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -A POSTROUTING -s 192.168.188.0/24 -j SNAT --to-source 210.14.67.127</span><br></pre></td></tr></table></figure>
+<pre class="language-bash" data-language="bash"><code class="language-bash">iptables -t nat -A POSTROUTING -s 192.168.188.0&#x2F;24 -j SNAT --to-source 210.14.67.127</code></pre>
 
 <h3 id="4-16-端口映射"><a href="#4-16-端口映射" class="headerlink" title="4.16. 端口映射"></a>4.16. 端口映射</h3><p>本机的 2222 端口映射到内网 虚拟机的 22 端口</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -A PREROUTING -d 210.14.67.127 -p tcp --dport 2222  -j DNAT --to-dest 192.168.188.115:22</span><br></pre></td></tr></table></figure>
+<pre class="language-bash" data-language="bash"><code class="language-bash">iptables -t nat -A PREROUTING -d 210.14.67.127 -p tcp --dport 2222  -j DNAT --to-dest 192.168.188.115:22</code></pre>
 
 <h3 id="4-17-字符串匹配"><a href="#4-17-字符串匹配" class="headerlink" title="4.17. 字符串匹配"></a>4.17. 字符串匹配</h3><p>比如，我们要过滤所有 TCP 连接中的字符串<code>test</code>，一旦出现它我们就终止这个连接，我们可以这么做：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -p tcp -m string --algo kmp --string &quot;test&quot; -j REJECT --reject-with tcp-reset</span><br><span class="line">iptables -L</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Chain INPUT (policy ACCEPT)</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">target     prot opt <span class="built_in">source</span>               destination</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">REJECT     tcp  --  anywhere             anywhere            STRING match <span class="string">&quot;test&quot;</span> ALGO name kmp TO 65535 reject-with tcp-reset</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"></span></span><br><span class="line"><span class="language-bash"><span class="comment"># Chain FORWARD (policy ACCEPT)</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">target     prot opt <span class="built_in">source</span>               destination</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"></span></span><br><span class="line"><span class="language-bash"><span class="comment"># Chain OUTPUT (policy ACCEPT)</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">target     prot opt <span class="built_in">source</span>               destination</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">iptables -A INPUT -p tcp -m string --algo kmp --string &quot;test&quot; -j REJECT --reject-with tcp-reset
+iptables -L
 
-<h3 id="4-18-阻止-Windows-蠕虫的攻击"><a href="#4-18-阻止-Windows-蠕虫的攻击" class="headerlink" title="4.18. 阻止 Windows 蠕虫的攻击"></a>4.18. 阻止 Windows 蠕虫的攻击</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -I INPUT -j DROP -p tcp -s 0.0.0.0/0 -m string --algo kmp --string &quot;cmd.exe&quot;</span><br></pre></td></tr></table></figure>
+# Chain INPUT (policy ACCEPT)
+# target     prot opt source               destination
+# REJECT     tcp  --  anywhere             anywhere            STRING match &quot;test&quot; ALGO name kmp TO 65535 reject-with tcp-reset
+#
+# Chain FORWARD (policy ACCEPT)
+# target     prot opt source               destination
+#
+# Chain OUTPUT (policy ACCEPT)
+# target     prot opt source               destination</code></pre>
 
-<h3 id="4-19-防止-SYN-洪水攻击"><a href="#4-19-防止-SYN-洪水攻击" class="headerlink" title="4.19. 防止 SYN 洪水攻击"></a>4.19. 防止 SYN 洪水攻击</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -p tcp --syn -m limit --limit 5/second -j ACCEPT</span><br></pre></td></tr></table></figure>
+<h3 id="4-18-阻止-Windows-蠕虫的攻击"><a href="#4-18-阻止-Windows-蠕虫的攻击" class="headerlink" title="4.18. 阻止 Windows 蠕虫的攻击"></a>4.18. 阻止 Windows 蠕虫的攻击</h3><pre class="language-bash" data-language="bash"><code class="language-bash">iptables -I INPUT -j DROP -p tcp -s 0.0.0.0&#x2F;0 -m string --algo kmp --string &quot;cmd.exe&quot;</code></pre>
+
+<h3 id="4-19-防止-SYN-洪水攻击"><a href="#4-19-防止-SYN-洪水攻击" class="headerlink" title="4.19. 防止 SYN 洪水攻击"></a>4.19. 防止 SYN 洪水攻击</h3><pre class="language-bash" data-language="bash"><code class="language-bash">iptables -A INPUT -p tcp --syn -m limit --limit 5&#x2F;second -j ACCEPT</code></pre>
 
 <h2 id="5-参考资料"><a href="#5-参考资料" class="headerlink" title="5. 参考资料"></a>5. 参考资料</h2><ul>
 <li><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/index.php/iptables_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">https://wiki.archlinux.org/index.php/iptables_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)</a></li>
@@ -438,7 +524,7 @@
     <div class="footer-inner">
 
   <div class="copyright">
-    &copy; 
+    &copy; 2022 – 
     <span itemprop="copyrightYear">2025</span>
     <span class="with-love">
       <i class="fa fa-heart"></i>
@@ -466,26 +552,6 @@
 <noscript>
   <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
 </noscript>
-
-
-  
-  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
-
-  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
-<script src="/js/third-party/search/local-search.js"></script>
-
-
-
-
-
-
-
-  
-
-
-
-
 <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
 
 <script>

@@ -14,10 +14,10 @@
 
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.saint1337.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":true,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.saint1337.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.23.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true,"trigger":"auto"}}</script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/config.min.js" defer></script>
 
     <meta name="description" content="Linux 文件目录管理 关键词：cd, ls, pwd, mkdir, rmdir, tree, touch, ln, rename, stat, file, chmod, chown, locate, find, cp, scp, mv, rm  1. Linux 文件目录工作机制1.1. Linux 目录结构linux 目录结构是树形结构，其根目录是 &#x2F; 。一张思维导图说明各个目录的作用：">
 <meta property="og:type" content="article">
@@ -39,7 +39,6 @@
 <link rel="canonical" href="https://blog.saint1337.top/2022/02/20/linux-cli-dir/">
 
 
-
 <script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.saint1337.top/2022/02/20/linux-cli-dir/","path":"2022/02/20/linux-cli-dir/","title":"Linux 文件目录管理"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
@@ -48,6 +47,28 @@
 
 
 
+
+
+
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/components/prism-core.min.js" integrity="sha256-bKrTFt2ZHyT4AE4LnBnAVctYKf9l6XP77kBvltgbjn4=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha256-9cmf7tcLdXpKsPi/2AWE93PbZpTp4M4tqzFk+lWomjU=" crossorigin="anonymous" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/utils.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/motion.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/sidebar.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/next-boot.min.js" defer></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/third-party/search/local-search.min.js" defer></script>
+
+
+
+
+
+
+
+  
 
 
 
@@ -92,7 +113,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -103,25 +124,25 @@
 
 
   <div class="search-pop-overlay">
-    <div class="popup search-popup"><div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off" maxlength="80"
-           placeholder="搜索..." spellcheck="false"
-           type="search" class="search-input">
-  </div>
-  <span class="popup-btn-close" role="button">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div class="search-result-container no-result">
-  <div class="search-result-icon">
-    <i class="fa fa-spinner fa-pulse fa-5x"></i>
-  </div>
-</div>
-
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -167,6 +188,11 @@
       </div>
   </nav>
 </div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/duzhuoshanwai" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;duzhuoshanwai" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
 
         </div>
       </div>
@@ -251,7 +277,10 @@
 <h2 id="1-Linux-文件目录工作机制"><a href="#1-Linux-文件目录工作机制" class="headerlink" title="1. Linux 文件目录工作机制"></a>1. Linux 文件目录工作机制</h2><h3 id="1-1-Linux-目录结构"><a href="#1-1-Linux-目录结构" class="headerlink" title="1.1. Linux 目录结构"></a>1.1. Linux 目录结构</h3><p>linux 目录结构是树形结构，其根目录是 <code>/</code> 。一张思维导图说明各个目录的作用：</p>
 <p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://raw.githubusercontent.com/dunwu/images/dev/cs/os/linux/linux-folders.png" alt="img"></p>
 <h3 id="1-2-Linux-文件属性"><a href="#1-2-Linux-文件属性" class="headerlink" title="1.2. Linux 文件属性"></a>1.2. Linux 文件属性</h3><p>Linux 系统是一种典型的多用户系统，不同的用户处于不同的地位，拥有不同的权限。为了保护系统的安全性，Linux 系统对不同的用户访问同一文件（包括目录文件）的权限做了不同的规定。<br>在 Linux 中我们可以使用 ll 或者 ls –l 命令来显示一个文件的属性以及文件所属的用户和组，如：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">ls</span> -l</span><br><span class="line">total 64</span><br><span class="line">dr-xr-xr-x 2 root root 4096 Dec 14 2012 bin</span><br><span class="line">dr-xr-xr-x 4 root root 4096 Apr 19 2012 boot</span><br></pre></td></tr></table></figure>
+<pre class="language-bash" data-language="bash"><code class="language-bash">$ ls -l
+total 64
+dr-xr-xr-x 2 root root 4096 Dec 14 2012 bin
+dr-xr-xr-x 4 root root 4096 Apr 19 2012 boot</code></pre>
 
 <p>实例中，bin 文件的第一个属性用 <code>d</code> 表示。<code>d</code> 在 Linux 中代表该文件是一个目录文件。<br>在 Linux 中第一个字符代表这个文件是目录、文件或链接文件等等。</p>
 <ul>
@@ -274,7 +303,10 @@
 <li>第 2、5、8 位表示写权限，如果用”w”字符表示，则有写权限，如果用”-“字符表示没有写权限。</li>
 <li>第 3、6、9 位表示可执行权限，如果用”x”字符表示，则有执行权限，如果用”-“字符表示，则没有执行权限。</li>
 </ul>
-<h4 id="1-2-1-Linux-文件属主和属组"><a href="#1-2-1-Linux-文件属主和属组" class="headerlink" title="1.2.1. Linux 文件属主和属组"></a>1.2.1. Linux 文件属主和属组</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">ls</span> -l</span><br><span class="line">total 64</span><br><span class="line">dr-xr-xr-x   2 root root 4096 Dec 14  2012 bin</span><br><span class="line">dr-xr-xr-x   4 root root 4096 Apr 19  2012 boot</span><br></pre></td></tr></table></figure>
+<h4 id="1-2-1-Linux-文件属主和属组"><a href="#1-2-1-Linux-文件属主和属组" class="headerlink" title="1.2.1. Linux 文件属主和属组"></a>1.2.1. Linux 文件属主和属组</h4><pre class="language-bash" data-language="bash"><code class="language-bash">$ ls -l
+total 64
+dr-xr-xr-x   2 root root 4096 Dec 14  2012 bin
+dr-xr-xr-x   4 root root 4096 Apr 19  2012 boot</code></pre>
 
 <ul>
 <li>对于文件来说，它都有一个特定的拥有者，也就是对该文件具有所有权的用户。</li>
@@ -315,14 +347,24 @@
 <p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/cd">http://man.linuxde.net/cd</a></p>
 </blockquote>
 <p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span>          <span class="comment"># 切换到用户主目录</span></span><br><span class="line"><span class="built_in">cd</span> ~        <span class="comment"># 切换到用户主目录</span></span><br><span class="line"><span class="built_in">cd</span> -        <span class="comment"># 切换到上一个工作目录</span></span><br><span class="line"><span class="built_in">cd</span> ..       <span class="comment"># 切换到上级目录</span></span><br><span class="line"><span class="built_in">cd</span> ../..    <span class="comment"># 切换到上两级目录</span></span><br></pre></td></tr></table></figure>
+<pre class="language-bash" data-language="bash"><code class="language-bash">cd          # 切换到用户主目录
+cd ~        # 切换到用户主目录
+cd -        # 切换到上一个工作目录
+cd ..       # 切换到上级目录
+cd ..&#x2F;..    # 切换到上两级目录</code></pre>
 
 <h3 id="3-2-ls"><a href="#3-2-ls" class="headerlink" title="3.2. ls"></a>3.2. ls</h3><blockquote>
 <p>ls 命令用来显示目录信息。</p>
 <p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/ls">http://man.linuxde.net/ls</a></p>
 </blockquote>
 <p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span>        <span class="comment"># 列出当前目录可见文件</span></span><br><span class="line"><span class="built_in">ls</span> -l     <span class="comment"># 列出当前目录可见文件详细信息</span></span><br><span class="line"><span class="built_in">ls</span> -la    <span class="comment"># 列出所有文件（包括隐藏）的详细信息</span></span><br><span class="line"><span class="built_in">ls</span> -lh    <span class="comment"># 列出详细信息并以可读大小显示文件大小</span></span><br><span class="line"><span class="built_in">ls</span> -lt    <span class="comment"># 按时间列出文件和文件夹详细信息</span></span><br><span class="line"><span class="built_in">ls</span> -ltr   <span class="comment"># 按修改时间列出文件和文件夹详细信息</span></span><br><span class="line"><span class="built_in">ls</span> --color=auto     <span class="comment"># 列出文件并标记颜色分类</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ls        # 列出当前目录可见文件
+ls -l     # 列出当前目录可见文件详细信息
+ls -la    # 列出所有文件（包括隐藏）的详细信息
+ls -lh    # 列出详细信息并以可读大小显示文件大小
+ls -lt    # 按时间列出文件和文件夹详细信息
+ls -ltr   # 按修改时间列出文件和文件夹详细信息
+ls --color&#x3D;auto     # 列出文件并标记颜色分类</code></pre>
 
 <h3 id="3-3-pwd"><a href="#3-3-pwd" class="headerlink" title="3.3. pwd"></a>3.3. pwd</h3><blockquote>
 <p>pwd 命令用来显示当前目录的绝对路径。</p>
@@ -333,28 +375,48 @@
 <p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/mkdir">http://man.linuxde.net/mkdir</a></p>
 </blockquote>
 <p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在当前目录中创建 zp 和 zp 的子目录 test</span></span><br><span class="line"><span class="built_in">mkdir</span> -p zp/test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在当前目录中创建 zp 和 zp 的子目录 test；权限设置为文件主可读、写、执行，同组用户可读和执行，其他用户无权访问</span></span><br><span class="line"><span class="built_in">mkdir</span> -p -m 750 zp/test</span><br></pre></td></tr></table></figure>
+<pre class="language-bash" data-language="bash"><code class="language-bash"># 在当前目录中创建 zp 和 zp 的子目录 test
+mkdir -p zp&#x2F;test
+
+# 在当前目录中创建 zp 和 zp 的子目录 test；权限设置为文件主可读、写、执行，同组用户可读和执行，其他用户无权访问
+mkdir -p -m 750 zp&#x2F;test</code></pre>
 
 <h3 id="3-5-rmdir"><a href="#3-5-rmdir" class="headerlink" title="3.5. rmdir"></a>3.5. rmdir</h3><blockquote>
 <p>rmdir 命令用来删除空目录。</p>
 <p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/rmdir">http://man.linuxde.net/rmdir</a></p>
 </blockquote>
 <p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 删除子目录 test 和其父目录 zp</span></span><br><span class="line"><span class="built_in">rmdir</span> -p zp/test</span><br></pre></td></tr></table></figure>
+<pre class="language-bash" data-language="bash"><code class="language-bash"># 删除子目录 test 和其父目录 zp
+rmdir -p zp&#x2F;test</code></pre>
 
 <h3 id="3-6-tree"><a href="#3-6-tree" class="headerlink" title="3.6. tree"></a>3.6. tree</h3><blockquote>
 <p>tree 命令以树状显示目录的内。</p>
 <p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/tree">http://man.linuxde.net/tree</a></p>
 </blockquote>
 <p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 列出目录 /private 第一级文件名</span></span><br><span class="line">tree /private -L 1</span><br><span class="line">/private/</span><br><span class="line">├── etc</span><br><span class="line">├── tftpboot</span><br><span class="line">├── tmp</span><br><span class="line">└── var</span><br><span class="line"></span><br><span class="line"><span class="comment"># 忽略文件夹</span></span><br><span class="line">tree -I node_modules            <span class="comment"># 忽略当前目录文件夹 node_modules</span></span><br><span class="line">tree -P node_modules            <span class="comment"># 列出当前目录文件夹 node_modules 的目录结构</span></span><br><span class="line">tree -P node_modules -L 2       <span class="comment"># 显示目录 node_modules 两层的目录树结构</span></span><br><span class="line">tree -L 2 &gt; /home/www/tree.txt  <span class="comment"># 当前目录结果存到 tree.txt 文件中</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 忽略多个文件夹</span></span><br><span class="line">tree -I <span class="string">&#x27;node_modules|icon|font&#x27;</span> -L 2</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"># 列出目录 &#x2F;private 第一级文件名
+tree &#x2F;private -L 1
+&#x2F;private&#x2F;
+├── etc
+├── tftpboot
+├── tmp
+└── var
+
+# 忽略文件夹
+tree -I node_modules            # 忽略当前目录文件夹 node_modules
+tree -P node_modules            # 列出当前目录文件夹 node_modules 的目录结构
+tree -P node_modules -L 2       # 显示目录 node_modules 两层的目录树结构
+tree -L 2 &gt; &#x2F;home&#x2F;www&#x2F;tree.txt  # 当前目录结果存到 tree.txt 文件中
+
+# 忽略多个文件夹
+tree -I &#39;node_modules|icon|font&#39; -L 2</code></pre>
 
 <h3 id="3-7-touch"><a href="#3-7-touch" class="headerlink" title="3.7. touch"></a>3.7. touch</h3><blockquote>
 <p>touch 命令有两个功能：一是用于把已存在文件的时间标签更新为系统当前的时间（默认方式），它们的数据将原封不动地保留下来；二是用来创建空文件。</p>
 <p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/touch">http://man.linuxde.net/touch</a></p>
 </blockquote>
 <p>示例：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch ex2</span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">touch ex2</code></pre>
 
 <h3 id="3-8-ln"><a href="#3-8-ln" class="headerlink" title="3.8. ln"></a>3.8. ln</h3><blockquote>
 <p>ln 命令用来为文件创建连接，连接类型分为硬连接和符号连接两种，默认的连接类型是硬连接。如果要创建符号连接必须使用”-s”选项。</p>
@@ -362,28 +424,43 @@
 <p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/ln">http://man.linuxde.net/ln</a></p>
 </blockquote>
 <p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将目录 /usr/mengqc/mub1 下的文件 m2.c 链接到目录 /usr/liu 下的文件 a2.c</span></span><br><span class="line"><span class="built_in">cd</span> /usr/mengqc</span><br><span class="line"><span class="built_in">ln</span> /mub1/m2.c /usr/liu/a2.c</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在目录 /usr/liu 下建立一个符号链接文件 abc，使它指向目录 /usr/mengqc/mub1</span></span><br><span class="line"><span class="comment"># 执行该命令后，/usr/mengqc/mub1 代表的路径将存放在名为 /usr/liu/abc 的文件中</span></span><br><span class="line"><span class="built_in">ln</span> -s /usr/mengqc/mub1 /usr/liu/abc</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"># 将目录 &#x2F;usr&#x2F;mengqc&#x2F;mub1 下的文件 m2.c 链接到目录 &#x2F;usr&#x2F;liu 下的文件 a2.c
+cd &#x2F;usr&#x2F;mengqc
+ln &#x2F;mub1&#x2F;m2.c &#x2F;usr&#x2F;liu&#x2F;a2.c
+
+# 在目录 &#x2F;usr&#x2F;liu 下建立一个符号链接文件 abc，使它指向目录 &#x2F;usr&#x2F;mengqc&#x2F;mub1
+# 执行该命令后，&#x2F;usr&#x2F;mengqc&#x2F;mub1 代表的路径将存放在名为 &#x2F;usr&#x2F;liu&#x2F;abc 的文件中
+ln -s &#x2F;usr&#x2F;mengqc&#x2F;mub1 &#x2F;usr&#x2F;liu&#x2F;abc</code></pre>
 
 <h3 id="3-9-rename"><a href="#3-9-rename" class="headerlink" title="3.9. rename"></a>3.9. rename</h3><blockquote>
 <p>rename 命令用字符串替换的方式批量重命名。</p>
 <p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/rename">http://man.linuxde.net/rename</a></p>
 </blockquote>
 <p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将 main1.c 重命名为 main.c</span></span><br><span class="line">rename main1.c main.c main1.c</span><br><span class="line"></span><br><span class="line">rename <span class="string">&quot;s/AA/aa/&quot;</span> *             <span class="comment"># 把文件名中的 AA 替换成 aa</span></span><br><span class="line">rename <span class="string">&quot;s//.html//.php/&quot;</span> *      <span class="comment"># 把 .html 后缀的改成 .php 后缀</span></span><br><span class="line">rename <span class="string">&quot;s/$//.txt/&quot;</span> *           <span class="comment"># 把所有的文件名都以 txt 结尾</span></span><br><span class="line">rename <span class="string">&quot;s//.txt//&quot;</span> *            <span class="comment"># 把所有以 .txt 结尾的文件名的.txt 删掉</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"># 将 main1.c 重命名为 main.c
+rename main1.c main.c main1.c
+
+rename &quot;s&#x2F;AA&#x2F;aa&#x2F;&quot; *             # 把文件名中的 AA 替换成 aa
+rename &quot;s&#x2F;&#x2F;.html&#x2F;&#x2F;.php&#x2F;&quot; *      # 把 .html 后缀的改成 .php 后缀
+rename &quot;s&#x2F;$&#x2F;&#x2F;.txt&#x2F;&quot; *           # 把所有的文件名都以 txt 结尾
+rename &quot;s&#x2F;&#x2F;.txt&#x2F;&#x2F;&quot; *            # 把所有以 .txt 结尾的文件名的.txt 删掉</code></pre>
 
 <h3 id="3-10-stat"><a href="#3-10-stat" class="headerlink" title="3.10. stat"></a>3.10. stat</h3><blockquote>
 <p>stat 命令用于显示文件的状态信息。stat 命令的输出信息比 ls 命令的输出信息要更详细。</p>
 <p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/stat">http://man.linuxde.net/stat</a></p>
 </blockquote>
 <p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">stat</span> myfile</span><br></pre></td></tr></table></figure>
+<pre class="language-bash" data-language="bash"><code class="language-bash">stat myfile</code></pre>
 
 <h3 id="3-11-file"><a href="#3-11-file" class="headerlink" title="3.11. file"></a>3.11. file</h3><blockquote>
 <p>file 命令用来探测给定文件的类型。file 命令对文件的检查分为文件系统、魔法幻数检查和语言检查 3 个过程。</p>
 <p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/file">http://man.linuxde.net/file</a></p>
 </blockquote>
 <p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">file install.log          <span class="comment"># 显示文件类型</span></span><br><span class="line">file -b install.log       <span class="comment"># 不显示文件名称</span></span><br><span class="line">file -i install.log       <span class="comment"># 显示 MIME 类型</span></span><br><span class="line">file -L /var/spool/mail   <span class="comment"># 显示符号链接的文件类型</span></span><br></pre></td></tr></table></figure>
+<pre class="language-bash" data-language="bash"><code class="language-bash">file install.log          # 显示文件类型
+file -b install.log       # 不显示文件名称
+file -i install.log       # 显示 MIME 类型
+file -L &#x2F;var&#x2F;spool&#x2F;mail   # 显示符号链接的文件类型</code></pre>
 
 <h3 id="3-12-chmod"><a href="#3-12-chmod" class="headerlink" title="3.12. chmod"></a>3.12. chmod</h3><blockquote>
 <p>chmod 命令用来变更文件或目录的权限。在 UNIX 系统家族里，文件或目录权限的控制分别以读取、写入、执行 3 种一般权限来区分，另有 3 种特殊权限可供运用。用户可以使用 chmod 指令去变更文件与目录的权限，设置方式采用文字或数字代号皆可。符号连接的权限无法变更，如果用户对符号连接修改权限，其改变会作用在被连接的原始文件。</p>
@@ -392,12 +469,23 @@
 <p>知识扩展：</p>
 <p>Linux 用 户分为：拥有者、组群(Group)、其他（other），Linux 系统中，预设的情況下，系统中所有的帐号与一般身份使用者，以及 root 的相关信 息， 都是记录在<code>/etc/passwd</code>文件中。每个人的密码则是记录在<code>/etc/shadow</code>文件下。 此外，所有的组群名称记录在<code>/etc/group</code>內！</p>
 <p>linux 文件的用户权限的分析图</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">  -rw-r--r--   1 user  staff   651 Oct 12 12:53 .gitmodules</span><br><span class="line"><span class="comment"># ↑╰┬╯╰┬╯╰┬╯</span></span><br><span class="line"><span class="comment"># ┆ ┆  ┆  ╰┈ 0 其他人</span></span><br><span class="line"><span class="comment"># ┆ ┆  ╰┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈ g 属组</span></span><br><span class="line"><span class="comment"># ┆ ╰┈┈┈┈ u 属组</span></span><br><span class="line"><span class="comment"># ╰┈┈ 第一个字母 `d` 代表目录，`-` 代表普通文件</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">  -rw-r--r--   1 user  staff   651 Oct 12 12:53 .gitmodules
+# ↑╰┬╯╰┬╯╰┬╯
+# ┆ ┆  ┆  ╰┈ 0 其他人
+# ┆ ┆  ╰┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈ g 属组
+# ┆ ╰┈┈┈┈ u 属组
+# ╰┈┈ 第一个字母 &#96;d&#96; 代表目录，&#96;-&#96; 代表普通文件</code></pre>
 
 <p>例：rwx 　 rw-　 r–</p>
 <p>r&#x3D;读取属性　　&#x2F;&#x2F;值＝ 4<br>w&#x3D;写入属性　　&#x2F;&#x2F;值＝ 2<br>x&#x3D;执行属性　　&#x2F;&#x2F;值＝ 1</p>
 <p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> u+x,g+w f01　　<span class="comment"># 为文件f01设置自己可以执行，组员可以写入的权限</span></span><br><span class="line"><span class="built_in">chmod</span> u=rwx,g=rw,o=r f01</span><br><span class="line"><span class="built_in">chmod</span> 764 f01</span><br><span class="line"><span class="built_in">chmod</span> a+x f01　　    <span class="comment"># 对文件f01的u,g,o都设置可执行属性</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将/home/wwwroot/里的所有文件和文件夹设置为755权限</span></span><br><span class="line"><span class="built_in">chmod</span> -R  755 /home/wwwroot/*</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">chmod u+x,g+w f01　　# 为文件f01设置自己可以执行，组员可以写入的权限
+chmod u&#x3D;rwx,g&#x3D;rw,o&#x3D;r f01
+chmod 764 f01
+chmod a+x f01　　    # 对文件f01的u,g,o都设置可执行属性
+
+# 将&#x2F;home&#x2F;wwwroot&#x2F;里的所有文件和文件夹设置为755权限
+chmod -R  755 &#x2F;home&#x2F;wwwroot&#x2F;*</code></pre>
 
 <h3 id="3-13-chown"><a href="#3-13-chown" class="headerlink" title="3.13. chown"></a>3.13. chown</h3><blockquote>
 <p>chown 命令改变某个文件或目录的所有者和所属的组，该命令可以向某个用户授权，使该用户变成指定文件的所有者或者改变文件所属的组。用户可以是用户或者是用户 D，用户组可以是组名或组 id。文件名可以使由空格分开的文件列表，在文件名中可以包含通配符。</p>
@@ -405,7 +493,8 @@
 <p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/chown">http://man.linuxde.net/chown</a></p>
 </blockquote>
 <p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将目录/usr/meng及其下面的所有文件、子目录的文件主改成 liu</span></span><br><span class="line"><span class="built_in">chown</span> -R liu /usr/meng</span><br></pre></td></tr></table></figure>
+<pre class="language-bash" data-language="bash"><code class="language-bash"># 将目录&#x2F;usr&#x2F;meng及其下面的所有文件、子目录的文件主改成 liu
+chown -R liu &#x2F;usr&#x2F;meng</code></pre>
 
 <h3 id="3-14-locate"><a href="#3-14-locate" class="headerlink" title="3.14. locate"></a>3.14. locate</h3><blockquote>
 <p>locate 命令和 slocate 命令都用来查找文件或目录。</p>
@@ -413,13 +502,37 @@
 <p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/locate_slocate">http://man.linuxde.net/locate_slocate</a></p>
 </blockquote>
 <p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">locate <span class="built_in">pwd</span>      <span class="comment"># 查找和 pwd 相关的所有文件</span></span><br><span class="line">locate /etc/sh  <span class="comment"># 搜索 etc 目录下所有以 sh 开头的文件</span></span><br></pre></td></tr></table></figure>
+<pre class="language-bash" data-language="bash"><code class="language-bash">locate pwd      # 查找和 pwd 相关的所有文件
+locate &#x2F;etc&#x2F;sh  # 搜索 etc 目录下所有以 sh 开头的文件</code></pre>
 
 <h3 id="3-15-find"><a href="#3-15-find" class="headerlink" title="3.15. find"></a>3.15. find</h3><blockquote>
 <p>find 命令用来在指定目录下查找文件。任何位于参数之前的字符串都将被视为欲查找的目录名。如果使用该命令时，不设置任何参数，则 find 命令将在当前目录下查找子目录与文件。并且将查找到的子目录和文件全部进行显示。</p>
 <p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/find">http://man.linuxde.net/find</a></p>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 当前目录搜索所有文件，文件内容 包含 “140.206.111.111” 的内容</span></span><br><span class="line">find . -<span class="built_in">type</span> f -name <span class="string">&quot;*&quot;</span> | xargs grep <span class="string">&quot;140.206.111.111&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出当前目录及子目录下所有文件和文件夹</span></span><br><span class="line">find .</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在 /home 目录下查找以 .txt 结尾的文件名</span></span><br><span class="line">find /home -name <span class="string">&quot;*.txt&quot;</span></span><br><span class="line"><span class="comment"># 同上，但忽略大小写</span></span><br><span class="line">find /home -iname <span class="string">&quot;*.txt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 当前目录及子目录下查找所有以 .txt 和 .pdf 结尾的文件</span></span><br><span class="line">find . -name <span class="string">&quot;*.txt&quot;</span> -o -name <span class="string">&quot;*.pdf&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 匹配文件路径或者文件</span></span><br><span class="line">find /usr/ -path <span class="string">&quot;*local*&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 基于正则表达式匹配文件路径</span></span><br><span class="line">find . -regex <span class="string">&quot;.*\(\.txt\|\.pdf\)$&quot;</span></span><br><span class="line"><span class="comment"># 同上，但忽略大小写</span></span><br><span class="line">find . -iregex <span class="string">&quot;.*\(\.txt\|\.pdf\)$&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 找出 /home 下不是以 .txt 结尾的文件</span></span><br><span class="line">find /home ! -name <span class="string">&quot;*.txt&quot;</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"># 当前目录搜索所有文件，文件内容 包含 “140.206.111.111” 的内容
+find . -type f -name &quot;*&quot; | xargs grep &quot;140.206.111.111&quot;
+
+# 列出当前目录及子目录下所有文件和文件夹
+find .
+
+# 在 &#x2F;home 目录下查找以 .txt 结尾的文件名
+find &#x2F;home -name &quot;*.txt&quot;
+# 同上，但忽略大小写
+find &#x2F;home -iname &quot;*.txt&quot;
+
+# 当前目录及子目录下查找所有以 .txt 和 .pdf 结尾的文件
+find . -name &quot;*.txt&quot; -o -name &quot;*.pdf&quot;
+
+# 匹配文件路径或者文件
+find &#x2F;usr&#x2F; -path &quot;*local*&quot;
+
+# 基于正则表达式匹配文件路径
+find . -regex &quot;.*\(\.txt\|\.pdf\)$&quot;
+# 同上，但忽略大小写
+find . -iregex &quot;.*\(\.txt\|\.pdf\)$&quot;
+
+# 找出 &#x2F;home 下不是以 .txt 结尾的文件
+find &#x2F;home ! -name &quot;*.txt&quot;</code></pre>
 
 <h3 id="3-16-cp"><a href="#3-16-cp" class="headerlink" title="3.16. cp"></a>3.16. cp</h3><blockquote>
 <p>cp 命令用来将一个或多个源文件或者目录复制到指定的目的文件或目录。它可以将单个源文件复制成一个指定文件名的具体的文件或一个已经存在的目录下。cp 命令还支持同时复制多个文件，当一次复制多个文件时，目标文件参数必须是一个已经存在的目录，否则将出现错误。</p>
@@ -431,32 +544,72 @@
 <li>目标文件：指定目标文件。当“源文件”为多个文件时，要求“目标文件”为指定的目录。</li>
 </ul>
 <p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将文件 file 复制到目录 /usr/men/tmp 下，并改名为 file1</span></span><br><span class="line"><span class="built_in">cp</span> file /usr/men/tmp/file1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将目录 /usr/men下的所有文件及其子目录复制到目录 /usr/zh 中</span></span><br><span class="line"><span class="built_in">cp</span> -r /usr/men /usr/zh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 强行将 /usr/men下的所有文件复制到目录 /usr/zh 中，无论是否有文件重复</span></span><br><span class="line"><span class="built_in">cp</span> -rf /usr/men/* /usr/zh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将目录 /usr/men 中的以 m 打头的所有 .c 文件复制到目录 /usr/zh 中</span></span><br><span class="line"><span class="built_in">cp</span> -i /usr/men m*.c /usr/zh</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"># 将文件 file 复制到目录 &#x2F;usr&#x2F;men&#x2F;tmp 下，并改名为 file1
+cp file &#x2F;usr&#x2F;men&#x2F;tmp&#x2F;file1
+
+# 将目录 &#x2F;usr&#x2F;men下的所有文件及其子目录复制到目录 &#x2F;usr&#x2F;zh 中
+cp -r &#x2F;usr&#x2F;men &#x2F;usr&#x2F;zh
+
+# 强行将 &#x2F;usr&#x2F;men下的所有文件复制到目录 &#x2F;usr&#x2F;zh 中，无论是否有文件重复
+cp -rf &#x2F;usr&#x2F;men&#x2F;* &#x2F;usr&#x2F;zh
+
+# 将目录 &#x2F;usr&#x2F;men 中的以 m 打头的所有 .c 文件复制到目录 &#x2F;usr&#x2F;zh 中
+cp -i &#x2F;usr&#x2F;men m*.c &#x2F;usr&#x2F;zh</code></pre>
 
 <h3 id="3-17-scp"><a href="#3-17-scp" class="headerlink" title="3.17. scp"></a>3.17. scp</h3><blockquote>
 <p>scp 命令用于在 Linux 下进行远程拷贝文件的命令，和它类似的命令有 cp，不过 cp 只是在本机进行拷贝不能跨服务器，而且 scp 传输是加密的。可能会稍微影响一下速度。当你服务器硬盘变为只读 read only system 时，用 scp 可以帮你把文件移出来。另外，scp 还非常不占资源，不会提高多少系统负荷，在这一点上，rsync 就远远不及它了。虽然 rsync 比 scp 会快一点，但当小文件众多的情况下，rsync 会导致硬盘 I&#x2F;O 非常高，而 scp 基本不影响系统正常使用。</p>
 </blockquote>
 <p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 拷贝文件到远程服务器的指定目录</span></span><br><span class="line">scp &lt;file&gt; &lt;user&gt;@&lt;ip&gt;:&lt;url&gt;</span><br><span class="line">scp test.txt root@192.168.0.1:/opt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拷贝目录到远程服务器的指定目录</span></span><br><span class="line">scp -r &lt;folder&gt; &lt;user&gt;@&lt;ip&gt;:&lt;url&gt;</span><br><span class="line">scp -r <span class="built_in">test</span> root@192.168.0.1:/opt</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"># 拷贝文件到远程服务器的指定目录
+scp &lt;file&gt; &lt;user&gt;@&lt;ip&gt;:&lt;url&gt;
+scp test.txt root@192.168.0.1:&#x2F;opt
+
+# 拷贝目录到远程服务器的指定目录
+scp -r &lt;folder&gt; &lt;user&gt;@&lt;ip&gt;:&lt;url&gt;
+scp -r test root@192.168.0.1:&#x2F;opt</code></pre>
 
 <h4 id="3-17-1-免密码传输"><a href="#3-17-1-免密码传输" class="headerlink" title="3.17.1. 免密码传输"></a>3.17.1. 免密码传输</h4><p>（1）生成 ssh 公私钥对</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">ssh-keygen -t rsa</code></pre>
 
 <p>（2）将服务器 A 的 <code>\~/.ssh/id_rsa.pub</code> 文件内容复制到服务器 B 的 <code>\~/.ssh/authorized_keys</code> 文件中。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 服务器 A 上执行以下命令</span></span><br><span class="line">scp ~/.ssh/id_rsa.pub root@192.168.0.2:~/.ssh/id_rsa.pub.tmp</span><br><span class="line"></span><br><span class="line"><span class="comment"># 服务器 B 上执行以下命令</span></span><br><span class="line"><span class="built_in">cat</span> ~/.ssh/id_rsa.pub.tmp &gt;&gt; ~/.ssh/authorized_keys</span><br><span class="line"><span class="built_in">rm</span> ~/.ssh/id_rsa.pub.tmp</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"># 服务器 A 上执行以下命令
+scp ~&#x2F;.ssh&#x2F;id_rsa.pub root@192.168.0.2:~&#x2F;.ssh&#x2F;id_rsa.pub.tmp
+
+# 服务器 B 上执行以下命令
+cat ~&#x2F;.ssh&#x2F;id_rsa.pub.tmp &gt;&gt; ~&#x2F;.ssh&#x2F;authorized_keys
+rm ~&#x2F;.ssh&#x2F;id_rsa.pub.tmp</code></pre>
 
 <h3 id="3-18-mv"><a href="#3-18-mv" class="headerlink" title="3.18. mv"></a>3.18. mv</h3><blockquote>
 <p>mv 命令用来对文件或目录重新命名，或者将文件从一个目录移到另一个目录中。source 表示源文件或目录，target 表示目标文件或目录。如果将一个文件移到一个已经存在的目标文件中，则目标文件的内容将被覆盖。</p>
 <p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/mv">http://man.linuxde.net/mv</a></p>
 </blockquote>
 <p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mv</span> file1.txt /home/office/                      <span class="comment"># 移动单个文件</span></span><br><span class="line"><span class="built_in">mv</span> file2.txt file3.txt file4.txt /home/office/  <span class="comment"># 移动多个文件</span></span><br><span class="line"><span class="built_in">mv</span> *.txt /home/office/                          <span class="comment"># 移动所有 txt 文件</span></span><br><span class="line"><span class="built_in">mv</span> dir1/ /home/office/                          <span class="comment"># 移动目录</span></span><br><span class="line"><span class="built_in">mv</span> /usr/men/* .                                 <span class="comment"># 将指定目录中的所有文件移到当前目录中</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">mv</span> file1.txt file2.txt          <span class="comment"># 重命名文件</span></span><br><span class="line"><span class="built_in">mv</span> dir1/ dir2/                  <span class="comment"># 重命名目录</span></span><br><span class="line"><span class="built_in">mv</span> -v *.txt /home/office        <span class="comment"># 打印移动信息</span></span><br><span class="line"><span class="built_in">mv</span> -i file1.txt /home/office    <span class="comment"># 提示是否覆盖文件</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">mv</span> -uv *.txt /home/office       <span class="comment"># 源文件比目标文件新时才执行更新</span></span><br><span class="line"><span class="built_in">mv</span> -vn *.txt /home/office       <span class="comment"># 不要覆盖任何已存在的文件</span></span><br><span class="line"><span class="built_in">mv</span> -f *.txt /home/office        <span class="comment"># 无条件覆盖已经存在的文件</span></span><br><span class="line"><span class="built_in">mv</span> -bv *.txt /home/office       <span class="comment"># 复制时创建备份</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">mv file1.txt &#x2F;home&#x2F;office&#x2F;                      # 移动单个文件
+mv file2.txt file3.txt file4.txt &#x2F;home&#x2F;office&#x2F;  # 移动多个文件
+mv *.txt &#x2F;home&#x2F;office&#x2F;                          # 移动所有 txt 文件
+mv dir1&#x2F; &#x2F;home&#x2F;office&#x2F;                          # 移动目录
+mv &#x2F;usr&#x2F;men&#x2F;* .                                 # 将指定目录中的所有文件移到当前目录中
+
+mv file1.txt file2.txt          # 重命名文件
+mv dir1&#x2F; dir2&#x2F;                  # 重命名目录
+mv -v *.txt &#x2F;home&#x2F;office        # 打印移动信息
+mv -i file1.txt &#x2F;home&#x2F;office    # 提示是否覆盖文件
+
+mv -uv *.txt &#x2F;home&#x2F;office       # 源文件比目标文件新时才执行更新
+mv -vn *.txt &#x2F;home&#x2F;office       # 不要覆盖任何已存在的文件
+mv -f *.txt &#x2F;home&#x2F;office        # 无条件覆盖已经存在的文件
+mv -bv *.txt &#x2F;home&#x2F;office       # 复制时创建备份</code></pre>
 
 <h3 id="3-19-rm"><a href="#3-19-rm" class="headerlink" title="3.19. rm"></a>3.19. rm</h3><blockquote>
 <p>rm 命令可以删除一个目录中的一个或多个文件或目录，也可以将某个目录及其下属的所有文件及其子目录均删除掉。对于链接文件，只是删除整个链接文件，而原有文件保持不变。</p>
 <p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/rm">http://man.linuxde.net/rm</a></p>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> test.txt               <span class="comment"># 删除文件</span></span><br><span class="line"><span class="built_in">rm</span> -i test.txt test2.txt  <span class="comment"># 交互式删除文件</span></span><br><span class="line"><span class="built_in">rm</span> -r *                   <span class="comment"># 删除当前目录下的所有文件和目录</span></span><br><span class="line"><span class="built_in">rm</span> -r testdir             <span class="comment"># 删除目录下的所有文件和目录</span></span><br><span class="line"><span class="built_in">rm</span> -rf testdir            <span class="comment"># 强制删除目录下的所有文件和目录</span></span><br><span class="line"><span class="built_in">rm</span> -v testdir             <span class="comment"># 显示当前删除操作的详情</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">rm test.txt               # 删除文件
+rm -i test.txt test2.txt  # 交互式删除文件
+rm -r *                   # 删除当前目录下的所有文件和目录
+rm -r testdir             # 删除目录下的所有文件和目录
+rm -rf testdir            # 强制删除目录下的所有文件和目录
+rm -v testdir             # 显示当前删除操作的详情</code></pre>
 
     </div>
 
@@ -500,7 +653,7 @@
     <div class="footer-inner">
 
   <div class="copyright">
-    &copy; 
+    &copy; 2022 – 
     <span itemprop="copyrightYear">2025</span>
     <span class="with-love">
       <i class="fa fa-heart"></i>
@@ -528,26 +681,6 @@
 <noscript>
   <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
 </noscript>
-
-
-  
-  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
-
-  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
-<script src="/js/third-party/search/local-search.js"></script>
-
-
-
-
-
-
-
-  
-
-
-
-
 <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
 
 <script>

@@ -14,10 +14,10 @@
 
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.saint1337.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":true,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.saint1337.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.23.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true,"trigger":"auto"}}</script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/config.min.js" defer></script>
 
     <meta name="description" content="数据库中加密存储密码和验证密码的步骤以下内容来自ChatGLM 存储密码 生成盐（Salt）： 为每个用户生成一个随机盐。   密码与盐结合： 将用户密码与盐值结合。   加密： 使用上述算法对结合后的密码进行加密。   存储： 将加密后的密码（哈希值）和盐存储在数据库中。    验证密码 从数据库中取出盐和哈希值：  在用户尝试登录时，系统需要从数据库中检索与该用户账户关联的盐值和之前存储的哈希">
 <meta property="og:type" content="article">
@@ -38,7 +38,6 @@
 <link rel="canonical" href="https://blog.saint1337.top/2024/09/24/%E5%85%B3%E4%BA%8E%E5%9C%A8%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E5%AD%98%E5%82%A8%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81%E5%92%8C%E9%AA%8C%E8%AF%81/">
 
 
-
 <script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.saint1337.top/2024/09/24/%E5%85%B3%E4%BA%8E%E5%9C%A8%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E5%AD%98%E5%82%A8%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81%E5%92%8C%E9%AA%8C%E8%AF%81/","path":"2024/09/24/关于在数据库中存储用户密码和验证/","title":"关于在数据库中存储用户密码和验证"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
@@ -47,6 +46,28 @@
 
 
 
+
+
+
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/components/prism-core.min.js" integrity="sha256-bKrTFt2ZHyT4AE4LnBnAVctYKf9l6XP77kBvltgbjn4=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha256-9cmf7tcLdXpKsPi/2AWE93PbZpTp4M4tqzFk+lWomjU=" crossorigin="anonymous" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/utils.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/motion.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/sidebar.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/next-boot.min.js" defer></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/third-party/search/local-search.min.js" defer></script>
+
+
+
+
+
+
+
+  
 
 
 
@@ -91,7 +112,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -102,25 +123,25 @@
 
 
   <div class="search-pop-overlay">
-    <div class="popup search-popup"><div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off" maxlength="80"
-           placeholder="搜索..." spellcheck="false"
-           type="search" class="search-input">
-  </div>
-  <span class="popup-btn-close" role="button">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div class="search-result-container no-result">
-  <div class="search-result-icon">
-    <i class="fa fa-spinner fa-pulse fa-5x"></i>
-  </div>
-</div>
-
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -166,6 +187,11 @@
       </div>
   </nav>
 </div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/duzhuoshanwai" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;duzhuoshanwai" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
 
         </div>
       </div>
@@ -281,9 +307,72 @@
 <li>盐不能重复使用（否则一破解，所有的都遭殃）</li>
 <li>盐随机变化（例如，虽用户名不重复，但用户名不能拿来当盐）</li>
 </ul>
-<h2 id="TypeScript-代码实现"><a href="#TypeScript-代码实现" class="headerlink" title="TypeScript 代码实现"></a>TypeScript 代码实现</h2><h3 id="生成加密后的哈希密码"><a href="#生成加密后的哈希密码" class="headerlink" title="生成加密后的哈希密码"></a>生成加密后的哈希密码</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> crypto <span class="keyword">from</span> <span class="string">&#x27;crypto&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 生成盐值(生成随机字符串转换16进制并截取指定长度)</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">generateSalt</span>(<span class="params"><span class="attr">length</span>: <span class="built_in">number</span> = <span class="number">16</span></span>): <span class="built_in">string</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> crypto.<span class="title function_">randomBytes</span>(<span class="title class_">Math</span>.<span class="title function_">ceil</span>(length / <span class="number">2</span>)).<span class="title function_">toString</span>(<span class="string">&#x27;hex&#x27;</span>).<span class="title function_">slice</span>(<span class="number">0</span>, length);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 哈希密码</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">hashPassword</span>(<span class="params"><span class="attr">password</span>: <span class="built_in">string</span>, <span class="attr">salt</span>: <span class="built_in">string</span></span>): <span class="built_in">string</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> hash = crypto.<span class="title function_">createHash</span>(<span class="string">&#x27;sha256&#x27;</span>);</span><br><span class="line">    hash.<span class="title function_">update</span>(password + salt);</span><br><span class="line">    <span class="keyword">return</span> hash.<span class="title function_">digest</span>(<span class="string">&#x27;hex&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 示例用法</span></span><br><span class="line"><span class="keyword">const</span> username = <span class="string">&#x27;张三&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> password = <span class="string">&#x27;myPassword123&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> salt = <span class="title function_">generateSalt</span>();</span><br><span class="line"><span class="keyword">const</span> hashedPassword = <span class="title function_">hashPassword</span>(password, salt);</span><br><span class="line"><span class="keyword">const</span> userInfo = &#123;</span><br><span class="line">    <span class="attr">username</span>: username,</span><br><span class="line">    <span class="attr">hashedPassword</span>: hashedPassword,</span><br><span class="line">    <span class="attr">salt</span>: salt,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(userInfo)</span><br><span class="line"></span><br><span class="line"><span class="comment">// &#123;</span></span><br><span class="line"><span class="comment">//     username: &#x27;张三&#x27;,</span></span><br><span class="line"><span class="comment">//     hashedPassword: &#x27;d199f982ad02822110e05685241cb134b965e1d767dcad581d0d2be99f72d585&#x27;,</span></span><br><span class="line"><span class="comment">//     salt: &#x27;be90365eb56291d2&#x27;</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="TypeScript-代码实现"><a href="#TypeScript-代码实现" class="headerlink" title="TypeScript 代码实现"></a>TypeScript 代码实现</h2><h3 id="生成加密后的哈希密码"><a href="#生成加密后的哈希密码" class="headerlink" title="生成加密后的哈希密码"></a>生成加密后的哈希密码</h3><pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript">import crypto from &#39;crypto&#39;;
 
-<h3 id="使用保存的哈希密码和盐值对用户输入的密码进行验证"><a href="#使用保存的哈希密码和盐值对用户输入的密码进行验证" class="headerlink" title="使用保存的哈希密码和盐值对用户输入的密码进行验证"></a>使用保存的哈希密码和盐值对用户输入的密码进行验证</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> crypto <span class="keyword">from</span> <span class="string">&#x27;crypto&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> userInfo = &#123;</span><br><span class="line">    <span class="attr">username</span>: <span class="string">&#x27;张三&#x27;</span>,</span><br><span class="line">    <span class="attr">hashedPassword</span>: <span class="string">&#x27;d199f982ad02822110e05685241cb134b965e1d767dcad581d0d2be99f72d585&#x27;</span>,</span><br><span class="line">    <span class="attr">salt</span>: <span class="string">&#x27;be90365eb56291d2&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 哈希密码</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">hashPassword</span>(<span class="params"><span class="attr">password</span>: <span class="built_in">string</span>, <span class="attr">salt</span>: <span class="built_in">string</span></span>): <span class="built_in">string</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> hash = crypto.<span class="title function_">createHash</span>(<span class="string">&#x27;sha256&#x27;</span>);</span><br><span class="line">    hash.<span class="title function_">update</span>(password + salt);</span><br><span class="line">    <span class="keyword">return</span> hash.<span class="title function_">digest</span>(<span class="string">&#x27;hex&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> inputPassword1 = <span class="string">&#x27;myPassword123&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> inputPassword2 = <span class="string">&#x27;myPassword321&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> hashedInputPassword1 = <span class="title function_">hashPassword</span>(inputPassword1, userInfo.<span class="property">salt</span>);</span><br><span class="line"><span class="keyword">const</span> hashedInputPassword2 = <span class="title function_">hashPassword</span>(inputPassword2, userInfo.<span class="property">salt</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (hashedInputPassword1 == userInfo.<span class="property">hashedPassword</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;密码正确&#x27;</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;密码错误&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (hashedInputPassword2 == userInfo.<span class="property">hashedPassword</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;密码正确&#x27;</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;密码错误&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//结果可知 inputpassword1验证正确 inputpassword2验证错误</span></span><br></pre></td></tr></table></figure>
+&#x2F;&#x2F; 生成盐值(生成随机字符串转换16进制并截取指定长度)
+function generateSalt(length: number &#x3D; 16): string &#123;
+    return crypto.randomBytes(Math.ceil(length &#x2F; 2)).toString(&#39;hex&#39;).slice(0, length);
+&#125;
+
+&#x2F;&#x2F; 哈希密码
+function hashPassword(password: string, salt: string): string &#123;
+    const hash &#x3D; crypto.createHash(&#39;sha256&#39;);
+    hash.update(password + salt);
+    return hash.digest(&#39;hex&#39;);
+&#125;
+
+&#x2F;&#x2F; 示例用法
+const username &#x3D; &#39;张三&#39;;
+const password &#x3D; &#39;myPassword123&#39;;
+const salt &#x3D; generateSalt();
+const hashedPassword &#x3D; hashPassword(password, salt);
+const userInfo &#x3D; &#123;
+    username: username,
+    hashedPassword: hashedPassword,
+    salt: salt,
+&#125;
+
+console.log(userInfo)
+
+&#x2F;&#x2F; &#123;
+&#x2F;&#x2F;     username: &#39;张三&#39;,
+&#x2F;&#x2F;     hashedPassword: &#39;d199f982ad02822110e05685241cb134b965e1d767dcad581d0d2be99f72d585&#39;,
+&#x2F;&#x2F;     salt: &#39;be90365eb56291d2&#39;
+&#x2F;&#x2F; &#125;</code></pre>
+
+<h3 id="使用保存的哈希密码和盐值对用户输入的密码进行验证"><a href="#使用保存的哈希密码和盐值对用户输入的密码进行验证" class="headerlink" title="使用保存的哈希密码和盐值对用户输入的密码进行验证"></a>使用保存的哈希密码和盐值对用户输入的密码进行验证</h3><pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript">import crypto from &#39;crypto&#39;;
+
+const userInfo &#x3D; &#123;
+    username: &#39;张三&#39;,
+    hashedPassword: &#39;d199f982ad02822110e05685241cb134b965e1d767dcad581d0d2be99f72d585&#39;,
+    salt: &#39;be90365eb56291d2&#39;
+&#125;
+
+&#x2F;&#x2F; 哈希密码
+function hashPassword(password: string, salt: string): string &#123;
+    const hash &#x3D; crypto.createHash(&#39;sha256&#39;);
+    hash.update(password + salt);
+    return hash.digest(&#39;hex&#39;);
+&#125;
+
+const inputPassword1 &#x3D; &#39;myPassword123&#39;;
+const inputPassword2 &#x3D; &#39;myPassword321&#39;;
+const hashedInputPassword1 &#x3D; hashPassword(inputPassword1, userInfo.salt);
+const hashedInputPassword2 &#x3D; hashPassword(inputPassword2, userInfo.salt);
+
+if (hashedInputPassword1 &#x3D;&#x3D; userInfo.hashedPassword) &#123;
+    console.log(&#39;密码正确&#39;);
+&#125;else&#123;
+    console.log(&#39;密码错误&#39;);
+&#125;
+
+if (hashedInputPassword2 &#x3D;&#x3D; userInfo.hashedPassword) &#123;
+    console.log(&#39;密码正确&#39;);
+&#125;else&#123;
+    console.log(&#39;密码错误&#39;);
+&#125;
+
+&#x2F;&#x2F;结果可知 inputpassword1验证正确 inputpassword2验证错误</code></pre>
 
 
     </div>
@@ -325,7 +414,7 @@
     <div class="footer-inner">
 
   <div class="copyright">
-    &copy; 
+    &copy; 2022 – 
     <span itemprop="copyrightYear">2025</span>
     <span class="with-love">
       <i class="fa fa-heart"></i>
@@ -353,26 +442,6 @@
 <noscript>
   <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
 </noscript>
-
-
-  
-  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
-
-  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
-<script src="/js/third-party/search/local-search.js"></script>
-
-
-
-
-
-
-
-  
-
-
-
-
 <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
 
 <script>

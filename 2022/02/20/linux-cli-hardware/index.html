@@ -14,10 +14,10 @@
 
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.saint1337.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":true,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.saint1337.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.23.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true,"trigger":"auto"}}</script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/config.min.js" defer></script>
 
     <meta name="description" content="Linux 硬件管理 关键词：df, du, top, free, iotop  1. Linux 硬件管理要点 查看磁盘空间 - 使用 df 查看文件或目录的磁盘空间 - 使用 du 实时查看系统整体运行状态（如：CPU、内存） - 使用 top 查看已使用和未使用的内存 - 使用 free 查看磁盘 I&#x2F;O 使用状况 - 使用 iotop  2. 命令常见用法2.1. df df 命">
 <meta property="og:type" content="article">
@@ -36,7 +36,6 @@
 <link rel="canonical" href="https://blog.saint1337.top/2022/02/20/linux-cli-hardware/">
 
 
-
 <script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.saint1337.top/2022/02/20/linux-cli-hardware/","path":"2022/02/20/linux-cli-hardware/","title":"Linux 硬件管理"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
@@ -45,6 +44,28 @@
 
 
 
+
+
+
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/components/prism-core.min.js" integrity="sha256-bKrTFt2ZHyT4AE4LnBnAVctYKf9l6XP77kBvltgbjn4=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha256-9cmf7tcLdXpKsPi/2AWE93PbZpTp4M4tqzFk+lWomjU=" crossorigin="anonymous" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/utils.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/motion.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/sidebar.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/next-boot.min.js" defer></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/third-party/search/local-search.min.js" defer></script>
+
+
+
+
+
+
+
+  
 
 
 
@@ -89,7 +110,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -100,25 +121,25 @@
 
 
   <div class="search-pop-overlay">
-    <div class="popup search-popup"><div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off" maxlength="80"
-           placeholder="搜索..." spellcheck="false"
-           type="search" class="search-input">
-  </div>
-  <span class="popup-btn-close" role="button">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div class="search-result-container no-result">
-  <div class="search-result-icon">
-    <i class="fa fa-spinner fa-pulse fa-5x"></i>
-  </div>
-</div>
-
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -164,6 +185,11 @@
       </div>
   </nav>
 </div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/duzhuoshanwai" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;duzhuoshanwai" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
 
         </div>
       </div>
@@ -257,14 +283,80 @@
 <p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/df">http://man.linuxde.net/df</a></p>
 </blockquote>
 <p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看系统磁盘设备，默认是 KB 为单位</span></span><br><span class="line">[root@LinServ-1 ~]# <span class="built_in">df</span></span><br><span class="line">文件系统               1K-块        已用     可用 已用% 挂载点</span><br><span class="line">/dev/sda2            146294492  28244432 110498708  21% /</span><br><span class="line">/dev/sda1              1019208     62360    904240   7% /boot</span><br><span class="line">tmpfs                  1032204         0   1032204   0% /dev/shm</span><br><span class="line">/dev/sdb1            2884284108 218826068 2518944764   8% /data1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 -h 选项以 KB 以上的单位来显示，可读性高</span></span><br><span class="line">[root@LinServ-1 ~]# <span class="built_in">df</span> -h</span><br><span class="line">文件系统              容量  已用 可用 已用% 挂载点</span><br><span class="line">/dev/sda2             140G   27G  106G  21% /</span><br><span class="line">/dev/sda1             996M   61M  884M   7% /boot</span><br><span class="line">tmpfs                1009M     0 1009M   0% /dev/shm</span><br><span class="line">/dev/sdb1             2.7T  209G  2.4T   8% /data1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看全部文件系统</span></span><br><span class="line">[root@LinServ-1 ~]# <span class="built_in">df</span> -a</span><br><span class="line">文件系统               1K-块        已用     可用 已用% 挂载点</span><br><span class="line">/dev/sda2            146294492  28244432 110498708  21% /</span><br><span class="line">proc                         0         0         0   -  /proc</span><br><span class="line">sysfs                        0         0         0   -  /sys</span><br><span class="line">devpts                       0         0         0   -  /dev/pts</span><br><span class="line">/dev/sda1              1019208     62360    904240   7% /boot</span><br><span class="line">tmpfs                  1032204         0   1032204   0% /dev/shm</span><br><span class="line">/dev/sdb1            2884284108 218826068 2518944764   8% /data1</span><br><span class="line">none                         0         0         0   -  /proc/sys/fs/binfmt_misc</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"># 查看系统磁盘设备，默认是 KB 为单位
+[root@LinServ-1 ~]# df
+文件系统               1K-块        已用     可用 已用% 挂载点
+&#x2F;dev&#x2F;sda2            146294492  28244432 110498708  21% &#x2F;
+&#x2F;dev&#x2F;sda1              1019208     62360    904240   7% &#x2F;boot
+tmpfs                  1032204         0   1032204   0% &#x2F;dev&#x2F;shm
+&#x2F;dev&#x2F;sdb1            2884284108 218826068 2518944764   8% &#x2F;data1
+
+# 使用 -h 选项以 KB 以上的单位来显示，可读性高
+[root@LinServ-1 ~]# df -h
+文件系统              容量  已用 可用 已用% 挂载点
+&#x2F;dev&#x2F;sda2             140G   27G  106G  21% &#x2F;
+&#x2F;dev&#x2F;sda1             996M   61M  884M   7% &#x2F;boot
+tmpfs                1009M     0 1009M   0% &#x2F;dev&#x2F;shm
+&#x2F;dev&#x2F;sdb1             2.7T  209G  2.4T   8% &#x2F;data1
+
+# 查看全部文件系统
+[root@LinServ-1 ~]# df -a
+文件系统               1K-块        已用     可用 已用% 挂载点
+&#x2F;dev&#x2F;sda2            146294492  28244432 110498708  21% &#x2F;
+proc                         0         0         0   -  &#x2F;proc
+sysfs                        0         0         0   -  &#x2F;sys
+devpts                       0         0         0   -  &#x2F;dev&#x2F;pts
+&#x2F;dev&#x2F;sda1              1019208     62360    904240   7% &#x2F;boot
+tmpfs                  1032204         0   1032204   0% &#x2F;dev&#x2F;shm
+&#x2F;dev&#x2F;sdb1            2884284108 218826068 2518944764   8% &#x2F;data1
+none                         0         0         0   -  &#x2F;proc&#x2F;sys&#x2F;fs&#x2F;binfmt_misc</code></pre>
 
 <h3 id="2-2-du"><a href="#2-2-du" class="headerlink" title="2.2. du"></a>2.2. du</h3><blockquote>
 <p>du 命令也是查看使用空间的，但是与 df 命令不同的是：du 命令是对文件和目录磁盘使用的空间的查看，还是和 df 命令有一些区别的。</p>
 <p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/du">http://man.linuxde.net/du</a></p>
 </blockquote>
 <p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 显示目录或者文件所占空间</span></span><br><span class="line">root@localhost [<span class="built_in">test</span>]# <span class="built_in">du</span></span><br><span class="line">608 ./test6</span><br><span class="line">308 ./test4</span><br><span class="line">4 ./scf/lib</span><br><span class="line">4 ./scf/service/deploy/product</span><br><span class="line">4 ./scf/service/deploy/info</span><br><span class="line">12 ./scf/service/deploy</span><br><span class="line">16 ./scf/service</span><br><span class="line">4 ./scf/doc</span><br><span class="line">4 ./scf/bin</span><br><span class="line">32 ./scf</span><br><span class="line">8 ./test3</span><br><span class="line">1288 .</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示指定文件所占空间</span></span><br><span class="line">[root@localhost <span class="built_in">test</span>]# <span class="built_in">du</span> log2012.log</span><br><span class="line">300 log2012.log</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看指定目录的所占空间</span></span><br><span class="line">[root@localhost <span class="built_in">test</span>]# <span class="built_in">du</span> scf</span><br><span class="line">4 scf/lib</span><br><span class="line">4 scf/service/deploy/product</span><br><span class="line">4 scf/service/deploy/info</span><br><span class="line">12 scf/service/deploy</span><br><span class="line">16 scf/service</span><br><span class="line">4 scf/doc</span><br><span class="line">4 scf/bin</span><br><span class="line">32 scf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示多个文件所占空间</span></span><br><span class="line">[root@localhost <span class="built_in">test</span>]# <span class="built_in">du</span> log30.tar.gz log31.tar.gz</span><br><span class="line">4 log30.tar.gz</span><br><span class="line">4 log31.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="comment"># 只显示总和的大小</span></span><br><span class="line">[root@localhost <span class="built_in">test</span>]# <span class="built_in">du</span> -s</span><br><span class="line">1288 .</span><br><span class="line"></span><br><span class="line">[root@localhost <span class="built_in">test</span>]# <span class="built_in">du</span> -s scf</span><br><span class="line">32 scf</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"># 显示目录或者文件所占空间
+root@localhost [test]# du
+608 .&#x2F;test6
+308 .&#x2F;test4
+4 .&#x2F;scf&#x2F;lib
+4 .&#x2F;scf&#x2F;service&#x2F;deploy&#x2F;product
+4 .&#x2F;scf&#x2F;service&#x2F;deploy&#x2F;info
+12 .&#x2F;scf&#x2F;service&#x2F;deploy
+16 .&#x2F;scf&#x2F;service
+4 .&#x2F;scf&#x2F;doc
+4 .&#x2F;scf&#x2F;bin
+32 .&#x2F;scf
+8 .&#x2F;test3
+1288 .
+
+# 显示指定文件所占空间
+[root@localhost test]# du log2012.log
+300 log2012.log
+
+# 查看指定目录的所占空间
+[root@localhost test]# du scf
+4 scf&#x2F;lib
+4 scf&#x2F;service&#x2F;deploy&#x2F;product
+4 scf&#x2F;service&#x2F;deploy&#x2F;info
+12 scf&#x2F;service&#x2F;deploy
+16 scf&#x2F;service
+4 scf&#x2F;doc
+4 scf&#x2F;bin
+32 scf
+
+# 显示多个文件所占空间
+[root@localhost test]# du log30.tar.gz log31.tar.gz
+4 log30.tar.gz
+4 log31.tar.gz
+
+# 只显示总和的大小
+[root@localhost test]# du -s
+1288 .
+
+[root@localhost test]# du -s scf
+32 scf</code></pre>
 
 <h3 id="2-3-top"><a href="#2-3-top" class="headerlink" title="2.3. top"></a>2.3. top</h3><blockquote>
 <p>top 命令可以实时动态地查看系统的整体运行情况，是一个综合了多方信息监测系统性能和运行信息的实用工具。通过 top 命令所提供的互动式界面，用热键可以管理。</p>
@@ -275,14 +367,36 @@
 <p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/free">http://man.linuxde.net/free</a></p>
 </blockquote>
 <p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">free -t    <span class="comment"># 以总和的形式显示内存的使用信息</span></span><br><span class="line">free -s 10 <span class="comment"># 周期性的查询内存使用信息，每10s 执行一次命令</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示内存使用情况</span></span><br><span class="line"></span><br><span class="line">free -m</span><br><span class="line">             total       used       free     shared    buffers     cached</span><br><span class="line">Mem:          2016       1973         42          0        163       1497</span><br><span class="line">-/+ buffers/cache:        312       1703</span><br><span class="line">Swap:         4094          0       4094</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">free -t    # 以总和的形式显示内存的使用信息
+free -s 10 # 周期性的查询内存使用信息，每10s 执行一次命令
+
+# 显示内存使用情况
+
+free -m
+             total       used       free     shared    buffers     cached
+Mem:          2016       1973         42          0        163       1497
+-&#x2F;+ buffers&#x2F;cache:        312       1703
+Swap:         4094          0       4094</code></pre>
 
 <h3 id="2-5-iotop"><a href="#2-5-iotop" class="headerlink" title="2.5. iotop"></a>2.5. iotop</h3><blockquote>
 <p>iotop 命令是一个用来监视磁盘 I&#x2F;O 使用状况的 top 类工具。iotop 具有与 top 相似的 UI，其中包括 PID、用户、I&#x2F;O、进程等相关信息。Linux 下的 IO 统计工具如 iostat，nmon 等大多数是只能统计到 per 设备的读写情况，如果你想知道每个进程是如何使用 IO 的就比较麻烦，使用 iotop 命令可以很方便的查看。</p>
 <p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/iotop">http://man.linuxde.net/iotop</a></p>
 </blockquote>
 <p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Total DISK <span class="built_in">read</span>:       0.00 B/s | Total DISK write:       0.00 B/s</span><br><span class="line">  TID  PRIO  USER     DISK READ  DISK WRITE  SWAPIN     IO&gt;    <span class="built_in">command</span></span><br><span class="line">    1 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % init [3]</span><br><span class="line">    2 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [kthreadd]</span><br><span class="line">    3 rt/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [migration/0]</span><br><span class="line">    4 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [ksoftirqd/0]</span><br><span class="line">    5 rt/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [watchdog/0]</span><br><span class="line">    6 rt/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [migration/1]</span><br><span class="line">    7 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [ksoftirqd/1]</span><br><span class="line">    8 rt/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [watchdog/1]</span><br><span class="line">    9 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [events/0]</span><br><span class="line">   10 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [events/1]</span><br><span class="line">   11 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [khelper]</span><br><span class="line">2572 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [bluetooth]</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Total DISK read:       0.00 B&#x2F;s | Total DISK write:       0.00 B&#x2F;s
+  TID  PRIO  USER     DISK READ  DISK WRITE  SWAPIN     IO&gt;    command
+    1 be&#x2F;4 root        0.00 B&#x2F;s    0.00 B&#x2F;s  0.00 %  0.00 % init [3]
+    2 be&#x2F;4 root        0.00 B&#x2F;s    0.00 B&#x2F;s  0.00 %  0.00 % [kthreadd]
+    3 rt&#x2F;4 root        0.00 B&#x2F;s    0.00 B&#x2F;s  0.00 %  0.00 % [migration&#x2F;0]
+    4 be&#x2F;4 root        0.00 B&#x2F;s    0.00 B&#x2F;s  0.00 %  0.00 % [ksoftirqd&#x2F;0]
+    5 rt&#x2F;4 root        0.00 B&#x2F;s    0.00 B&#x2F;s  0.00 %  0.00 % [watchdog&#x2F;0]
+    6 rt&#x2F;4 root        0.00 B&#x2F;s    0.00 B&#x2F;s  0.00 %  0.00 % [migration&#x2F;1]
+    7 be&#x2F;4 root        0.00 B&#x2F;s    0.00 B&#x2F;s  0.00 %  0.00 % [ksoftirqd&#x2F;1]
+    8 rt&#x2F;4 root        0.00 B&#x2F;s    0.00 B&#x2F;s  0.00 %  0.00 % [watchdog&#x2F;1]
+    9 be&#x2F;4 root        0.00 B&#x2F;s    0.00 B&#x2F;s  0.00 %  0.00 % [events&#x2F;0]
+   10 be&#x2F;4 root        0.00 B&#x2F;s    0.00 B&#x2F;s  0.00 %  0.00 % [events&#x2F;1]
+   11 be&#x2F;4 root        0.00 B&#x2F;s    0.00 B&#x2F;s  0.00 %  0.00 % [khelper]
+2572 be&#x2F;4 root        0.00 B&#x2F;s    0.00 B&#x2F;s  0.00 %  0.00 % [bluetooth]</code></pre>
 
     </div>
 
@@ -326,7 +440,7 @@
     <div class="footer-inner">
 
   <div class="copyright">
-    &copy; 
+    &copy; 2022 – 
     <span itemprop="copyrightYear">2025</span>
     <span class="with-love">
       <i class="fa fa-heart"></i>
@@ -354,26 +468,6 @@
 <noscript>
   <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
 </noscript>
-
-
-  
-  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
-
-  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
-<script src="/js/third-party/search/local-search.js"></script>
-
-
-
-
-
-
-
-  
-
-
-
-
 <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
 
 <script>

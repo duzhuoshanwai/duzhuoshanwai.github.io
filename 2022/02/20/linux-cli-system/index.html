@@ -14,10 +14,10 @@
 
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.saint1337.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":true,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.saint1337.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.23.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true,"trigger":"auto"}}</script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/config.min.js" defer></script>
 
     <meta name="description" content="Linux 系统管理 关键词：lsb_release, reboot, exit, shutdown, date, mount, umount, ps, kill, systemctl, service, crontab  1. Linux 系统管理要点 查看 Linux 系统发行版本 使用 lsb_release（此命令适用于所有的 Linux 发行版本） 使用 cat &#x2F;etc&#x2F;redhat-">
 <meta property="og:type" content="article">
@@ -36,7 +36,6 @@
 <link rel="canonical" href="https://blog.saint1337.top/2022/02/20/linux-cli-system/">
 
 
-
 <script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.saint1337.top/2022/02/20/linux-cli-system/","path":"2022/02/20/linux-cli-system/","title":"Linux 系统管理"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
@@ -45,6 +44,28 @@
 
 
 
+
+
+
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/components/prism-core.min.js" integrity="sha256-bKrTFt2ZHyT4AE4LnBnAVctYKf9l6XP77kBvltgbjn4=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha256-9cmf7tcLdXpKsPi/2AWE93PbZpTp4M4tqzFk+lWomjU=" crossorigin="anonymous" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/utils.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/motion.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/sidebar.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/next-boot.min.js" defer></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/third-party/search/local-search.min.js" defer></script>
+
+
+
+
+
+
+
+  
 
 
 
@@ -89,7 +110,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -100,25 +121,25 @@
 
 
   <div class="search-pop-overlay">
-    <div class="popup search-popup"><div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off" maxlength="80"
-           placeholder="搜索..." spellcheck="false"
-           type="search" class="search-input">
-  </div>
-  <span class="popup-btn-close" role="button">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div class="search-result-container no-result">
-  <div class="search-result-icon">
-    <i class="fa fa-spinner fa-pulse fa-5x"></i>
-  </div>
-</div>
-
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -164,6 +185,11 @@
       </div>
   </nav>
 </div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/duzhuoshanwai" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;duzhuoshanwai" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
 
         </div>
       </div>
@@ -275,77 +301,279 @@
 <p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/reboot">http://man.linuxde.net/reboot</a></p>
 </blockquote>
 <p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">reboot        <span class="comment"># 重开机。</span></span><br><span class="line">reboot -w     <span class="comment"># 做个重开机的模拟（只有纪录并不会真的重开机）。</span></span><br></pre></td></tr></table></figure>
+<pre class="language-bash" data-language="bash"><code class="language-bash">reboot        # 重开机。
+reboot -w     # 做个重开机的模拟（只有纪录并不会真的重开机）。</code></pre>
 
 <h3 id="2-3-exit"><a href="#2-3-exit" class="headerlink" title="2.3. exit"></a>2.3. exit</h3><blockquote>
 <p>exit 命令同于退出 shell，并返回给定值。在 shell 脚本中可以终止当前脚本执行。执行 exit 可使 shell 以指定的状态值退出。若不设置状态值参数，则 shell 以预设值退出。状态值 0 代表执行成功，其他值代表执行失败。</p>
 <p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/exit">http://man.linuxde.net/exit</a></p>
 </blockquote>
 <p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 退出当前 shell</span></span><br><span class="line">[root@localhost ~]# <span class="built_in">exit</span></span><br><span class="line"><span class="built_in">logout</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 在脚本中，进入脚本所在目录，否则退出</span></span><br><span class="line"><span class="built_in">cd</span> $(<span class="built_in">dirname</span> <span class="variable">$0</span>) || <span class="built_in">exit</span> 1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在脚本中，判断参数数量，不匹配就打印使用方式，退出</span></span><br><span class="line"><span class="keyword">if</span> [ <span class="string">&quot;<span class="variable">$#</span>&quot;</span> -ne <span class="string">&quot;2&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;usage: <span class="variable">$0</span> &lt;area&gt; &lt;hours&gt;&quot;</span></span><br><span class="line">    <span class="built_in">exit</span> 2</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 在脚本中，退出时删除临时文件</span></span><br><span class="line"><span class="built_in">trap</span> <span class="string">&quot;rm -f tmpfile; echo Bye.&quot;</span> EXIT</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查上一命令的退出码</span></span><br><span class="line">./mycommand.sh</span><br><span class="line">EXCODE=$?</span><br><span class="line"><span class="keyword">if</span> [ <span class="string">&quot;<span class="variable">$EXCODE</span>&quot;</span> == <span class="string">&quot;0&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;O.K&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"># 退出当前 shell
+[root@localhost ~]# exit
+logout
+
+# 在脚本中，进入脚本所在目录，否则退出
+cd $(dirname $0) || exit 1
+
+# 在脚本中，判断参数数量，不匹配就打印使用方式，退出
+if [ &quot;$#&quot; -ne &quot;2&quot; ]; then
+    echo &quot;usage: $0 &lt;area&gt; &lt;hours&gt;&quot;
+    exit 2
+fi
+
+# 在脚本中，退出时删除临时文件
+trap &quot;rm -f tmpfile; echo Bye.&quot; EXIT
+
+# 检查上一命令的退出码
+.&#x2F;mycommand.sh
+EXCODE&#x3D;$?
+if [ &quot;$EXCODE&quot; &#x3D;&#x3D; &quot;0&quot; ]; then
+    echo &quot;O.K&quot;
+fi</code></pre>
 
 <h3 id="2-4-shutdown"><a href="#2-4-shutdown" class="headerlink" title="2.4. shutdown"></a>2.4. shutdown</h3><blockquote>
 <p>shutdown 命令用来系统关机命令。shutdown 指令可以关闭所有程序，并依用户的需要，进行重新开机或关机的动作。</p>
 <p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/shutdown">http://man.linuxde.net/shutdown</a></p>
 </blockquote>
 <p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 指定现在立即关机</span></span><br><span class="line">shutdown -h now</span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定 5 分钟后关机，同时送出警告信息给登入用户</span></span><br><span class="line">shutdown +5 <span class="string">&quot;System will shutdown after 5 minutes&quot;</span></span><br></pre></td></tr></table></figure>
+<pre class="language-bash" data-language="bash"><code class="language-bash"># 指定现在立即关机
+shutdown -h now
+
+# 指定 5 分钟后关机，同时送出警告信息给登入用户
+shutdown +5 &quot;System will shutdown after 5 minutes&quot;</code></pre>
 
 <h3 id="2-5-date"><a href="#2-5-date" class="headerlink" title="2.5. date"></a>2.5. date</h3><blockquote>
 <p>date 命令是显示或设置系统时间与日期。</p>
 <p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/date">http://man.linuxde.net/date</a></p>
 </blockquote>
 <p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 格式化输出</span></span><br><span class="line"><span class="built_in">date</span> +<span class="string">&quot;%Y-%m-%d&quot;</span></span><br><span class="line">2009-12-07</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出昨天日期</span></span><br><span class="line"><span class="built_in">date</span> -d <span class="string">&quot;1 day ago&quot;</span> +<span class="string">&quot;%Y-%m-%d&quot;</span></span><br><span class="line">2012-11-19</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2 秒后输出</span></span><br><span class="line"><span class="built_in">date</span> -d <span class="string">&quot;2 second&quot;</span> +<span class="string">&quot;%Y-%m-%d %H:%M.%S&quot;</span></span><br><span class="line">2012-11-20 14:21.31</span><br><span class="line"></span><br><span class="line"><span class="comment"># 传说中的 1234567890 秒</span></span><br><span class="line"><span class="built_in">date</span> -d <span class="string">&quot;1970-01-01 1234567890 seconds&quot;</span> +<span class="string">&quot;%Y-%m-%d %H:%m:%S&quot;</span></span><br><span class="line">2009-02-13 23:02:30</span><br><span class="line"></span><br><span class="line"><span class="comment"># 普通转格式</span></span><br><span class="line"><span class="built_in">date</span> -d <span class="string">&quot;2009-12-12&quot;</span> +<span class="string">&quot;%Y/%m/%d %H:%M.%S&quot;</span></span><br><span class="line">2009/12/12 00:00.00</span><br><span class="line"></span><br><span class="line"><span class="comment"># apache 格式转换</span></span><br><span class="line"><span class="built_in">date</span> -d <span class="string">&quot;Dec 5, 2009 12:00:37 AM&quot;</span> +<span class="string">&quot;%Y-%m-%d %H:%M.%S&quot;</span></span><br><span class="line">2009-12-05 00:00.37</span><br><span class="line"></span><br><span class="line"><span class="comment"># 格式转换后时间游走</span></span><br><span class="line"><span class="built_in">date</span> -d <span class="string">&quot;Dec 5, 2009 12:00:37 AM 2 year ago&quot;</span> +<span class="string">&quot;%Y-%m-%d %H:%M.%S&quot;</span></span><br><span class="line">2007-12-05 00:00.37</span><br><span class="line"></span><br><span class="line"><span class="comment"># 加减操作</span></span><br><span class="line"><span class="built_in">date</span> +%Y%m%d                   <span class="comment"># 显示前天年月日</span></span><br><span class="line"><span class="built_in">date</span> -d <span class="string">&quot;+1 day&quot;</span> +%Y%m%d       <span class="comment"># 显示前一天的日期</span></span><br><span class="line"><span class="built_in">date</span> -d <span class="string">&quot;-1 day&quot;</span> +%Y%m%d       <span class="comment"># 显示后一天的日期</span></span><br><span class="line"><span class="built_in">date</span> -d <span class="string">&quot;-1 month&quot;</span> +%Y%m%d     <span class="comment"># 显示上一月的日期</span></span><br><span class="line"><span class="built_in">date</span> -d <span class="string">&quot;+1 month&quot;</span> +%Y%m%d     <span class="comment"># 显示下一月的日期</span></span><br><span class="line"><span class="built_in">date</span> -d <span class="string">&quot;-1 year&quot;</span> +%Y%m%d      <span class="comment"># 显示前一年的日期</span></span><br><span class="line"><span class="built_in">date</span> -d <span class="string">&quot;+1 year&quot;</span> +%Y%m%d      <span class="comment"># 显示下一年的日期</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设定时间</span></span><br><span class="line"><span class="built_in">date</span> -s                        <span class="comment"># 设置当前时间，只有root权限才能设置，其他只能查看</span></span><br><span class="line"><span class="built_in">date</span> -s 20120523               <span class="comment"># 设置成20120523，这样会把具体时间设置成空00:00:00</span></span><br><span class="line"><span class="built_in">date</span> -s 01:01:01               <span class="comment"># 设置具体时间，不会对日期做更改</span></span><br><span class="line"><span class="built_in">date</span> -s <span class="string">&quot;01:01:01 2012-05-23&quot;</span>  <span class="comment"># 这样可以设置全部时间</span></span><br><span class="line"><span class="built_in">date</span> -s <span class="string">&quot;01:01:01 20120523&quot;</span>    <span class="comment"># 这样可以设置全部时间</span></span><br><span class="line"><span class="built_in">date</span> -s <span class="string">&quot;2012-05-23 01:01:01&quot;</span>  <span class="comment"># 这样可以设置全部时间</span></span><br><span class="line"><span class="built_in">date</span> -s <span class="string">&quot;20120523 01:01:01&quot;</span>    <span class="comment"># 这样可以设置全部时间</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 有时需要检查一组命令花费的时间</span></span><br><span class="line"><span class="comment">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line">start=$(<span class="built_in">date</span> +%s)</span><br><span class="line">nmap man.linuxde.net &amp;&gt; /dev/null</span><br><span class="line"></span><br><span class="line">end=$(<span class="built_in">date</span> +%s)</span><br><span class="line">difference=$(( end - start ))</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$difference</span> seconds.</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"># 格式化输出
+date +&quot;%Y-%m-%d&quot;
+2009-12-07
+
+# 输出昨天日期
+date -d &quot;1 day ago&quot; +&quot;%Y-%m-%d&quot;
+2012-11-19
+
+# 2 秒后输出
+date -d &quot;2 second&quot; +&quot;%Y-%m-%d %H:%M.%S&quot;
+2012-11-20 14:21.31
+
+# 传说中的 1234567890 秒
+date -d &quot;1970-01-01 1234567890 seconds&quot; +&quot;%Y-%m-%d %H:%m:%S&quot;
+2009-02-13 23:02:30
+
+# 普通转格式
+date -d &quot;2009-12-12&quot; +&quot;%Y&#x2F;%m&#x2F;%d %H:%M.%S&quot;
+2009&#x2F;12&#x2F;12 00:00.00
+
+# apache 格式转换
+date -d &quot;Dec 5, 2009 12:00:37 AM&quot; +&quot;%Y-%m-%d %H:%M.%S&quot;
+2009-12-05 00:00.37
+
+# 格式转换后时间游走
+date -d &quot;Dec 5, 2009 12:00:37 AM 2 year ago&quot; +&quot;%Y-%m-%d %H:%M.%S&quot;
+2007-12-05 00:00.37
+
+# 加减操作
+date +%Y%m%d                   # 显示前天年月日
+date -d &quot;+1 day&quot; +%Y%m%d       # 显示前一天的日期
+date -d &quot;-1 day&quot; +%Y%m%d       # 显示后一天的日期
+date -d &quot;-1 month&quot; +%Y%m%d     # 显示上一月的日期
+date -d &quot;+1 month&quot; +%Y%m%d     # 显示下一月的日期
+date -d &quot;-1 year&quot; +%Y%m%d      # 显示前一年的日期
+date -d &quot;+1 year&quot; +%Y%m%d      # 显示下一年的日期
+
+# 设定时间
+date -s                        # 设置当前时间，只有root权限才能设置，其他只能查看
+date -s 20120523               # 设置成20120523，这样会把具体时间设置成空00:00:00
+date -s 01:01:01               # 设置具体时间，不会对日期做更改
+date -s &quot;01:01:01 2012-05-23&quot;  # 这样可以设置全部时间
+date -s &quot;01:01:01 20120523&quot;    # 这样可以设置全部时间
+date -s &quot;2012-05-23 01:01:01&quot;  # 这样可以设置全部时间
+date -s &quot;20120523 01:01:01&quot;    # 这样可以设置全部时间
+
+# 有时需要检查一组命令花费的时间
+#!&#x2F;bin&#x2F;bash
+
+start&#x3D;$(date +%s)
+nmap man.linuxde.net &amp;&gt; &#x2F;dev&#x2F;null
+
+end&#x3D;$(date +%s)
+difference&#x3D;$(( end - start ))
+echo $difference seconds.</code></pre>
 
 <h3 id="2-6-mount"><a href="#2-6-mount" class="headerlink" title="2.6. mount"></a>2.6. mount</h3><blockquote>
 <p>mount 命令用于挂载文件系统到指定的挂载点。此命令的最常用于挂载 cdrom，使我们可以访问 cdrom 中的数据，因为你将光盘插入 cdrom 中，Linux 并不会自动挂载，必须使用 Linux mount 命令来手动完成挂载。</p>
 <p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/mount">http://man.linuxde.net/mount</a> &gt; <a target="_blank" rel="noopener" href="https://blog.csdn.net/weishujie000/article/details/76531924">https://blog.csdn.net/weishujie000/article/details/76531924</a></p>
 </blockquote>
 <p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将 /dev/hda1 挂在 /mnt 之下</span></span><br><span class="line">mount /dev/hda1 /mnt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 /dev/hda1 用唯读模式挂在 /mnt 之下</span></span><br><span class="line">mount -o ro /dev/hda1 /mnt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 /tmp/image.iso 这个光碟的 image 档使用 loop 模式挂在 /mnt/cdrom 之下</span></span><br><span class="line"><span class="comment"># 用这种方法可以将一般网络上可以找到的 Linux ISO 在不烧录成光碟的情况下检视其内容</span></span><br><span class="line">mount -o loop /tmp/image.iso /mnt/cdrom</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"># 将 &#x2F;dev&#x2F;hda1 挂在 &#x2F;mnt 之下
+mount &#x2F;dev&#x2F;hda1 &#x2F;mnt
+
+# 将 &#x2F;dev&#x2F;hda1 用唯读模式挂在 &#x2F;mnt 之下
+mount -o ro &#x2F;dev&#x2F;hda1 &#x2F;mnt
+
+# 将 &#x2F;tmp&#x2F;image.iso 这个光碟的 image 档使用 loop 模式挂在 &#x2F;mnt&#x2F;cdrom 之下
+# 用这种方法可以将一般网络上可以找到的 Linux ISO 在不烧录成光碟的情况下检视其内容
+mount -o loop &#x2F;tmp&#x2F;image.iso &#x2F;mnt&#x2F;cdrom</code></pre>
 
 <h3 id="2-7-umount"><a href="#2-7-umount" class="headerlink" title="2.7. umount"></a>2.7. umount</h3><blockquote>
 <p>umount 命令用于卸载已经挂载的文件系统。利用设备名或挂载点都能 umount 文件系统，不过最好还是通过挂载点卸载，以免使用绑定挂载（一个设备，多个挂载点）时产生混乱。</p>
 <p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/umount">http://man.linuxde.net/umount</a></p>
 </blockquote>
 <p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 通过设备名卸载</span></span><br><span class="line">umount -v /dev/sda1</span><br><span class="line">/dev/sda1 umounted</span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过挂载点卸载</span></span><br><span class="line">umount -v /mnt/mymount/</span><br><span class="line">/tmp/diskboot.img umounted</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"># 通过设备名卸载
+umount -v &#x2F;dev&#x2F;sda1
+&#x2F;dev&#x2F;sda1 umounted
+
+# 通过挂载点卸载
+umount -v &#x2F;mnt&#x2F;mymount&#x2F;
+&#x2F;tmp&#x2F;diskboot.img umounted</code></pre>
 
 <h3 id="2-8-ps"><a href="#2-8-ps" class="headerlink" title="2.8. ps"></a>2.8. ps</h3><blockquote>
 <p>ps 命令用于报告当前系统的进程状态。可以搭配 kill 指令随时中断、删除不必要的程序。ps 命令是最基本同时也是非常强大的进程查看命令，使用该命令可以确定有哪些进程正在运行和运行的状态、进程是否结束、进程有没有僵死、哪些进程占用了过多的资源等等，总之大部分信息都是可以通过执行该命令得到的。</p>
 <p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/ps">http://man.linuxde.net/ps</a></p>
 </blockquote>
 <p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 按内存资源的使用量对进程进行排序</span></span><br><span class="line">ps aux | <span class="built_in">sort</span> -rnk 4</span><br><span class="line"></span><br><span class="line"><span class="comment"># 按 CPU 资源的使用量对进程进行排序</span></span><br><span class="line">ps aux | <span class="built_in">sort</span> -nk 3</span><br></pre></td></tr></table></figure>
+<pre class="language-bash" data-language="bash"><code class="language-bash"># 按内存资源的使用量对进程进行排序
+ps aux | sort -rnk 4
+
+# 按 CPU 资源的使用量对进程进行排序
+ps aux | sort -nk 3</code></pre>
 
 <h3 id="2-9-kill"><a href="#2-9-kill" class="headerlink" title="2.9. kill"></a>2.9. kill</h3><blockquote>
 <p>kill 命令用来删除执行中的程序或工作。kill 可将指定的信息送至程序。预设的信息为 SIGTERM(15),可将指定程序终止。若仍无法终止该程序，可使用 SIGKILL(9) 信息尝试强制删除程序。程序或工作的编号可利用 ps 指令或 job 指令查看。</p>
 <p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/kill">http://man.linuxde.net/kill</a></p>
 </blockquote>
 <p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 列出所有信号名称</span></span><br><span class="line"> <span class="built_in">kill</span> -l</span><br><span class="line"> 1) SIGHUP       2) SIGINT       3) SIGQUIT      4) SIGILL</span><br><span class="line"> 5) SIGTRAP      6) SIGABRT      7) SIGBUS       8) SIGFPE</span><br><span class="line"> 9) SIGKILL     10) SIGUSR1     11) SIGSEGV     12) SIGUSR2</span><br><span class="line">13) SIGPIPE     14) SIGALRM     15) SIGTERM     16) SIGSTKFLT</span><br><span class="line">17) SIGCHLD     18) SIGCONT     19) SIGSTOP     20) SIGTSTP</span><br><span class="line">21) SIGTTIN     22) SIGTTOU     23) SIGURG      24) SIGXCPU</span><br><span class="line">25) SIGXFSZ     26) SIGVTALRM   27) SIGPROF     28) SIGWINCH</span><br><span class="line">29) SIGIO       30) SIGPWR      31) SIGSYS      34) SIGRTMIN</span><br><span class="line">35) SIGRTMIN+1  36) SIGRTMIN+2  37) SIGRTMIN+3  38) SIGRTMIN+4</span><br><span class="line">39) SIGRTMIN+5  40) SIGRTMIN+6  41) SIGRTMIN+7  42) SIGRTMIN+8</span><br><span class="line">43) SIGRTMIN+9  44) SIGRTMIN+10 45) SIGRTMIN+11 46) SIGRTMIN+12</span><br><span class="line">47) SIGRTMIN+13 48) SIGRTMIN+14 49) SIGRTMIN+15 50) SIGRTMAX-14</span><br><span class="line">51) SIGRTMAX-13 52) SIGRTMAX-12 53) SIGRTMAX-11 54) SIGRTMAX-10</span><br><span class="line">55) SIGRTMAX-9  56) SIGRTMAX-8  57) SIGRTMAX-7  58) SIGRTMAX-6</span><br><span class="line">59) SIGRTMAX-5  60) SIGRTMAX-4  61) SIGRTMAX-3  62) SIGRTMAX-2</span><br><span class="line">63) SIGRTMAX-1  64) SIGRTMAX</span><br><span class="line"></span><br><span class="line"><span class="comment"># 先用 ps 查找进程，然后用 kill 杀掉</span></span><br><span class="line">ps -ef | grep vim</span><br><span class="line">root      3268  2884  0 16:21 pts/1    00:00:00 vim install.log</span><br><span class="line">root      3370  2822  0 16:21 pts/0    00:00:00 grep vim</span><br><span class="line"></span><br><span class="line"><span class="built_in">kill</span> 3268</span><br><span class="line"><span class="built_in">kill</span> 3268</span><br><span class="line">-bash: <span class="built_in">kill</span>: (3268) - 没有那个进程</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"># 列出所有信号名称
+ kill -l
+ 1) SIGHUP       2) SIGINT       3) SIGQUIT      4) SIGILL
+ 5) SIGTRAP      6) SIGABRT      7) SIGBUS       8) SIGFPE
+ 9) SIGKILL     10) SIGUSR1     11) SIGSEGV     12) SIGUSR2
+13) SIGPIPE     14) SIGALRM     15) SIGTERM     16) SIGSTKFLT
+17) SIGCHLD     18) SIGCONT     19) SIGSTOP     20) SIGTSTP
+21) SIGTTIN     22) SIGTTOU     23) SIGURG      24) SIGXCPU
+25) SIGXFSZ     26) SIGVTALRM   27) SIGPROF     28) SIGWINCH
+29) SIGIO       30) SIGPWR      31) SIGSYS      34) SIGRTMIN
+35) SIGRTMIN+1  36) SIGRTMIN+2  37) SIGRTMIN+3  38) SIGRTMIN+4
+39) SIGRTMIN+5  40) SIGRTMIN+6  41) SIGRTMIN+7  42) SIGRTMIN+8
+43) SIGRTMIN+9  44) SIGRTMIN+10 45) SIGRTMIN+11 46) SIGRTMIN+12
+47) SIGRTMIN+13 48) SIGRTMIN+14 49) SIGRTMIN+15 50) SIGRTMAX-14
+51) SIGRTMAX-13 52) SIGRTMAX-12 53) SIGRTMAX-11 54) SIGRTMAX-10
+55) SIGRTMAX-9  56) SIGRTMAX-8  57) SIGRTMAX-7  58) SIGRTMAX-6
+59) SIGRTMAX-5  60) SIGRTMAX-4  61) SIGRTMAX-3  62) SIGRTMAX-2
+63) SIGRTMAX-1  64) SIGRTMAX
+
+# 先用 ps 查找进程，然后用 kill 杀掉
+ps -ef | grep vim
+root      3268  2884  0 16:21 pts&#x2F;1    00:00:00 vim install.log
+root      3370  2822  0 16:21 pts&#x2F;0    00:00:00 grep vim
+
+kill 3268
+kill 3268
+-bash: kill: (3268) - 没有那个进程</code></pre>
 
 <h3 id="2-10-systemctl"><a href="#2-10-systemctl" class="headerlink" title="2.10. systemctl"></a>2.10. systemctl</h3><blockquote>
 <p>systemctl 命令是系统服务管理器指令，它实际上将 service 和 chkconfig 这两个命令组合到一起。</p>
 <p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/systemctl">http://man.linuxde.net/systemctl</a></p>
 </blockquote>
 <p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1.启动 nfs 服务</span></span><br><span class="line">systemctl start nfs-server.service</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2.设置开机自启动</span></span><br><span class="line">systemctl <span class="built_in">enable</span> nfs-server.service</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3.停止开机自启动</span></span><br><span class="line">systemctl <span class="built_in">disable</span> nfs-server.service</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4.查看服务当前状态</span></span><br><span class="line">systemctl status nfs-server.service</span><br><span class="line"></span><br><span class="line"><span class="comment"># 5.重新启动某服务</span></span><br><span class="line">systemctl restart nfs-server.service</span><br><span class="line"></span><br><span class="line"><span class="comment"># 6.查看所有已启动的服务</span></span><br><span class="line">systemctl list -units --<span class="built_in">type</span>=service</span><br><span class="line"></span><br><span class="line"><span class="comment"># 7. 开启防火墙 22 端口</span></span><br><span class="line">iptables -I INPUT -p tcp --dport 22 -j accept</span><br><span class="line"></span><br><span class="line"><span class="comment"># 8. 彻底关闭防火墙</span></span><br><span class="line"><span class="built_in">sudo</span> systemctl status firewalld.service</span><br><span class="line"><span class="built_in">sudo</span> systemctl stop firewalld.service</span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">disable</span> firewalld.service</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"># 1.启动 nfs 服务
+systemctl start nfs-server.service
+
+# 2.设置开机自启动
+systemctl enable nfs-server.service
+
+# 3.停止开机自启动
+systemctl disable nfs-server.service
+
+# 4.查看服务当前状态
+systemctl status nfs-server.service
+
+# 5.重新启动某服务
+systemctl restart nfs-server.service
+
+# 6.查看所有已启动的服务
+systemctl list -units --type&#x3D;service
+
+# 7. 开启防火墙 22 端口
+iptables -I INPUT -p tcp --dport 22 -j accept
+
+# 8. 彻底关闭防火墙
+sudo systemctl status firewalld.service
+sudo systemctl stop firewalld.service
+sudo systemctl disable firewalld.service</code></pre>
 
 <h3 id="2-11-service"><a href="#2-11-service" class="headerlink" title="2.11. service"></a>2.11. service</h3><blockquote>
 <p>service 命令是 Redhat Linux 兼容的发行版中用来控制系统服务的实用工具，它以启动、停止、重新启动和关闭系统服务，还可以显示所有系统服务的当前状态。</p>
 <p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/service">http://man.linuxde.net/service</a></p>
 </blockquote>
 <p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">service network status</span><br><span class="line">配置设备：</span><br><span class="line">lo eth0</span><br><span class="line">当前的活跃设备：</span><br><span class="line">lo eth0</span><br><span class="line"></span><br><span class="line">service network restart</span><br><span class="line">正在关闭接口 eth0：                                        [  确定  ]</span><br><span class="line">关闭环回接口：                                             [  确定  ]</span><br><span class="line">设置网络参数：                                             [  确定  ]</span><br><span class="line">弹出环回接口：                                             [  确定  ]</span><br><span class="line">弹出界面 eth0：                                            [  确定  ]</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">service network status
+配置设备：
+lo eth0
+当前的活跃设备：
+lo eth0
+
+service network restart
+正在关闭接口 eth0：                                        [  确定  ]
+关闭环回接口：                                             [  确定  ]
+设置网络参数：                                             [  确定  ]
+弹出环回接口：                                             [  确定  ]
+弹出界面 eth0：                                            [  确定  ]</code></pre>
 
 <h3 id="2-12-crontab"><a href="#2-12-crontab" class="headerlink" title="2.12. crontab"></a>2.12. crontab</h3><blockquote>
 <p>crontab 命令被用来提交和管理用户的需要周期性执行的任务，与 windows 下的计划任务类似，当安装完成操作系统后，默认会安装此服务工具，并且会自动启动 crond 进程，crond 进程每分钟会定期检查是否有要执行的任务，如果有要执行的任务，则自动执行该任务。</p>
 <p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/crontab">http://man.linuxde.net/crontab</a></p>
 </blockquote>
 <p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 每 1 分钟执行一次 command</span></span><br><span class="line">* * * * * <span class="built_in">command</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 每小时的第 3 和第 15 分钟执行</span></span><br><span class="line">3,15 * * * * <span class="built_in">command</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 在上午 8 点到 11 点的第 3 和第 15 分钟执行</span></span><br><span class="line">3,15 8-11 * * * <span class="built_in">command</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 每隔两天的上午 8 点到 11 点的第 3 和第 15 分钟执行</span></span><br><span class="line">3,15 8-11 */2 * * <span class="built_in">command</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 每个星期一的上午 8 点到 11 点的第 3 和第 15 分钟执行</span></span><br><span class="line">3,15 8-11 * * 1 <span class="built_in">command</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 每晚的 21:30 重启 smb</span></span><br><span class="line">30 21 * * * /etc/init.d/smb restart</span><br><span class="line"></span><br><span class="line"><span class="comment"># 每月 1、10、22 日的 4 : 45 重启 smb</span></span><br><span class="line">45 4 1,10,22 * * /etc/init.d/smb restart</span><br><span class="line"></span><br><span class="line"><span class="comment"># 每周六、周日的 1:10 重启 smb</span></span><br><span class="line">10 1 * * 6,0 /etc/init.d/smb restart</span><br><span class="line"></span><br><span class="line"><span class="comment"># 每天 18 : 00 至 23 : 00 之间每隔 30 分钟重启 smb</span></span><br><span class="line">0,30 18-23 * * * /etc/init.d/smb restart</span><br><span class="line"></span><br><span class="line"><span class="comment"># 每星期六的晚上 11:00 pm 重启 smb</span></span><br><span class="line">0 23 * * 6 /etc/init.d/smb restart</span><br><span class="line"></span><br><span class="line"><span class="comment"># 每一小时重启 smb</span></span><br><span class="line">* */1 * * * /etc/init.d/smb restart</span><br><span class="line"></span><br><span class="line"><span class="comment"># 晚上 11 点到早上 7 点之间，每隔一小时重启 smb</span></span><br><span class="line">* 23-7/1 * * * /etc/init.d/smb restart</span><br><span class="line"></span><br><span class="line"><span class="comment"># 每月的 4 号与每周一到周三的 11 点重启 smb</span></span><br><span class="line">0 11 4 * mon-wed /etc/init.d/smb restart</span><br><span class="line"></span><br><span class="line"><span class="comment"># 一月一号的 4 点重启 smb</span></span><br><span class="line">0 4 1 jan * /etc/init.d/smb restart</span><br><span class="line"></span><br><span class="line"><span class="comment"># 每小时执行`/etc/cron.hourly`目录内的脚本</span></span><br><span class="line">01 * * * * root run-parts /etc/cron.hourly</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"># 每 1 分钟执行一次 command
+* * * * * command
+
+# 每小时的第 3 和第 15 分钟执行
+3,15 * * * * command
+
+# 在上午 8 点到 11 点的第 3 和第 15 分钟执行
+3,15 8-11 * * * command
+
+# 每隔两天的上午 8 点到 11 点的第 3 和第 15 分钟执行
+3,15 8-11 *&#x2F;2 * * command
+
+# 每个星期一的上午 8 点到 11 点的第 3 和第 15 分钟执行
+3,15 8-11 * * 1 command
+
+# 每晚的 21:30 重启 smb
+30 21 * * * &#x2F;etc&#x2F;init.d&#x2F;smb restart
+
+# 每月 1、10、22 日的 4 : 45 重启 smb
+45 4 1,10,22 * * &#x2F;etc&#x2F;init.d&#x2F;smb restart
+
+# 每周六、周日的 1:10 重启 smb
+10 1 * * 6,0 &#x2F;etc&#x2F;init.d&#x2F;smb restart
+
+# 每天 18 : 00 至 23 : 00 之间每隔 30 分钟重启 smb
+0,30 18-23 * * * &#x2F;etc&#x2F;init.d&#x2F;smb restart
+
+# 每星期六的晚上 11:00 pm 重启 smb
+0 23 * * 6 &#x2F;etc&#x2F;init.d&#x2F;smb restart
+
+# 每一小时重启 smb
+* *&#x2F;1 * * * &#x2F;etc&#x2F;init.d&#x2F;smb restart
+
+# 晚上 11 点到早上 7 点之间，每隔一小时重启 smb
+* 23-7&#x2F;1 * * * &#x2F;etc&#x2F;init.d&#x2F;smb restart
+
+# 每月的 4 号与每周一到周三的 11 点重启 smb
+0 11 4 * mon-wed &#x2F;etc&#x2F;init.d&#x2F;smb restart
+
+# 一月一号的 4 点重启 smb
+0 4 1 jan * &#x2F;etc&#x2F;init.d&#x2F;smb restart
+
+# 每小时执行&#96;&#x2F;etc&#x2F;cron.hourly&#96;目录内的脚本
+01 * * * * root run-parts &#x2F;etc&#x2F;cron.hourly</code></pre>
 
     </div>
 
@@ -389,7 +617,7 @@
     <div class="footer-inner">
 
   <div class="copyright">
-    &copy; 
+    &copy; 2022 – 
     <span itemprop="copyrightYear">2025</span>
     <span class="with-love">
       <i class="fa fa-heart"></i>
@@ -417,26 +645,6 @@
 <noscript>
   <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
 </noscript>
-
-
-  
-  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
-
-  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
-<script src="/js/third-party/search/local-search.js"></script>
-
-
-
-
-
-
-
-  
-
-
-
-
 <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
 
 <script>
