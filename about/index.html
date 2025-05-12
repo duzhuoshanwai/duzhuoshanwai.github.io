@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>施工中</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+
+        .construction-icon {
+            width: 150px;          /* 调整图片尺寸 */
+            height: 150px;         /* 保持与宽度一致形成正圆 */
+            border-radius: 50%;     /* 圆形关键样式 */
+            animation: rotate 2s linear infinite;
+            margin-bottom: 20px;
+            object-fit: cover;      /* 保持图片比例 */
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);  /* 添加阴影增强立体感 */
+        }
+
+        .text {
+            font-size: 24px;
+            color: #333;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <img src="https://images.duzhuo.icu/2025-05/2025-05-12-17:23:58-34fca132c23c4a57.webp" 
+         class="construction-icon" 
+         alt="施工中">
+    <div class="text">正在施工</div>
+</body>
+</html>
