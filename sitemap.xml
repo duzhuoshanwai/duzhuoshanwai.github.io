@@ -2,9 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://blog.saint1337.top/2025/08/31/%E4%BD%BF%E7%94%A8reqable%E5%92%8C%E7%AE%97%E6%B3%95%E5%8A%A9%E6%89%8B%E7%AE%80%E5%8D%95%E9%80%86%E5%90%91%E6%9C%89%E9%81%93%E7%BF%BB%E8%AF%91%E5%AE%98%E6%9F%A5%E8%AF%8D%E6%8E%A5%E5%8F%A3/</loc>
+    <loc>https://blog.saint1337.top/2025/09/01/%E4%BD%BF%E7%94%A8reqable%E5%92%8C%E7%AE%97%E6%B3%95%E5%8A%A9%E6%89%8B%E7%AE%80%E5%8D%95%E9%80%86%E5%90%91%E6%9C%89%E9%81%93%E7%BF%BB%E8%AF%91%E5%AE%98%E6%9F%A5%E8%AF%8D%E6%8E%A5%E5%8F%A3%EF%BC%88%E4%B8%8B%EF%BC%89/</loc>
     
-    <lastmod>2025-08-31</lastmod>
+    <lastmod>2025-09-01</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.saint1337.top/2025/08/31/%E4%BD%BF%E7%94%A8reqable%E5%92%8C%E7%AE%97%E6%B3%95%E5%8A%A9%E6%89%8B%E7%AE%80%E5%8D%95%E9%80%86%E5%90%91%E6%9C%89%E9%81%93%E7%BF%BB%E8%AF%91%E5%AE%98%E6%9F%A5%E8%AF%8D%E6%8E%A5%E5%8F%A3%EF%BC%88%E4%B8%8A%EF%BC%89/</loc>
+    
+    <lastmod>2025-09-01</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -760,7 +769,7 @@
 
   <url>
     <loc>https://blog.saint1337.top/</loc>
-    <lastmod>2025-08-31</lastmod>
+    <lastmod>2025-09-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>

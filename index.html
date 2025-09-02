@@ -173,7 +173,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-count">80</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -210,7 +210,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2025/08/31/%E4%BD%BF%E7%94%A8reqable%E5%92%8C%E7%AE%97%E6%B3%95%E5%8A%A9%E6%89%8B%E7%AE%80%E5%8D%95%E9%80%86%E5%90%91%E6%9C%89%E9%81%93%E7%BF%BB%E8%AF%91%E5%AE%98%E6%9F%A5%E8%AF%8D%E6%8E%A5%E5%8F%A3/">
+    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2025/09/01/%E4%BD%BF%E7%94%A8reqable%E5%92%8C%E7%AE%97%E6%B3%95%E5%8A%A9%E6%89%8B%E7%AE%80%E5%8D%95%E9%80%86%E5%90%91%E6%9C%89%E9%81%93%E7%BF%BB%E8%AF%91%E5%AE%98%E6%9F%A5%E8%AF%8D%E6%8E%A5%E5%8F%A3%EF%BC%88%E4%B8%8B%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -228,7 +228,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/08/31/%E4%BD%BF%E7%94%A8reqable%E5%92%8C%E7%AE%97%E6%B3%95%E5%8A%A9%E6%89%8B%E7%AE%80%E5%8D%95%E9%80%86%E5%90%91%E6%9C%89%E9%81%93%E7%BF%BB%E8%AF%91%E5%AE%98%E6%9F%A5%E8%AF%8D%E6%8E%A5%E5%8F%A3/" class="post-title-link" itemprop="url">使用Reqable和算法助手简单逆向有道翻译官查词接口</a>
+          <a href="/2025/09/01/%E4%BD%BF%E7%94%A8reqable%E5%92%8C%E7%AE%97%E6%B3%95%E5%8A%A9%E6%89%8B%E7%AE%80%E5%8D%95%E9%80%86%E5%90%91%E6%9C%89%E9%81%93%E7%BF%BB%E8%AF%91%E5%AE%98%E6%9F%A5%E8%AF%8D%E6%8E%A5%E5%8F%A3%EF%BC%88%E4%B8%8B%EF%BC%89/" class="post-title-link" itemprop="url">使用reqable和算法助手简单逆向有道翻译官查词接口（下）</a>
         </h2>
 
         <div class="post-meta-container">
@@ -240,11 +240,102 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2025-08-31 18:46:26 / 修改时间：21:05:05" itemprop="dateCreated datePublished" datetime="2025-08-31T18:46:26+08:00">2025-08-31</time>
+      <time title="创建时间：2025-09-01 14:49:38 / 修改时间：16:15:41" itemprop="dateCreated datePublished" datetime="2025-09-01T14:49:38+08:00">2025-09-01</time>
     </span>
 
   
-    <span id="/2025/08/31/%E4%BD%BF%E7%94%A8reqable%E5%92%8C%E7%AE%97%E6%B3%95%E5%8A%A9%E6%89%8B%E7%AE%80%E5%8D%95%E9%80%86%E5%90%91%E6%9C%89%E9%81%93%E7%BF%BB%E8%AF%91%E5%AE%98%E6%9F%A5%E8%AF%8D%E6%8E%A5%E5%8F%A3/" class="post-meta-item twikoo_visitors" data-flag-title="使用Reqable和算法助手简单逆向有道翻译官查词接口" title="阅读次数">
+    <span id="/2025/09/01/%E4%BD%BF%E7%94%A8reqable%E5%92%8C%E7%AE%97%E6%B3%95%E5%8A%A9%E6%89%8B%E7%AE%80%E5%8D%95%E9%80%86%E5%90%91%E6%9C%89%E9%81%93%E7%BF%BB%E8%AF%91%E5%AE%98%E6%9F%A5%E8%AF%8D%E6%8E%A5%E5%8F%A3%EF%BC%88%E4%B8%8B%EF%BC%89/" class="post-meta-item twikoo_visitors" data-flag-title="使用reqable和算法助手简单逆向有道翻译官查词接口（下）" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h2><p>书接上回，在上篇中我们使用算法助手找出了查词请求中的<code>sign</code>参数的合成方法。在返回的内容中还有几个<code>&quot;encryptedData&quot;</code>没能解密，我们在下篇中来解决他。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/09/01/%E4%BD%BF%E7%94%A8reqable%E5%92%8C%E7%AE%97%E6%B3%95%E5%8A%A9%E6%89%8B%E7%AE%80%E5%8D%95%E9%80%86%E5%90%91%E6%9C%89%E9%81%93%E7%BF%BB%E8%AF%91%E5%AE%98%E6%9F%A5%E8%AF%8D%E6%8E%A5%E5%8F%A3%EF%BC%88%E4%B8%8B%EF%BC%89/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2025/08/31/%E4%BD%BF%E7%94%A8reqable%E5%92%8C%E7%AE%97%E6%B3%95%E5%8A%A9%E6%89%8B%E7%AE%80%E5%8D%95%E9%80%86%E5%90%91%E6%9C%89%E9%81%93%E7%BF%BB%E8%AF%91%E5%AE%98%E6%9F%A5%E8%AF%8D%E6%8E%A5%E5%8F%A3%EF%BC%88%E4%B8%8A%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="duzhuo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="duzhuo's-blog">
+      <meta itemprop="description" content="记录，分享一些我觉得好玩的内容。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | duzhuo's-blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/08/31/%E4%BD%BF%E7%94%A8reqable%E5%92%8C%E7%AE%97%E6%B3%95%E5%8A%A9%E6%89%8B%E7%AE%80%E5%8D%95%E9%80%86%E5%90%91%E6%9C%89%E9%81%93%E7%BF%BB%E8%AF%91%E5%AE%98%E6%9F%A5%E8%AF%8D%E6%8E%A5%E5%8F%A3%EF%BC%88%E4%B8%8A%EF%BC%89/" class="post-title-link" itemprop="url">使用Reqable和算法助手简单逆向有道翻译官查词接口（上）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-08-31 18:46:26" itemprop="dateCreated datePublished" datetime="2025-08-31T18:46:26+08:00">2025-08-31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-09-01 14:45:52" itemprop="dateModified" datetime="2025-09-01T14:45:52+08:00">2025-09-01</time>
+    </span>
+
+  
+    <span id="/2025/08/31/%E4%BD%BF%E7%94%A8reqable%E5%92%8C%E7%AE%97%E6%B3%95%E5%8A%A9%E6%89%8B%E7%AE%80%E5%8D%95%E9%80%86%E5%90%91%E6%9C%89%E9%81%93%E7%BF%BB%E8%AF%91%E5%AE%98%E6%9F%A5%E8%AF%8D%E6%8E%A5%E5%8F%A3%EF%BC%88%E4%B8%8A%EF%BC%89/" class="post-meta-item twikoo_visitors" data-flag-title="使用Reqable和算法助手简单逆向有道翻译官查词接口（上）" title="阅读次数">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -265,7 +356,7 @@
 <p>安装算法助手并授予 Root 权限，并在 LSPosed 中勾选需要捕获的 APP。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2025/08/31/%E4%BD%BF%E7%94%A8reqable%E5%92%8C%E7%AE%97%E6%B3%95%E5%8A%A9%E6%89%8B%E7%AE%80%E5%8D%95%E9%80%86%E5%90%91%E6%9C%89%E9%81%93%E7%BF%BB%E8%AF%91%E5%AE%98%E6%9F%A5%E8%AF%8D%E6%8E%A5%E5%8F%A3/#more" rel="contents">
+              <a class="btn" href="/2025/08/31/%E4%BD%BF%E7%94%A8reqable%E5%92%8C%E7%AE%97%E6%B3%95%E5%8A%A9%E6%89%8B%E7%AE%80%E5%8D%95%E9%80%86%E5%90%91%E6%9C%89%E9%81%93%E7%BF%BB%E8%AF%91%E5%AE%98%E6%9F%A5%E8%AF%8D%E6%8E%A5%E5%8F%A3%EF%BC%88%E4%B8%8A%EF%BC%89/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -981,101 +1072,6 @@ Template(strings&#x3D;(&#39;Hello,&#39;, &#39;&#39;), interpolations&#x3D;(Inter
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2024/12/01/%E6%B2%A1%E6%9C%89%E9%93%BE%E6%8E%A5%E7%9A%84%E4%BA%92%E8%81%94%E7%BD%91/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2024/11/27/%E5%85%B3%E4%BA%8E%E5%A4%84%E7%90%86CORS%E9%97%AE%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="duzhuo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="duzhuo's-blog">
-      <meta itemprop="description" content="记录，分享一些我觉得好玩的内容。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | duzhuo's-blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/11/27/%E5%85%B3%E4%BA%8E%E5%A4%84%E7%90%86CORS%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">关于处理CORS问题</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-11-27 14:47:47" itemprop="dateCreated datePublished" datetime="2024-11-27T14:47:47+08:00">2024-11-27</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-01-11 08:43:34" itemprop="dateModified" datetime="2025-01-11T08:43:34+08:00">2025-01-11</time>
-    </span>
-
-  
-    <span id="/2024/11/27/%E5%85%B3%E4%BA%8E%E5%A4%84%E7%90%86CORS%E9%97%AE%E9%A2%98/" class="post-meta-item twikoo_visitors" data-flag-title="关于处理CORS问题" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span id="twikoo_visitors"></span>
-    </span>
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="CORS（跨源资源共享）？"><a href="#CORS（跨源资源共享）？" class="headerlink" title="CORS（跨源资源共享）？"></a>CORS（跨源资源共享）？</h2><blockquote>
-<p>以下内容引用自 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CORS">mdn web docs</a></p>
-<p><strong>跨源资源共享</strong>（<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Glossary/CORS">CORS</a>，或通俗地译为跨域资源共享）是一种基于 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Glossary/HTTP">HTTP</a> 头的机制，该机制通过允许服务器标示除了它自己以外的其他<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Glossary/Origin">源</a>（域、协议或端口），使得浏览器允许这些源访问加载自己的资源。跨源资源共享还通过一种机制来检查服务器是否会允许要发送的真实请求，该机制通过浏览器发起一个到服务器托管的跨源资源的“预检”请求。在预检中，浏览器发送的头中标示有 HTTP 方法和真实请求中会用到的头。</p>
-</blockquote>
-<p>举例：在 <code>http://localhost:8000</code> 的网页上使用 <code>fetch()</code> 对 <code>https://sm.ms/api/v2/</code> 这个图床的api接口发送请求即会产生CORS问题。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/11/27/%E5%85%B3%E4%BA%8E%E5%A4%84%E7%90%86CORS%E9%97%AE%E9%A2%98/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>

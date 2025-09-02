@@ -173,7 +173,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-count">80</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -201,6 +201,101 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2024/11/27/%E5%85%B3%E4%BA%8E%E5%A4%84%E7%90%86CORS%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="duzhuo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="duzhuo's-blog">
+      <meta itemprop="description" content="记录，分享一些我觉得好玩的内容。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | duzhuo's-blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/11/27/%E5%85%B3%E4%BA%8E%E5%A4%84%E7%90%86CORS%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">关于处理CORS问题</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-11-27 14:47:47" itemprop="dateCreated datePublished" datetime="2024-11-27T14:47:47+08:00">2024-11-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-01-11 08:43:34" itemprop="dateModified" datetime="2025-01-11T08:43:34+08:00">2025-01-11</time>
+    </span>
+
+  
+    <span id="/2024/11/27/%E5%85%B3%E4%BA%8E%E5%A4%84%E7%90%86CORS%E9%97%AE%E9%A2%98/" class="post-meta-item twikoo_visitors" data-flag-title="关于处理CORS问题" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="CORS（跨源资源共享）？"><a href="#CORS（跨源资源共享）？" class="headerlink" title="CORS（跨源资源共享）？"></a>CORS（跨源资源共享）？</h2><blockquote>
+<p>以下内容引用自 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CORS">mdn web docs</a></p>
+<p><strong>跨源资源共享</strong>（<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Glossary/CORS">CORS</a>，或通俗地译为跨域资源共享）是一种基于 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Glossary/HTTP">HTTP</a> 头的机制，该机制通过允许服务器标示除了它自己以外的其他<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Glossary/Origin">源</a>（域、协议或端口），使得浏览器允许这些源访问加载自己的资源。跨源资源共享还通过一种机制来检查服务器是否会允许要发送的真实请求，该机制通过浏览器发起一个到服务器托管的跨源资源的“预检”请求。在预检中，浏览器发送的头中标示有 HTTP 方法和真实请求中会用到的头。</p>
+</blockquote>
+<p>举例：在 <code>http://localhost:8000</code> 的网页上使用 <code>fetch()</code> 对 <code>https://sm.ms/api/v2/</code> 这个图床的api接口发送请求即会产生CORS问题。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/11/27/%E5%85%B3%E4%BA%8E%E5%A4%84%E7%90%86CORS%E9%97%AE%E9%A2%98/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1124,99 +1219,6 @@ print(response.status_code)</code></pre>
 <li>[2024-07-01] <a target="_blank" rel="noopener" href="https://tracker.debian.org/news/1541136/accepted-openssh-192p1-2deb12u3-source-into-stable-security/">Accepted openssh 1:9.2p1-2+deb12u3 (source) into stable-security </a>(Debian FTP Masters) (signed by: Salvatore Bonaccorso)</li>
 </ul>
 
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2024/07/02/%E4%BD%BF%E7%94%A8%E4%B8%AA%E4%BA%BA%E7%94%A8%E6%88%B7%E5%85%8D%E8%B4%B9%E7%9A%84ubuntu-pro/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="duzhuo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="duzhuo's-blog">
-      <meta itemprop="description" content="记录，分享一些我觉得好玩的内容。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | duzhuo's-blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/07/02/%E4%BD%BF%E7%94%A8%E4%B8%AA%E4%BA%BA%E7%94%A8%E6%88%B7%E5%85%8D%E8%B4%B9%E7%9A%84ubuntu-pro/" class="post-title-link" itemprop="url">使用个人用户免费的ubuntu-pro</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2024-07-02 20:28:20 / 修改时间：20:28:59" itemprop="dateCreated datePublished" datetime="2024-07-02T20:28:20+08:00">2024-07-02</time>
-    </span>
-
-  
-    <span id="/2024/07/02/%E4%BD%BF%E7%94%A8%E4%B8%AA%E4%BA%BA%E7%94%A8%E6%88%B7%E5%85%8D%E8%B4%B9%E7%9A%84ubuntu-pro/" class="post-meta-item twikoo_visitors" data-flag-title="使用个人用户免费的ubuntu-pro" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span id="twikoo_visitors"></span>
-    </span>
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Ubuntu发行版的终端广告（<a target="_blank" rel="noopener" href="https://bugs.launchpad.net/ubuntu/+source/ubuntu-advantage-tools/+bug/1950692">Bug #1950692</a>）和snap（<a target="_blank" rel="noopener" href="https://blog.linuxmint.com/?p=3766">Mint Blog中的观点</a>）一直是令人诟病的内容，也是我切换到Debian的原因。</p>
-<p>但是，今天还是要注册一下Ubuntu Pro，毕竟还有一些以前安装的机器在运行着已经EOL的Ubuntu版本，需要安装一些安全补丁。</p>
-<img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2024/07/02/zZBFKwEVMH9YtJP.jpg" alt="pic" height="400">
-
-<h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><p>打开Ubuntu Pro的网站 <a target="_blank" rel="noopener" href="https://ubuntu.com/pro">https://ubuntu.com/pro</a></p>
-<p>点击Get Ubuntu Pro now并选择Myself，点击Register登录帐号确认。</p>
-<p>获取Token，复制下面的命令。</p>
-<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2024/07/02/d8pbVvHP6MJm5yF.png" alt="Screenshot_20240702_201037-1.png"></p>
-<p>这里以**Ubuntu 18.04 LTS (Bionic Beaver)**为例：</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/07/02/%E4%BD%BF%E7%94%A8%E4%B8%AA%E4%BA%BA%E7%94%A8%E6%88%B7%E5%85%8D%E8%B4%B9%E7%9A%84ubuntu-pro/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
       
     </div>
 

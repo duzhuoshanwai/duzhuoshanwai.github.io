@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-duzhuo-32%C3%9732.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-duzhuo-16%C3%9716.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.saint1337.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.23.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"fold":{"enable":true,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true,"trigger":"auto"}}</script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/config.min.js" defer></script>
+
+    <meta name="description" content="前情提要书接上回，在上篇中我们使用算法助手找出了查词请求中的sign参数的合成方法。在返回的内容中还有几个&quot;encryptedData&quot;没能解密，我们在下篇中来解决他。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用reqable和算法助手简单逆向有道翻译官查词接口（下）">
+<meta property="og:url" content="https://blog.saint1337.top/2025/09/01/%E4%BD%BF%E7%94%A8reqable%E5%92%8C%E7%AE%97%E6%B3%95%E5%8A%A9%E6%89%8B%E7%AE%80%E5%8D%95%E9%80%86%E5%90%91%E6%9C%89%E9%81%93%E7%BF%BB%E8%AF%91%E5%AE%98%E6%9F%A5%E8%AF%8D%E6%8E%A5%E5%8F%A3%EF%BC%88%E4%B8%8B%EF%BC%89/index.html">
+<meta property="og:site_name" content="duzhuo&#39;s-blog">
+<meta property="og:description" content="前情提要书接上回，在上篇中我们使用算法助手找出了查词请求中的sign参数的合成方法。在返回的内容中还有几个&quot;encryptedData&quot;没能解密，我们在下篇中来解决他。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://images.duzhuo.icu/2025-09/2025-09-01-15:07:44-7a59049ad2a2bc08.webp">
+<meta property="article:published_time" content="2025-09-01T06:49:38.000Z">
+<meta property="article:modified_time" content="2025-09-01T08:15:41.846Z">
+<meta property="article:author" content="duzhuo">
+<meta property="article:tag" content="博客">
+<meta property="article:tag" content="技术">
+<meta property="article:tag" content="分享">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://images.duzhuo.icu/2025-09/2025-09-01-15:07:44-7a59049ad2a2bc08.webp">
+
+
+<link rel="canonical" href="https://blog.saint1337.top/2025/09/01/%E4%BD%BF%E7%94%A8reqable%E5%92%8C%E7%AE%97%E6%B3%95%E5%8A%A9%E6%89%8B%E7%AE%80%E5%8D%95%E9%80%86%E5%90%91%E6%9C%89%E9%81%93%E7%BF%BB%E8%AF%91%E5%AE%98%E6%9F%A5%E8%AF%8D%E6%8E%A5%E5%8F%A3%EF%BC%88%E4%B8%8B%EF%BC%89/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.saint1337.top/2025/09/01/%E4%BD%BF%E7%94%A8reqable%E5%92%8C%E7%AE%97%E6%B3%95%E5%8A%A9%E6%89%8B%E7%AE%80%E5%8D%95%E9%80%86%E5%90%91%E6%9C%89%E9%81%93%E7%BF%BB%E8%AF%91%E5%AE%98%E6%9F%A5%E8%AF%8D%E6%8E%A5%E5%8F%A3%EF%BC%88%E4%B8%8B%EF%BC%89/","path":"2025/09/01/使用reqable和算法助手简单逆向有道翻译官查词接口（下）/","title":"使用reqable和算法助手简单逆向有道翻译官查词接口（下）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>使用reqable和算法助手简单逆向有道翻译官查词接口（下） | duzhuo's-blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/components/prism-core.min.js" integrity="sha256-bKrTFt2ZHyT4AE4LnBnAVctYKf9l6XP77kBvltgbjn4=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha256-9cmf7tcLdXpKsPi/2AWE93PbZpTp4M4tqzFk+lWomjU=" crossorigin="anonymous" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/utils.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/motion.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/sidebar.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/next-boot.min.js" defer></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/third-party/search/local-search.min.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start --><script> let HEXO_MMEDIA_DATA = { js: [], css: [], aplayerData: [], metingData: [], artPlayerData: [], dplayerData: []}; </script><!-- hexo injector head_end end --><style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">duzhuo's-blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">学无止境</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E6%83%85%E6%8F%90%E8%A6%81"><span class="nav-number">1.</span> <span class="nav-text">前情提要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8%E7%AE%97%E6%B3%95%E5%8A%A9%E6%89%8B%E6%97%A5%E5%BF%97%E4%B8%AD%E6%90%9C%E7%B4%A2"><span class="nav-number">2.</span> <span class="nav-text">在算法助手日志中搜索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8python%E5%A4%8D%E7%8E%B0%E8%A7%A3%E5%AF%86%E6%93%8D%E4%BD%9C"><span class="nav-number">3.</span> <span class="nav-text">使用python复现解密操作</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">duzhuo</p>
+  <div class="site-description" itemprop="description">记录，分享一些我觉得好玩的内容。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/duzhuoshanwai" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;duzhuoshanwai" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2025/09/01/%E4%BD%BF%E7%94%A8reqable%E5%92%8C%E7%AE%97%E6%B3%95%E5%8A%A9%E6%89%8B%E7%AE%80%E5%8D%95%E9%80%86%E5%90%91%E6%9C%89%E9%81%93%E7%BF%BB%E8%AF%91%E5%AE%98%E6%9F%A5%E8%AF%8D%E6%8E%A5%E5%8F%A3%EF%BC%88%E4%B8%8B%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="duzhuo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="duzhuo's-blog">
+      <meta itemprop="description" content="记录，分享一些我觉得好玩的内容。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="使用reqable和算法助手简单逆向有道翻译官查词接口（下） | duzhuo's-blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          使用reqable和算法助手简单逆向有道翻译官查词接口（下）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-09-01 14:49:38 / 修改时间：16:15:41" itemprop="dateCreated datePublished" datetime="2025-09-01T14:49:38+08:00">2025-09-01</time>
+    </span>
+
+  
+    <span id="/2025/09/01/%E4%BD%BF%E7%94%A8reqable%E5%92%8C%E7%AE%97%E6%B3%95%E5%8A%A9%E6%89%8B%E7%AE%80%E5%8D%95%E9%80%86%E5%90%91%E6%9C%89%E9%81%93%E7%BF%BB%E8%AF%91%E5%AE%98%E6%9F%A5%E8%AF%8D%E6%8E%A5%E5%8F%A3%EF%BC%88%E4%B8%8B%EF%BC%89/" class="post-meta-item twikoo_visitors" data-flag-title="使用reqable和算法助手简单逆向有道翻译官查词接口（下）" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h2><p>书接上回，在上篇中我们使用算法助手找出了查词请求中的<code>sign</code>参数的合成方法。在返回的内容中还有几个<code>&quot;encryptedData&quot;</code>没能解密，我们在下篇中来解决他。</p>
+<span id="more"></span>
+
+<h2 id="在算法助手日志中搜索"><a href="#在算法助手日志中搜索" class="headerlink" title="在算法助手日志中搜索"></a>在算法助手日志中搜索</h2><p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://images.duzhuo.icu/2025-09/2025-09-01-15:07:44-7a59049ad2a2bc08.webp"></p>
+<p>在算法助手日志中搜索<code>&quot;encryptedData&quot;</code>中的值（Base64），可以看到我们可以找到这个Base64解密的过程使用的算法是 <code>AES/CBC/PKCS5Padding</code>。BTW，我不懂密码学，有疑问具体请参考<a target="_blank" rel="noopener" href="https://crypto.stackexchange.com/questions/9043/what-is-the-difference-between-pkcs5-padding-and-pkcs7-padding">What is the difference between PKCS#5 padding and PKCS#7 padding</a> 和 <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/20770072/aes-cbc-pkcs5padding-vs-aes-cbc-pkcs7padding-with-256-key-size-performance-java">AES&#x2F;CBC&#x2F;PKCS5Padding vs AES&#x2F;CBC&#x2F;PKCS7Padding with 256 key size performance java</a> 。</p>
+<p>仔细观察后发现算法助手中使用的Base64文本和我们在json中接收的有点区别，使用的是<strong>Base 64 Encoding with URL and Filename Safe Alphabet</strong>。简单来说就是<code>+</code>被替换为了<code>-</code>，<code>/</code>被替换为了<code>_</code>，详见 <a target="_blank" rel="noopener" href="https://www.rfc-editor.org/rfc/rfc4648#section-5">RFC 4648</a>。</p>
+<p>在有道翻译官中尝试比对多个查词操作后发现，密钥和 IV 都不会改变。</p>
+<h2 id="使用python复现解密操作"><a href="#使用python复现解密操作" class="headerlink" title="使用python复现解密操作"></a>使用python复现解密操作</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python"># Crypto 不是标准库，安装和使用请看：https:&#x2F;&#x2F;pycryptodome.readthedocs.io&#x2F;en&#x2F;latest&#x2F;src&#x2F;introduction.html
+
+from Crypto.Cipher import AES
+from Crypto.Util.Padding import unpad
+import base64
+
+def decrypt_aes_cbc(key_b64, iv_b64, ciphertext_b64):
+    &quot;&quot;&quot;
+    使用 AES&#x2F;CBC&#x2F;PKCS5Padding 模式解密数据.
+
+    参数:
+        key_b64 (str): Base64 编码的密钥.
+        iv_b64 (str): Base64 编码的初始化向量 (IV).
+        ciphertext_b64 (str): Base64 编码的密文.
+
+    返回:
+        str: 解密后的 UTF-8 字符串，如果失败则返回错误信息.
+    &quot;&quot;&quot;
+    try:
+        # 1. 将 Base64 编码的输入解码为字节
+        key &#x3D; base64.b64decode(key_b64)
+        iv &#x3D; base64.b64decode(iv_b64)
+        ciphertext &#x3D; base64.b64decode(ciphertext_b64)
+
+        # 2. 创建一个 AES 密码器对象
+        # 模式为 CBC (Cipher Block Chaining)
+        cipher &#x3D; AES.new(key, AES.MODE_CBC, iv)
+
+        # 3. 解密数据并移除填充
+        # pycryptodome 使用 PKCS7 填充，它是 PKCS5 填充的超集，完全兼容
+        decrypted_padded &#x3D; cipher.decrypt(ciphertext)
+        decrypted_plaintext_bytes &#x3D; unpad(decrypted_padded, AES.block_size)
+
+        # 4. 将解密的字节解码为 UTF-8 字符串
+        return decrypted_plaintext_bytes.decode(&#39;utf-8&#39;)
+
+    except (ValueError, KeyError) as e:
+        return f&quot;解密失败，请检查密钥、IV或密文是否正确。错误: &#123;e&#125;&quot;
+    except Exception as e:
+        return f&quot;发生未知错误: &#123;e&#125;&quot;
+
+# --- 主程序入口 ---
+if __name__ &#x3D;&#x3D; &quot;__main__&quot;:
+    # ▼▼▼ 请在此处填入你的 Base64 编码的密钥、IV 和密文 ▼▼▼
+
+    key_base64 &#x3D; &quot;OzcwEYSQqe5xtvlXFHDCzw&#x3D;&#x3D;&quot;  # 密钥 (Key)
+    iv_base64 &#x3D; &quot;jTdFyls45vdv1QF2aPiRHA&#x3D;&#x3D;&quot;   # IV (Initialization Vector)
+    ciphertext_base64 &#x3D; &quot;oGaanzGEv4TFGNkgbPQfjud8s3YxqQChkIEIrFbM1cBTZVTOYTNTITEN80WaI5wWdgH5pqSIioMNYDk4PAOfIXtzJ9xZgVWxMlmFbqg9wQeM8pr3xCVnxlWKPfFKAxU8pVN9i8imvpGz3GjrwthIpKiO8TP_goUEoMGrnS9KCYaz432zuu7XlY6rP0AAPXbj_69dHI2tmk6k0VwPb375RP12s86vesh84XPNjpeI1rtoLrqSG8XrOH4qSITmIQBKgSyuGKiQYtnHif3hNcIPM2PAtv-tz_ILyptil3sIJ0fIZxOFC4l6X9-gK9bvhZpbZZzxvcXstStTyhJbBWgdcKGL56ZdJ3wh8qXg3z4BQMXNsCHLUt4bYvc8V4Lmf1bGlBI0PIKW887zfxJelHTn2L1bc-VuLe7JlruJf1Wqe1v2ZJeiB8p7wIwvOTDlPJxOSM0FWFr0-zycMYpormdEpY6I8AL-vWkHCmxpzJXY8bcQ9uioYkICZUW6pmxsX8CUG5RPQsLyiZXH19r68PRaTo-DH7PBt1xPjrOSn_Sr_R4-q-c2zAia1ZXDLx5s7BldJc84e3FWuMl0BPGrqVgKBDWqMT2cJZnlHwpLHTdu03IzI1eHl_KbrqgTm0XHtoBQnGbMqSG3zoRgZ6L8mhWvOEFKfBgyYeNtSCQsJzyybt_AKPSy_LbOIf_zKxShoUIsjiCsbJxOkRwvbnjl4b2a2i6hVzxUkW17QqmoKHKToYiFxOEw5TKF06UTM_XvwkIzYyel2N2NOYt3ro74rDPA7FtA2Ij3S4uYP_e5G4VasdjbWf9HtnXawIGIhrODS_3JtfsPtIwJlba6IudeQ536OdBK5foTuPIC6GrjZVyJaNYR4gBkBZLLiQlud04RknyRTwZ52s9zS1Cx-z1JgpwJmyXQ6LekRTkycy2LgMpMXKJRXn1ftkLs7l_8CbrV9qv80JHpAEq2Q2LuSv8vPzghJgJRuyqktxY4PdbEo97OECKH_SetDJvY02fBEUyfT0dyTnMlE_dqAaSU7C-IVOORwywCvs0Gn6V0cFB8_tvNA6adpecjxQlv5IrXXWowjxcWGW-GcosUgSiAiA3Lu57Oq8b58Q8cpoeAoAdacQh7QEGu1TPFVHW1tb0FWt8srRRy98Skuxpss1syi4qETsQ6jcyeXV3gZ3HAa5dUUdJXYO0jdD9tQGEURQwH11XeKBLc03UyQCDhHN8k26XY53AWsZNXbNazqocr9G2DsnZMCx-blHV-q8F5KxfCnLvXAfsQgm0C9Rq9Kfialesa7whoVvHTFkR9bLYAeZ0VgdOqPRPvaZ6HCj2QK0Wh-1EB9qPIVHX4L2ifCopd_2nOLmo3bagC4Atqcy4N4nxi1JK7M7mTrcA8VY5EgMlW2h9ZvxtpJRXOjTvi9QotRA378xQ7nrX1ZXiH5-AW2bO--D4ikNDAndKnmshxos0Z1RDUa3ab1c_7EyPz-Yr7e_gbQly9P9dr49e_TXs2Et5iy0RnQFzeHDvFVG8Lha4MTFlaeyvMUbVIcYYmpnCyGZIMKbKDBSY62iL8QNuu1ZgqqFTnHPPYPOAEVLUYCzwziqzMhRfA0F27J-X020nvZf_xU0QHbdXmuRVY3AeqakS-y6WSdX9wV-Ce7TtsHLj1JJDBDXdV3HN9oa71vLwWQ9QWhPch8u9W2bKDCSGS8L8wbVO8F68cGkKDQ-W_MSKGESIZSimanHGgWN-CN7w09gjLBrhM1vU1YQFZ7nD7275owZ56tAk-pxR1IJBnYSpdOdFp71L2NEeuodnfPqkUvSBWPeJSULh0zPC1ed0iAk4arpgoeUNIQSf9SQy8FDdYh5O59iSucI4yYmociq5qHnejYRL1w5Hw3tsdRs2vyhnCribHzYodhRb7tGah5t8AyCI2UzpxQYRJZ8oGW7z7vtw5g5N2_kxMSId_UPSOGxFwVJHFr-ahmEgdy_45_Qez2AMyL5BS5TLmTzbFyUHe04g2tHVxKya8qeqmhYeyG4FU5WuWxbIxN9jdJtCvMtsxqnAyAuKnGe3XqxFEr7QTaA7XKpny_2KoArch3m457cIwmiXtWmpc1MBPs6cUgVg3L6_iiNXwtIw4W41-t0mztnvangkQ5nxkep4RM8twnsqMZ_JEU--TFXgH_ku_gYUb8lI9FZjtBB9Twe881aCpmOi7FNNFw2H7JGFropf58oqz0ND3bTeA3jwaGR53EmzIvX81GuDOJW-JkrP51cYGV5b_BiaP6bY2G_-rY5QWlIEUPstXbYJHL9wwOfwa_hJ-B2fnKzfo-qnD9cMWhZfgUcbXpfGWlhHN_emqD36Q73cVNquBwG93m69AVuEL0q1Ccsg2zVPo2UUQC3CxqRWnqnEK-SJS7bE1tUxkhnr3p6Xn1YNKqbcHZ5hfooAQiw19E3zgw3y1sRCIx6YdCrqDErbzsXGOhYopI6HUCaV07b2iagoUS47boO0DBUIXRuYq5sdGnX7uWBGoGOHxdhifeRcGBxiKdmiy8lY0MX5ShAhO5L9VlrYNA2MtbINwg4bJg_JOjmXlwLFWc3jjvxrJdviCBUxZ9ejZCFRBBLkCWcVJ5sOGeEURwPZm_-NWEmL98DROUfsWzqY9ExcumIY3tlO1bV22zsI6YZ6dLTv0qfQIvHrKsWdiP4ZJho_4R6vrxQ0HKNnsoTAtlix4kfhHkjAqpivfsNzYTKhkQWdeQROPzxTv4ojih8lnSRDeAw9uRU0pttLPCMZiV6GtiUdPxmuprIfrRBxnNUkI2jk2fNdp03m9H9Q2FsTE0Gb5mSWGS3-SZeBnTpQFmW0_JVGgqJFeBINkX69m045safLdhrF6G2TEDUXOx8LZNq51LbulZ_R-jgj5j9XJA9I0nez4fEplZ8B8vRb32rDgBDLr0neQV4pP1snVyOkfwbYqQXe2kj9VPfr9GwUPk2M5aRlzisX7huS3sHe3xJ95pZ4ciQtdkq_UaIfNyD2c98cahhna9qwyBVmNsar-2Wo4WP1gzFTthA62pDv2XEX-tQwax60nXJ_Wx9vOznufgY8JIGWSfx6pzK0GIQUqTuh7iCeqBSyhKFirC1jHKJtJwKVUNECUcBnuSDJARFHhBa4we_-E9ofwx0UU9MwhvDohpPcaaRy8F7487B3cGOs0_h7HH_tI2skG9Wi3dm6HzFIjFm2NqB9NpesWUyWD9szmE0-EtVnYIZ6xayrDeECnSR1T5fVp3y-ABUks12vdxaWNTggdRAKVlJSEqQLt0rI9g77GRG6FoMYL19iQUuvtYOOfv7CX9lXK86vSpup3PYfjAcVZ-eriooohF1L9xxlD9fHH_rk801nbN5NqZCAiCG__YitSRNVK9_awZQ6Rs1eT-5KC4TqvqYNU1HGA3R9RjhD6X2QqeAF9YZyRlH6YiyutSvzkPQcDlYKcXde1itYxy2yuaPABIy_d2TTfXZz4frx96pmYFkU3r9K9BDSf04j1E1zXhHl8T1fRpEbx29Yt87Pkiuc5F4_eH2Lfn-m1eZ3-oTDoRjFIYQQ243IFJu8om3FCOrbJHV1zTqs295r_p4DOcAPoBBuXlKIs6bpBqid1i_C-KoEGYFAwD-1HVDo-aILAMOR5YFiTPU6BXj7c1CErMv_tkCSrJxz17jt3tHD3x3fnf8r48kUO0uC7Pa0G24dy4pH_Gfj46yfhUNuTuVRKrjTmJwrbhRkUJjIkEWcBpOv9DxB0P-CJI0ZK2tljxb6oolVnYxoulst-HCBdoMfq7sq8L2NL5sAIQqJVhgX2KeSUm4hm1_aqf-vxefh_8NKpAoSp5fty0AVbKY1IQgD0blhwYZKbKwOYPyOkW0gNdGbm4wJeVUCT2z4kiyIx-5-NFb0Pbwg9fU6U9TIzU53Mi1o4JuL8lQuGy0Sd-awEzEXl9HWZAXuEBix36VjO2pzphCqrhgmqXyJflYxSQDroHw4AWJlnj2gxmIzpuImOipRQpWBXbqNXSPxoX9f6hdkYuewSsJPgtnbixL_TIwQIxwe2uGCdSvsbcUTpZHFdbYTy__OVUeMhAhu4WmmwF6h5_Bvkj6Lw_t26gDlypT0ovAeIGiKIj6rWde7VdAKOxCnuYKFei0Ih8yp-ajOOg4pFqtfmgW2Znlx81QYyifIsOiumqBzMJUsGwygBa-p2OU-6iZ0zM1cBchKC__0wxWsI8ggJrWmdMrmfZVlMlszIy5fr52JZoKEFFEpN6TjNEjSI4bik575E6SHz2j-dl02aI-i4qY93LXstCevXmuDNcUNvrLdehWWHS6KaAKDJFKqdMUxTf9sIWTaVPEc6J-_wJX0cQFscs22OIcdPugv4fNUE5sYbRLtxj5NCCUNr7OymE53mJdLYs9WJWI_N58_KTQ3xCy0xWUq3_Vsi0YLSvIX54esSG3IiRzE8clMsxTiWINWWpZUcXyGXkafrYXcLdPU7zrqWGILHh1KrJ5yUUH3RbJZ4HKMtrYpnmAEq-qvHo4-EvflAjQpN7RlYGo0tEkGODsQ7yutEyIcEVVurUmjl0YbykpbSb20t3zGDwDbmAmInFAW7T2UCtK8Rj1AbuxIsJCg7ZAZl06WicEnozVeb9XnrSU1PvamxVrwD30ozJo5wJju4_3JB5cQrZFaGImyL7V6qY2aunBm-jsybNeIrkwyzPkkA6wCeLtDnf0UMYfKIlIoP0pci0ldg8Bee8q_mjyYnY1Ktbr76bEKo5Wt77WiUuIH0zEx1dG8dqYXvr-Im8jGpD_CvSL8JcZBGPV-pyPVoNbkv9KWt2fi5g3O2DimIvEHkljAGJnckM52r0a33E-n6nZuVX5yPxiQXVF-aVtj8Xkql5MwWWBni9zFVFGJQrUnlxMwAMw6odRYxoL8uis9uKNnvY6Eki5x0ua4gJuFt3PIimKWhYVX_v2PyMcuwQLv5Khep7pIf13VtHKdS44GToyoDsAA4G1YWloeA_H0HQzbWDczSCD76nFZHN8Pyhz8pIBI7_YUNo7tcPbIlbK3c8qXeeqVgco9KjVaScdAxoca_m0xbKxH96GnSxKs9h4p0Uw-nA3Qihwd2rQQOleACZjP_PmszKSPJRxyyodmQduNsUmKkrRRg6stSO5sm_XsUJymjIfRU3HW2mqYceknWGHlZjHaYp4HNyKShpsj50XiN2Ljz_e0VctHKbXxyi9dcsw5L6HM6zH7y2WpOXiSXDVmIacMFbYhnE2UxBCQL1looy-4HJ2S11zo9-rdICwJpVDnbLhN8T8cw-qxveVBUQRQS4OCSaJPfh5cHYGEpOXMP4HNjMWGCrq1ms9n_PcIB-j3IpNuzFRDiQPEbKi41aZbuEBzOEZA5vaWZ35Iet1Y-cA2yqrnGfy2VkbesGBwujq7tOn5sUlV1EhOvu2vJU58pgjtYIqdANQppS5qIK6gHPzHPV3OT5Y1OB7AVSbtJZSOTK2vv-e8sRfekpY-6iIe5ZgaosaoyL1F6alpZRvj168Ht9zyWaxZom0G_sonVLSA8fndTUZfoYUgXacKACu2WD_yGZ4JuojjTdgnIKHcp6YpptgcUZ1NerZT5ghf-lJBcnuYvP3ZWn7oW7ZJEyGAmIZprVziFACyN4zRssdehCGbAEaB2kXyUtQ39ooYbygjK6RbE0zHB14eB0ISR48Ohw4avY0PD1T7OB9UENL8XsewsriVZLTRgg1B-niIK2igm-g9j-UrPpynyg-33M_Cx08UxPegeIludBYJnLNHPoPY8GaARmtAQI333MxFVjGHwfsNtyqJMuD-odLel_Q2-7-KX3-h-BuVQb8ZHl_Bi0lJcVYwj-pjKQwCgvOkeREdlMOKUsCIpHy1Lqsb1FbxUTMkrU8Ke-m7LADzDt2Nvf56B20njA106jVdypOyy9o1Nw5I8njDLsrfrAGqWHaKV8ZNNrwGq8djkkZ6ponx276bYPqFiTFHR68cU9eDt1t-i-Mjm2CkKH9N4CmODQoupNzg3kAAFQBsW33OlhiPexGc3trG0fcJosNKLa-Je2wN9OSSzWWQ_HsJtkzJT_9xaMA1NsWKxQWMUkZnd9PY4MKSj3ft_-y3k33-72_IEdN4NhRCAdC_A3GpvmSBdY5mP4h1yogY49ILWTS4Ipdal7M_p0TuPub2ZNzKcACRWw83AjhCW9rXEUhWYuuvXFYlGfO2lB0t2HDoZh2zl1W2BxIKV2uNMtMXb299hgtkyMenU9Xyg2ia6ydl1ZS7ZbmhiScF_qiaKbaHkhHZUOKa_fcpbjV0zyaANrp8IRSgmX0eIkhin0rul3iKgbnwVBKc_JmWPHeZ1_NfA9Rqn9JLKm1C7t1pBGyXvPW5730WcNWuOeYDIRp6XjyUYaDlQe1IMuQ4IkPxy_FmimbTHkZvc_PtqbJ72q1aEt8TowhEN8xHFWPLm9ndA0epPDKhgOuF2URg3rj7nMAyFyd8KF6ZTR7Tu4Qud-LH7z_PrWILLfMy1ApnxbxP1vkLKCpxoZ47n7Q7CV6Z5Npbk9LIOv8bc5TUVTLi6cXZsEP5AJmzzxnIel1zgCRxmybKcPJNTeqd4_iGgilg94XA9J4lkPq2ve4bFBbc5B89QqKXadlnxwdKk-HZwRJvjL-ZfpeM1Nc2LF72DjAKvLXvs8BXPw0ZWeFg8d9K-viPq3z-A7kZsf1bTUkCr-nmbJAwOqmJzzg0ERxIgeS1IHMRNRMMdDR8GY9qS3lsp8AgfWeXd9vC7UdEnvdscIPmBebECcuz3ZuVHL7RMJXIslKAYYkD_2revueOqO0lPGD5JGF1eJnI2qDnr9rlNSLFf97XUgstToXdVQ7sWX5oAeXwaKZXG5yDYZxHL5w0LQpYqFW94MMOPtIJfyGvkjpIz-NDL8j9QWGZInj7AKcFu65nPy01qXslvjxezxP38P1GblyqMjvVZQ8jGyjeIH7xL4WAqflUDiKl4Jk5mknv8-NdwzNbutBWBCxOFXQK5FHCZDtSxmlrHsPwdt9Qi4-D1oWEvJymTMkGKYEPsxwQ760EpF1QE1fL8ZaeqOB8CU9SoClJ5gtfXyyhnBEJwuGWAL4Dobhj_DeJlrorjMjEvxDChdW5eODWlMHWa196Rz-shySgImGZ0lL5gV3_tjs8HgW4aG4WB1EvEkOoN3i7EKIrC_5zstaNWwzyOT4xhOyTydLTFd44C83wibgdfc5Wr64jBLBXZInQMNsU3lpyq7cS0NkR1twkB0qIeqqONow9dVweUauw0SnXx8HqKjCZiJjXEG-maFzzRuD3QtdC0bg2JP6ahOJjgC7jAyyFRK0A1_zK5nqt9oFwa6nIt7WZmhhS5cZC5v1TRi8aRm0YfgjDm67zwZWpB8vHiE1Kfe6FEx2DMsSEqRdxIGBuOVi0cbl_HH6jpL7AQ_oRmUdTVK4zK5KYSDyK8ytO8UV8nTAGgyW6MMP8OxhqNqSJwkcGfpSGUBAnubfiUHxK_fXtL7SjUruQ6uVxGAQxkjsW45pLiNfTsLhaq6OvHXXaUWo4A7k6Clqz2Sdi03yvKfE0WSufbp0k3guCmVMROoFMOBjFH3ATELTu9WBZUYVfqekdrbS2c0NeN6GjBmwoean0gnuCCz2D5TYDnIyqPeRL43Rd--Vevy7wuZr8HjymqDjXiTmHUWEkE3VeyE8K9_OXtrl6peC_PkttrMB4gAkLLvRVkjajMblxRMjyJqMClduYD-EYmVLGSxzWkgjeA_LmiCec5GxQpz9GFzcQ_L6qkk6S8aYGA4LaXv25au3QiKsN9lgb3M8TXfvFOQCmNruX-qeqIs6aPKgAcjT1Agg9LcO3NUcUltCa23w1aw1COn_d-xhRSjsAG8zmsxFHVTtcOMck0J_gIkY8eUAHvspXw2ND-OL_KguwsFzcEMWijBQhGfMEUc4tAwTfr_hTxTAVAtsoG3gpJx2wof-RYAl9Z66uDsLp1Wn-Gr84_80sVqjd8Fsfjk8s9frktl8uEqWsASmX56PvXI-miNWsFhTVMhjnhCVVWtynQyXbkLonWfyc8DSQSEoavNADl_0qZfJUzKLSC8Kag90TnueZqKbuo5piW_3MK5PQ3FK1FSymMeocL0zf6TjXY10xNhJCs1DHKU-HJGcq8MF5LxT1LTk_qrcDevbwWMXD_2PJ7KzyAJ0ceM-VhDKh00633qlczBaBdWRDPjMhCEeaOUdApMe2Hi0I0HFFNT2l3PfMqYOD96Mf5tKRGp-2iukQ0H1sQ9NA6Fhm3zwhnG-u8ZxBR3EebCcMZAxrDKYw26WLtb4kmdEnZQEMS8iNah861Y7czAZmxGbe9F46sZtxjyasx6LZP8hfOGsgbjYc8tpf8NQwLC6FvfAqqP9bLk2c0ETvj6uN_uBkG8c-IsWbu4Frg0EFXSEZz4TRA9QJLILPGBJgJs79CEWQAyZFYqZfU_l_6izQk46ezcVS2allrMWahSYMZHHQmeZX_8vT8R_BD4q0Ve1PVaDHjpyik4OTAhSx871c5HPxqJC0IFh2iMdcjRkEUw3-P_xle1XPR8yIOxQSPucLEHMj0DuLdimuTErE61W2sC4e-be0YZsqshQCOy8JxD4iBMNMjeMi_J7Yzzw4cwbbUyGw6rR7iLVgUmEmPUu06CQwCH9j7OdXozkmCo69Mg3SGCTh0eYKqZ7a64jMRLRdPpg3s-4_XwDIC0lFBvmB2CgZhFkw3oh4PI9v2tTgg5r2w5YZM5tdX6qBkMJDOcSPyFkOG2hHRaquvkkiF3stskyynGNbSRxgrlj9MImMg96-FYFcDg_MO-hFcUwWoFk5XuSj-WO6g5_9NemOg1UruxvPas9zpNRpmbcTg751bIFOLhkWWw2I-rHPzWrJYfh0BUSfeK_8b7URvHJRptMMbjNSKz-U9U53UvVlU2UNMIxUSEwd9disEA_g_ZziFNJ3tWZQMnv7cthUzYYNj-z1iDsXb2lj2NYhcR_hrfa4rFFpGXXFIFXucg0P4dHk5ryfrW31BNKg5T5Q5r3F8UZ1AaoNrgxWH1MNRK3_je6B11H_ANeNFO2jF_r1hXwt5tVBaBO32xTZ6t8poYoO9_XjEMI57Lz3EhGq8fTjV0jCW0exA12AORV9LMz3qy4msliPD99ATS1yKxxGckkzSCyxFK9vUZaXwMEhuErfkAJiXn9Y9dDE-UU74sTrJEARDfuR28wCfOp_xoyyMKH-Gr8GgFHobmhibCqzcAVisIkiFWJMUgT-j1g0eUXDu1vi0d9ahDswb6If8VCxFXydUxaBVSnaP2Pom0qjn8T2jWPdBixGYmPvggoJ1aTO71rkw0zz_C4TTWGjomNF9pj4u_gklRRyLoh26UmbS5I5cg1T-8IP4cGUIPW1Mm4z8yVDN7uJ8cAhVyqGtsU6h5vn53g8B0qyk2yvcqG1tG6VHF2faHNnHKiNEHfevY4OO7JVgsTZVaAXDgKyKcWxk7tlcRlKmFiE4S7Vpf9LwGp9pPjiQ6sivMnMXNWLhXXCg7pVts2ApuqGuxD9maPuzOJuS1chhuiAwdUpRnSwmhRn2L-Fg8KV4ErdAttq61V4If_KmVWVtjx6KLtEfywxWgfhxM3hLhiS4HIBexNup4uNkcA8lbx2WqnjYcGjvFBxgrPNaJGA5XDB5xn9kcDbhzKB-O2avox2xTb0b05c9KJNp292oLxPMF1AEs5fimeNrnVbMLVIqLr-r9tjW-I7qhF_LWXhtEax98Wj6ZzjJsZgqF99vO7wSO9NqaiHFKHODMd6ilPMPHAJNo8OLAdsRKJgvqKAXB_h-GGGwoFpKbVEVkbNKYruy20Op7X-Desvan5rg9qb2QlQ6XtnKDrx8KBHYt9W9oT8-LN5WFiNofnY-GJ7mvfXsJSrDmFogH75z6UzEbzSHGOwN6luF4i_R1aDLN6Ar-vBPEQAEbtYzgDM1Q7u4GyF3Tty6WjFz9chNx5WVvkq1gqkuXx9hIMt3Ok4o6nRXm19csnnv_SWsFBVEzQOVo1hllvh3E-A2m4__dBjiZGuZT-YMO2Sf7HDUUhdhey07F-vv4U9wqF3VLqVaUYThiYi4EQ3jYYK1sH2SFyVILgDiPWxytCFZWFwRWKXh7y0H5aatWegLITDlKU_8bW4HFOKBN1kyIvhuxykQ8SMqWzfX4TEgFCClJ5_xJVQXDEOshoGltQIg9__-IjEHxLiLsVStt-DZY_iLcnjkTLSJ7U256_TYuKEvJSeNa7MB2EESRNrAVGIjNZbGhvOsandNLjiV7rpX-YxB5Me0Lewr3OW38LlwbkpnB5NmKJO4-k5KZuA6V99lJg8Vi4yFgLxX5Po3lLNh-1ncLM3Gu8XHIFh0HyK6rV9AMUbkmQuwSJHUL8tu5ra5UEv3Z-FMhw_KX8BiWQx79_wiz-VIFjBTFdmPkAqJA_Vu2V8pzW6nhoDFG32gZj9Ni6z8JVIm4-au-9nRwZWuYaZAL_UhwToF7WEWvIyJpWveN5zp6GNmDc9zk7YWIXgSsMkbKiYHtd4xStF11hElZMFiB0EyYWJ7GNpfKt_L3qeCn4bzjFFrCqi-DmCoxqhkz4UwYzy8O8M_TVWKoMzh29CpK7S-n88v2-SyCVgJmPExSRC9TrklJgjpsJT39UzggFkUC4tUgwR0Bv0dCrp0_lBn-VPujWWe05jbt6dqd1losVVEAbQ4kNsSU9zPb-9XCMnvnrh3DTCFNPcrNoYv3rgu2l3j_1sghafeBhsA8A&#x3D;&#x3D;&quot;
+
+    # 进行替换操作
+    ciphertext_base64 &#x3D; ciphertext_base64.replace(&#39;-&#39;, &#39;+&#39;)
+    ciphertext_base64 &#x3D; ciphertext_base64.replace(&#39;_&#39;, &#39;&#x2F;&#39;)
+
+    print(ciphertext_base64)
+
+    # 检查用户是否已填入数据
+    if not key_base64 or not iv_base64 or not ciphertext_base64:
+        print(&quot;❌ 脚本未运行。请先在代码中填入 key_base64, iv_base64, 和 ciphertext_base64 的值。&quot;)
+    else:
+        # 调用解密函数
+        decrypted_result &#x3D; decrypt_aes_cbc(key_base64, iv_base64, ciphertext_base64)
+
+        # 打印结果
+        print(&quot;--- 解密结果 ---&quot;)
+        print(decrypted_result)</code></pre>
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/08/31/%E4%BD%BF%E7%94%A8reqable%E5%92%8C%E7%AE%97%E6%B3%95%E5%8A%A9%E6%89%8B%E7%AE%80%E5%8D%95%E9%80%86%E5%90%91%E6%9C%89%E9%81%93%E7%BF%BB%E8%AF%91%E5%AE%98%E6%9F%A5%E8%AF%8D%E6%8E%A5%E5%8F%A3%EF%BC%88%E4%B8%8A%EF%BC%89/" rel="prev" title="使用Reqable和算法助手简单逆向有道翻译官查词接口（上）">
+                  <i class="fa fa-angle-left"></i> 使用Reqable和算法助手简单逆向有道翻译官查词接口（上）
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2022 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">duzhuo</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: '32px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":true,"envId":"https://twikoo.saint1337.top/","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+<!-- hexo injector body_end start --><script src="/assets/mmedia/mmedia-loader.js"></script><!-- hexo injector body_end end -->
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>
