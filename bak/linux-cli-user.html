@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-duzhuo-32%C3%9732.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-duzhuo-16%C3%9716.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.saint1337.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.23.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"fold":{"enable":true,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true,"trigger":"auto"}}</script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/config.min.js" defer></script>
+
+    <meta name="description" content="Linux 用户管理 关键词：groupadd, groupdel, groupmod, useradd, userdel, usermod, passwd, su, sudo  1. Linux 用户管理要点 创建用户组 - 使用 groupadd 删除用户组 - 使用 groupdel 修改用户组信息 - 使用 groupmod 创建用户 - 使用 useradd 删除用户 - 使用 user">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Linux 用户管理">
+<meta property="og:url" content="https://blog.saint1337.top/bak/linux-cli-user.html">
+<meta property="og:site_name" content="duzhuo&#39;s-blog">
+<meta property="og:description" content="Linux 用户管理 关键词：groupadd, groupdel, groupmod, useradd, userdel, usermod, passwd, su, sudo  1. Linux 用户管理要点 创建用户组 - 使用 groupadd 删除用户组 - 使用 groupdel 修改用户组信息 - 使用 groupmod 创建用户 - 使用 useradd 删除用户 - 使用 user">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-02-20T07:09:06.000Z">
+<meta property="article:modified_time" content="2025-09-03T15:13:05.438Z">
+<meta property="article:author" content="duzhuo">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://blog.saint1337.top/bak/linux-cli-user">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":true,"permalink":"https://blog.saint1337.top/bak/linux-cli-user.html","path":"bak/linux-cli-user.html","title":"Linux 用户管理"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Linux 用户管理 | duzhuo's-blog
+</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/components/prism-core.min.js" integrity="sha256-bKrTFt2ZHyT4AE4LnBnAVctYKf9l6XP77kBvltgbjn4=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha256-9cmf7tcLdXpKsPi/2AWE93PbZpTp4M4tqzFk+lWomjU=" crossorigin="anonymous" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/utils.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/motion.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/sidebar.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/next-boot.min.js" defer></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/third-party/search/local-search.min.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">duzhuo's-blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">学无止境</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux-%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">Linux 用户管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Linux-%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86%E8%A6%81%E7%82%B9"><span class="nav-number">1.1.</span> <span class="nav-text">1. Linux 用户管理要点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%91%BD%E4%BB%A4%E5%B8%B8%E8%A7%81%E7%94%A8%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">2. 命令常见用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-groupadd"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1. groupadd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-groupdel"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2. groupdel</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-groupmod"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3. groupmod</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-useradd"><span class="nav-number">1.2.4.</span> <span class="nav-text">2.4. useradd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-userdel"><span class="nav-number">1.2.5.</span> <span class="nav-text">2.5. userdel</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-usermod"><span class="nav-number">1.2.6.</span> <span class="nav-text">2.6. usermod</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-7-passwd"><span class="nav-number">1.2.7.</span> <span class="nav-text">2.7. passwd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-8-su"><span class="nav-number">1.2.8.</span> <span class="nav-text">2.8. su</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-9-sudo"><span class="nav-number">1.2.9.</span> <span class="nav-text">2.9. sudo</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-9-1-%E7%BB%99%E6%99%AE%E9%80%9A%E7%94%A8%E6%88%B7%E6%8E%88%E6%9D%83-sudo"><span class="nav-number">1.2.9.1.</span> <span class="nav-text">2.9.1. 给普通用户授权 sudo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-9-2-%E5%85%8D%E5%AF%86%E7%A0%81%E6%8E%88%E6%9D%83-sudo"><span class="nav-number">1.2.9.2.</span> <span class="nav-text">2.9.2. 免密码授权 sudo</span></a></li></ol></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">duzhuo</p>
+  <div class="site-description" itemprop="description">记录，分享一些我觉得好玩的内容。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/duzhuoshanwai" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;duzhuoshanwai" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner page posts-expand">
+
+
+    
+    
+    
+    <div class="post-block" lang="zh-CN"><header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">Linux 用户管理
+</h1>
+
+<div class="post-meta-container">
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <h1 id="Linux-用户管理"><a href="#Linux-用户管理" class="headerlink" title="Linux 用户管理"></a>Linux 用户管理</h1><blockquote>
+<p>关键词：<code>groupadd</code>, <code>groupdel</code>, <code>groupmod</code>, <code>useradd</code>, <code>userdel</code>, <code>usermod</code>, <code>passwd</code>, <code>su</code>, <code>sudo</code></p>
+</blockquote>
+<h2 id="1-Linux-用户管理要点"><a href="#1-Linux-用户管理要点" class="headerlink" title="1. Linux 用户管理要点"></a>1. Linux 用户管理要点</h2><ul>
+<li>创建用户组 - 使用 <a href="#groupadd">groupadd</a></li>
+<li>删除用户组 - 使用 <a href="#groupdel">groupdel</a></li>
+<li>修改用户组信息 - 使用 <a href="#groupmod">groupmod</a></li>
+<li>创建用户 - 使用 <a href="#useradd">useradd</a></li>
+<li>删除用户 - 使用 <a href="#userdel">userdel</a></li>
+<li>修改用户信息 - 使用 <a href="#usermod">usermod</a></li>
+<li>设置用户认证信息 - 使用 <a href="#passwd">passwd</a></li>
+<li>切换用户 - 使用 <a href="#su">su</a></li>
+<li>当前用户想执行没有权限执行的命令时，使用其他用户身份去执行 - 使用 <a href="#sudo">sudo</a></li>
+</ul>
+<h2 id="2-命令常见用法"><a href="#2-命令常见用法" class="headerlink" title="2. 命令常见用法"></a>2. 命令常见用法</h2><h3 id="2-1-groupadd"><a href="#2-1-groupadd" class="headerlink" title="2.1. groupadd"></a>2.1. groupadd</h3><blockquote>
+<p>groupadd 命令用于创建一个新的用户组，新用户组的信息将被添加到系统文件中。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/groupadd">http://man.linuxde.net/groupadd</a></p>
+</blockquote>
+<p>示例：</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"># 建立一个新组，并设置组 ID 加入系统
+$ groupadd -g 344 jsdigname</code></pre>
+
+<h3 id="2-2-groupdel"><a href="#2-2-groupdel" class="headerlink" title="2.2. groupdel"></a>2.2. groupdel</h3><blockquote>
+<p>groupdel 命令用于删除指定的用户组，本命令要修改的系统文件包括 <code>/ect/group</code> 和 <code>/ect/gshadow</code>。若该群组中仍包括某些用户，则必须先删除这些用户后，方能删除群组。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/groupdel">http://man.linuxde.net/groupdel</a></p>
+</blockquote>
+<p>示例：</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">$ groupadd damon  # 创建damon用户组
+$ groupdel damon  # 删除这个用户组</code></pre>
+
+<h3 id="2-3-groupmod"><a href="#2-3-groupmod" class="headerlink" title="2.3. groupmod"></a>2.3. groupmod</h3><blockquote>
+<p>groupmod 命令更改群组识别码或名称。需要更改群组的识别码或名称时，可用 groupmod 指令来完成这项工作。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/groupmod">http://man.linuxde.net/groupmod</a></p>
+</blockquote>
+<h3 id="2-4-useradd"><a href="#2-4-useradd" class="headerlink" title="2.4. useradd"></a>2.4. useradd</h3><blockquote>
+<p>useradd 命令用于 Linux 中创建的新的系统用户。useradd 可用来建立用户帐号。帐号建好之后，再用 passwd 设定帐号的密码．而可用 userdel 删除帐号。使用 useradd 指令所建立的帐号，实际上是保存在 <code>/etc/passwd</code> 文本文件中。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/useradd">http://man.linuxde.net/useradd</a></p>
+</blockquote>
+<p>示例：</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"># 新建用户加入组
+$ useradd –g sales jack –G company,employees    # -g：加入主要组、-G：加入次要组
+
+# 建立一个新用户账户，并设置 ID
+$ useradd caojh -u 544</code></pre>
+
+<h3 id="2-5-userdel"><a href="#2-5-userdel" class="headerlink" title="2.5. userdel"></a>2.5. userdel</h3><blockquote>
+<p>userdel 命令用于删除给定的用户，以及与用户相关的文件。若不加选项，则仅删除用户帐号，而不删除相关文件。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/userdel">http://man.linuxde.net/userdel</a></p>
+</blockquote>
+<p>示例：</p>
+<p>userdel 命令很简单，比如我们现在有个用户 linuxde，其 home 目录位于<code>/var</code>目录中，现在我们来删除这个用户：</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">$ userdel linuxde       # 删除用户linuxde，但不删除其家目录及文件；
+$ userdel -r linuxde    # 删除用户linuxde，其 home 目录及文件一并删除；</code></pre>
+
+<h3 id="2-6-usermod"><a href="#2-6-usermod" class="headerlink" title="2.6. usermod"></a>2.6. usermod</h3><blockquote>
+<p>usermod 命令用于修改用户的基本信息。usermod 命令不允许你改变正在线上的使用者帐号名称。当 usermod 命令用来改变 user id，必须确认这名 user 没在电脑上执行任何程序。你需手动更改使用者的 crontab 档。也需手动更改使用者的 at 工作档。采用 NIS server 须在 server 上更动相关的 NIS 设定。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/usermod">http://man.linuxde.net/usermod</a></p>
+</blockquote>
+<p>示例：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"># 将 newuser2 添加到组 staff 中
+$ usermod -G staff newuser2
+
+# 修改 newuser 的用户名为 newuser1
+$ usermod -l newuser1 newuser
+
+# 锁定账号 newuser1
+$ usermod -L newuser1
+
+# 解除对 newuser1 的锁定
+$ usermod -U newuser1</code></pre>
+
+<h3 id="2-7-passwd"><a href="#2-7-passwd" class="headerlink" title="2.7. passwd"></a>2.7. passwd</h3><blockquote>
+<p>passwd 命令用于设置用户的认证信息，包括用户密码、密码过期时间等。系统管理者则能用它管理系统用户的密码。只有管理者可以指定用户名称，一般用户只能变更自己的密码。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/passwd">http://man.linuxde.net/passwd</a></p>
+</blockquote>
+<p>示例：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"># 如果是普通用户执行 passwd 只能修改自己的密码。
+# 如果新建用户后，要为新用户创建密码，则用 passwd 用户名，注意要以 root 用户的权限来创建。
+$ passwd linuxde    # 更改或创建linuxde用户的密码；
+Changing password for user linuxde.
+New UNIX password:          # 请输入新密码；
+Retype new UNIX password:   # 再输入一次；
+passwd: all authentication tokens updated successfully. # 成功；
+
+# 普通用户如果想更改自己的密码，直接运行 passwd 即可，比如当前操作的用户是 linuxde。
+$ passwd
+Changing password for user linuxde. # 更改linuxde用户的密码；
+(current) UNIX password:   # 请输入当前密码；
+New UNIX password:         # 请输入新密码；
+Retype new UNIX password:  # 确认新密码；
+passwd: all authentication tokens updated successfully. # 更改成功；
+
+# 比如我们让某个用户不能修改密码，可以用&#96;-l&#96;选项来锁定：
+$ passwd -l linuxde    # 锁定用户linuxde不能更改密码；
+Locking password for user linuxde.
+passwd: Success           # 锁定成功；
+
+$ su linuxde   # 通过su切换到linuxde用户；
+$ passwd      # linuxde来更改密码；
+Changing password for user linuxde.
+Changing password for linuxde
+(current) UNIX password:          # 输入linuxde的当前密码；
+passwd: Authentication token manipulation error     # 失败，不能更改密码；
+
+$ passwd -d linuxde  # 清除linuxde用户密码；
+Removing password for user linuxde.
+passwd: Success                         # 清除成功；
+
+$ passwd -S linuxde    # 查询linuxde用户密码状态；
+Empty password.                         # 空密码，也就是没有密码；</code></pre>
+
+<h3 id="2-8-su"><a href="#2-8-su" class="headerlink" title="2.8. su"></a>2.8. su</h3><blockquote>
+<p>su 命令用于切换当前用户身份到其他用户身份，变更时须输入所要变更的用户帐号与密码。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/su">http://man.linuxde.net/su</a></p>
+</blockquote>
+<p>示例：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"># 变更帐号为 root 并在执行 ls 指令后退出变回原使用者：
+$ su -c ls root
+
+# 变更帐号为 root 并传入&#96;-f&#96;选项给新执行的 shell：
+$ su root -f
+
+# 变更帐号为 test 并改变工作目录至 test 的家目录：
+$ su -test</code></pre>
+
+<h3 id="2-9-sudo"><a href="#2-9-sudo" class="headerlink" title="2.9. sudo"></a>2.9. sudo</h3><blockquote>
+<p>sudo 命令用来以其他身份来执行命令，预设的身份为 root。在 <code>/etc/sudoers</code> 中设置了可执行 sudo 指令的用户。若其未经授权的用户企图使用 sudo，则会发出警告的邮件给管理员。用户使用 sudo 时，必须先输入密码，之后有 5 分钟的有效期限，超过期限则必须重新输入密码。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/sudo">http://man.linuxde.net/sudo</a></p>
+</blockquote>
+<p>示例：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"># 指定用户执行命令
+$ sudo -u userb ls -l
+# 列出目前的权限
+$ sudo -l
+# 显示sudo设置
+$ sudo -L</code></pre>
+
+<h4 id="2-9-1-给普通用户授权-sudo"><a href="#2-9-1-给普通用户授权-sudo" class="headerlink" title="2.9.1. 给普通用户授权 sudo"></a>2.9.1. 给普通用户授权 sudo</h4><p>假设要给普通用户 mary 配置 sudo 权限：</p>
+<ol>
+<li><code>/etc/sudoers</code> 文件存放了 sudo 的相关用户，但是默认是没有写权限的，所以需要设为可写：<code>chmod u+w /etc/sudoers</code></li>
+<li>在该文件中添加 <code>mary ALL=(ALL) ALL</code> ，保存并退出，让 mary 具有 sudo 的所有权限</li>
+<li>再将 <code>/etc/sudoers</code> 的权限恢复到默认状态：<code>chmod u-w /etc/sudoers</code></li>
+</ol>
+<h4 id="2-9-2-免密码授权-sudo"><a href="#2-9-2-免密码授权-sudo" class="headerlink" title="2.9.2. 免密码授权 sudo"></a>2.9.2. 免密码授权 sudo</h4><p>与给普通用户授权 sudo 类似，区别仅在于第 2 步：<code>mary ALL=(ALL) NOPASSWD: ALL</code>。</p>
+
+      </div>
+      
+      
+      
+    </div>
+
+    
+    
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2022 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">duzhuo</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: '32px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":true,"envId":"https://twikoo.saint1337.top/","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>

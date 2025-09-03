@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-duzhuo-32%C3%9732.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-duzhuo-16%C3%9716.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.saint1337.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.23.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"fold":{"enable":true,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true,"trigger":"auto"}}</script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/config.min.js" defer></script>
+
+    <meta name="description" content="查看 Linux 命令帮助信息 Linux 中有非常多的命令，想全部背下来是很困难的事。所以，我认为学习 Linux 的第一步，就是了解如何快速检索命令说明。 关键词：help, whatis, info, which, whereis, man  1. 查看 Linux 命令帮助信息的要点 查看 Shell 内部命令的帮助信息 - 使用 help 查看命令的简要说明 - 使用 whatis 查看">
+<meta property="og:type" content="website">
+<meta property="og:title" content="查看 Linux 命令帮助信息">
+<meta property="og:url" content="https://blog.saint1337.top/bak/linux-cli-help.html">
+<meta property="og:site_name" content="duzhuo&#39;s-blog">
+<meta property="og:description" content="查看 Linux 命令帮助信息 Linux 中有非常多的命令，想全部背下来是很困难的事。所以，我认为学习 Linux 的第一步，就是了解如何快速检索命令说明。 关键词：help, whatis, info, which, whereis, man  1. 查看 Linux 命令帮助信息的要点 查看 Shell 内部命令的帮助信息 - 使用 help 查看命令的简要说明 - 使用 whatis 查看">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-02-20T07:09:06.000Z">
+<meta property="article:modified_time" content="2025-09-03T15:13:05.248Z">
+<meta property="article:author" content="duzhuo">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://blog.saint1337.top/bak/linux-cli-help">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":true,"permalink":"https://blog.saint1337.top/bak/linux-cli-help.html","path":"bak/linux-cli-help.html","title":"查看 Linux 命令帮助信息"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>查看 Linux 命令帮助信息 | duzhuo's-blog
+</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/components/prism-core.min.js" integrity="sha256-bKrTFt2ZHyT4AE4LnBnAVctYKf9l6XP77kBvltgbjn4=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha256-9cmf7tcLdXpKsPi/2AWE93PbZpTp4M4tqzFk+lWomjU=" crossorigin="anonymous" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/utils.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/motion.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/sidebar.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/next-boot.min.js" defer></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/third-party/search/local-search.min.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">duzhuo's-blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">学无止境</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B-Linux-%E5%91%BD%E4%BB%A4%E5%B8%AE%E5%8A%A9%E4%BF%A1%E6%81%AF"><span class="nav-number">1.</span> <span class="nav-text">查看 Linux 命令帮助信息</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%9F%A5%E7%9C%8B-Linux-%E5%91%BD%E4%BB%A4%E5%B8%AE%E5%8A%A9%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A6%81%E7%82%B9"><span class="nav-number">1.1.</span> <span class="nav-text">1. 查看 Linux 命令帮助信息的要点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%91%BD%E4%BB%A4%E5%B8%B8%E8%A7%81%E7%94%A8%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">2. 命令常见用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-help"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1. help</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-whatis"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2. whatis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-info"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3. info</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-which"><span class="nav-number">1.2.4.</span> <span class="nav-text">2.4. which</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-whereis"><span class="nav-number">1.2.5.</span> <span class="nav-text">2.5. whereis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-man"><span class="nav-number">1.2.6.</span> <span class="nav-text">2.6. man</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-6-1-man-%E8%A6%81%E7%82%B9"><span class="nav-number">1.2.6.1.</span> <span class="nav-text">2.6.1. man 要点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">1.3.</span> <span class="nav-text">3. 参考资料</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">duzhuo</p>
+  <div class="site-description" itemprop="description">记录，分享一些我觉得好玩的内容。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/duzhuoshanwai" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;duzhuoshanwai" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner page posts-expand">
+
+
+    
+    
+    
+    <div class="post-block" lang="zh-CN"><header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">查看 Linux 命令帮助信息
+</h1>
+
+<div class="post-meta-container">
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <h1 id="查看-Linux-命令帮助信息"><a href="#查看-Linux-命令帮助信息" class="headerlink" title="查看 Linux 命令帮助信息"></a>查看 Linux 命令帮助信息</h1><blockquote>
+<p>Linux 中有非常多的命令，想全部背下来是很困难的事。所以，我认为学习 Linux 的第一步，就是了解如何快速检索命令说明。</p>
+<p>关键词：<code>help</code>, <code>whatis</code>, <code>info</code>, <code>which</code>, <code>whereis</code>, <code>man</code></p>
+</blockquote>
+<h2 id="1-查看-Linux-命令帮助信息的要点"><a href="#1-查看-Linux-命令帮助信息的要点" class="headerlink" title="1. 查看 Linux 命令帮助信息的要点"></a>1. 查看 Linux 命令帮助信息的要点</h2><ul>
+<li>查看 Shell 内部命令的帮助信息 - 使用 <a href="#help">help</a></li>
+<li>查看命令的简要说明 - 使用 <a href="#whatis">whatis</a></li>
+<li>查看命令的详细说明 - 使用 <a href="#info">info</a></li>
+<li>查看命令的位置 - 使用 <a href="#which">which</a></li>
+<li>定位指令的二进制程序、源代码文件和 man 手册页等相关文件的路径 - 使用 <a href="#whereis">whereis</a></li>
+<li>查看命令的帮助手册（包含说明、用法等信息） - 使用 <a href="#man">man</a></li>
+<li>只记得部分命令关键字 - 使用 man -k</li>
+</ul>
+<blockquote>
+<p>注：推荐一些 Linux 命令中文手册：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://man.linuxde.net/">Linux 命令大全</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/jaywcjlove/linux-command">linux-command</a></li>
+</ul>
+</blockquote>
+<h2 id="2-命令常见用法"><a href="#2-命令常见用法" class="headerlink" title="2. 命令常见用法"></a>2. 命令常见用法</h2><h3 id="2-1-help"><a href="#2-1-help" class="headerlink" title="2.1. help"></a>2.1. help</h3><blockquote>
+<p>help 命令用于查看 Shell 内部命令的帮助信息。而对于外部命令的帮助信息只能使用 man 或者 info 命令查看。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/help">http://man.linuxde.net/help</a></p>
+</blockquote>
+<h3 id="2-2-whatis"><a href="#2-2-whatis" class="headerlink" title="2.2. whatis"></a>2.2. whatis</h3><blockquote>
+<p>whatis 用于查询一个命令执行什么功能。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/whatis">http://man.linuxde.net/whatis</a></p>
+</blockquote>
+<p>示例：</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"># 查看 man 命令的简要说明
+$ whatis man
+
+# 查看以 loca 开拓的命令的简要说明
+$ whatis -w &quot;loca*&quot;</code></pre>
+
+<h3 id="2-3-info"><a href="#2-3-info" class="headerlink" title="2.3. info"></a>2.3. info</h3><blockquote>
+<p>info 是 Linux 下 info 格式的帮助指令。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/info">http://man.linuxde.net/info</a></p>
+</blockquote>
+<p>示例：</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"># 查看 man 命令的详细说明
+$ info man</code></pre>
+
+<h3 id="2-4-which"><a href="#2-4-which" class="headerlink" title="2.4. which"></a>2.4. which</h3><blockquote>
+<p>which 命令用于查找并显示给定命令的绝对路径，环境变量 PATH 中保存了查找命令时需要遍历的目录。which 指令会在环境变量$PATH 设置的目录里查找符合条件的文件。也就是说，使用 which 命令，就可以看到某个系统命令是否存在，以及执行的到底是哪一个位置的命令。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/which">http://man.linuxde.net/which</a></p>
+</blockquote>
+<p>示例：</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">which pwd # 查找命令的路径</code></pre>
+
+<p>说明：which 是根据使用者所配置的 PATH 变量内的目录去搜寻可运行档的！所以，不同的 PATH 配置内容所找到的命令当然不一样的！</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">[root@localhost ~]# which cd
+cd: shell built-in command</code></pre>
+
+<p>cd 这个常用的命令竟然找不到啊！为什么呢？这是因为 cd 是 bash 内建的命令！但是 which 默认是找 PATH 内所规范的目录，所以当然一定找不到的！</p>
+<h3 id="2-5-whereis"><a href="#2-5-whereis" class="headerlink" title="2.5. whereis"></a>2.5. whereis</h3><blockquote>
+<p>whereis 命令用来定位指令的二进制程序、源代码文件和 man 手册页等相关文件的路径。</p>
+<p>whereis 命令只能用于程序名的搜索，而且只搜索二进制文件（参数-b）、man 说明文件（参数-m）和源代码文件（参数-s）。如果省略参数，则返回所有信息。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/whereis">http://man.linuxde.net/whereis</a></p>
+</blockquote>
+<p>示例：</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">whereis git # 将相关的文件都查找出来</code></pre>
+
+<h3 id="2-6-man"><a href="#2-6-man" class="headerlink" title="2.6. man"></a>2.6. man</h3><blockquote>
+<p>man 命令是 Linux 下的帮助指令，通过 man 指令可以查看 Linux 中的指令帮助、配置文件帮助和编程帮助等信息。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/man">http://man.linuxde.net/man</a></p>
+</blockquote>
+<p>示例：</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">$ man date # 查看 date 命令的帮助手册
+$ man 3 printf # 查看 printf 命令的帮助手册中的第 3 类
+$ man -k keyword # 根据命令中部分关键字来查询命令</code></pre>
+
+<h4 id="2-6-1-man-要点"><a href="#2-6-1-man-要点" class="headerlink" title="2.6.1. man 要点"></a>2.6.1. man 要点</h4><p>在 man 的帮助手册中，可以使用 page up 和 page down 来上下翻页。</p>
+<p>man 的帮助手册中，将帮助文档分为了 9 个类别，对于有的关键字可能存在多个类别中， 我们就需要指定特定的类别来查看；（一般我们查询 bash 命令，归类在 1 类中）。</p>
+<p>man 页面的分类(常用的是分类 1 和分类 3)：</p>
+<ol>
+<li>可执行程序或 shell 命令</li>
+<li>系统调用(内核提供的函数)</li>
+<li>库调用(程序库中的函数)</li>
+<li>特殊文件(通常位于 &#x2F;dev)</li>
+<li>文件格式和规范，如 &#x2F;etc&#x2F;passwd</li>
+<li>游戏</li>
+<li>杂项(包括宏包和规范，如 man(7)，groff(7))</li>
+<li>系统管理命令(通常只针对 root 用户)</li>
+<li>内核例程 [非标准]</li>
+</ol>
+<p>前面说到使用 whatis 会显示命令所在的具体的文档类别，我们学习如何使用它</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ whatis printf
+printf (1) - format and print data
+printf (1p) - write formatted output
+printf (3) - formatted output conversion
+printf (3p) - print formatted output
+printf [builtins](1) - bash built-in commands, see bash(1)</code></pre>
+
+<p>我们看到 printf 在分类 1 和分类 3 中都有；分类 1 中的页面是命令操作及可执行文件的帮助；而 3 是常用函数库说明；如果我们想看的是 C 语言中 printf 的用法，可以指定查看分类 3 的帮助：</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">$ man 3 printf</code></pre>
+
+<h2 id="3-参考资料"><a href="#3-参考资料" class="headerlink" title="3. 参考资料"></a>3. 参考资料</h2><p><a target="_blank" rel="noopener" href="https://linuxtools-rst.readthedocs.io/zh_CN/latest/base/01_use_man.html">https://linuxtools-rst.readthedocs.io/zh_CN/latest/base/01_use_man.html</a></p>
+
+      </div>
+      
+      
+      
+    </div>
+
+    
+    
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2022 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">duzhuo</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: '32px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":true,"envId":"https://twikoo.saint1337.top/","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>

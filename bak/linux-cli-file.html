@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-duzhuo-32%C3%9732.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-duzhuo-16%C3%9716.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.saint1337.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.23.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"fold":{"enable":true,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true,"trigger":"auto"}}</script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/config.min.js" defer></script>
+
+    <meta name="description" content="Linux 文件内容查看编辑 关键词：cat, head, tail, more, less, sed, vi, grep  1. Linux 文件内容查看编辑要点 连接文件并打印到标准输出设备 - 使用 cat 显示指定文件的开头若干行 - 使用 head 显示指定文件的末尾若干行，常用于实时打印日志文件内容 - 使用 tail 显示文件内容，每次显示一屏 - 使用 more 显示文件内容，每次">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Linux 文件内容查看编辑">
+<meta property="og:url" content="https://blog.saint1337.top/bak/linux-cli-file.html">
+<meta property="og:site_name" content="duzhuo&#39;s-blog">
+<meta property="og:description" content="Linux 文件内容查看编辑 关键词：cat, head, tail, more, less, sed, vi, grep  1. Linux 文件内容查看编辑要点 连接文件并打印到标准输出设备 - 使用 cat 显示指定文件的开头若干行 - 使用 head 显示指定文件的末尾若干行，常用于实时打印日志文件内容 - 使用 tail 显示文件内容，每次显示一屏 - 使用 more 显示文件内容，每次">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-02-20T07:09:06.000Z">
+<meta property="article:modified_time" content="2025-09-03T15:13:04.955Z">
+<meta property="article:author" content="duzhuo">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://blog.saint1337.top/bak/linux-cli-file">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":true,"permalink":"https://blog.saint1337.top/bak/linux-cli-file.html","path":"bak/linux-cli-file.html","title":"Linux 文件内容查看编辑"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Linux 文件内容查看编辑 | duzhuo's-blog
+</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/components/prism-core.min.js" integrity="sha256-bKrTFt2ZHyT4AE4LnBnAVctYKf9l6XP77kBvltgbjn4=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha256-9cmf7tcLdXpKsPi/2AWE93PbZpTp4M4tqzFk+lWomjU=" crossorigin="anonymous" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/utils.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/motion.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/sidebar.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/next-boot.min.js" defer></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/third-party/search/local-search.min.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">duzhuo's-blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">学无止境</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux-%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9%E6%9F%A5%E7%9C%8B%E7%BC%96%E8%BE%91"><span class="nav-number">1.</span> <span class="nav-text">Linux 文件内容查看编辑</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Linux-%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9%E6%9F%A5%E7%9C%8B%E7%BC%96%E8%BE%91%E8%A6%81%E7%82%B9"><span class="nav-number">1.1.</span> <span class="nav-text">1. Linux 文件内容查看编辑要点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%91%BD%E4%BB%A4%E5%B8%B8%E8%A7%81%E7%94%A8%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">2. 命令常见用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-cat"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1. cat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-head"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2. head</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-tail"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3. tail</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-more"><span class="nav-number">1.2.4.</span> <span class="nav-text">2.4. more</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-less"><span class="nav-number">1.2.5.</span> <span class="nav-text">2.5. less</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-sed"><span class="nav-number">1.2.6.</span> <span class="nav-text">2.6. sed</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-7-vi"><span class="nav-number">1.2.7.</span> <span class="nav-text">2.7. vi</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-8-grep"><span class="nav-number">1.2.8.</span> <span class="nav-text">2.8. grep</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">1.3.</span> <span class="nav-text">3. 参考资料</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">duzhuo</p>
+  <div class="site-description" itemprop="description">记录，分享一些我觉得好玩的内容。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/duzhuoshanwai" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;duzhuoshanwai" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner page posts-expand">
+
+
+    
+    
+    
+    <div class="post-block" lang="zh-CN"><header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">Linux 文件内容查看编辑
+</h1>
+
+<div class="post-meta-container">
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <h1 id="Linux-文件内容查看编辑"><a href="#Linux-文件内容查看编辑" class="headerlink" title="Linux 文件内容查看编辑"></a>Linux 文件内容查看编辑</h1><blockquote>
+<p>关键词：<code>cat</code>, <code>head</code>, <code>tail</code>, <code>more</code>, <code>less</code>, <code>sed</code>, <code>vi</code>, <code>grep</code></p>
+</blockquote>
+<h2 id="1-Linux-文件内容查看编辑要点"><a href="#1-Linux-文件内容查看编辑要点" class="headerlink" title="1. Linux 文件内容查看编辑要点"></a>1. Linux 文件内容查看编辑要点</h2><ul>
+<li>连接文件并打印到标准输出设备 - 使用 <a href="#cat">cat</a></li>
+<li>显示指定文件的开头若干行 - 使用 <a href="#head">head</a></li>
+<li>显示指定文件的末尾若干行，常用于实时打印日志文件内容 - 使用 <a href="#tail">tail</a></li>
+<li>显示文件内容，每次显示一屏 - 使用 <a href="#more">more</a></li>
+<li>显示文件内容，每次显示一屏 - 使用 <a href="#less">less</a></li>
+<li>自动编辑一个或多个文件；简化对文件的反复操作；编写转换程序等 - 使用 <a href="#sed">sed</a></li>
+<li>文本编辑器 - 使用 <a href="#vi">vi</a></li>
+<li>使用正则表达式搜索文本，并把匹配的行打印出来 - 使用 <a href="#grep">grep</a></li>
+</ul>
+<h2 id="2-命令常见用法"><a href="#2-命令常见用法" class="headerlink" title="2. 命令常见用法"></a>2. 命令常见用法</h2><h3 id="2-1-cat"><a href="#2-1-cat" class="headerlink" title="2.1. cat"></a>2.1. cat</h3><blockquote>
+<p>cat 命令用于连接文件并打印到标准输出设备上。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/cat">http://man.linuxde.net/cat</a></p>
+</blockquote>
+<p>示例：</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">cat m1              # 在屏幕上显示文件 ml 的内容
+cat m1 m2           # 同时显示文件 ml 和 m2 的内容
+cat m1 m2 &gt; file    # 将文件 ml 和 m2 合并后放入文件 file 中</code></pre>
+
+<h3 id="2-2-head"><a href="#2-2-head" class="headerlink" title="2.2. head"></a>2.2. head</h3><blockquote>
+<p>head 命令用于显示文件的开头内容。在默认情况下，head 命令显示文件的头部 10 行内容。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/head">http://man.linuxde.net/head</a></p>
+</blockquote>
+<h3 id="2-3-tail"><a href="#2-3-tail" class="headerlink" title="2.3. tail"></a>2.3. tail</h3><blockquote>
+<p>tail 命令用于显示文件的尾部内容。在默认情况下，tail 命令显示文件的尾部 10 行内容。如果给定的文件不止一个，则在显示的每个文件前面加一个文件名标题。如果没有指定文件或者文件名为“-”，则读取标准输入。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/tail">http://man.linuxde.net/tail</a></p>
+</blockquote>
+<p>示例：</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">tail file           # 显示文件file的最后10行
+tail -n +20 file    # 显示文件file的内容，从第20行至文件末尾
+tail -c 10 file     # 显示文件file的最后10个字符</code></pre>
+
+<h3 id="2-4-more"><a href="#2-4-more" class="headerlink" title="2.4. more"></a>2.4. more</h3><blockquote>
+<p>more 命令是一个基于 vi 编辑器文本过滤器，它以全屏幕的方式按页显示文本文件的内容，支持 vi 中的关键字定位操作。more 名单中内置了若干快捷键，常用的有 H（获得帮助信息），Enter（向下翻滚一行），空格（向下滚动一屏），Q（退出命令）。</p>
+<p>该命令一次显示一屏文本，满屏后停下来，并且在屏幕的底部出现一个提示信息，给出至今己显示的该文件的百分比：–More–（XX%）可以用下列不同的方法对提示做出回答：</p>
+<ul>
+<li>按 Space 键：显示文本的下一屏内容。</li>
+<li>按 Enier 键：只显示文本的下一行内容。</li>
+<li>按斜线符|：接着输入一个模式，可以在文本中寻找下一个相匹配的模式。</li>
+<li>按 H 键：显示帮助屏，该屏上有相关的帮助信息。</li>
+<li>按 B 键：显示上一屏内容。</li>
+<li>按 Q 键：退出 rnore 命令。</li>
+</ul>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/more">http://man.linuxde.net/more</a></p>
+</blockquote>
+<p>示例：</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"># 显示文件 file 的内容，但在显示之前先清屏，并且在屏幕的最下方显示完核的百分比。
+more -dc file
+
+# 显示文件 file 的内容，每 10 行显示一次，而且在显示之前先清屏。
+more -c -10 file</code></pre>
+
+<h3 id="2-5-less"><a href="#2-5-less" class="headerlink" title="2.5. less"></a>2.5. less</h3><p>less 命令的作用与 more 十分相似，都可以用来浏览文字档案的内容，不同的是 less 命令允许用户向前或向后浏览文件，而 more 命令只能向前浏览。用 less 命令显示文件时，用 PageUp 键向上翻页，用 PageDown 键向下翻页。要退出 less 程序，应按 Q 键。</p>
+<p>示例：</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">less &#x2F;var&#x2F;log&#x2F;shadowsocks.log</code></pre>
+
+<h3 id="2-6-sed"><a href="#2-6-sed" class="headerlink" title="2.6. sed"></a>2.6. sed</h3><blockquote>
+<p>sed 是一种流编辑器，它是文本处理工具，能够完美的配合正则表达式使用，功能不同凡响。处理时，把当前处理的行存储在临时缓冲区中，称为“模式空间”（pattern space），接着用 sed 命令处理缓冲区中的内容，处理完成后，把缓冲区的内容送往屏幕。接着处理下一行，这样不断重复，直到文件末尾。文件内容并没有改变，除非你使用重定向存储输出。Sed 主要用来自动编辑一个或多个文件；简化对文件的反复操作；编写转换程序等。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/sed">http://man.linuxde.net/sed</a></p>
+</blockquote>
+<p>示例：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"># 替换文本中的字符串
+sed &#39;s&#x2F;book&#x2F;books&#x2F;&#39; file
+
+# -n 选项 和 p 命令 一起使用表示只打印那些发生替换的行
+sed -n &#39;s&#x2F;test&#x2F;TEST&#x2F;p&#39; file
+
+# 直接编辑文件选项 -i ，会匹配 file 文件中每一行的第一个 book 替换为 books
+sed -i &#39;s&#x2F;book&#x2F;books&#x2F;g&#39; file
+
+# 使用后缀 &#x2F;g 标记会替换每一行中的所有匹配
+sed &#39;s&#x2F;book&#x2F;books&#x2F;g&#39; file
+
+# 删除空白行
+sed &#39;&#x2F;^$&#x2F;d&#39; file
+
+# 删除文件的第2行
+sed &#39;2d&#39; file
+
+# 删除文件的第2行到末尾所有行
+sed &#39;2,$d&#39; file
+
+# 删除文件最后一行
+sed &#39;$d&#39; file
+
+# 删除文件中所有开头是test的行
+sed &#39;&#x2F;^test&#x2F;&#39;d file</code></pre>
+
+<h3 id="2-7-vi"><a href="#2-7-vi" class="headerlink" title="2.7. vi"></a>2.7. vi</h3><blockquote>
+<p>vi 命令是 UNIX 操作系统和类 UNIX 操作系统中最通用的全屏幕纯文本编辑器。Linux 中的 vi 编辑器叫 vim，它是 vi 的增强版（vi Improved），与 vi 编辑器完全兼容，而且实现了很多增强功能。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/vi">http://man.linuxde.net/vi</a></p>
+<p>引申阅读：<a target="_blank" rel="noopener" href="https://github.com/dunwu/OS/blob/master/docs/vim.md">Vim 入门指南</a></p>
+</blockquote>
+<h3 id="2-8-grep"><a href="#2-8-grep" class="headerlink" title="2.8. grep"></a>2.8. grep</h3><blockquote>
+<p>grep（global search regular expression(RE) and print out the line，全面搜索正则表达式并把行打印出来）是一种强大的文本搜索工具，它能使用正则表达式搜索文本，并把匹配的行打印出来。</p>
+<p>参考：<a target="_blank" rel="noopener" href="http://man.linuxde.net/grep">http://man.linuxde.net/grep</a></p>
+</blockquote>
+<p>示例：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"># 在多级目录中对文本递归搜索(程序员搜代码的最爱）:
+$ grep &quot;class&quot; . -R -n
+
+# 忽略匹配样式中的字符大小写
+$ echo &quot;hello world&quot; | grep -i &quot;HELLO&quot;
+
+# 匹配多个模式:
+$ grep -e &quot;class&quot; -e &quot;vitural&quot; file
+
+# 只在目录中所有的.php和.html文件中递归搜索字符&quot;main()&quot;
+$ grep &quot;main()&quot; . -r --include *.&#123;php,html&#125;
+
+# 在搜索结果中排除所有README文件
+$ grep &quot;main()&quot; . -r --exclude &quot;README&quot;
+
+# 在搜索结果中排除filelist文件列表里的文件
+$ grep &quot;main()&quot; . -r --exclude-from filelist</code></pre>
+
+<h2 id="3-参考资料"><a href="#3-参考资料" class="headerlink" title="3. 参考资料"></a>3. 参考资料</h2><ul>
+<li><a target="_blank" rel="noopener" href="http://man.linuxde.net/">Linux 命令大全</a></li>
+</ul>
+
+      </div>
+      
+      
+      
+    </div>
+
+    
+    
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2022 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">duzhuo</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: '32px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":true,"envId":"https://twikoo.saint1337.top/","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>

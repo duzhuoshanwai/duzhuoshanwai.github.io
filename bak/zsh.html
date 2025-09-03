@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-duzhuo-32%C3%9732.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-duzhuo-16%C3%9716.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.saint1337.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.23.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"fold":{"enable":true,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true,"trigger":"auto"}}</script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/config.min.js" defer></script>
+
+    <meta name="description" content="oh-my-zsh 应用1. Zsh 简介1.1. Zsh 是什么使用 Linux 的人都知道：*Shell_ 是一个用 C 语言编写的程序,它是用户使用 Linux 的桥梁。Shell 既是一种命令语言,又是一种程序设计语言。 Shell 的类型有很多种，linux 下默认的是 bash，虽然 bash 的功能已经很强大，但对于以懒惰为美德的程序员来说，bash 的提示功能不够强大，界面也不够炫">
+<meta property="og:type" content="website">
+<meta property="og:title" content="oh-my-zsh 应用">
+<meta property="og:url" content="https://blog.saint1337.top/bak/zsh.html">
+<meta property="og:site_name" content="duzhuo&#39;s-blog">
+<meta property="og:description" content="oh-my-zsh 应用1. Zsh 简介1.1. Zsh 是什么使用 Linux 的人都知道：*Shell_ 是一个用 C 语言编写的程序,它是用户使用 Linux 的桥梁。Shell 既是一种命令语言,又是一种程序设计语言。 Shell 的类型有很多种，linux 下默认的是 bash，虽然 bash 的功能已经很强大，但对于以懒惰为美德的程序员来说，bash 的提示功能不够强大，界面也不够炫">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cloud.githubusercontent.com/assets/2618447/6316862/70f58fb6-ba03-11e4-82c9-c083bf9a6574.png">
+<meta property="article:published_time" content="2022-02-20T07:09:06.000Z">
+<meta property="article:modified_time" content="2025-09-03T15:19:27.671Z">
+<meta property="article:author" content="duzhuo">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="oh-my-zsh">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cloud.githubusercontent.com/assets/2618447/6316862/70f58fb6-ba03-11e4-82c9-c083bf9a6574.png">
+
+
+<link rel="canonical" href="https://blog.saint1337.top/bak/zsh">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":true,"permalink":"https://blog.saint1337.top/bak/zsh.html","path":"bak/zsh.html","title":"oh-my-zsh 应用"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>oh-my-zsh 应用 | duzhuo's-blog
+</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/components/prism-core.min.js" integrity="sha256-bKrTFt2ZHyT4AE4LnBnAVctYKf9l6XP77kBvltgbjn4=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha256-9cmf7tcLdXpKsPi/2AWE93PbZpTp4M4tqzFk+lWomjU=" crossorigin="anonymous" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/utils.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/motion.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/sidebar.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/next-boot.min.js" defer></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/third-party/search/local-search.min.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">duzhuo's-blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">学无止境</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#oh-my-zsh-%E5%BA%94%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">oh-my-zsh 应用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Zsh-%E7%AE%80%E4%BB%8B"><span class="nav-number">1.1.</span> <span class="nav-text">1. Zsh 简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-Zsh-%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1. Zsh 是什么</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Zsh-%E5%AE%89%E8%A3%85"><span class="nav-number">1.2.</span> <span class="nav-text">2. Zsh 安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E7%8E%AF%E5%A2%83%E8%A6%81%E6%B1%82"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1. 环境要求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E5%AE%89%E8%A3%85-zsh"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2. 安装 zsh</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E5%AE%89%E8%A3%85-oh-my-zsh"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3. 安装 oh-my-zsh</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-%E9%85%8D%E7%BD%AE-oh-my-zsh"><span class="nav-number">1.2.4.</span> <span class="nav-text">2.4. 配置 oh-my-zsh</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-1-%E6%8F%92%E4%BB%B6"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">2.4.1. 插件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-2-%E4%B8%BB%E9%A2%98"><span class="nav-number">1.2.4.2.</span> <span class="nav-text">2.4.2. 主题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="nav-number">1.3.</span> <span class="nav-text">3. 快捷键</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">1.4.</span> <span class="nav-text">4. 参考资料</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">duzhuo</p>
+  <div class="site-description" itemprop="description">记录，分享一些我觉得好玩的内容。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/duzhuoshanwai" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;duzhuoshanwai" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner page posts-expand">
+
+
+    
+    
+    
+    <div class="post-block" lang="zh-CN"><header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">oh-my-zsh 应用
+</h1>
+
+<div class="post-meta-container">
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <h1 id="oh-my-zsh-应用"><a href="#oh-my-zsh-应用" class="headerlink" title="oh-my-zsh 应用"></a>oh-my-zsh 应用</h1><h2 id="1-Zsh-简介"><a href="#1-Zsh-简介" class="headerlink" title="1. Zsh 简介"></a>1. Zsh 简介</h2><h3 id="1-1-Zsh-是什么"><a href="#1-1-Zsh-是什么" class="headerlink" title="1.1. Zsh 是什么"></a>1.1. Zsh 是什么</h3><p>使用 Linux 的人都知道：*<strong>Shell_ 是一个用 C 语言编写的程序,它是用户使用 Linux 的桥梁。<em>Shell</em> 既是一种命令语言,又是一种程序设计语言</strong>。</p>
+<p>Shell 的类型有很多种，linux 下默认的是 bash，虽然 bash 的功能已经很强大，但对于以懒惰为美德的程序员来说，bash 的提示功能不够强大，界面也不够炫，并非理想工具。</p>
+<p><a target="_blank" rel="noopener" href="http://www.zsh.org/"><strong>Zsh</strong></a> 也是一种 Shell（据传说 99% 的 Bash 操作 和 Zsh 是相同的），它的功能极其强大，只是配置过于复杂，起初只有极客才在用。后来，出现了一个名叫 <a target="_blank" rel="noopener" href="https://github.com/robbyrussell/oh-my-zsh"><strong>oh-my-zsh</strong></a> 的开源项目，使用 zsh 就变得十分简易了。</p>
+<h2 id="2-Zsh-安装"><a href="#2-Zsh-安装" class="headerlink" title="2. Zsh 安装"></a>2. Zsh 安装</h2><h3 id="2-1-环境要求"><a href="#2-1-环境要求" class="headerlink" title="2.1. 环境要求"></a>2.1. 环境要求</h3><ul>
+<li>CentOS 6.7 64 bit</li>
+<li>root 用户</li>
+</ul>
+<h3 id="2-2-安装-zsh"><a href="#2-2-安装-zsh" class="headerlink" title="2.2. 安装 zsh"></a>2.2. 安装 zsh</h3><ul>
+<li>先看下你的 CentOS 支持哪些 shell：<code>cat /etc/shells</code>，正常结果应该是这样的：</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">&#x2F;bin&#x2F;sh
+&#x2F;bin&#x2F;bash
+&#x2F;sbin&#x2F;nologin
+&#x2F;bin&#x2F;dash
+&#x2F;bin&#x2F;tcsh
+&#x2F;bin&#x2F;csh</code></pre>
+
+<p>如果已经有 zsh ，那么我们就不必安装了。</p>
+<ul>
+<li>CentOS 安装：<code>sudo yum install -y zsh</code></li>
+<li>Ubuntu 安装：<code>sudo apt-get install -y zsh</code></li>
+<li>检查系统的 shell：<code>cat /etc/shells</code>，你会发现多了一个：<code>/bin/zsh</code></li>
+</ul>
+<h3 id="2-3-安装-oh-my-zsh"><a href="#2-3-安装-oh-my-zsh" class="headerlink" title="2.3. 安装 oh-my-zsh"></a>2.3. 安装 oh-my-zsh</h3><p>使用 <a target="_blank" rel="noopener" href="http://www.zsh.org/"><strong>Zsh</strong></a>，怎么能离开灵魂伴侣 <a target="_blank" rel="noopener" href="https://github.com/robbyrussell/oh-my-zsh"><strong>oh-my-zsh</strong></a>？</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"># 安装 oh-my-zsh
+wget https:&#x2F;&#x2F;github.com&#x2F;robbyrussell&#x2F;oh-my-zsh&#x2F;raw&#x2F;master&#x2F;tools&#x2F;install.sh -O - | sh</code></pre>
+
+<h3 id="2-4-配置-oh-my-zsh"><a href="#2-4-配置-oh-my-zsh" class="headerlink" title="2.4. 配置 oh-my-zsh"></a>2.4. 配置 oh-my-zsh</h3><h4 id="2-4-1-插件"><a href="#2-4-1-插件" class="headerlink" title="2.4.1. 插件"></a>2.4.1. 插件</h4><blockquote>
+<p>oh-my-zsh 插件太多，不一一列举，请参考：<a target="_blank" rel="noopener" href="https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins">oh-my-zsh 插件列表</a></p>
+</blockquote>
+<ul>
+<li>启用 oh-my-zsh 中自带的插件。</li>
+<li>查看 oh-my-zsh 插件数：<code>ls -l /root/.oh-my-zsh/plugins |grep &quot;^d&quot;|wc -l</code></li>
+<li>编辑配置文件：<code>vim /root/.zshrc</code></li>
+<li>插件推荐：<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/zsh-users/zsh-autosuggestions"><code>zsh-autosuggestions</code></a><ul>
+<li>这个插件会对历史命令一些补全，类似 fish 终端</li>
+<li>安装，复制该命令：<code>git clone https://github.com/zsh-users/zsh-autosuggestions $&#123;ZSH_CUSTOM:-\~/.oh-my-zsh/custom&#125;/plugins/zsh-autosuggestions</code> - 编辑：<code>vim \~/.zshrc</code>，找到这一行，后括号里面的后面添加：<code>plugins=( 前面的一些插件名称，换行，加上：zsh-autosuggestions)</code> - 刷新下配置：<code>source \~/.zshrc</code></li>
+</ul>
+</li>
+<li>extract<ul>
+<li>功能强大的解压插件，所有类型的文件解压一个命令 x 全搞定，再也不需要去记 tar 后面到底是哪几个参数了。</li>
+</ul>
+</li>
+<li>z<ul>
+<li>强大的目录自动跳转命令，会记忆你曾经进入过的目录，用模糊匹配快速进入你想要的目录。</li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/zsh-users/zsh-syntax-highlighting"><code>zsh-syntax-highlighting</code></a><ul>
+<li>这个插件会对终端命令高亮显示,比如正确的拼写会是绿色标识,否则是红色,另外对于一些 shell 输出语句也会有高亮显示,算是不错的辅助插件</li>
+<li>安装，复制该命令：<code>git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $&#123;ZSH_CUSTOM:-\~/.oh-my-zsh/custom&#125;/plugins/zsh-syntax-highlighting</code></li>
+<li>编辑：<code>vim \~/.zshrc</code>，找到这一行，后括号里面的后面添加：<code>plugins=( 前面的一些插件名称，换行，加上：zsh-syntax-highlighting)</code> - 刷新下配置：<code>source \~/.zshrc</code></li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/mfaerevaag/wd"><code>wd</code></a><ul>
+<li>简单地讲就是给指定目录映射一个全局的名字，以后方便直接跳转到这个目录，比如：</li>
+<li>编辑配置文件，添加上 wd 的名字：<code>vim /root/.zshrc</code></li>
+<li>我常去目录：<strong>&#x2F;opt&#x2F;setups</strong>，每次进入该目录下都需要这样：<code>cd /opt/setups</code></li>
+<li>现在用 wd 给他映射一个快捷方式：<code>cd /opt/setups ; wd add setups</code></li>
+<li>以后我在任何目录下只要运行：<code>wd setups</code> 就自动跑到 &#x2F;opt&#x2F;setups 目录下了</li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/wting/autojump"><code>autojump</code></a><ul>
+<li>这个插件会记录你常去的那些目录，然后做一下权重记录，你可以用这个命令看到你的习惯：<code>j --stat</code>，如果这个里面有你的记录，那你就只要敲最后一个文件夹名字即可进入，比如我个人习惯的 program：<code>j program</code>，就可以直接到：<code>/usr/program</code></li>
+<li>插件下载：<code>wget https://github.com/downloads/wting/autojump/autojump_v21.1.2.tar.gz</code></li>
+<li>解压：<code>tar zxvf autojump_v21.1.2.tar.gz</code></li>
+<li>进入解压后目录并安装：<code>cd autojump_v21.1.2/ ; ./install.sh</code></li>
+<li>再执行下这个：<code>source /etc/profile.d/autojump.sh</code></li>
+<li>编辑配置文件，添加上 autojump 的名字：<code>vim /root/.zshrc</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-4-2-主题"><a href="#2-4-2-主题" class="headerlink" title="2.4.2. 主题"></a>2.4.2. 主题</h4><blockquote>
+<p>oh-my-zsh 主题太多，不一一列举，请参考：<a target="_blank" rel="noopener" href="https://github.com/robbyrussell/oh-my-zsh/wiki/Themes">oh-my-zsh 主题列表</a></p>
+</blockquote>
+<ul>
+<li>查看 oh-my-zsh 主题数：<code>ls -l /root/.oh-my-zsh/themes |grep &quot;^-&quot;|wc -l</code></li>
+<li>个人比较推荐的是（排名有先后）：<ul>
+<li><code>ys</code></li>
+<li><code>agnoster</code></li>
+<li><code>avit</code></li>
+<li><code>blinks</code></li>
+</ul>
+</li>
+<li>编辑配置文件：<code>vim /root/.zshrc</code></li>
+<li>配置好新主题需要重新连接 shell 才能看到效果</li>
+</ul>
+<p>zsh 效果如下：</p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://cloud.githubusercontent.com/assets/2618447/6316862/70f58fb6-ba03-11e4-82c9-c083bf9a6574.png" alt="img"></p>
+<h2 id="3-快捷键"><a href="#3-快捷键" class="headerlink" title="3. 快捷键"></a>3. 快捷键</h2><ul>
+<li>呃，这个其实可以不用讲的，你自己用的时候你自己会发现的，各种便捷，特别是用 Tab 多的人一定会有各种惊喜的。</li>
+<li>使用 ctrl-r 来搜索命令历史记录。按完此快捷键后，可以输入关键命令词语，如果历史记录有含有此词语会显示出来。</li>
+<li>命令别名： - 在命令行中输入 alias 可以查看已经有的命令别名 - 自己新增一些别名，编辑文件：<code>vim \~/.zshrc</code>，在文件加入下面格式的命令，比如以下是网友提供的一些思路：</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">alias cls&#x3D;&#39;clear&#39;
+alias ll&#x3D;&#39;ls -l&#39;
+alias la&#x3D;&#39;ls -a&#39;
+alias grep&#x3D;&quot;grep --color&#x3D;auto&quot;
+alias -s html&#x3D;&#39;vim&#39;   # 在命令行直接输入后缀为 html 的文件名，会在 Vim 中打开
+alias -s rb&#x3D;&#39;vim&#39;     # 在命令行直接输入 ruby 文件，会在 Vim 中打开
+alias -s py&#x3D;&#39;vim&#39;      # 在命令行直接输入 python 文件，会用 vim 中打开，以下类似
+alias -s js&#x3D;&#39;vim&#39;
+alias -s c&#x3D;&#39;vim&#39;
+alias -s java&#x3D;&#39;vim&#39;
+alias -s txt&#x3D;&#39;vim&#39;
+alias -s gz&#x3D;&#39;tar -xzvf&#39; # 在命令行直接输入后缀为 gz 的文件名，会自动解压打开
+alias -s tgz&#x3D;&#39;tar -xzvf&#39;
+alias -s zip&#x3D;&#39;unzip&#39;
+alias -s bz2&#x3D;&#39;tar -xjvf&#39;</code></pre>
+
+<h2 id="4-参考资料"><a href="#4-参考资料" class="headerlink" title="4. 参考资料"></a>4. 参考资料</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/robbyrussell/oh-my-zsh">oh-my-zsh Github</a></li>
+</ul>
+
+      </div>
+      
+      
+      
+    </div>
+
+    
+    
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2022 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">duzhuo</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: '32px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":true,"envId":"https://twikoo.saint1337.top/","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>
