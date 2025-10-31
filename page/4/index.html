@@ -173,7 +173,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-count">54</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -201,6 +201,194 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2024/02/02/AdGuardHome-in-OpenWRT/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="duzhuo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="duzhuo's-blog">
+      <meta itemprop="description" content="记录，分享一些我觉得好玩的内容。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | duzhuo's-blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/02/02/AdGuardHome-in-OpenWRT/" class="post-title-link" itemprop="url">在OpenWRT上使用AdGuard Home的DNS服务代替dnsmasq</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-02-02 10:52:35" itemprop="dateCreated datePublished" datetime="2024-02-02T10:52:35+08:00">2024-02-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-02-23 20:16:40" itemprop="dateModified" datetime="2024-02-23T20:16:40+08:00">2024-02-23</time>
+    </span>
+
+  
+    <span id="/2024/02/02/AdGuardHome-in-OpenWRT/" class="post-meta-item twikoo_visitors" data-flag-title="在OpenWRT上使用AdGuard Home的DNS服务代替dnsmasq" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="当前环境"><a href="#当前环境" class="headerlink" title="当前环境"></a>当前环境</h2><p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://cdn.jsdelivr.net/gh/duzhuoshanwai/Image-Hosting@master/img/Screenshot_20240202_112818.png"></p>
+<h2 id="Step1-从仓库下载二进制文件并解压"><a href="#Step1-从仓库下载二进制文件并解压" class="headerlink" title="Step1 从仓库下载二进制文件并解压"></a>Step1 从仓库下载二进制文件并解压</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">cd &#x2F;usr&#x2F;bin
+## 没有curl可以使用opkg安装或者用wget替代
+curl -O https:&#x2F;&#x2F;github.com&#x2F;AdguardTeam&#x2F;AdGuardHome&#x2F;releases&#x2F;download&#x2F;v0.107.42&#x2F;AdGuardHome_linux_arm64.tar.gz
+tar -zxvf .&#x2F;AdGuardHome_linux_arm64.tar.gz
+rm -rf .&#x2F;AdGuardHome_linux_arm64.tar.gz
+cd .&#x2F;AdGuardHome</code></pre>
+
+<h2 id="Step2-启动AdGuardHome并进入后台"><a href="#Step2-启动AdGuardHome并进入后台" class="headerlink" title="Step2 启动AdGuardHome并进入后台"></a>Step2 启动AdGuardHome并进入后台</h2><pre class="language-bash" data-language="bash"><code class="language-bash">.&#x2F;AdGuardHome</code></pre>
+
+<p>出现类似下面的提示就代表AdGuardHome已经启动</p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://cdn.jsdelivr.net/gh/duzhuoshanwai/Image-Hosting@master/img/Screenshot_20240202_152653.png"></p>
+<p>这样大概就是成功了，现在我们的AdGuardHome还不能开机运行，需要配置守护进程。</p>
+<h2 id="Step3-配置开机启动"><a href="#Step3-配置开机启动" class="headerlink" title="Step3 配置开机启动"></a>Step3 配置开机启动</h2>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/02/02/AdGuardHome-in-OpenWRT/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2024/01/20/%E6%90%AC%E5%AE%B6%E6%95%B4%E7%90%86%E7%BD%91%E7%BB%9C-%E5%81%9C%E6%9B%B4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="duzhuo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="duzhuo's-blog">
+      <meta itemprop="description" content="记录，分享一些我觉得好玩的内容。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | duzhuo's-blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/01/20/%E6%90%AC%E5%AE%B6%E6%95%B4%E7%90%86%E7%BD%91%E7%BB%9C-%E5%81%9C%E6%9B%B4/" class="post-title-link" itemprop="url">搬家整理网络--停更</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-01-20 09:48:41" itemprop="dateCreated datePublished" datetime="2024-01-20T09:48:41+08:00">2024-01-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-02-23 20:16:40" itemprop="dateModified" datetime="2024-02-23T20:16:40+08:00">2024-02-23</time>
+    </span>
+
+  
+    <span id="/2024/01/20/%E6%90%AC%E5%AE%B6%E6%95%B4%E7%90%86%E7%BD%91%E7%BB%9C-%E5%81%9C%E6%9B%B4/" class="post-meta-item twikoo_visitors" data-flag-title="搬家整理网络--停更" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>如题</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -388,7 +576,7 @@ root@armbian:&#x2F;etc&#x2F;wireguard# systemctl start wg-quick@wg0</code></pre>
 <li><a target="_blank" rel="noopener" href="http://singlelogin.re/">http://singlelogin.re/</a> </li>
 <li><a target="_blank" rel="noopener" href="http://zlibrary-global.se/">http://zlibrary-global.se/</a></li>
 <li><a target="_blank" rel="noopener" href="http://zh.loginzlib2vrak5zzpcocc3ouizykn6k5qecgj2tzlnab5wcbqhembyd.onion/">http://zh.loginzlib2vrak5zzpcocc3ouizykn6k5qecgj2tzlnab5wcbqhembyd.onion/</a> 登录后跳转</li>
-<li><a href="mailto:&#x62;&#108;&#x61;&#x63;&#x6b;&#98;&#111;&#x78;&#x40;&#x7a;&#108;&#x69;&#x62;&#46;&#115;&#101;">blackbox@zlib.se</a> 发送邮件自动返回访问地址 <strong>(测试被Gmail标记为垃圾邮件)</strong></li>
+<li><a href="mailto:&#98;&#108;&#x61;&#x63;&#x6b;&#98;&#111;&#120;&#64;&#122;&#108;&#x69;&#x62;&#46;&#x73;&#101;">blackbox@zlib.se</a> 发送邮件自动返回访问地址 <strong>(测试被Gmail标记为垃圾邮件)</strong></li>
 </ul>
           <!--noindex-->
             <div class="post-button">
@@ -1005,241 +1193,6 @@ services:
 <p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202306011057458.png"></p>
 <p>Peace. 🥀</p>
 
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2023/04/20/wsl-fix-systemd-issue/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="duzhuo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="duzhuo's-blog">
-      <meta itemprop="description" content="记录，分享一些我觉得好玩的内容。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | duzhuo's-blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/04/20/wsl-fix-systemd-issue/" class="post-title-link" itemprop="url">System has not been booted with systemd as init system (PID 1).</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-04-20 15:09:06" itemprop="dateCreated datePublished" datetime="2023-04-20T15:09:06+08:00">2023-04-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-23 20:16:40" itemprop="dateModified" datetime="2024-02-23T20:16:40+08:00">2024-02-23</time>
-    </span>
-
-  
-    <span id="/2023/04/20/wsl-fix-systemd-issue/" class="post-meta-item twikoo_visitors" data-flag-title="System has not been booted with systemd as init system (PID 1)." title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span id="twikoo_visitors"></span>
-    </span>
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="升级-wsl"><a href="#升级-wsl" class="headerlink" title="升级 wsl"></a>升级 wsl</h2><ul>
-<li><strong>注意开启 windows update</strong></li>
-<li><code>wsl --update</code></li>
-<li><code>wsl --version</code><pre class="line-numbers language-none"><code class="language-none">WSL version: 1.1.3.0
-Kernel version: 5.15.90.1
-WSLg version: 1.0.49
-MSRDC version: 1.2.3770
-Direct3D version: 1.608.2-61064218
-DXCore version: 10.0.25131.1002-220531-1700.rs-onecore-base2-hyp
-Windows version: 10.0.22621.525</code></pre></li>
-</ul>
-<h2 id="开启-Systemd-support"><a href="#开启-Systemd-support" class="headerlink" title="开启 Systemd support"></a>开启 Systemd support</h2><ul>
-<li><p><code>sudo nano /etc/wsl.conf</code></p>
-  <pre class="language-none"><code class="language-none">[boot]
-systemd&#x3D;true</code></pre>
-</li>
-<li><p><code>^O</code> + <code>^X</code></p>
-</li>
-<li><p><code>wsl --shutdown</code></p>
-</li>
-</ul>
-<h2 id="Enjoy"><a href="#Enjoy" class="headerlink" title="Enjoy !"></a>Enjoy !</h2>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2023/04/13/wsl-debian-proxy/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="duzhuo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="duzhuo's-blog">
-      <meta itemprop="description" content="记录，分享一些我觉得好玩的内容。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | duzhuo's-blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/04/13/wsl-debian-proxy/" class="post-title-link" itemprop="url">wsl2+宿主机v2rayN 实现命令行proxy</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-04-13 15:09:06" itemprop="dateCreated datePublished" datetime="2023-04-13T15:09:06+08:00">2023-04-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-23 20:16:40" itemprop="dateModified" datetime="2024-02-23T20:16:40+08:00">2024-02-23</time>
-    </span>
-
-  
-    <span id="/2023/04/13/wsl-debian-proxy/" class="post-meta-item twikoo_visitors" data-flag-title="wsl2+宿主机v2rayN 实现命令行proxy" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span id="twikoo_visitors"></span>
-    </span>
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul>
-<li>v2rayn version 5.39</li>
-<li>wsl2 + Debian</li>
-</ul>
-<h2 id="v2rayN-设置局域网-socks5-http-proxy"><a href="#v2rayN-设置局域网-socks5-http-proxy" class="headerlink" title="v2rayN 设置局域网 socks5 &#x2F; http proxy"></a>v2rayN 设置局域网 socks5 &#x2F; http proxy</h2><ul>
-<li>core:基础设置中勾选允许来自局域网的连接和开启 Mux 多路复用 ( 推荐设置认证密码 )</li>
-<li>在选择节点窗口下方查看共享给局域网的端口</li>
-</ul>
-<h2 id="查看宿主机的-ip-和-wsl-的-ip"><a href="#查看宿主机的-ip-和-wsl-的-ip" class="headerlink" title="查看宿主机的 ip 和 wsl 的 ip"></a>查看宿主机的 ip 和 wsl 的 ip</h2><ul>
-<li><p>获取宿主机 ip <code>cat /etc/resolv.conf</code></p>
-</li>
-<li><p>同时添加代理到 <code>/etc/environment</code> <code>~/.profile</code></p>
-<p>也可以添加到 <code>~/.bashrc</code> <code>~/.zshrc</code></p>
-</li>
-</ul>
-<pre class="line-numbers language-none"><code class="language-none">### http代理
-
-export windows_host&#x3D;&#96;cat &#x2F;etc&#x2F;resolv.conf|grep nameserver|awk &#39;&#123;print $2&#125;&#39;&#96;
-export ALL_PROXY&#x3D;socks5:&#x2F;&#x2F;&#123;username&#125;:&#123;passwd&#125;@$windows_host:&#123;port&#125;
-export HTTP_PROXY&#x3D;$ALL_PROXY
-export http_proxy&#x3D;$ALL_PROXY
-export HTTPS_PROXY&#x3D;$ALL_PROXY
-export https_proxy&#x3D;$ALL_PROXY
-export no_proxy&#x3D;127.0.0.1,.devops.com,localhost,local,.local,172.28.0.0&#x2F;16
-
-if [ &quot;&#96;git config --global --get proxy.https&#96;&quot; !&#x3D; &quot;socks5:&#x2F;&#x2F;&#123;username&#125;:&#123;passwd&#125;@$windows_host:&#123;port&#125;&quot; ]; then
-            git config --global proxy.https socks5:&#x2F;&#x2F;&#123;username&#125;:&#123;passwd&#125;@$windows_host:&#123;port&#125;
-fi
-</code></pre>
-
-<ul>
-<li><code>source /etc/environment&amp;&amp;source ~/.profile</code></li>
-</ul>
-<h2 id="测试连接"><a href="#测试连接" class="headerlink" title="测试连接"></a>测试连接</h2><ul>
-<li><p><code>wget google.com</code></p>
-</li>
-<li><p><code>curl google.com</code></p>
-</li>
-<li><p>有返回值说明正常</p>
-</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/04/13/wsl-debian-proxy/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
       
     </div>
 

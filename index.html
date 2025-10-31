@@ -173,7 +173,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-count">54</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -201,6 +201,185 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2025/10/31/%E4%BD%BF%E7%94%A8-NetworkManager-%E5%88%9B%E5%BB%BA%E6%A1%A5%E6%8E%A5%E7%BD%91%E5%8D%A1%E5%B9%B6%E4%B8%BA-QEMU-%E6%A8%A1%E6%8B%9F%E5%99%A8%E6%8F%90%E4%BE%9B%E7%BD%91%E7%BB%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="duzhuo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="duzhuo's-blog">
+      <meta itemprop="description" content="记录，分享一些我觉得好玩的内容。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | duzhuo's-blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/10/31/%E4%BD%BF%E7%94%A8-NetworkManager-%E5%88%9B%E5%BB%BA%E6%A1%A5%E6%8E%A5%E7%BD%91%E5%8D%A1%E5%B9%B6%E4%B8%BA-QEMU-%E6%A8%A1%E6%8B%9F%E5%99%A8%E6%8F%90%E4%BE%9B%E7%BD%91%E7%BB%9C/" class="post-title-link" itemprop="url">使用 NetworkManager 创建桥接网卡并为 QEMU 模拟器提供网络</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-10-31 13:26:33 / 修改时间：17:14:10" itemprop="dateCreated datePublished" datetime="2025-10-31T13:26:33+08:00">2025-10-31</time>
+    </span>
+
+  
+    <span id="/2025/10/31/%E4%BD%BF%E7%94%A8-NetworkManager-%E5%88%9B%E5%BB%BA%E6%A1%A5%E6%8E%A5%E7%BD%91%E5%8D%A1%E5%B9%B6%E4%B8%BA-QEMU-%E6%A8%A1%E6%8B%9F%E5%99%A8%E6%8F%90%E4%BE%9B%E7%BD%91%E7%BB%9C/" class="post-meta-item twikoo_visitors" data-flag-title="使用 NetworkManager 创建桥接网卡并为 QEMU 模拟器提供网络" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>桥接器</strong>（network bridge），又称<strong>网桥</strong>，一种网络设备，负责网络桥接（network bridging）。桥接器将网络的多个网段在数据链路层（OSI模型第2层）连接起来（即桥接）。</p>
+<p>网桥本质上就是一个<strong>二层（Layer 2）交换机</strong>的虚拟实现，根据 <strong>MAC 地址</strong> 来转发帧。它不会修改 IP 包，也不关心 IP 层的东西。</p>
+<p>当你把多个网络接口（如物理网卡、虚拟 tap 接口等）“加入”到同一个 bridge 中时，它们就像<em><strong>都插在同一个交换机上</strong></em>。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/10/31/%E4%BD%BF%E7%94%A8-NetworkManager-%E5%88%9B%E5%BB%BA%E6%A1%A5%E6%8E%A5%E7%BD%91%E5%8D%A1%E5%B9%B6%E4%B8%BA-QEMU-%E6%A8%A1%E6%8B%9F%E5%99%A8%E6%8F%90%E4%BE%9B%E7%BD%91%E7%BB%9C/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2025/10/17/%E4%BD%BF%E7%94%A8-libguestfs-%E6%9B%B4%E6%94%B9-VM-%E7%A1%AC%E7%9B%98%E9%95%9C%E5%83%8F%E5%AF%86%E7%A0%81%E5%92%8C%E6%89%A9%E5%AE%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="duzhuo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="duzhuo's-blog">
+      <meta itemprop="description" content="记录，分享一些我觉得好玩的内容。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | duzhuo's-blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/10/17/%E4%BD%BF%E7%94%A8-libguestfs-%E6%9B%B4%E6%94%B9-VM-%E7%A1%AC%E7%9B%98%E9%95%9C%E5%83%8F%E5%AF%86%E7%A0%81%E5%92%8C%E6%89%A9%E5%AE%B9/" class="post-title-link" itemprop="url">使用 libguestfs 和 qemu 工具更改 VM 磁盘镜像密码和扩容</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-10-17 16:28:01" itemprop="dateCreated datePublished" datetime="2025-10-17T16:28:01+08:00">2025-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-10-21 10:59:54" itemprop="dateModified" datetime="2025-10-21T10:59:54+08:00">2025-10-21</time>
+    </span>
+
+  
+    <span id="/2025/10/17/%E4%BD%BF%E7%94%A8-libguestfs-%E6%9B%B4%E6%94%B9-VM-%E7%A1%AC%E7%9B%98%E9%95%9C%E5%83%8F%E5%AF%86%E7%A0%81%E5%92%8C%E6%89%A9%E5%AE%B9/" class="post-meta-item twikoo_visitors" data-flag-title="使用 libguestfs 和 qemu 工具更改 VM 磁盘镜像密码和扩容" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>libguestfs</strong> 是一个 C 语言库和一套用于访问和修改虚拟机（VM）磁盘镜像的工具集。它能让管理员能够在不启动虚拟机的情况下直接操作磁盘内容，极大简化了虚拟化环境的管理工作。</p>
+<p>本文以 <code>Rocky-9-GenericCloud-Base-9.6-20250531.0.x86_64.qcow2</code> 这个镜像为例，简单演示添加用户、修改密码、添加密钥、修改硬盘大小等常用功能。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/10/17/%E4%BD%BF%E7%94%A8-libguestfs-%E6%9B%B4%E6%94%B9-VM-%E7%A1%AC%E7%9B%98%E9%95%9C%E5%83%8F%E5%AF%86%E7%A0%81%E5%92%8C%E6%89%A9%E5%AE%B9/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -896,182 +1075,6 @@ Template(strings&#x3D;(&#39;Hello,&#39;, &#39;&#39;), interpolations&#x3D;(Inter
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2025/01/10/%E4%BD%BF%E7%94%A8column-%E5%B7%A5%E5%85%B7%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%96%87%E6%9C%AC%E8%BE%93%E5%87%BA/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2024/12/31/%E5%86%8D%E8%A7%812024%EF%BC%8C%E4%BD%A0%E5%A5%BD2025/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="duzhuo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="duzhuo's-blog">
-      <meta itemprop="description" content="记录，分享一些我觉得好玩的内容。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | duzhuo's-blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/12/31/%E5%86%8D%E8%A7%812024%EF%BC%8C%E4%BD%A0%E5%A5%BD2025/" class="post-title-link" itemprop="url">再见2024，你好2025</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2024-12-31 10:53:14 / 修改时间：11:15:34" itemprop="dateCreated datePublished" datetime="2024-12-31T10:53:14+08:00">2024-12-31</time>
-    </span>
-
-  
-    <span id="/2024/12/31/%E5%86%8D%E8%A7%812024%EF%BC%8C%E4%BD%A0%E5%A5%BD2025/" class="post-meta-item twikoo_visitors" data-flag-title="再见2024，你好2025" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span id="twikoo_visitors"></span>
-    </span>
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>最期待：天国：拯救2 <a target="_blank" rel="noopener" href="https://www.kingdomcomerpg.com/">https://www.kingdomcomerpg.com/</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2024/12/01/%E6%B2%A1%E6%9C%89%E9%93%BE%E6%8E%A5%E7%9A%84%E4%BA%92%E8%81%94%E7%BD%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="duzhuo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="duzhuo's-blog">
-      <meta itemprop="description" content="记录，分享一些我觉得好玩的内容。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | duzhuo's-blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/12/01/%E6%B2%A1%E6%9C%89%E9%93%BE%E6%8E%A5%E7%9A%84%E4%BA%92%E8%81%94%E7%BD%91/" class="post-title-link" itemprop="url">没有链接的互联网</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-12-01 08:16:48" itemprop="dateCreated datePublished" datetime="2024-12-01T08:16:48+08:00">2024-12-01</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-01-11 09:16:24" itemprop="dateModified" datetime="2025-01-11T09:16:24+08:00">2025-01-11</time>
-    </span>
-
-  
-    <span id="/2024/12/01/%E6%B2%A1%E6%9C%89%E9%93%BE%E6%8E%A5%E7%9A%84%E4%BA%92%E8%81%94%E7%BD%91/" class="post-meta-item twikoo_visitors" data-flag-title="没有链接的互联网" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span id="twikoo_visitors"></span>
-    </span>
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>以下内容来自于<a target="_blank" rel="noopener" href="https://github.com/ruanyf/weekly/blob/master/docs/issue-327.md">科技爱好者周刊（第 327 期）：没有链接的互联网</a></p>
-<h2 id="没有链接的互联网"><a href="#没有链接的互联网" class="headerlink" title="没有链接的互联网"></a>没有链接的互联网</h2><p>你能想象吗，没有链接的互联网是什么样？</p>
-<p>不用想了，这正在变成现实。</p>
-<p>2017年，脸书（Facebook）出台了一项政策：只要帖子里面有（外部）链接，就会减少这个帖子的曝光。</p>
-<p>也就是说，<strong>只要你贴了链接，别人就（几乎）看不见你的帖子了</strong>。这样做是为了防止用户跳出脸书，也为了防止用户为其他网站引流。</p>
-<p>所以，你现在访问脸书，就会看到一种奇特的做法：大家发帖都没有链接，有些帖子甚至只是一句话的图片（下图），真正的链接放在帖子的置顶评论里面。</p>
-<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://cdn.beekka.com/blogimg/asset/202411/bg2024111602.webp"></p>
-<p>后来，其他的互联网平台纷纷跟进，限制链接。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/12/01/%E6%B2%A1%E6%9C%89%E9%93%BE%E6%8E%A5%E7%9A%84%E4%BA%92%E8%81%94%E7%BD%91/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
