@@ -173,7 +173,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">54</span>
+          <span class="site-state-item-count">55</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -210,7 +210,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2024/02/02/AdGuardHome-in-OpenWRT/">
+    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2024/02/23/%E5%B0%9D%E8%AF%95%E4%B8%BA%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%88%B7%E5%85%A5Armbian/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -228,7 +228,123 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/02/02/AdGuardHome-in-OpenWRT/" class="post-title-link" itemprop="url">在OpenWRT上使用AdGuard Home的DNS服务代替dnsmasq</a>
+          <a href="/2024/02/23/%E5%B0%9D%E8%AF%95%E4%B8%BA%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%88%B7%E5%85%A5Armbian/" class="post-title-link" itemprop="url">尝试为电视盒子刷入Armbian</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-02-24 09:52:06" itemprop="dateCreated datePublished" datetime="2024-02-24T09:52:06+08:00">2024-02-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-02-26 11:13:57" itemprop="dateModified" datetime="2024-02-26T11:13:57+08:00">2024-02-26</time>
+    </span>
+
+  
+    <span id="/2024/02/23/%E5%B0%9D%E8%AF%95%E4%B8%BA%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%88%B7%E5%85%A5Armbian/" class="post-meta-item twikoo_visitors" data-flag-title="尝试为电视盒子刷入Armbian" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><ul>
+<li><p>运营商的电视盒子一只 以晶晨芯片的CM311-1为例 <a target="_blank" rel="noopener" href="https://github.com/ophub/amlogic-s9xxx-armbian/blob/main/README.cn.md">查看目前可用的设备列表</a></p>
+</li>
+<li><p>双公头usb线 没有现成的可以用两根不要的线剥开对接四芯自己制作</p>
+</li>
+<li><p>一个闲置的空u盘</p>
+</li>
+<li><p>（可选)晶晨盒子短接神器 没有的话其实用镊子短接也可以</p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2024/02/24/m8dgyULcaBI5ehl.jpg"></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://download.saint1337.top/tools/%E8%BF%90%E8%90%A5%E5%95%86%E7%9B%92%E5%AD%90Armbian/">晶晨烧录工具Amlogic_USB_Burning_Tool</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/ophub/kernel/releases/tag/tools">选择合适的安卓底包用来开启adb</a>   <a target="_blank" rel="noopener" href="https://download.saint1337.top/tools/%E8%BF%90%E8%90%A5%E5%95%86%E7%9B%92%E5%AD%90Armbian/%E5%AE%89%E5%8D%93%E5%BA%95%E5%8C%85/">部分底包分流</a></p>
+</li>
+<li><p>adb工具 <a target="_blank" rel="noopener" href="https://www.xda-developers.com/install-adb-windows-macos-linux/">xda的安装教程参考</a> 或者使用开心电视助手替代 <a href>链接</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://etcher.balena.io/">balena etcher</a> 或者 <a target="_blank" rel="noopener" href="https://rufus.ie/zh/">rufus</a> 用来写入Armbian镜像到u盘</p>
+</li>
+</ul>
+<h2 id="刷入底包"><a href="#刷入底包" class="headerlink" title="刷入底包"></a>刷入底包</h2><p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2024/02/24/4ctyfg5TbmIhWl8.png" alt="Snipaste_2024-02-24_12-19-51.png"></p>
+<p>打开晶晨刷机工具，设置→导入镜像。</p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2024/02/24/MuJr4amDBENfAIq.png" alt="Snipaste_2024-02-24_12-22-46.png"></p>
+<p>点击开始后准备接入线。</p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2024/02/24/VwXUPdhJ7rEM4pG.jpg" alt="1000070790.jpg"></p>
+<p>关闭电源！！！ 插入刷机神器，双公线一头插入盒子靠近网口的那个usb口，另一头接入电脑usb口（2.0的可能好一点）。先在烧录工具上点开始，接入线，然后打开盒子上的电源开关等待烧录工具的提示即可。</p>
+<h2 id="刷入Armbian镜像到U盘"><a href="#刷入Armbian镜像到U盘" class="headerlink" title="刷入Armbian镜像到U盘"></a>刷入Armbian镜像到U盘</h2>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/02/23/%E5%B0%9D%E8%AF%95%E4%B8%BA%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%88%B7%E5%85%A5Armbian/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2024/02/01/AdGuardHome-in-OpenWRT/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="duzhuo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="duzhuo's-blog">
+      <meta itemprop="description" content="记录，分享一些我觉得好玩的内容。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | duzhuo's-blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/02/01/AdGuardHome-in-OpenWRT/" class="post-title-link" itemprop="url">在OpenWRT上使用AdGuard Home的DNS服务代替dnsmasq</a>
         </h2>
 
         <div class="post-meta-container">
@@ -250,7 +366,7 @@
     </span>
 
   
-    <span id="/2024/02/02/AdGuardHome-in-OpenWRT/" class="post-meta-item twikoo_visitors" data-flag-title="在OpenWRT上使用AdGuard Home的DNS服务代替dnsmasq" title="阅读次数">
+    <span id="/2024/02/01/AdGuardHome-in-OpenWRT/" class="post-meta-item twikoo_visitors" data-flag-title="在OpenWRT上使用AdGuard Home的DNS服务代替dnsmasq" title="阅读次数">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -283,7 +399,7 @@ cd .&#x2F;AdGuardHome</code></pre>
 <h2 id="Step3-配置开机启动"><a href="#Step3-配置开机启动" class="headerlink" title="Step3 配置开机启动"></a>Step3 配置开机启动</h2>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2024/02/02/AdGuardHome-in-OpenWRT/#more" rel="contents">
+              <a class="btn" href="/2024/02/01/AdGuardHome-in-OpenWRT/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -314,7 +430,7 @@ cd .&#x2F;AdGuardHome</code></pre>
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2024/01/20/%E6%90%AC%E5%AE%B6%E6%95%B4%E7%90%86%E7%BD%91%E7%BB%9C-%E5%81%9C%E6%9B%B4/">
+    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2024/01/19/%E6%90%AC%E5%AE%B6%E6%95%B4%E7%90%86%E7%BD%91%E7%BB%9C-%E5%81%9C%E6%9B%B4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -332,7 +448,7 @@ cd .&#x2F;AdGuardHome</code></pre>
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/01/20/%E6%90%AC%E5%AE%B6%E6%95%B4%E7%90%86%E7%BD%91%E7%BB%9C-%E5%81%9C%E6%9B%B4/" class="post-title-link" itemprop="url">搬家整理网络--停更</a>
+          <a href="/2024/01/19/%E6%90%AC%E5%AE%B6%E6%95%B4%E7%90%86%E7%BD%91%E7%BB%9C-%E5%81%9C%E6%9B%B4/" class="post-title-link" itemprop="url">搬家整理网络--停更</a>
         </h2>
 
         <div class="post-meta-container">
@@ -354,7 +470,7 @@ cd .&#x2F;AdGuardHome</code></pre>
     </span>
 
   
-    <span id="/2024/01/20/%E6%90%AC%E5%AE%B6%E6%95%B4%E7%90%86%E7%BD%91%E7%BB%9C-%E5%81%9C%E6%9B%B4/" class="post-meta-item twikoo_visitors" data-flag-title="搬家整理网络--停更" title="阅读次数">
+    <span id="/2024/01/19/%E6%90%AC%E5%AE%B6%E6%95%B4%E7%90%86%E7%BD%91%E7%BB%9C-%E5%81%9C%E6%9B%B4/" class="post-meta-item twikoo_visitors" data-flag-title="搬家整理网络--停更" title="阅读次数">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -515,7 +631,7 @@ root@armbian:&#x2F;etc&#x2F;wireguard# systemctl start wg-quick@wg0</code></pre>
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2023/11/15/about-z-lib/">
+    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2023/11/14/about-z-lib/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -533,7 +649,7 @@ root@armbian:&#x2F;etc&#x2F;wireguard# systemctl start wg-quick@wg0</code></pre>
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/11/15/about-z-lib/" class="post-title-link" itemprop="url">关于 z-library 的访问 (2023-11-28)</a>
+          <a href="/2023/11/14/about-z-lib/" class="post-title-link" itemprop="url">关于 z-library 的访问 (2023-11-28)</a>
         </h2>
 
         <div class="post-meta-container">
@@ -555,7 +671,7 @@ root@armbian:&#x2F;etc&#x2F;wireguard# systemctl start wg-quick@wg0</code></pre>
     </span>
 
   
-    <span id="/2023/11/15/about-z-lib/" class="post-meta-item twikoo_visitors" data-flag-title="关于 z-library 的访问 (2023-11-28)" title="阅读次数">
+    <span id="/2023/11/14/about-z-lib/" class="post-meta-item twikoo_visitors" data-flag-title="关于 z-library 的访问 (2023-11-28)" title="阅读次数">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -576,11 +692,11 @@ root@armbian:&#x2F;etc&#x2F;wireguard# systemctl start wg-quick@wg0</code></pre>
 <li><a target="_blank" rel="noopener" href="http://singlelogin.re/">http://singlelogin.re/</a> </li>
 <li><a target="_blank" rel="noopener" href="http://zlibrary-global.se/">http://zlibrary-global.se/</a></li>
 <li><a target="_blank" rel="noopener" href="http://zh.loginzlib2vrak5zzpcocc3ouizykn6k5qecgj2tzlnab5wcbqhembyd.onion/">http://zh.loginzlib2vrak5zzpcocc3ouizykn6k5qecgj2tzlnab5wcbqhembyd.onion/</a> 登录后跳转</li>
-<li><a href="mailto:&#98;&#108;&#x61;&#x63;&#x6b;&#98;&#111;&#120;&#64;&#122;&#108;&#x69;&#x62;&#46;&#x73;&#101;">blackbox@zlib.se</a> 发送邮件自动返回访问地址 <strong>(测试被Gmail标记为垃圾邮件)</strong></li>
+<li><a href="mailto:&#x62;&#108;&#x61;&#x63;&#x6b;&#98;&#111;&#x78;&#x40;&#x7a;&#108;&#x69;&#x62;&#46;&#115;&#101;">blackbox@zlib.se</a> 发送邮件自动返回访问地址 <strong>(测试被Gmail标记为垃圾邮件)</strong></li>
 </ul>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/11/15/about-z-lib/#more" rel="contents">
+              <a class="btn" href="/2023/11/14/about-z-lib/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -611,7 +727,7 @@ root@armbian:&#x2F;etc&#x2F;wireguard# systemctl start wg-quick@wg0</code></pre>
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2023/11/09/sudo-unable-to-resolve-host-hostname-Name-or-service-not-known/">
+    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2023/11/08/sudo-unable-to-resolve-host-hostname-Name-or-service-not-known/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -629,7 +745,7 @@ root@armbian:&#x2F;etc&#x2F;wireguard# systemctl start wg-quick@wg0</code></pre>
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/11/09/sudo-unable-to-resolve-host-hostname-Name-or-service-not-known/" class="post-title-link" itemprop="url">sudo: unable to resolve host hostname: Name or service not known</a>
+          <a href="/2023/11/08/sudo-unable-to-resolve-host-hostname-Name-or-service-not-known/" class="post-title-link" itemprop="url">sudo: unable to resolve host hostname: Name or service not known</a>
         </h2>
 
         <div class="post-meta-container">
@@ -651,7 +767,7 @@ root@armbian:&#x2F;etc&#x2F;wireguard# systemctl start wg-quick@wg0</code></pre>
     </span>
 
   
-    <span id="/2023/11/09/sudo-unable-to-resolve-host-hostname-Name-or-service-not-known/" class="post-meta-item twikoo_visitors" data-flag-title="sudo: unable to resolve host hostname: Name or service not known" title="阅读次数">
+    <span id="/2023/11/08/sudo-unable-to-resolve-host-hostname-Name-or-service-not-known/" class="post-meta-item twikoo_visitors" data-flag-title="sudo: unable to resolve host hostname: Name or service not known" title="阅读次数">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -706,7 +822,7 @@ ff02::2 ip6-allrouters</code></pre>
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2023/11/06/%E8%A7%A3%E5%86%B3%E4%BC%98%E9%BA%92%E9%BA%9F%E7%89%88%E5%BE%AE%E4%BF%A1%E4%BF%AE%E6%94%B9%E2%81%84etc%E2%81%84lsb-release%E7%9A%84%E9%97%AE%E9%A2%98/">
+    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2023/11/05/%E8%A7%A3%E5%86%B3%E4%BC%98%E9%BA%92%E9%BA%9F%E7%89%88%E5%BE%AE%E4%BF%A1%E4%BF%AE%E6%94%B9%E2%81%84etc%E2%81%84lsb-release%E7%9A%84%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -724,7 +840,7 @@ ff02::2 ip6-allrouters</code></pre>
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/11/06/%E8%A7%A3%E5%86%B3%E4%BC%98%E9%BA%92%E9%BA%9F%E7%89%88%E5%BE%AE%E4%BF%A1%E4%BF%AE%E6%94%B9%E2%81%84etc%E2%81%84lsb-release%E7%9A%84%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">优麒麟版微信修改/etc/lsb-release后识别错误问题</a>
+          <a href="/2023/11/05/%E8%A7%A3%E5%86%B3%E4%BC%98%E9%BA%92%E9%BA%9F%E7%89%88%E5%BE%AE%E4%BF%A1%E4%BF%AE%E6%94%B9%E2%81%84etc%E2%81%84lsb-release%E7%9A%84%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">优麒麟版微信修改/etc/lsb-release后识别错误问题</a>
         </h2>
 
         <div class="post-meta-container">
@@ -746,7 +862,7 @@ ff02::2 ip6-allrouters</code></pre>
     </span>
 
   
-    <span id="/2023/11/06/%E8%A7%A3%E5%86%B3%E4%BC%98%E9%BA%92%E9%BA%9F%E7%89%88%E5%BE%AE%E4%BF%A1%E4%BF%AE%E6%94%B9%E2%81%84etc%E2%81%84lsb-release%E7%9A%84%E9%97%AE%E9%A2%98/" class="post-meta-item twikoo_visitors" data-flag-title="优麒麟版微信修改/etc/lsb-release后识别错误问题" title="阅读次数">
+    <span id="/2023/11/05/%E8%A7%A3%E5%86%B3%E4%BC%98%E9%BA%92%E9%BA%9F%E7%89%88%E5%BE%AE%E4%BF%A1%E4%BF%AE%E6%94%B9%E2%81%84etc%E2%81%84lsb-release%E7%9A%84%E9%97%AE%E9%A2%98/" class="post-meta-item twikoo_visitors" data-flag-title="优麒麟版微信修改/etc/lsb-release后识别错误问题" title="阅读次数">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -776,7 +892,7 @@ DISTRIB_CODENAME&#x3D;trixie
 DISTRIB_DESCRIPTION&#x3D;&quot;Debian GNU&#x2F;Linux trixie&#x2F;sid&quot;</code></pre>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/11/06/%E8%A7%A3%E5%86%B3%E4%BC%98%E9%BA%92%E9%BA%9F%E7%89%88%E5%BE%AE%E4%BF%A1%E4%BF%AE%E6%94%B9%E2%81%84etc%E2%81%84lsb-release%E7%9A%84%E9%97%AE%E9%A2%98/#more" rel="contents">
+              <a class="btn" href="/2023/11/05/%E8%A7%A3%E5%86%B3%E4%BC%98%E9%BA%92%E9%BA%9F%E7%89%88%E5%BE%AE%E4%BF%A1%E4%BF%AE%E6%94%B9%E2%81%84etc%E2%81%84lsb-release%E7%9A%84%E9%97%AE%E9%A2%98/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -807,7 +923,7 @@ DISTRIB_DESCRIPTION&#x3D;&quot;Debian GNU&#x2F;Linux trixie&#x2F;sid&quot;</code
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2023/10/30/Debian-wifi/">
+    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2023/10/29/Debian-wifi/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -825,7 +941,7 @@ DISTRIB_DESCRIPTION&#x3D;&quot;Debian GNU&#x2F;Linux trixie&#x2F;sid&quot;</code
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/10/30/Debian-wifi/" class="post-title-link" itemprop="url">GNU/Linux 使用 CLi 连接无线网</a>
+          <a href="/2023/10/29/Debian-wifi/" class="post-title-link" itemprop="url">GNU/Linux 使用 CLi 连接无线网</a>
         </h2>
 
         <div class="post-meta-container">
@@ -847,7 +963,7 @@ DISTRIB_DESCRIPTION&#x3D;&quot;Debian GNU&#x2F;Linux trixie&#x2F;sid&quot;</code
     </span>
 
   
-    <span id="/2023/10/30/Debian-wifi/" class="post-meta-item twikoo_visitors" data-flag-title="GNU/Linux 使用 CLi 连接无线网" title="阅读次数">
+    <span id="/2023/10/29/Debian-wifi/" class="post-meta-item twikoo_visitors" data-flag-title="GNU/Linux 使用 CLi 连接无线网" title="阅读次数">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -873,7 +989,7 @@ DISTRIB_DESCRIPTION&#x3D;&quot;Debian GNU&#x2F;Linux trixie&#x2F;sid&quot;</code
 <h2 id="使用-wpa-supplicant-连接网络"><a href="#使用-wpa-supplicant-连接网络" class="headerlink" title="使用 wpa_supplicant 连接网络"></a>使用 <code>wpa_supplicant</code> 连接网络</h2><p><code>sudo wpa_passphrase &#123;SSID&#125; &#123;PASSWD&#125; &gt; sudo /etc/wpa_supplicant/&#123;SSID&#125;.conf</code></p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/10/30/Debian-wifi/#more" rel="contents">
+              <a class="btn" href="/2023/10/29/Debian-wifi/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1120,96 +1236,6 @@ services:
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2023/06/01/mourn-rarbg/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="duzhuo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="duzhuo's-blog">
-      <meta itemprop="description" content="记录，分享一些我觉得好玩的内容。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | duzhuo's-blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/06/01/mourn-rarbg/" class="post-title-link" itemprop="url">Mourn RARBG</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-06-01 10:55:06" itemprop="dateCreated datePublished" datetime="2023-06-01T10:55:06+08:00">2023-06-01</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-23 20:16:40" itemprop="dateModified" datetime="2024-02-23T20:16:40+08:00">2024-02-23</time>
-    </span>
-
-  
-    <span id="/2023/06/01/mourn-rarbg/" class="post-meta-item twikoo_visitors" data-flag-title="Mourn RARBG" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span id="twikoo_visitors"></span>
-    </span>
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <blockquote>
-<p>Hello guys,<br>We would like to inform you that we have decided to shut down our site.<br>The past 2 years have been very difficult for us - some of the people in our team died due to covid complications,<br>others still suffer the side effects of it - not being able to work at all.<br>Some are also fighting the war in Europe - ON BOTH SIDES.<br>Also, the power price increase in data centers in Europe hit us pretty hard.<br>Inflation makes our daily expenses impossible to bare.<br>Therefore we can no longer run this site without massive expenses that we can no longer cover out of pocket.<br>After an unanimous vote we’ve decided that we can no longer do it.<br>We are sorry :(<br>Bye</p>
-</blockquote>
-<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202306011052237.jpg"></p>
-<p>妈的 我用 AdBlock 把 RARBG 的广告屏蔽了 我真是个畜生 😭</p>
-<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://raw.githubusercontent.com/duzhuoshanwai/Image-Hosting/master/img/202306011057458.png"></p>
-<p>Peace. 🥀</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -1222,7 +1248,7 @@ services:
 
   <div class="copyright">
     &copy; 2022 – 
-    <span itemprop="copyrightYear">2025</span>
+    <span itemprop="copyrightYear">2026</span>
     <span class="with-love">
       <i class="fa fa-heart"></i>
     </span>

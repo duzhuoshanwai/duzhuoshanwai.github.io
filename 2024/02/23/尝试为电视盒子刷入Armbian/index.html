@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-duzhuo-32%C3%9732.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-duzhuo-16%C3%9716.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.saint1337.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.23.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"fold":{"enable":true,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":true,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true,"trigger":"auto"}}</script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/config.min.js" defer></script>
+
+    <meta name="description" content="准备 运营商的电视盒子一只 以晶晨芯片的CM311-1为例 查看目前可用的设备列表  双公头usb线 没有现成的可以用两根不要的线剥开对接四芯自己制作  一个闲置的空u盘  （可选)晶晨盒子短接神器 没有的话其实用镊子短接也可以   晶晨烧录工具Amlogic_USB_Burning_Tool  选择合适的安卓底包用来开启adb   部分底包分流  adb工具 xda的安装教程参考 或者使用开心电">
+<meta property="og:type" content="article">
+<meta property="og:title" content="尝试为电视盒子刷入Armbian">
+<meta property="og:url" content="https://blog.saint1337.top/2024/02/23/%E5%B0%9D%E8%AF%95%E4%B8%BA%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%88%B7%E5%85%A5Armbian/index.html">
+<meta property="og:site_name" content="duzhuo&#39;s-blog">
+<meta property="og:description" content="准备 运营商的电视盒子一只 以晶晨芯片的CM311-1为例 查看目前可用的设备列表  双公头usb线 没有现成的可以用两根不要的线剥开对接四芯自己制作  一个闲置的空u盘  （可选)晶晨盒子短接神器 没有的话其实用镊子短接也可以   晶晨烧录工具Amlogic_USB_Burning_Tool  选择合适的安卓底包用来开启adb   部分底包分流  adb工具 xda的安装教程参考 或者使用开心电">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2024/02/24/m8dgyULcaBI5ehl.jpg">
+<meta property="og:image" content="https://s2.loli.net/2024/02/24/4ctyfg5TbmIhWl8.png">
+<meta property="og:image" content="https://s2.loli.net/2024/02/24/MuJr4amDBENfAIq.png">
+<meta property="og:image" content="https://s2.loli.net/2024/02/24/VwXUPdhJ7rEM4pG.jpg">
+<meta property="og:image" content="https://s2.loli.net/2024/02/24/rSdYsG67kZhORzo.png">
+<meta property="og:image" content="https://s2.loli.net/2024/02/24/oTN5jRtLBuQKPCM.png">
+<meta property="og:image" content="https://s2.loli.net/2024/02/24/9iB5pnROVIZHWza.png">
+<meta property="og:image" content="https://s2.loli.net/2024/02/24/IOmpHJrMWlknZ9N.png">
+<meta property="article:published_time" content="2024-02-24T01:52:06.000Z">
+<meta property="article:modified_time" content="2024-02-26T03:13:57.572Z">
+<meta property="article:author" content="duzhuo">
+<meta property="article:tag" content="博客">
+<meta property="article:tag" content="技术">
+<meta property="article:tag" content="分享">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2024/02/24/m8dgyULcaBI5ehl.jpg">
+
+
+<link rel="canonical" href="https://blog.saint1337.top/2024/02/23/%E5%B0%9D%E8%AF%95%E4%B8%BA%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%88%B7%E5%85%A5Armbian/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://blog.saint1337.top/2024/02/23/%E5%B0%9D%E8%AF%95%E4%B8%BA%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%88%B7%E5%85%A5Armbian/","path":"2024/02/23/尝试为电视盒子刷入Armbian/","title":"尝试为电视盒子刷入Armbian"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>尝试为电视盒子刷入Armbian | duzhuo's-blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/components/prism-core.min.js" integrity="sha256-bKrTFt2ZHyT4AE4LnBnAVctYKf9l6XP77kBvltgbjn4=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha256-9cmf7tcLdXpKsPi/2AWE93PbZpTp4M4tqzFk+lWomjU=" crossorigin="anonymous" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/utils.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/motion.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/sidebar.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/next-boot.min.js" defer></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.23.0/source/js/third-party/search/local-search.min.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start --><script> let HEXO_MMEDIA_DATA = { js: [], css: [], aplayerData: [], metingData: [], artPlayerData: [], dplayerData: []}; </script><!-- hexo injector head_end end --><style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">duzhuo's-blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">学无止境</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%86%E5%A4%87"><span class="nav-number">1.</span> <span class="nav-text">准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%B7%E5%85%A5%E5%BA%95%E5%8C%85"><span class="nav-number">2.</span> <span class="nav-text">刷入底包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%B7%E5%85%A5Armbian%E9%95%9C%E5%83%8F%E5%88%B0U%E7%9B%98"><span class="nav-number">3.</span> <span class="nav-text">刷入Armbian镜像到U盘</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8ABD%E8%AE%BE%E7%BD%AE%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E4%BB%8Eusb%E5%90%AF%E5%8A%A8"><span class="nav-number">4.</span> <span class="nav-text">使用ABD设置电视盒子从usb启动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%90%AFADB"><span class="nav-number">4.1.</span> <span class="nav-text">开启ADB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%9A%84ADB%E5%91%BD%E4%BB%A4"><span class="nav-number">4.2.</span> <span class="nav-text">使用命令行的ADB命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%BC%80%E5%BF%83%E7%94%B5%E8%A7%86%E5%8A%A9%E6%89%8B"><span class="nav-number">4.3.</span> <span class="nav-text">使用开心电视助手</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8SSH%E8%BF%9E%E6%8E%A5%E5%88%B0%E9%87%8D%E5%90%AF%E4%B9%8B%E5%90%8E%E7%9A%84%E7%9B%92%E5%AD%90%E5%B9%B6%E5%86%99%E5%85%A5EMMC"><span class="nav-number">5.</span> <span class="nav-text">使用SSH连接到重启之后的盒子并写入EMMC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%99%E5%85%A5EMMC"><span class="nav-number">5.1.</span> <span class="nav-text">写入EMMC</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#armbian-update%E5%91%BD%E4%BB%A4%E5%8D%87%E7%BA%A7%E5%86%85%E6%A0%B8%E4%B9%8B%E5%90%8E%E6%88%90%E7%A0%96%E5%A4%B4%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95"><span class="nav-number">6.</span> <span class="nav-text">armbian-update命令升级内核之后成砖头的解决办法</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">duzhuo</p>
+  <div class="site-description" itemprop="description">记录，分享一些我觉得好玩的内容。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">55</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/duzhuoshanwai" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;duzhuoshanwai" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2024/02/23/%E5%B0%9D%E8%AF%95%E4%B8%BA%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%88%B7%E5%85%A5Armbian/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="duzhuo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="duzhuo's-blog">
+      <meta itemprop="description" content="记录，分享一些我觉得好玩的内容。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="尝试为电视盒子刷入Armbian | duzhuo's-blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          尝试为电视盒子刷入Armbian
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-02-24 09:52:06" itemprop="dateCreated datePublished" datetime="2024-02-24T09:52:06+08:00">2024-02-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-02-26 11:13:57" itemprop="dateModified" datetime="2024-02-26T11:13:57+08:00">2024-02-26</time>
+    </span>
+
+  
+    <span id="/2024/02/23/%E5%B0%9D%E8%AF%95%E4%B8%BA%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%88%B7%E5%85%A5Armbian/" class="post-meta-item twikoo_visitors" data-flag-title="尝试为电视盒子刷入Armbian" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><ul>
+<li><p>运营商的电视盒子一只 以晶晨芯片的CM311-1为例 <a target="_blank" rel="noopener" href="https://github.com/ophub/amlogic-s9xxx-armbian/blob/main/README.cn.md">查看目前可用的设备列表</a></p>
+</li>
+<li><p>双公头usb线 没有现成的可以用两根不要的线剥开对接四芯自己制作</p>
+</li>
+<li><p>一个闲置的空u盘</p>
+</li>
+<li><p>（可选)晶晨盒子短接神器 没有的话其实用镊子短接也可以</p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2024/02/24/m8dgyULcaBI5ehl.jpg"></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://download.saint1337.top/tools/%E8%BF%90%E8%90%A5%E5%95%86%E7%9B%92%E5%AD%90Armbian/">晶晨烧录工具Amlogic_USB_Burning_Tool</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/ophub/kernel/releases/tag/tools">选择合适的安卓底包用来开启adb</a>   <a target="_blank" rel="noopener" href="https://download.saint1337.top/tools/%E8%BF%90%E8%90%A5%E5%95%86%E7%9B%92%E5%AD%90Armbian/%E5%AE%89%E5%8D%93%E5%BA%95%E5%8C%85/">部分底包分流</a></p>
+</li>
+<li><p>adb工具 <a target="_blank" rel="noopener" href="https://www.xda-developers.com/install-adb-windows-macos-linux/">xda的安装教程参考</a> 或者使用开心电视助手替代 <a href="">链接</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://etcher.balena.io/">balena etcher</a> 或者 <a target="_blank" rel="noopener" href="https://rufus.ie/zh/">rufus</a> 用来写入Armbian镜像到u盘</p>
+</li>
+</ul>
+<h2 id="刷入底包"><a href="#刷入底包" class="headerlink" title="刷入底包"></a>刷入底包</h2><p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2024/02/24/4ctyfg5TbmIhWl8.png" alt="Snipaste_2024-02-24_12-19-51.png"></p>
+<p>打开晶晨刷机工具，设置→导入镜像。</p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2024/02/24/MuJr4amDBENfAIq.png" alt="Snipaste_2024-02-24_12-22-46.png"></p>
+<p>点击开始后准备接入线。</p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2024/02/24/VwXUPdhJ7rEM4pG.jpg" alt="1000070790.jpg"></p>
+<p>关闭电源！！！ 插入刷机神器，双公线一头插入盒子靠近网口的那个usb口，另一头接入电脑usb口（2.0的可能好一点）。先在烧录工具上点开始，接入线，然后打开盒子上的电源开关等待烧录工具的提示即可。</p>
+<h2 id="刷入Armbian镜像到U盘"><a href="#刷入Armbian镜像到U盘" class="headerlink" title="刷入Armbian镜像到U盘"></a>刷入Armbian镜像到U盘</h2><p>到<a target="_blank" rel="noopener" href="https://github.com/ophub/amlogic-s9xxx-armbian/releases">release</a>中选择适合自己硬件的固件 使用Balena Etcher刷入</p>
+<p>刷写之后的U盘，在设置盒子从U盘启动前先不要插入盒子。</p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2024/02/24/rSdYsG67kZhORzo.png" alt="Snipaste_2024-02-24_18-03-10.png"></p>
+<h2 id="使用ABD设置电视盒子从usb启动"><a href="#使用ABD设置电视盒子从usb启动" class="headerlink" title="使用ABD设置电视盒子从usb启动"></a>使用ABD设置电视盒子从usb启动</h2><h3 id="开启ADB"><a href="#开启ADB" class="headerlink" title="开启ADB"></a>开启ADB</h3><p>大部分安卓刷机包都已经设置了ADB调试。如果没有的话需要连点版本号进入开发者选项自行开启。</p>
+<h3 id="使用命令行的ADB命令"><a href="#使用命令行的ADB命令" class="headerlink" title="使用命令行的ADB命令"></a>使用命令行的ADB命令</h3><pre class="language-none"><code class="language-none">adb connect 192.168.2.162
+adb shell reboot update #输入命令之后再插入U盘！！！</code></pre>
+
+<h3 id="使用开心电视助手"><a href="#使用开心电视助手" class="headerlink" title="使用开心电视助手"></a>使用开心电视助手</h3><p>在首页输入电视盒子的ip和默认端口5555→调试→从U盘&#x2F;SD卡启动 ！！！点击之后再插入U盘！！！</p>
+<p>不要在安卓系统下插入U盘！！！可能会导致U盘中文件权限损坏，修复需要重新刷入Armbian镜像。</p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2024/02/24/oTN5jRtLBuQKPCM.png" alt="Snipaste_2024-02-24_17-48-47.png"></p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2024/02/24/9iB5pnROVIZHWza.png" alt="Snipaste_2024-02-24_17-49-02.png"></p>
+<h2 id="使用SSH连接到重启之后的盒子并写入EMMC"><a href="#使用SSH连接到重启之后的盒子并写入EMMC" class="headerlink" title="使用SSH连接到重启之后的盒子并写入EMMC"></a>使用SSH连接到重启之后的盒子并写入EMMC</h2><p>盒子成功启动后会自动从DHCP服务器获取IP地址，进入路由器后台查看</p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2024/02/24/IOmpHJrMWlknZ9N.png" alt="Snipaste_2024-02-24_18-09-44.png"></p>
+<p>使用SSH连接工具连接后默认的用户&#x2F;密码是 root&#x2F;1234 跟随提示设置普通用户和更改密码</p>
+<h3 id="写入EMMC"><a href="#写入EMMC" class="headerlink" title="写入EMMC"></a>写入EMMC</h3><p>这里直接照搬项目README</p>
+<p>登录 Armbian 系统 (默认用户: root, 默认密码: 1234) → 输入命令：</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">armbian-install</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>可选参数</th>
+<th>默认值</th>
+<th>选项</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-m</td>
+<td>no</td>
+<td>yes&#x2F;no</td>
+<td>使用 Mainline u-boot</td>
+</tr>
+<tr>
+<td>-a</td>
+<td>yes</td>
+<td>yes&#x2F;no</td>
+<td>使用 <a target="_blank" rel="noopener" href="https://github.com/7Ji/ampart">ampart</a> 分区表调整工具</td>
+</tr>
+<tr>
+<td>-l</td>
+<td>no</td>
+<td>yes&#x2F;no</td>
+<td>List. 显示全部设备列表</td>
+</tr>
+</tbody></table>
+<p>举例: <code>armbian-install -m yes -a no</code></p>
+<p><strong>注意</strong>！！！有些型号写入EMMC可能会失败 需要反编译dtb文件 修改emmc频率</p>
+<p>几个参考的issue </p>
+<p><a target="_blank" rel="noopener" href="https://github.com/ophub/amlogic-s9xxx-armbian/issues/1603#issuecomment-1675634318">https://github.com/ophub/amlogic-s9xxx-armbian/issues/1603#issuecomment-1675634318</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/ophub/amlogic-s9xxx-armbian/issues/2007#issue-2074390845">https://github.com/ophub/amlogic-s9xxx-armbian/issues/2007#issue-2074390845</a></p>
+<h2 id="armbian-update命令升级内核之后成砖头的解决办法"><a href="#armbian-update命令升级内核之后成砖头的解决办法" class="headerlink" title="armbian-update命令升级内核之后成砖头的解决办法"></a>armbian-update命令升级内核之后成砖头的解决办法</h2><p>盒子输入armbian之后默认启动顺序是 tf卡→u盘→emmc</p>
+<p>将任意烧录好armbian系统的u盘插上 等待启动后执行命令<code>armbian-update -s</code>用来恢复系统内核</p>
+<p>参见<a target="_blank" rel="noopener" href="https://github.com/ophub/amlogic-s9xxx-armbian/blob/main/documents/README.cn.md#10-%E6%9B%B4%E6%96%B0-armbian-%E5%86%85%E6%A0%B8">https://github.com/ophub/amlogic-s9xxx-armbian/blob/main/documents/README.cn.md#10-%E6%9B%B4%E6%96%B0-armbian-%E5%86%85%E6%A0%B8</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/02/01/AdGuardHome-in-OpenWRT/" rel="prev" title="在OpenWRT上使用AdGuard Home的DNS服务代替dnsmasq">
+                  <i class="fa fa-angle-left"></i> 在OpenWRT上使用AdGuard Home的DNS服务代替dnsmasq
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/02/27/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%A2%AB%E9%BB%91%E4%B9%8B%E5%90%8E%E5%AF%B9ssh%E6%9C%8D%E5%8A%A1%E7%9A%84%E4%BA%A1%E7%BE%8A%E8%A1%A5%E7%89%A2/" rel="next" title="服务器被黑之后对ssh服务的亡羊补牢">
+                  服务器被黑之后对ssh服务的亡羊补牢 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments"><div id="twikoo-comments"></div></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2022 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">duzhuo</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: '32px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+<script class="next-config" data-name="twikoo" type="application/json">{"enable":true,"visitor":true,"envId":"https://twikoo.saint1337.top/","el":"#twikoo-comments"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.twikoo.el)
+    .then(() => NexT.utils.getScript(
+      CONFIG.twikoo.jsUrl || 'https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js',
+      { condition: window.twikoo }
+    ))
+    .then(() => {
+      twikoo.init(CONFIG.twikoo);
+    });
+});
+</script>
+<style>
+.post-block, .comments {
+  overflow: visible;
+}
+.tk-owo-emotion {
+  display: inline-block;
+}
+</style>
+
+<!-- hexo injector body_end start --><script src="/assets/mmedia/mmedia-loader.js"></script><!-- hexo injector body_end end -->
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>
