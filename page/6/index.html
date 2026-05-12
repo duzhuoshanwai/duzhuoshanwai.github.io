@@ -173,7 +173,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">55</span>
+          <span class="site-state-item-count">56</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -201,6 +201,109 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2022/02/20/systemd/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="duzhuo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="duzhuo's-blog">
+      <meta itemprop="description" content="记录，分享一些我觉得好玩的内容。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | duzhuo's-blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/02/20/systemd/" class="post-title-link" itemprop="url">Systemd 应用</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-02-20 15:09:06" itemprop="dateCreated datePublished" datetime="2022-02-20T15:09:06+08:00">2022-02-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-02-23 20:16:40" itemprop="dateModified" datetime="2024-02-23T20:16:40+08:00">2024-02-23</time>
+    </span>
+
+  
+    <span id="/2022/02/20/systemd/" class="post-meta-item twikoo_visitors" data-flag-title="Systemd 应用" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Systemd-应用"><a href="#Systemd-应用" class="headerlink" title="Systemd 应用"></a>Systemd 应用</h1><blockquote>
+<p>搬运自：<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-commands.html">Systemd 入门教程：命令篇</a>、<a href="hhttp://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-part-two.html">Systemd 入门教程：实战篇</a></p>
+</blockquote>
+<p>Systemd 是 Linux 系统工具，用来启动<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2016/02/linux-daemon.html">守护进程</a>，已成为大多数发行版的标准配置。</p>
+<p>本文介绍它的基本用法，分为上下两篇。今天介绍它的主要命令，<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-part-two.html">下一篇</a>介绍如何用于实战。</p>
+<h2 id="1-由来"><a href="#1-由来" class="headerlink" title="1. 由来"></a>1. 由来</h2><p>历史上，<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2013/08/linux_boot_process.html">Linux 的启动</a>一直采用<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Init"><code>init</code></a>进程。</p>
+<p>下面的命令用来启动服务。</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">$ sudo &#x2F;etc&#x2F;init.d&#x2F;apache2 start
+# 或者
+$ service apache2 start</code></pre>
+
+<p>这种方法有两个缺点。</p>
+<p>一是启动时间长。<code>init</code>进程是串行启动，只有前一个进程启动完，才会启动下一个进程。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/02/20/systemd/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 

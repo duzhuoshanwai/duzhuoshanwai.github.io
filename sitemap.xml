@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.saint1337.top/2026/05/11/Linux-VM-%E4%B8%B2%E5%8F%A3-Console-%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/</loc>
+    
+    <lastmod>2026-05-12</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.saint1337.top/2026/02/03/%E4%BE%9D%E6%97%A7%E8%8D%89%E5%8F%B0%E7%8F%AD%E5%AD%90%E8%BF%99%E4%B8%80%E5%9D%97/</loc>
     
     <lastmod>2026-03-14</lastmod>
@@ -796,7 +805,7 @@
 
   <url>
     <loc>https://blog.saint1337.top/</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-05-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
