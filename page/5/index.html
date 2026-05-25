@@ -173,7 +173,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">57</span>
+          <span class="site-state-item-count">58</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -201,6 +201,103 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2023/10/29/Debian-wifi/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="duzhuo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="duzhuo's-blog">
+      <meta itemprop="description" content="记录，分享一些我觉得好玩的内容。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | duzhuo's-blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/10/29/Debian-wifi/" class="post-title-link" itemprop="url">GNU/Linux 使用 CLi 连接无线网</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-10-30 10:55:06" itemprop="dateCreated datePublished" datetime="2023-10-30T10:55:06+08:00">2023-10-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-02-23 20:16:40" itemprop="dateModified" datetime="2024-02-23T20:16:40+08:00">2024-02-23</time>
+    </span>
+
+  
+    <span id="/2023/10/29/Debian-wifi/" class="post-meta-item twikoo_visitors" data-flag-title="GNU/Linux 使用 CLi 连接无线网" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="查看当前无线网卡并启用"><a href="#查看当前无线网卡并启用" class="headerlink" title="查看当前无线网卡并启用"></a>查看当前无线网卡并启用</h2><p><code>sudo iwconfig</code> 查看得到我当前的无线网卡名称是 <code>wlan0</code></p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2023/10/30/9c68AOBhnV1jCRm.png" alt="Screenshot_20231030_170101.png"></p>
+<p><code>sudo ifconfig wlan0 up</code> 启用无线网卡</p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2023/10/30/dLewbAYZVifng18.png" alt="Screenshot_20231030_171338_看图王1.png"></p>
+<h2 id="扫描可用网络"><a href="#扫描可用网络" class="headerlink" title="扫描可用网络"></a>扫描可用网络</h2><p><code>sudo iwlist wlan0 scan</code> 查找当前可用网络 结果过多的情况下使用  <code>grep</code> 找出 SSID</p>
+<p><img src="https://s2.loli.net/2024/07/04/IDaPFlrGWxUt8mX.gif" data-original="https://s2.loli.net/2023/10/30/nmWhKYZrxMzvk1V.png" alt="Screenshot_20231030_171426_看图王.png"></p>
+<h2 id="使用-wpa-supplicant-连接网络"><a href="#使用-wpa-supplicant-连接网络" class="headerlink" title="使用 wpa_supplicant 连接网络"></a>使用 <code>wpa_supplicant</code> 连接网络</h2><p><code>sudo wpa_passphrase &#123;SSID&#125; &#123;PASSWD&#125; &gt; sudo /etc/wpa_supplicant/&#123;SSID&#125;.conf</code></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/10/29/Debian-wifi/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1201,104 +1298,6 @@ proxies:
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2023/02/05/VMware-tools-Issue/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://blog.saint1337.top/2022/08/21/2022-08-21-blogupdate/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="duzhuo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="duzhuo's-blog">
-      <meta itemprop="description" content="记录，分享一些我觉得好玩的内容。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | duzhuo's-blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/08/21/2022-08-21-blogupdate/" class="post-title-link" itemprop="url">2022-8-21 blog更新日志</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-08-21 22:23:08" itemprop="dateCreated datePublished" datetime="2022-08-21T22:23:08+08:00">2022-08-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 14:07:18" itemprop="dateModified" datetime="2024-11-27T14:07:18+08:00">2024-11-27</time>
-    </span>
-
-  
-    <span id="/2022/08/21/2022-08-21-blogupdate/" class="post-meta-item twikoo_visitors" data-flag-title="2022-8-21 blog更新日志" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span id="twikoo_visitors"></span>
-    </span>
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="更新日志"><a href="#更新日志" class="headerlink" title="更新日志"></a>更新日志</h1><ul>
-<li>update hexo-theme-next 7.8.0 → 8.12.3</li>
-<li>add hexo-next-twikoo</li>
-</ul>
-<h4 id="hexo-tag-mmedia-test"><a href="#hexo-tag-mmedia-test" class="headerlink" title="hexo-tag-mmedia test"></a>hexo-tag-mmedia test</h4><div id="mmedia-AezeuEboPSzVrUGa" style="width:100%;height:650px;max-width:1200px;center"></div><script> var AezeuEboPSzVrUGa_options = JSON.parse('{\"style\":\"width:100%;height:650px;max-width:1200px;center\",\"url\":\"https://dlink.host/sharepoint/aHR0cHM6Ly9zYWludDEzMzctbXkuc2hhcmVwb2ludC5jb20vOnY6L2cvcGVyc29uYWwvZHV6aHVvX3NhaW50MTMzN19vbm1pY3Jvc29mdF9jb20vRWFpY2hQZ21JaEZIaEVLRVpFdUN3OVlCTnpxVV9xUnkxYm1GR2prR20yZDVnUT9lPWJRbkR4bA.mp4\",\"autoSize\":true,\"autoMini\":false,\"fullscreen\":true,\"fullscreenWeb\":true}'); AezeuEboPSzVrUGa_options.container = "#mmedia-AezeuEboPSzVrUGa"; HEXO_MMEDIA_DATA.js.push("https://cdn.jsdelivr.net/npm/artplayer/dist/artplayer.js");HEXO_MMEDIA_DATA.artPlayerData.push(AezeuEboPSzVrUGa_options); </script>
-
-<div id="mmedia-xjvVBCwUhWSVmeCd"></div><script> var xjvVBCwUhWSVmeCd_options = JSON.parse('{\"audio\":[{\"name\":\"Sweety - 樱花草\",\"url\":\"https://dlink.host/sharepoint/aHR0cHM6Ly9zYWludDEzMzctbXkuc2hhcmVwb2ludC5jb20vOnU6L2cvcGVyc29uYWwvZHV6aHVvX3NhaW50MTMzN19vbm1pY3Jvc29mdF9jb20vRWNCZGxoUDdxQVJIaVBzY2NvSXFndm9CYURseDZhWVlYNUpsZHc0b1FlckhVZz9lPTJrSmhmcQ.mp3\"}]}');
-    xjvVBCwUhWSVmeCd_options.container = document.getElementById("mmedia-xjvVBCwUhWSVmeCd");HEXO_MMEDIA_DATA.css.push("https://cdn.jsdelivr.net/npm/aplayer@1/dist/APlayer.min.css");HEXO_MMEDIA_DATA.js.push("https://cdn.jsdelivr.net/npm/aplayer@1/dist/APlayer.min.js");HEXO_MMEDIA_DATA.aplayerData.push(xjvVBCwUhWSVmeCd_options); </script>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/08/21/2022-08-21-blogupdate/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
